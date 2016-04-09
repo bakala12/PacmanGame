@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace PacmanGame.ViewModels
 {
-    public class HelpViewModel : CloseableViewModel
+    public class HighscoresViewModel: CloseableViewModel
     {
-        public HelpViewModel() :base("Help")
+        public HighscoresViewModel() : base("Highscores")
         {
+            
         }
     }
 }

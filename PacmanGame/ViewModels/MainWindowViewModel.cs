@@ -12,7 +12,7 @@ namespace PacmanGame.ViewModels
         void ChangeCurrentViewModel(string name);
     }
 
-    public class MainWindowViewModel : ViewModelBase, IViewModelChanger
+    public class MainWindowViewModel : IViewModelChanger
     {
         public MainWindowViewModel(IList<ViewModelBase> viewModels)
         {

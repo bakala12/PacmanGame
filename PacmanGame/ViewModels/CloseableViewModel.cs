@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PacmanGame.ViewModels
 {
@@ -17,6 +18,7 @@ namespace PacmanGame.ViewModels
         /// <param name="name"></param>
         protected CloseableViewModel(string name = null) : base(name)
         {
+            ReturnCommand = new DelegateCommand(x=>Close());
         }
 
         /// <summary>
@@ -31,5 +33,10 @@ namespace PacmanGame.ViewModels
         {
             RequestClose?.Invoke(this, EventArgs.Empty);
         }
+
+        /// <summary>
+        /// A command to invoked to close the view.
+        /// </summary>
+        public ICommand ReturnCommand { get; protected set; }
     }
 }
