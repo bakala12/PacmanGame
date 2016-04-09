@@ -10,4 +10,12 @@
     <DataTemplate DataType="{x:Type vm:HelpViewModel}">
         <screens:HelpView/>
     </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vm:HighscoresViewModel}">
+        <screens:HighscoresView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vm:OptionsViewModel}">
+        <screens:OptionsView/>
+    </DataTemplate>
 </ResourceDictionary>
