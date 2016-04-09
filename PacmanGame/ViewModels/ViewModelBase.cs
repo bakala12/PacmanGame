@@ -16,6 +16,20 @@ namespace PacmanGame.ViewModels
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
         /// <summary>
+        /// Gets the name of current ViewModel.
+        /// </summary>
+        public string Name { get; }
+
+        /// <summary>
+        /// Initializies a new instance of ViewModelBase class with the specified name.
+        /// </summary>
+        /// <param name="name">The name of the view model.</param>
+        protected ViewModelBase(string name=null)
+        {
+            Name = name;
+        }
+
+        /// <summary>
         /// An event raised when the property is changed.
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;

@@ -25,7 +25,7 @@ namespace PacmanGame.ViewModels
         /// <summary>
         /// Initializes a new instance of StartMenuViewModel class
         /// </summary>
-        public StartMenuViewModel()
+        public StartMenuViewModel() : base("StartMenu")
         {
             NewGameCommand = new DelegateCommand(x=>NewGame());
             LoadGameCommand = new DelegateCommand(x=>LoadGame());
