@@ -1,24 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using PacmanGame.Annotations;
+using PacmanGame.ViewModels;
 
-namespace PacmanGame.ViewModels
+namespace PacmanGame
 {
-    public interface IViewModelChanger
+    public class ViewModelsChanger : IViewModelChanger, INotifyPropertyChanged
     {
-        ViewModelBase CurrentViewModel { get; }
-        void ChangeCurrentViewModel(string name);
-    }
-
-    public class MainWindowViewModel : IViewModelChanger, INotifyPropertyChanged
-    {
-        public MainWindowViewModel()
+        public ViewModelsChanger()
         {
             var vm = new List<ViewModelBase>
             {

@@ -19,7 +19,7 @@ namespace PacmanGame
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            ViewModelChanger = new MainWindowViewModel();
+            ViewModelChanger = new ViewModelsChanger();
             ViewModelChanger.ChangeCurrentViewModel("StartMenu");
             MainWindow window = new MainWindow();
             Current.MainWindow = window;
