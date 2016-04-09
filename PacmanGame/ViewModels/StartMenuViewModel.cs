@@ -47,17 +47,17 @@ namespace PacmanGame.ViewModels
 
         protected virtual void ShowHighscores()
         {
-            
+            (Application.Current as App)?.ViewModelChanger.ChangeCurrentViewModel("Highscores");
         }
 
         protected virtual void ShowOptions()
         {
-            
+            (Application.Current as App)?.ViewModelChanger.ChangeCurrentViewModel("Options");
         }
 
         protected virtual void ShowHelp()
         {
-            
+            (Application.Current as App)?.ViewModelChanger.ChangeCurrentViewModel("Help");
         }
 
         /// <summary>

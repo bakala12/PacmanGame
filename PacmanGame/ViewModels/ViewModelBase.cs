@@ -26,6 +26,8 @@ namespace PacmanGame.ViewModels
         /// <param name="name">The name of the view model.</param>
         protected ViewModelBase(string name=null)
         {
+            if(string.IsNullOrEmpty(name))
+                throw new ArgumentException("Name cannot be neighter null nor empty");
             Name = name;
         }
 
