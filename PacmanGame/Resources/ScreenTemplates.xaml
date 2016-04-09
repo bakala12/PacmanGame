@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vm="clr-namespace:PacmanGame.ViewModels"
+                    xmlns:screens="clr-namespace:PacmanGame.Views">
+    
+    <DataTemplate DataType="{x:Type vm:StartMenuViewModel}">
+        <screens:StartMenuView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vm:HelpViewModel}">
+        <screens:HelpView/>
+    </DataTemplate>
+</ResourceDictionary>
