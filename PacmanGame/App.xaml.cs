@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using PacmanGame.ViewModels;
 
 namespace PacmanGame
 {
@@ -13,5 +14,20 @@ namespace PacmanGame
     /// </summary>
     public partial class App : Application
     {
+        public IViewModelChanger ViewModelChanger { get; private set; }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            IList<ViewModelBase> vm = new List<ViewModelBase>();
+            vm.Add(new StartMenuViewModel());
+            vm.Add(new HelpViewModel());
+            ViewModelChanger = new MainWindowViewModel(vm);
+            ViewModelChanger.ChangeCurrentViewModel("StartMenu");
+            MainWindow window = new MainWindow();
+            Current.MainWindow = window;
+            window.DataContext = ViewModelChanger;
+            Current.MainWindow.Show();
+        }
     }
 }
