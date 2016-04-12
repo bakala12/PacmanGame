@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 
 namespace GameControls.Others
 {
@@ -12,7 +13,7 @@ namespace GameControls.Others
     /// <summary>
     /// An object which is used to pass additional information with the movement events.
     /// </summary>
-    public class MovementEventArgs : EventArgs
+    public class MovementEventArgs : RoutedEventArgs
     {
         /// <summary>
         /// Gets the direction of the movement.
@@ -23,7 +24,7 @@ namespace GameControls.Others
         /// Initializes a new instance of MovementEventArgs class with the specified direction.
         /// </summary>
         /// <param name="direction"></param>
-        public MovementEventArgs(Direction direction)
+        public MovementEventArgs(Direction direction, RoutedEvent @event, object source) : base(@event, source)
         {
             MovementDirection = direction;
         }

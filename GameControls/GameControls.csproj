@@ -49,7 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Elements\GameElement.cs" />
+    <Compile Include="Elements\MovableElement.cs" />
     <Compile Include="Interfaces\IGameElement.cs" />
+    <Compile Include="Interfaces\IMovable.cs" />
+    <Compile Include="Others\Direction.cs" />
+    <Compile Include="Others\MovementEventArgs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
