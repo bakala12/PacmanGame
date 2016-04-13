@@ -48,8 +48,12 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Elements\Block.cs" />
+    <Compile Include="Elements\Coin.cs" />
+    <Compile Include="Elements\Enemy.cs" />
     <Compile Include="Elements\GameElement.cs" />
     <Compile Include="Elements\MovableElement.cs" />
+    <Compile Include="Elements\Player.cs" />
     <Compile Include="Interfaces\IGameElement.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Others\Direction.cs" />

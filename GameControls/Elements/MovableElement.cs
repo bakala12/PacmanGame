@@ -39,6 +39,32 @@ namespace GameControls.Elements
         }
 
         /// <summary>
+        /// Initializes a new instance of MovableElement class with the given width, height and speed.
+        /// </summary>
+        /// <param name="width">Width of the element.</param>
+        /// <param name="height">Height of the element.</param>
+        /// <param name="speed">Movement speed of the element.</param>
+        protected MovableElement(uint width, uint height, uint speed=1) : base(width, height)
+        {
+            Speed = speed;
+        }
+
+        /// <summary>
+        /// Gets or sets the movement speed of the current element.
+        /// </summary>
+        public uint Speed
+        {
+            get { return (uint)GetValue(SpeedProperty); }
+            set { SetValue(SpeedProperty, value); }
+        }
+
+        /// <summary>
+        /// Dependency property for storing Speed property.
+        /// </summary>
+        public static readonly DependencyProperty SpeedProperty =
+            DependencyProperty.Register("Speed", typeof(uint), typeof(MovableElement), new PropertyMetadata(0));
+
+        /// <summary>
         /// Moves the object in the specified direction.
         /// </summary>
         /// <param name="direction">The dierction in which the element should be moved.</param>
