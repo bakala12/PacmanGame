@@ -54,10 +54,7 @@ namespace PacmanGame.BoardGenerator
         /// </remarks>
         GameBoard IGameBoardGenerator.GenerateBoard(uint rows, uint columns, uint stage)
         {
-            GameBoard board = new GameBoard(Rows, Columns);
-            var elements = ReadFile();
-            
-            return board;
+            return new GameBoard(Rows, Columns, ReadFile());
         }
 
         /// <summary>
