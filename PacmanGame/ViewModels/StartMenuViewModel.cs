@@ -37,7 +37,7 @@ namespace PacmanGame.ViewModels
 
         protected virtual void NewGame()
         {
-            
+            (Application.Current as App)?.ViewModelChanger.ChangeCurrentViewModel("Game");
         }
 
         protected virtual void LoadGame()

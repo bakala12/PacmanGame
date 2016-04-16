@@ -36,7 +36,7 @@ namespace GameControls.Board
         /// </summary>
         public static readonly DependencyProperty RowsProperty =
            DependencyProperty.Register("Rows", typeof(uint), typeof(GameBoardPanel),
-               new FrameworkPropertyMetadata(1,FrameworkPropertyMetadataOptions.AffectsParentMeasure |
+               new FrameworkPropertyMetadata((uint)1,FrameworkPropertyMetadataOptions.AffectsParentMeasure |
                    FrameworkPropertyMetadataOptions.AffectsParentArrange |
                    FrameworkPropertyMetadataOptions.AffectsArrange |
                    FrameworkPropertyMetadataOptions.AffectsMeasure |
@@ -47,7 +47,7 @@ namespace GameControls.Board
         /// </summary>
         public static readonly DependencyProperty ColumnsProperty = 
             DependencyProperty.Register("Columns", typeof(uint), typeof(GameBoardPanel),
-                new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.AffectsParentMeasure |
+                new FrameworkPropertyMetadata((uint)1, FrameworkPropertyMetadataOptions.AffectsParentMeasure |
                     FrameworkPropertyMetadataOptions.AffectsParentArrange |
                     FrameworkPropertyMetadataOptions.AffectsArrange |
                     FrameworkPropertyMetadataOptions.AffectsMeasure |

@@ -17,10 +17,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type local:MovableElement}">
+    <Style TargetType="{x:Type elements:MovableElement}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:MovableElement}">
+                <ControlTemplate TargetType="{x:Type elements:MovableElement}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
@@ -30,10 +30,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type local:Coin}">
+    <Style TargetType="{x:Type elements:Coin}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:Coin}">
+                <ControlTemplate TargetType="{x:Type elements:Coin}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
@@ -43,10 +43,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type local:Block}">
+    <Style TargetType="{x:Type elements:Block}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:Block}">
+                <ControlTemplate TargetType="{x:Type elements:Block}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
@@ -56,10 +56,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type local:Player}">
+    <Style TargetType="{x:Type elements:Player}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:Player}">
+                <ControlTemplate TargetType="{x:Type elements:Player}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
@@ -69,10 +69,10 @@
         </Setter>
     </Style>
 
-    <Style TargetType="{x:Type local:Enemy}">
+    <Style TargetType="{x:Type elements:Enemy}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type local:Enemy}">
+                <ControlTemplate TargetType="{x:Type elements:Enemy}">
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">

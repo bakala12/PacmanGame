@@ -18,4 +18,8 @@
     <DataTemplate DataType="{x:Type vm:OptionsViewModel}">
         <screens:OptionsView/>
     </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vm:GameViewModel}">
+        <screens:GameView/>
+    </DataTemplate>
 </ResourceDictionary>

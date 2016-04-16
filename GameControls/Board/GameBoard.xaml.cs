@@ -22,12 +22,26 @@ namespace GameControls.Board
     /// </summary>
     public partial class GameBoard : UserControl
     {
+        /// <summary>
+        /// Initializes a new instance of GameBoard control.
+        /// </summary>
         public GameBoard()
         {
             InitializeComponent();
             Rows = 1;
             Columns = 1;
             Background = Brushes.Orange;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of GameBoard with the specified number of rows and columns.
+        /// </summary>
+        /// <param name="rows">The number of rows of GameBoard.</param>
+        /// <param name="columns">The number of columns of GameBoard.</param>
+        public GameBoard(uint rows, uint columns) : this()
+        {
+            Rows = rows;
+            Columns = columns;
         }
 
         /// <summary>
@@ -52,12 +66,12 @@ namespace GameControls.Board
         /// A DependencyProperty for storing Rows property.
         /// </summary>
         public static readonly DependencyProperty RowsProperty = 
-            DependencyProperty.Register("Rows", typeof(uint), typeof(GameBoard), new FrameworkPropertyMetadata(0));
+            DependencyProperty.Register("Rows", typeof(uint), typeof(GameBoard), new FrameworkPropertyMetadata());
 
         /// <summary>
         /// A DependencyProperty for storing Columns property.
         /// </summary>
         public static readonly DependencyProperty ColumnsProperty = 
-            DependencyProperty.Register("Columns", typeof(uint), typeof(GameBoard), new FrameworkPropertyMetadata(0));
+            DependencyProperty.Register("Columns", typeof(uint), typeof(GameBoard), new FrameworkPropertyMetadata());
     }
 }
