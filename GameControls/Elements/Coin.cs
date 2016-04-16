@@ -12,14 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GameControls.Interfaces;
 
 namespace GameControls.Elements
 {
-    public class Coin : GameElement
+    public class Coin : GameElement, ICollectable
     {
         static Coin()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Coin), new FrameworkPropertyMetadata(typeof(Coin)));
         }
+
+        public void Collect()
+        {
+            Collected?.Invoke(this, EventArgs.Empty);
+        }
+
+        public event EventHandler Collected;
     }
 }
