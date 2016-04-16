@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BoardGenerator\IGameBoardGenerator.cs" />
+    <Compile Include="BoardGenerator\ExampleFileGameBoardGenerator.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\CloseableViewModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
@@ -143,6 +145,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="Resources\example_board.board" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
