@@ -14,18 +14,18 @@ namespace GameControls.Interfaces
         /// <summary>
         /// Gets the current X position of the element.
         /// </summary>
-        uint X { get; set; }
+        double X { get; set; }
         /// <summary>
         /// Gets the current Y position of the element.
         /// </summary>
-        uint Y { get; set; }
+        double Y { get; set; }
         /// <summary>
         /// Gets the width of the element.
         /// </summary>
-        uint ElementWidth { get; }
+        double ElementWidth { get; }
         /// <summary>
         /// Gets the height of the element.
         /// </summary>
-        uint ElementHeight { get; }
+        double ElementHeight { get; }
     }
 }

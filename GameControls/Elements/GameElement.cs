@@ -45,7 +45,7 @@ namespace GameControls.Elements
         /// </summary>
         /// <param name="width">Width of the element.</param>
         /// <param name="height">Height of the element.</param>
-        protected GameElement(uint width, uint height):this()
+        protected GameElement(double width, double height):this()
         {
             ElementHeight = height;
             ElementWidth = width;
@@ -55,7 +55,7 @@ namespace GameControls.Elements
         /// A DependencyProperty for storing X value.
         /// </summary>
         public static readonly DependencyProperty XProperty = 
-            DependencyProperty.Register("X", typeof(uint), typeof(GameElement),
+            DependencyProperty.Register("X", typeof(double), typeof(GameElement),
                 new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender|
                     FrameworkPropertyMetadataOptions.AffectsArrange |
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsParentArrange));
@@ -64,7 +64,7 @@ namespace GameControls.Elements
         /// A DependencyProperty for storing Y value.
         /// </summary>
         public static readonly DependencyProperty YProperty = 
-            DependencyProperty.Register("Y", typeof(uint), typeof(GameElement), new FrameworkPropertyMetadata(0,
+            DependencyProperty.Register("Y", typeof(double), typeof(GameElement), new FrameworkPropertyMetadata(0,
                 FrameworkPropertyMetadataOptions.AffectsRender |
                     FrameworkPropertyMetadataOptions.AffectsArrange |
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsParentArrange));
@@ -73,49 +73,49 @@ namespace GameControls.Elements
         /// A DependencyProperty for storing ElementWidth value.
         /// </summary>
         public static readonly DependencyProperty ElementWidthProperty = 
-            DependencyProperty.Register("ElementWidth", typeof(uint), typeof(GameElement),
+            DependencyProperty.Register("ElementWidth", typeof(double), typeof(GameElement),
                 new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender));
 
         /// <summary>
         /// A DependencyProperty for storing ElementHeight value.
         /// </summary>
         public static readonly DependencyProperty ElementHeightProperty = 
-            DependencyProperty.Register("ElementHeight", typeof(uint), typeof(GameElement), 
+            DependencyProperty.Register("ElementHeight", typeof(double), typeof(GameElement), 
                 new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender));
 
         /// <summary>
         /// Gets or sets the current X position of the element.
         /// </summary>
-        public uint X
+        public double X
         {
-            get { return (uint) GetValue(XProperty); }
+            get { return (double) GetValue(XProperty); }
             set { SetValue(XProperty, value);}
         }
 
         /// <summary>
         /// Gets or sets the current Y position of the element.
         /// </summary>
-        public uint Y
+        public double Y
         {
-            get { return (uint) GetValue(YProperty); }
+            get { return (double) GetValue(YProperty); }
             set { SetValue(YProperty, value);}
         }
 
         /// <summary>
         /// Gets or sets the width of the element.
         /// </summary>
-        public uint ElementWidth
+        public double ElementWidth
         {
-            get { return (uint) GetValue(ElementWidthProperty); }
+            get { return (double) GetValue(ElementWidthProperty); }
             protected set { SetValue(ElementWidthProperty, value);}
         }
 
         /// <summary>
         /// Gets or sets the height of the element.
         /// </summary>
-        public uint ElementHeight
+        public double ElementHeight
         {
-            get { return (uint) GetValue(ElementHeightProperty); }
+            get { return (double) GetValue(ElementHeightProperty); }
             protected set { SetValue(ElementHeightProperty, value);}
         }
     }
