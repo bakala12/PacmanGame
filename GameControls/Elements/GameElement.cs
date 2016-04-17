@@ -56,7 +56,7 @@ namespace GameControls.Elements
         /// </summary>
         public static readonly DependencyProperty XProperty = 
             DependencyProperty.Register("X", typeof(double), typeof(GameElement),
-                new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender|
+                new FrameworkPropertyMetadata((double)0, FrameworkPropertyMetadataOptions.AffectsRender|
                     FrameworkPropertyMetadataOptions.AffectsArrange |
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsParentArrange));
 
@@ -64,7 +64,7 @@ namespace GameControls.Elements
         /// A DependencyProperty for storing Y value.
         /// </summary>
         public static readonly DependencyProperty YProperty = 
-            DependencyProperty.Register("Y", typeof(double), typeof(GameElement), new FrameworkPropertyMetadata(0,
+            DependencyProperty.Register("Y", typeof(double), typeof(GameElement), new FrameworkPropertyMetadata((double)0,
                 FrameworkPropertyMetadataOptions.AffectsRender |
                     FrameworkPropertyMetadataOptions.AffectsArrange |
                 FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsParentArrange));
@@ -74,14 +74,14 @@ namespace GameControls.Elements
         /// </summary>
         public static readonly DependencyProperty ElementWidthProperty = 
             DependencyProperty.Register("ElementWidth", typeof(double), typeof(GameElement),
-                new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender));
+                new FrameworkPropertyMetadata((double)0, FrameworkPropertyMetadataOptions.AffectsRender));
 
         /// <summary>
         /// A DependencyProperty for storing ElementHeight value.
         /// </summary>
         public static readonly DependencyProperty ElementHeightProperty = 
             DependencyProperty.Register("ElementHeight", typeof(double), typeof(GameElement), 
-                new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.AffectsRender));
+                new FrameworkPropertyMetadata((double)0, FrameworkPropertyMetadataOptions.AffectsRender));
 
         /// <summary>
         /// Gets or sets the current X position of the element.

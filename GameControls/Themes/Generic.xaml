@@ -41,6 +41,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Background" Value="Yellow"/>
     </Style>
 
     <Style TargetType="{x:Type elements:Block}">
@@ -54,6 +55,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Background" Value="Gray"/>
     </Style>
 
     <Style TargetType="{x:Type elements:Player}">
@@ -67,6 +69,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Background" Value="Red"/>
     </Style>
 
     <Style TargetType="{x:Type elements:Enemy}">
@@ -80,5 +83,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Background" Value="DarkBlue"/>
     </Style>
 </ResourceDictionary>
