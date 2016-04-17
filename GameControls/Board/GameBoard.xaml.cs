@@ -33,7 +33,7 @@ namespace GameControls.Board
             InitializeComponent();
             Rows = 1;
             Columns = 1;
-            Background = Brushes.Orange;
+            Background = Brushes.DeepSkyBlue;
             Children = this.ElementsPanel.Children;
         }
 
