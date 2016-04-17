@@ -8,6 +8,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            <board:GameBoard />
+          <Viewbox>
+              <ContentControl Content="{Binding GameBoard}"/>
+          </Viewbox>  
     </Grid>
 </UserControl>

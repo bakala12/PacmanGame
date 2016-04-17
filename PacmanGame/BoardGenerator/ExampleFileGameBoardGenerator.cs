@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using GameControls.Board;
@@ -15,18 +16,17 @@ namespace PacmanGame.BoardGenerator
     internal class ExampleFileGameBoardGenerator : IGameBoardGenerator
     {
         /// <summary>
-        /// Initializes a new instance of ExampleFileGameBoardGenerator with the given path.
+        /// Initializes a new instance of ExampleFileGameBoardGenerator.
         /// </summary>
-        /// <param name="path">Path to file.</param>
-        internal ExampleFileGameBoardGenerator(string path)
+        internal ExampleFileGameBoardGenerator(Stream s)
         {
-            _path = path;
+            _stream = s;
         }
 
         /// <summary>
         /// Stores a path to the file with info about the board.
         /// </summary>
-        private readonly string _path;
+        private readonly Stream _stream;
 
         /// <summary>
         /// Fixed number of rows.
@@ -64,7 +64,7 @@ namespace PacmanGame.BoardGenerator
         private IList<GameElement> ReadFile()
         {
             IList<GameElement> elements = new List<GameElement>();
-            using (var sr = new StringReader(_path))
+            using (var sr = new StreamReader(_stream))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
