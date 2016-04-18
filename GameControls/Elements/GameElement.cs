@@ -74,14 +74,18 @@ namespace GameControls.Elements
         /// </summary>
         public static readonly DependencyProperty ElementWidthProperty = 
             DependencyProperty.Register("ElementWidth", typeof(double), typeof(GameElement),
-                new FrameworkPropertyMetadata((double)0, FrameworkPropertyMetadataOptions.AffectsRender));
+                new FrameworkPropertyMetadata((double)0, FrameworkPropertyMetadataOptions.AffectsRender |
+                    FrameworkPropertyMetadataOptions.AffectsArrange |
+                FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsParentArrange));
 
         /// <summary>
         /// A DependencyProperty for storing ElementHeight value.
         /// </summary>
         public static readonly DependencyProperty ElementHeightProperty = 
             DependencyProperty.Register("ElementHeight", typeof(double), typeof(GameElement), 
-                new FrameworkPropertyMetadata((double)0, FrameworkPropertyMetadataOptions.AffectsRender));
+                new FrameworkPropertyMetadata((double)0, FrameworkPropertyMetadataOptions.AffectsRender |
+                    FrameworkPropertyMetadataOptions.AffectsArrange |
+                FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsParentArrange));
 
         /// <summary>
         /// Gets or sets the current X position of the element.
@@ -107,7 +111,7 @@ namespace GameControls.Elements
         public double ElementWidth
         {
             get { return (double) GetValue(ElementWidthProperty); }
-            protected set { SetValue(ElementWidthProperty, value);}
+            set { SetValue(ElementWidthProperty, value);}
         }
 
         /// <summary>
@@ -116,7 +120,7 @@ namespace GameControls.Elements
         public double ElementHeight
         {
             get { return (double) GetValue(ElementHeightProperty); }
-            protected set { SetValue(ElementHeightProperty, value);}
+            set { SetValue(ElementHeightProperty, value);}
         }
     }
 }

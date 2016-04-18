@@ -80,10 +80,10 @@ namespace PacmanGame.BoardGenerator
                             element = new Coin();
                             break;
                         case "P":
-                            element = new Enemy();
+                            element = new Player();
                             break;
                         case "E":
-                            element = new Player();
+                            element = new Enemy();
                             break;
                         default:
                             throw new NotSupportedException();
