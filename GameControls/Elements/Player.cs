@@ -38,7 +38,6 @@ namespace GameControls.Elements
             Direction = Direction.Left;
             Angle = 90;
             IsAlive = true;
-            ElementWidth = ElementHeight = 20; 
         }
 
         /// <summary>

@@ -81,8 +81,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type elements:Player}">
-                    <Grid>
-                        <Path Fill="{TemplateBinding Background}">
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Path Fill="{TemplateBinding Background}" Stretch="UniformToFill">
                             <Path.Data>
                                 <MultiBinding Converter="{StaticResource PacmanGeometryConverter}">
                                     <Binding Path="Direction" RelativeSource="{RelativeSource AncestorType={x:Type elements:Player}}"/>

@@ -111,7 +111,7 @@ namespace GameControls.Elements
         public double ElementWidth
         {
             get { return (double) GetValue(ElementWidthProperty); }
-            set { SetValue(ElementWidthProperty, value);}
+            protected set { SetValue(ElementWidthProperty, value);}
         }
 
         /// <summary>
@@ -120,7 +120,21 @@ namespace GameControls.Elements
         public double ElementHeight
         {
             get { return (double) GetValue(ElementHeightProperty); }
-            set { SetValue(ElementHeightProperty, value);}
+            protected set { SetValue(ElementHeightProperty, value);}
+        }
+
+        /// <summary>
+        /// Overrides a part of the arrangement proccess. It is used to receive
+        /// the width and height of the element.
+        /// </summary>
+        /// <param name="arrangeBounds">The size of the element.</param>
+        /// <returns>Final size of the element.</returns>
+        protected override Size ArrangeOverride(Size arrangeBounds)
+        {
+            Size ret = base.ArrangeOverride(arrangeBounds);
+            ElementWidth = ret.Width;
+            ElementHeight = ret.Height;
+            return ret;
         }
     }
 }

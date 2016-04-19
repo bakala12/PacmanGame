@@ -49,7 +49,7 @@ namespace GameControls.Others
             }
             PathGeometry geometry = new PathGeometry();
             LineSegment l1 = new LineSegment(A, true);
-            ArcSegment arc = new ArcSegment(B, new Size(radius, radius), 0, true, SweepDirection.Clockwise, true);
+            ArcSegment arc = new ArcSegment(B, new Size(radius,radius), 0, true, SweepDirection.Clockwise, true);
             PathFigure f = new PathFigure(center, new PathSegment[] {l1, arc}, true);
             geometry.Figures = new PathFigureCollection();
             geometry.Figures.Add(f);
