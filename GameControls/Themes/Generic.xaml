@@ -5,7 +5,9 @@
     xmlns:oth ="clr-namespace:GameControls.Others">
 
     <oth:PacmanGeometryConverter x:Key="PacmanGeometryConverter"/>
-
+    <oth:EnemyGeometryConverter x:Key="EnemyGeometryConverter"/>
+    <oth:EnemyGeometryConverter2 x:Key="EnemyGeometryConverter2"/>
+    
     <RadialGradientBrush x:Key="CoinColor">
         <GradientStop Color="Gold" Offset="0.1"/>
         <GradientStop Color="Goldenrod" Offset="0.2"/>
@@ -123,46 +125,20 @@
                     <Grid Width="{TemplateBinding ElementWidth}" Height="{TemplateBinding ElementHeight}">
                         <Path Fill="LightGoldenrodYellow" >
                             <Path.Data>
-                                <PathGeometry>
-                                    <PathFigure StartPoint="20,20" IsClosed="True">
-                                        <PathFigure.Segments>
-                                            <LineSegment Point="18, 5"/>
-                                            <ArcSegment Point="2,5" SweepDirection="Counterclockwise" RotationAngle="90" Size="3,5"/>
-                                            <LineSegment Point="0,20"/>
-                                            <LineSegment Point="5,17"/>
-                                            <LineSegment Point="10,20"/>
-                                            <LineSegment Point="15,17"/>
-                                        </PathFigure.Segments>
-                                    </PathFigure>
-                                </PathGeometry>
+                                <MultiBinding Converter="{StaticResource EnemyGeometryConverter}">
+                                    <Binding Path="ElementWidth" RelativeSource="{RelativeSource AncestorType={x:Type elements:Enemy}}"/>
+                                    <Binding Path="ElementHeight" RelativeSource="{RelativeSource AncestorType={x:Type elements:Enemy}}"/>
+                                </MultiBinding>
                             </Path.Data>
                         </Path>
                         <Path Fill="{TemplateBinding Background}"
                               Stroke="{TemplateBinding BorderBrush}"
                               StrokeThickness="{TemplateBinding BorderThickness}">
                             <Path.Data>
-                                <GeometryGroup FillRule="EvenOdd">
-                                    <PathGeometry>
-                                        <PathFigure StartPoint="20,20" IsClosed="True">
-                                            <PathFigure.Segments>
-                                                <LineSegment Point="18, 5"/>
-                                                <ArcSegment Point="2,5" SweepDirection="Counterclockwise" RotationAngle="90" Size="3,5"/>
-                                                <LineSegment Point="0,20"/>
-                                                <LineSegment Point="5,17"/>
-                                                <LineSegment Point="10,20"/>
-                                                <LineSegment Point="15,17"/>
-                                            </PathFigure.Segments>
-                                        </PathFigure>
-                                    </PathGeometry>
-                                    <EllipseGeometry Center="6,6" RadiusX="3" RadiusY="3"/>
-                                    <EllipseGeometry Center="14,6" RadiusX="3" RadiusY="3"/>
-                                    <EllipseGeometry Center="6,6" RadiusX="1.5" RadiusY="1.5"/>
-                                    <EllipseGeometry Center="14,6" RadiusX="1.5" RadiusY="1.5"/>
-                                    <RectangleGeometry Rect="5,10,10,5" RadiusX="0" RadiusY="0"/>
-                                    <RectangleGeometry Rect="6,10,2.5,2"/>
-                                    <RectangleGeometry Rect="9,13,2.5,2"/>
-                                    <RectangleGeometry Rect="12,10,2.5,2"/>
-                                </GeometryGroup>
+                                <MultiBinding Converter="{StaticResource EnemyGeometryConverter2}">
+                                    <Binding Path="ElementWidth" RelativeSource="{RelativeSource AncestorType={x:Type elements:Enemy}}"/>
+                                    <Binding Path="ElementHeight" RelativeSource="{RelativeSource AncestorType={x:Type elements:Enemy}}"/>
+                                </MultiBinding>
                             </Path.Data>
                         </Path>
                     </Grid>
