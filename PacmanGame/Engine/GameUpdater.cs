@@ -23,7 +23,8 @@ namespace PacmanGame.Engine
         public bool CheckMovement(MovableElement movable, GameBoard gameBoard, Direction direction)
         {
             Rect rect = TryMove(movable, direction);
-            return gameBoard.Elements.OfType<Block>().Any(b => CheckCollision(b, rect));
+            return CheckBoardMovementPossibility(rect, gameBoard) &&
+                gameBoard.Elements.OfType<Block>().Any(b => CheckCollision(b, rect));
         }
 
         private static Rect TryMove(MovableElement movable, Direction direction)
@@ -52,6 +53,12 @@ namespace PacmanGame.Engine
         {
             Rect rect1 = new Rect(new Point(element.X, element.Y), new Size(element.ElementWidth, element.ElementHeight));
             return rect1.IntersectsWith(rect);
+        }
+
+        private static bool CheckBoardMovementPossibility(Rect rect, GameBoard gameBoard)
+        {
+            Rect boardRect = new Rect(new Point(0,0), new Size(gameBoard.Columns, gameBoard.Rows));
+            return boardRect.Contains(rect);
         }
     }
 }
