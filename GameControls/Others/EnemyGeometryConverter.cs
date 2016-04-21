@@ -24,7 +24,7 @@ namespace GameControls.Others
             psc.Add(new LineSegment() { Point = new Point(0, height) });
             psc.Add(new LineSegment() { Point = new Point(5 * width / 20, 17 * height / 20) });
             psc.Add(new LineSegment() { Point = new Point(10 * width / 20, height) });
-            psc.Add(new LineSegment() { Point = new Point(15 * width / 20, 17 * height) });
+            psc.Add(new LineSegment() { Point = new Point(15 * width / 20, 17 * height/20) });
             pf.Segments = psc;
             pf.IsClosed = true;
             PathFigureCollection pfc = new PathFigureCollection();
