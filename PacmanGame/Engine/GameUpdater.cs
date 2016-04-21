@@ -22,7 +22,36 @@ namespace PacmanGame.Engine
 
         public bool CheckMovement(MovableElement movable, GameBoard gameBoard, Direction direction)
         {
-            return false;
+            Rect rect = TryMove(movable, direction);
+            return gameBoard.Elements.OfType<Block>().Any(b => CheckCollision(b, rect));
+        }
+
+        private static Rect TryMove(MovableElement movable, Direction direction)
+        {
+            Rect rect1 = new Rect(new Point(movable.X, movable.Y), new Size(movable.ElementWidth, movable.ElementHeight));
+            double speed = movable.Speed;
+            switch (direction)
+            {
+                case Direction.Left:
+                    rect1.Offset(-speed, 0);
+                    break;
+                case Direction.Right:
+                    rect1.Offset(speed, 0);
+                    break;                   
+                case Direction.Up:
+                    rect1.Offset(0, -speed);
+                    break;
+                case Direction.Down:
+                    rect1.Offset(0, speed);
+                    break;
+            }
+            return rect1;
+        }
+
+        private static bool CheckCollision(IGameElement element, Rect rect)
+        {
+            Rect rect1 = new Rect(new Point(element.X, element.Y), new Size(element.ElementWidth, element.ElementHeight));
+            return rect1.IntersectsWith(rect);
         }
     }
 }

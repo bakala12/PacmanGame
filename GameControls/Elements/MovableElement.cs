@@ -35,7 +35,7 @@ namespace GameControls.Elements
         /// </summary>
         protected MovableElement()
         {
-
+            Speed = 1;
         }
 
         /// <summary>
@@ -46,8 +46,24 @@ namespace GameControls.Elements
         /// <param name="speed">Movement speed of the element.</param>
         protected MovableElement(double width, double height, double speed=1) : base(width, height)
         {
-            //Speed = speed;
+            Speed = speed;
         }
+
+        /// <summary>
+        /// Gets or sets the speed of the element.
+        /// </summary>
+        public double Speed
+        {
+            get { return (double) GetValue(SpeedProperty); }
+            set { SetValue(SpeedProperty, value);}
+        }
+
+        /// <summary>
+        /// Dependency property for storing Speed property.
+        /// </summary>
+        public static readonly DependencyProperty SpeedProperty =
+            DependencyProperty.Register("Speed", typeof(double), typeof(MovableElement), 
+                new FrameworkPropertyMetadata((double)0));
 
         /// <summary>
         /// Moves the object in the specified direction.
