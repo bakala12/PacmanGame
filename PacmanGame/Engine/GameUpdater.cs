@@ -23,7 +23,7 @@ namespace PacmanGame.Engine
         {
             Rect rect1 = new Rect(new Point(element1.X, element1.Y), new Size(element1.ElementWidth, element1.ElementHeight));
             Rect rect2 = new Rect(new Point(element2.X, element2.Y), new Size(element2.ElementWidth, element2.ElementHeight));
-            return false;
+            return rect1.IntersectsWith(rect2);
         }
 
         public bool CheckMovement(MovableElement movable, GameBoard gameBoard, Direction direction)
