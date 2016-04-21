@@ -81,7 +81,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type elements:Player}">
-                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Viewbox>
                         <Path Fill="{TemplateBinding Background}" Stretch="UniformToFill">
                             <Path.Data>
                                 <MultiBinding Converter="{StaticResource PacmanGeometryConverter}">
@@ -92,7 +92,7 @@
                                 </MultiBinding>
                             </Path.Data>
                         </Path>
-                    </Grid>
+                    </Viewbox>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
