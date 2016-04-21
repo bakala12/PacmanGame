@@ -58,7 +58,9 @@
     <Compile Include="BoardGenerator\IGameBoardGenerator.cs" />
     <Compile Include="BoardGenerator\ExampleFileGameBoardGenerator.cs" />
     <Compile Include="Engine\GameEngine.cs" />
+    <Compile Include="Engine\GameUpdateCheckerFactory.cs" />
     <Compile Include="Engine\GameUpdater.cs" />
+    <Compile Include="Engine\IGameUpdateChecker.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\CloseableViewModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />

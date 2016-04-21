@@ -11,13 +11,7 @@ using GameControls.Others;
 
 namespace PacmanGame.Engine
 {
-    public interface IGameChecker
-    {
-        bool CheckCollision(IGameElement element1, IGameElement element2);
-        bool CheckMovement(MovableElement element, GameBoard gameBoard, Direction direction);
-    }
-
-    internal class GameUpdateChecker : IGameChecker
+    internal class GameUpdateUpdateChecker : IGameUpdateChecker
     {
         public bool CheckCollision(IGameElement element1, IGameElement element2)
         {
