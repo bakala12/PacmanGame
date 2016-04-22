@@ -4,14 +4,16 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Input;
 using PacmanGame.Annotations;
+using PacmanGame.Properties;
 using PacmanGame.ViewModels;
 
 namespace PacmanGame
 {
-    public class ViewModelsChanger : IViewModelChanger, INotifyPropertyChanged
+    public class MainWindowViewModel : IViewModelChanger, IHaveControlKeys, INotifyPropertyChanged
     {
-        public ViewModelsChanger()
+        public MainWindowViewModel()
         {
             var vm = new List<ViewModelBase>
             {
@@ -80,6 +82,52 @@ namespace PacmanGame
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private Key _upKey;
+        private Key _downKey;
+        private Key _leftKey;
+        private Key _rightKey;
+
+        public Key UpKey
+        {
+            get { return _upKey; }
+            set { _upKey = value; OnPropertyChanged(); }
+        }
+
+        public Key LeftKey
+        {
+            get { return _leftKey; }
+            set { _leftKey = value; OnPropertyChanged(); }
+        }
+
+        public Key DownKey
+        {
+            get { return _downKey; }
+            set { _downKey = value; OnPropertyChanged(); }
+        }
+
+        public Key RightKey
+        {
+            get { return _rightKey; }
+            set { _rightKey = value; OnPropertyChanged(); }
+        }
+
+        public void LoadControlKeys()
+        {
+            LeftKey = Settings.Default.LeftKey;
+            RightKey = Settings.Default.RightKey;
+            UpKey = Settings.Default.UpKey;
+            DownKey = Settings.Default.DownKey;
+        }
+
+        public void SaveControlKeys()
+        {
+            Settings.Default.DownKey = DownKey;
+            Settings.Default.LeftKey = LeftKey;
+            Settings.Default.RightKey = RightKey;
+            Settings.Default.UpKey = UpKey;
+            Settings.Default.Save();
         }
     }
 }

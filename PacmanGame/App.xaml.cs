@@ -15,15 +15,19 @@ namespace PacmanGame
     public partial class App : Application
     {
         public IViewModelChanger ViewModelChanger { get; private set; }
+        public IHaveControlKeys ControlKeysAccessor { get; private set; }
 
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            ViewModelChanger = new ViewModelsChanger();
+            MainWindowViewModel vm = new MainWindowViewModel();
+            ViewModelChanger = vm;
+            ControlKeysAccessor = vm;
             ViewModelChanger.ChangeCurrentViewModel("StartMenu");
             MainWindow window = new MainWindow();
             Current.MainWindow = window;
             window.DataContext = ViewModelChanger;
+            ControlKeysAccessor.LoadControlKeys();
             Current.MainWindow.Show();
         }
     } 

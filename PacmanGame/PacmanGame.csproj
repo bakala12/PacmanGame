@@ -61,6 +61,7 @@
     <Compile Include="Engine\GameUpdateCheckerFactory.cs" />
     <Compile Include="Engine\GameUpdater.cs" />
     <Compile Include="Engine\IGameUpdateChecker.cs" />
+    <Compile Include="IHaveControlKeys.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\CloseableViewModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="ViewModels\PauseViewModel.cs" />
     <Compile Include="ViewModels\StartMenuViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="ViewModelsChanger.cs" />
+    <Compile Include="MainWindowViewModel.cs" />
     <Compile Include="Views\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
     </Compile>
@@ -147,6 +148,7 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <AppDesigner Include="Properties\" />
     <Resource Include="Resources\example_board.board" />
