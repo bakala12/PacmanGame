@@ -22,6 +22,7 @@ namespace PacmanGame.Engine
 
         public bool CheckMovement(MovableElement movable, GameBoard gameBoard, Direction direction)
         {
+            if (direction == Direction.None) return false;
             Rect rect = TryMove(movable, direction);
             return CheckBoardMovementPossibility(rect, gameBoard) &&
                 gameBoard.Elements.OfType<Block>().Any(b => CheckCollision(b, rect));

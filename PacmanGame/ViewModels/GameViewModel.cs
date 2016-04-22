@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GameControls.Board;
+using GameControls.Others;
 using PacmanGame.BoardGenerator;
+using PacmanGame.Engine;
 
 namespace PacmanGame.ViewModels
 {
@@ -21,6 +23,7 @@ namespace PacmanGame.ViewModels
             IGameBoardGenerator generator = new ExampleFileGameBoardGenerator(s.Stream);
             GameBoard = generator.GenerateBoard(30, 30, 1);
             MoveCommand = new DelegateCommand(MovePlayer);
+            _gameEngine = new GameEngine(GameUpdateCheckerFactory.Instance.CreateUpdateChecker(), GameBoard);
         }
 
         private GameBoard _gameBoard;
@@ -35,13 +38,23 @@ namespace PacmanGame.ViewModels
             }
         }
 
+        private GameEngine _gameEngine;
+
         public ICommand MoveCommand { get; }
 
         private void MovePlayer(object parameter)
         {
             Key key = parameter as Key? ?? Key.None;
             if(key==Key.None) return;
-            //here move in engine
+            IHaveControlKeys controlKeysAccessor = (Application.Current as App)?.ControlKeysAccessor;
+            if(controlKeysAccessor==null) throw new InvalidOperationException();
+            Direction direction;
+            if(controlKeysAccessor.LeftKey == key) direction=Direction.Left;
+            else if (controlKeysAccessor.RightKey == key) direction = Direction.Right;
+            else if (controlKeysAccessor.UpKey == key) direction = Direction.Up;
+            else if (controlKeysAccessor.DownKey == key) direction = Direction.Down;
+            else direction = Direction.None;
+            _gameEngine.MovePlayer(direction);
         }
     }
 }
