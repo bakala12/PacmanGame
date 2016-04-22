@@ -86,5 +86,11 @@ namespace GameControls.Elements
         public static readonly DependencyProperty IsAliveProperty =
             DependencyProperty.Register("IsAlive", typeof (bool), typeof (Player),
                 new FrameworkPropertyMetadata(false));
+
+        public override void Move(Direction direction)
+        {
+            base.Move(direction);
+            Direction = direction;
+        }
     }
 }

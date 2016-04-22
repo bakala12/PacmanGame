@@ -72,6 +72,21 @@ namespace GameControls.Elements
         public virtual void Move(Direction direction)
         {
             RaiseMovementEvents(direction);
+            switch (direction)
+            {
+                case Direction.Left:
+                    Y -= Speed;
+                    break;
+                case Direction.Right:
+                    Y += Speed;
+                    break;
+                case Direction.Up:
+                    X -= Speed;
+                    break;
+                case Direction.Down:
+                    X += Speed;
+                    break;
+            }
         }
 
         protected virtual void RaiseMovementEvents(Direction direction)
@@ -148,31 +163,26 @@ namespace GameControls.Elements
         /// <summary>
         /// A RoutedEvent which handles MoveLeft event. 
         /// </summary>
-        public static readonly RoutedEvent MoveLeftEvent =
-            EventManager.RegisterRoutedEvent("MoveLeft", RoutingStrategy.Bubble, typeof(MovementEventHandler), typeof(MovableElement));
+        public static readonly RoutedEvent MoveLeftEvent = EventManager.RegisterRoutedEvent("MoveLeft", RoutingStrategy.Bubble, typeof (MovementEventHandler), typeof (MovableElement));
 
         /// <summary>
         /// A RoutedEvent which handles MoveLeft event. 
         /// </summary>
-        public static readonly RoutedEvent MoveRightEvent =
-            EventManager.RegisterRoutedEvent("MoveRight", RoutingStrategy.Bubble, typeof(MovementEventHandler), typeof(MovableElement));
+        public static readonly RoutedEvent MoveRightEvent = EventManager.RegisterRoutedEvent("MoveRight", RoutingStrategy.Bubble, typeof (MovementEventHandler), typeof (MovableElement));
 
         /// <summary>
         /// A RoutedEvent which handles MoveRight event. 
         /// </summary>
-        public static readonly RoutedEvent MoveUpEvent = 
-            EventManager.RegisterRoutedEvent("MoveUp", RoutingStrategy.Bubble, typeof(MovementEventHandler), typeof(MovableElement));
+        public static readonly RoutedEvent MoveUpEvent = EventManager.RegisterRoutedEvent("MoveUp", RoutingStrategy.Bubble, typeof (MovementEventHandler), typeof (MovableElement));
 
         /// <summary>
         /// A RoutedEvent which handles MoveDown event. 
         /// </summary>
-        public static readonly RoutedEvent MoveDownEvent =
-            EventManager.RegisterRoutedEvent("MoveDown", RoutingStrategy.Bubble, typeof(MovementEventHandler), typeof(MovableElement));
+        public static readonly RoutedEvent MoveDownEvent = EventManager.RegisterRoutedEvent("MoveDown", RoutingStrategy.Bubble, typeof (MovementEventHandler), typeof (MovableElement));
 
         /// <summary>
         /// A RoutedEvent which handles Moved event. 
         /// </summary>
-        public static readonly RoutedEvent MovedEvent = 
-            EventManager.RegisterRoutedEvent("Moved", RoutingStrategy.Bubble, typeof(MovementEventHandler), typeof(MovableElement));
+        public static readonly RoutedEvent MovedEvent = EventManager.RegisterRoutedEvent("Moved", RoutingStrategy.Bubble, typeof (MovementEventHandler), typeof (MovableElement));
     }
 }

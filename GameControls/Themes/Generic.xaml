@@ -123,21 +123,21 @@
                     <Viewbox>
                         <Grid>
                             <Path Fill="LightGoldenrodYellow" >
-                            <Path.Data>
-                                <PathGeometry>
-                                    <PathFigure StartPoint="1,1" IsClosed="True">
-                                        <PathFigure.Segments>
-                                            <LineSegment Point="0.9, 0.25"/>
-                                            <ArcSegment Point="0.1, 0.25" SweepDirection="Counterclockwise" RotationAngle="90" Size="0.15,0.25"/>
-                                            <LineSegment Point="0,1"/>
-                                            <LineSegment Point="0.25, 0.85"/>
-                                            <LineSegment Point="0.5,1"/>
-                                            <LineSegment Point="0.75,0.85"/>
-                                        </PathFigure.Segments>
-                                    </PathFigure>
-                                </PathGeometry>
-                            </Path.Data>
-                        </Path>
+                                <Path.Data>
+                                    <PathGeometry>
+                                        <PathFigure StartPoint="1,1" IsClosed="True">
+                                            <PathFigure.Segments>
+                                                <LineSegment Point="0.9, 0.25"/>
+                                                <ArcSegment Point="0.1, 0.25" SweepDirection="Counterclockwise" RotationAngle="90" Size="0.15,0.25"/>
+                                                <LineSegment Point="0,1"/>
+                                                <LineSegment Point="0.25, 0.85"/>
+                                                <LineSegment Point="0.5,1"/>
+                                                <LineSegment Point="0.75,0.85"/>
+                                            </PathFigure.Segments>
+                                        </PathFigure>
+                                    </PathGeometry>
+                                </Path.Data>
+                            </Path>
                             <Path Fill="{TemplateBinding Background}"
                               Stroke="{TemplateBinding BorderBrush}"
                               StrokeThickness="{TemplateBinding BorderThickness}">

@@ -15,8 +15,8 @@ namespace PacmanGame.Engine
     {
         public bool CheckCollision(IGameElement element1, IGameElement element2)
         {
-            Rect rect1 = new Rect(new Point(element1.X, element1.Y), new Size(element1.ElementWidth, element1.ElementHeight));
-            Rect rect2 = new Rect(new Point(element2.X, element2.Y), new Size(element2.ElementWidth, element2.ElementHeight));
+            Rect rect1 = new Rect(new Point(element1.X, element1.Y), new Size(1,1));
+            Rect rect2 = new Rect(new Point(element2.X, element2.Y), new Size(1,1));
             return rect1.IntersectsWith(rect2);
         }
 
@@ -30,20 +30,20 @@ namespace PacmanGame.Engine
 
         private static Rect TryMove(MovableElement movable, Direction direction)
         {
-            Rect rect1 = new Rect(new Point(movable.X, movable.Y), new Size(movable.ElementWidth, movable.ElementHeight));
+            Rect rect1 = new Rect(new Point(movable.X, movable.Y), new Size(1,1));
             double speed = movable.Speed;
             switch (direction)
             {
-                case Direction.Left:
+                case Direction.Up:
                     rect1.Offset(-speed, 0);
                     break;
-                case Direction.Right:
+                case Direction.Down:
                     rect1.Offset(speed, 0);
                     break;                   
-                case Direction.Up:
+                case Direction.Left:
                     rect1.Offset(0, -speed);
                     break;
-                case Direction.Down:
+                case Direction.Right:
                     rect1.Offset(0, speed);
                     break;
             }
@@ -52,14 +52,15 @@ namespace PacmanGame.Engine
 
         private static bool CheckCollision(IGameElement element, Rect rect)
         {
-            Rect rect1 = new Rect(new Point(element.X, element.Y), new Size(element.ElementWidth, element.ElementHeight));
+            Rect rect1 = new Rect(new Point(element.X, element.Y), new Size(1,1));
             return rect1.IntersectsWith(rect);
         }
 
         private static bool CheckBoardMovementPossibility(Rect rect, GameBoard gameBoard)
         {
-            Rect boardRect = new Rect(new Point(0,0), new Size(gameBoard.Columns, gameBoard.Rows));
-            return boardRect.Contains(rect);
+            Rect boardRect = new Rect(new Point(0,0), new Size(gameBoard.Rows, gameBoard.Columns));
+            bool b =boardRect.Contains(rect);
+            return b;
         }
     }
 }
