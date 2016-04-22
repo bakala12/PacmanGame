@@ -6,8 +6,15 @@
         xmlns:local="clr-namespace:PacmanGame"
         xmlns:vm="clr-namespace:PacmanGame.ViewModels"
         xmlns:views="clr-namespace:PacmanGame.Views"
+        xmlns:keys="clr-namespace:System.Windows.Input;assembly=WindowsBase"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
+    <Window.InputBindings>
+        <KeyBinding Key="{Binding LeftKey}" Command="{Binding CurrentViewModel.MoveCommand}" CommandParameter="{Binding LeftKey}"/>
+        <KeyBinding Key="{Binding RightKey}" Command="{Binding CurrentViewModel.MoveCommand}" CommandParameter="{Binding RightKey}"/>
+        <KeyBinding Key="{Binding UpKey}" Command="{Binding CurrentViewModel.MoveCommand}" CommandParameter="{Binding UpKey}"/>
+        <KeyBinding Key="{Binding DownKey}" Command="{Binding CurrentViewModel.MoveCommand}" CommandParameter="{Binding DownKey}"/>
+    </Window.InputBindings>
     <Grid>
         <ContentControl Content="{Binding CurrentViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
     </Grid>
