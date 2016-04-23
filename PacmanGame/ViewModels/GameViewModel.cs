@@ -17,6 +17,9 @@ namespace PacmanGame.ViewModels
 {
     public class GameViewModel : ViewModelBase
     {
+        private readonly GameEngine _gameEngine;
+        private GameBoard _gameBoard;
+
         public GameViewModel() : base("Game")
         {
             var s = Application.GetResourceStream(new Uri("Resources/example_board.board", UriKind.Relative));
@@ -25,8 +28,6 @@ namespace PacmanGame.ViewModels
             MoveCommand = new DelegateCommand(MovePlayer);
             _gameEngine = new GameEngine(GameUpdateCheckerFactory.Instance.CreateUpdateChecker(GameBoard), GameBoard);
         }
-
-        private GameBoard _gameBoard;
 
         public GameBoard GameBoard
         {
@@ -37,8 +38,6 @@ namespace PacmanGame.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        private GameEngine _gameEngine;
 
         public ICommand MoveCommand { get; }
 

@@ -62,6 +62,7 @@
     <Compile Include="Engine\GameUpdater.cs" />
     <Compile Include="Engine\IGameUpdateChecker.cs" />
     <Compile Include="Graph\Graph.cs" />
+    <Compile Include="Graph\GraphCreator.cs" />
     <Compile Include="Graph\GraphExtender.cs" />
     <Compile Include="Graph\IGraph.cs" />
     <Compile Include="IHaveControlKeys.cs" />
