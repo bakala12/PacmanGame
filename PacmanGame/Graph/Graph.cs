@@ -12,7 +12,7 @@ namespace PacmanGame.Graph
     {
         private readonly bool[,] _blocks;
         public int VerticlesCount { get; private set; }
-        private List<int>[] _neighbours;
+        public List<int>[] Neighbours { get; private set; }
 
         public Graph(GameBoard gameBoard)
         {
@@ -35,17 +35,17 @@ namespace PacmanGame.Graph
         private void ConstructGraph()
         {
             VerticlesCount = _blocks.Length;
-            _neighbours = new List<int>[VerticlesCount];
+            Neighbours = new List<int>[VerticlesCount];
             for (int i = 0; i < _blocks.GetLength(0); i++)
             {
                 for (int j = 0; j < _blocks.GetLength(1); j++)
                 {
-                    _neighbours[_blocks.GetLength(1) * i + j] = new List<int>();
+                    Neighbours[_blocks.GetLength(1) * i + j] = new List<int>();
                     if (_blocks[i, j]) continue;
-                    if (i - 1 >= 0 && !_blocks[i - 1, j]) _neighbours[_blocks.GetLength(1) * i + j].Add(_blocks.GetLength(1) * (i - 1) + j);
-                    if (i + 1 < _blocks.GetLength(0) && !_blocks[i + 1, j]) _neighbours[_blocks.GetLength(1) * i + j].Add(_blocks.GetLength(1) * (i + 1) + j);
-                    if (j - 1 >= 0 && !_blocks[i, j - 1]) _neighbours[_blocks.GetLength(1) * i + j].Add(_blocks.GetLength(1) * i + j - 1);
-                    if (j + 1 < _blocks.GetLength(1) && !_blocks[i, j + 1]) _neighbours[_blocks.GetLength(1) * i + j].Add(_blocks.GetLength(1) * i + j + 1);
+                    if (i - 1 >= 0 && !_blocks[i - 1, j]) Neighbours[_blocks.GetLength(1) * i + j].Add(_blocks.GetLength(1) * (i - 1) + j);
+                    if (i + 1 < _blocks.GetLength(0) && !_blocks[i + 1, j]) Neighbours[_blocks.GetLength(1) * i + j].Add(_blocks.GetLength(1) * (i + 1) + j);
+                    if (j - 1 >= 0 && !_blocks[i, j - 1]) Neighbours[_blocks.GetLength(1) * i + j].Add(_blocks.GetLength(1) * i + j - 1);
+                    if (j + 1 < _blocks.GetLength(1) && !_blocks[i, j + 1]) Neighbours[_blocks.GetLength(1) * i + j].Add(_blocks.GetLength(1) * i + j + 1);
                 }
             }
         }

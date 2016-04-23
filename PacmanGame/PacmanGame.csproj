@@ -61,6 +61,8 @@
     <Compile Include="Engine\GameUpdateCheckerFactory.cs" />
     <Compile Include="Engine\GameUpdater.cs" />
     <Compile Include="Engine\IGameUpdateChecker.cs" />
+    <Compile Include="Graph\Graph.cs" />
+    <Compile Include="Graph\GraphExtender.cs" />
     <Compile Include="IHaveControlKeys.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModels\CloseableViewModel.cs" />
