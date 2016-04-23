@@ -4,10 +4,72 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacmanGame.Views"
+             xmlns:converters ="clr-namespace:PacmanGame.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
-            <TextBlock Text="Ustawienia"/>
-            <Button Content="Powrót" Command="{Binding ReturnCommand}"/>
-    </StackPanel>
+             d:DesignHeight="300" d:DesignWidth="300" KeyDown="OptionsView_OnKeyDown" >
+    <UserControl.Resources>
+        <converters:KeyDisplayConverter x:Key="KeyDisplayConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Sterowanie" Grid.Row="0"/>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.3*"/>
+                <ColumnDefinition Width="0.3*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Ruch w lewo" Grid.Row="0" Grid.Column="0"/>
+            <TextBlock Text="Ruch w prawo" Grid.Row="1" Grid.Column="0"/>
+            <TextBlock Text="Ruch w górę" Grid.Row="2" Grid.Column="0"/>
+            <TextBlock Text="Ruch w dół" Grid.Row="3" Grid.Column="0"/>
+            <TextBlock Grid.Row="0" Grid.Column="1">
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource KeyDisplayConverter}">
+                        <Binding Path="ActiveLeft"/>
+                        <Binding Path="DataContext.LeftKey" RelativeSource="{RelativeSource AncestorType={x:Type local:OptionsView}}"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1">
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource KeyDisplayConverter}">
+                        <Binding Path="ActiveRight"/>
+                        <Binding Path="DataContext.RightKey" RelativeSource="{RelativeSource AncestorType={x:Type local:OptionsView}}"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="1">
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource KeyDisplayConverter}">
+                        <Binding Path="ActiveUp"/>
+                        <Binding Path="DataContext.UpKey" RelativeSource="{RelativeSource AncestorType={x:Type local:OptionsView}}"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="1">
+                <TextBlock.Text>
+                    <MultiBinding Converter="{StaticResource KeyDisplayConverter}">
+                        <Binding Path="ActiveDown"/>
+                        <Binding Path="DataContext.DownKey" RelativeSource="{RelativeSource AncestorType={x:Type local:OptionsView}}"/>
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <Button Content="Zmień" Command="{Binding ChangeKeyCommand}" CommandParameter="Left" Grid.Row="0" Grid.Column="2"/>
+            <Button Content="Zmień" Command="{Binding ChangeKeyCommand}" CommandParameter="Right" Grid.Row="1" Grid.Column="2"/>
+            <Button Content="Zmień" Command="{Binding ChangeKeyCommand}" CommandParameter="Up" Grid.Row="2" Grid.Column="2"/>
+            <Button Content="Zmień" Command="{Binding ChangeKeyCommand}" CommandParameter="Down" Grid.Row="3" Grid.Column="2"/>
+        </Grid>
+        <Button Content="Powrót" Command="{Binding ReturnCommand}" Grid.Row="2"/>
+    </Grid>
 </UserControl>

@@ -15,10 +15,31 @@ namespace PacmanGame.ViewModels
         /// <summary>
         /// Initializes a new instance of CloseableViewModel object.
         /// </summary>
-        /// <param name="name"></param>
+        /// <param name="name">Name of the view model.</param>
         protected CloseableViewModel(string name = null) : base(name)
         {
             ReturnCommand = new DelegateCommand(x=>Close());
+            ViewAppeared += (sender, args) => OnViewAppeared();
+        }
+
+        /// <summary>
+        /// Occures when the view associated with the current view model appeared on the screen.
+        /// </summary>
+        public EventHandler ViewAppeared;
+
+        /// <summary>
+        /// Raises the ViewAppeared event. This is for internal use.
+        /// </summary>
+        internal virtual void RaiseViewAppearedEvent()
+        {
+            ViewAppeared?.Invoke(this, EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Reaction for ViewAppeared event. This is empty by default. Subclasses may override this method.
+        /// </summary>
+        protected virtual void OnViewAppeared()
+        {
         }
 
         /// <summary>

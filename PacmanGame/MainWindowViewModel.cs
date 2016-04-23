@@ -55,6 +55,7 @@ namespace PacmanGame
             {
                 _currentViewModel = value;
                 OnPropertyChanged();
+                (CurrentViewModel as CloseableViewModel)?.RaiseViewAppearedEvent();
             }
         }
 

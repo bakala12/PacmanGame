@@ -25,28 +25,7 @@ namespace PacmanGame.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Windows.Input.Key UpKey {
-            get {
-                return ((global::System.Windows.Input.Key)(this["UpKey"]));
-            }
-            set {
-                this["UpKey"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Windows.Input.Key DownKey {
-            get {
-                return ((global::System.Windows.Input.Key)(this["DownKey"]));
-            }
-            set {
-                this["DownKey"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<Key>Left</Key>")]
         public global::System.Windows.Input.Key LeftKey {
             get {
                 return ((global::System.Windows.Input.Key)(this["LeftKey"]));
@@ -58,12 +37,37 @@ namespace PacmanGame.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<Key>Right</Key>")]
         public global::System.Windows.Input.Key RightKey {
             get {
                 return ((global::System.Windows.Input.Key)(this["RightKey"]));
             }
             set {
                 this["RightKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<Key>Up</Key>")]
+        public global::System.Windows.Input.Key UpKey {
+            get {
+                return ((global::System.Windows.Input.Key)(this["UpKey"]));
+            }
+            set {
+                this["UpKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<Key>Down</Key>")]
+        public global::System.Windows.Input.Key DownKey {
+            get {
+                return ((global::System.Windows.Input.Key)(this["DownKey"]));
+            }
+            set {
+                this["DownKey"] = value;
             }
         }
     }

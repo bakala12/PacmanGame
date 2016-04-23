@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="BoardGenerator\IGameBoardGenerator.cs" />
     <Compile Include="BoardGenerator\ExampleFileGameBoardGenerator.cs" />
+    <Compile Include="Converters\KeyDisplayConverter.cs" />
     <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="Engine\GameUpdateCheckerFactory.cs" />
     <Compile Include="Engine\GameUpdater.cs" />

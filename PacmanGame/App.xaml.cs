@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
+using PacmanGame.Properties;
 using PacmanGame.ViewModels;
 
 namespace PacmanGame
@@ -20,6 +22,7 @@ namespace PacmanGame
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+            DefaultControls();
             MainWindowViewModel vm = new MainWindowViewModel();
             ViewModelChanger = vm;
             ControlKeysAccessor = vm;
@@ -29,6 +32,19 @@ namespace PacmanGame
             window.DataContext = ViewModelChanger;
             ControlKeysAccessor.LoadControlKeys();
             Current.MainWindow.Show();
+        }
+
+        private void DefaultControls()
+        {
+            if (Settings.Default.LeftKey == Key.None)
+                Settings.Default.LeftKey = Key.Left;
+            if (Settings.Default.RightKey == Key.None)
+                Settings.Default.RightKey = Key.Right;
+            if (Settings.Default.UpKey == Key.None)
+                Settings.Default.UpKey = Key.Up;
+            if (Settings.Default.DownKey == Key.None)
+                Settings.Default.DownKey = Key.Down;
+            Settings.Default.Save();
         }
     } 
 }

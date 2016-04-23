@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PacmanGame.ViewModels;
 
 namespace PacmanGame.Views
 {
@@ -24,5 +25,7 @@ namespace PacmanGame.Views
         {
             InitializeComponent();
         }
+
+        private void OptionsView_OnKeyDown(object sender, KeyEventArgs e) => (DataContext as OptionsViewModel)?.OnKeyDown(sender, e);
     }
 }
