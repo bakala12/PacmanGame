@@ -53,14 +53,14 @@ namespace PacmanGame.Engine
         private static bool CheckCollision(IGameElement element, Rect rect)
         {
             Rect rect1 = new Rect(new Point(element.X, element.Y), new Size(1,1));
-            return rect1.IntersectsWith(rect);
+            Rect intersection = Rect.Intersect(rect1, rect);
+            return intersection.IsEmpty && !rect1.IntersectsWith(rect);
         }
 
         private static bool CheckBoardMovementPossibility(Rect rect, GameBoard gameBoard)
         {
             Rect boardRect = new Rect(new Point(0,0), new Size(gameBoard.Rows, gameBoard.Columns));
-            bool b =boardRect.Contains(rect);
-            return b;
+            return boardRect.Contains(rect);
         }
     }
 }

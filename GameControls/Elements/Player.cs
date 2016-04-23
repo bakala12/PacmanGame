@@ -87,6 +87,10 @@ namespace GameControls.Elements
             DependencyProperty.Register("IsAlive", typeof (bool), typeof (Player),
                 new FrameworkPropertyMetadata(false));
 
+        /// <summary>
+        /// Overrides the Move method. It also changes pacman direction.
+        /// </summary>
+        /// <param name="direction">The direction in which player would be moved.</param>
         public override void Move(Direction direction)
         {
             base.Move(direction);
