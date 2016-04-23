@@ -34,8 +34,7 @@ namespace PacmanGame.Engine
         {
             if (direction == Direction.None) return false;
             Rect rect = TryMove(movable, direction);
-            return CheckBoardMovementPossibility(rect, _gameBoard) &&
-                _gameBoard.Elements.OfType<Block>().Any(b => CheckCollision(b, rect));
+            return CheckBoardMovementPossibility(rect, _gameBoard) && CheckMovement(movable, direction, _gameBoard);
         }
 
         private static Rect TryMove(MovableElement movable, Direction direction)
@@ -60,17 +59,29 @@ namespace PacmanGame.Engine
             return rect1;
         }
 
-        private static bool CheckCollision(IGameElement element, Rect rect)
-        {
-            Rect rect1 = new Rect(new Point(element.X, element.Y), new Size(1,1));
-            Rect intersection = Rect.Intersect(rect1, rect);
-            return intersection.IsEmpty && !rect1.IntersectsWith(rect);
-        }
-
         private static bool CheckBoardMovementPossibility(Rect rect, GameBoard gameBoard)
         {
             Rect boardRect = new Rect(new Point(0,0), new Size(gameBoard.Rows, gameBoard.Columns));
             return boardRect.Contains(rect);
+        }
+
+        private bool CheckMovement(MovableElement movable, Direction direction, GameBoard board)
+        {
+            int ind = (int)(((int)movable.X) * board.Rows + (int)movable.Y);
+            var neighbours = _graph.Neighbours[ind];
+            switch (direction)
+            {
+                case Direction.Left:
+                    return neighbours.Contains(ind - 1);
+                case Direction.Right:
+                    return neighbours.Contains(ind + 1);
+                case Direction.Up:
+                    return neighbours.Contains((int)(ind - board.Rows));
+                case Direction.Down:
+                    return neighbours.Contains((int) (ind + board.Rows));
+                default:
+                    return false;
+            }
         }
     }
 }
