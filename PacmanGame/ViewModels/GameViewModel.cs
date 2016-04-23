@@ -23,7 +23,7 @@ namespace PacmanGame.ViewModels
             IGameBoardGenerator generator = new ExampleFileGameBoardGenerator(s.Stream);
             GameBoard = generator.GenerateBoard(30, 30, 1);
             MoveCommand = new DelegateCommand(MovePlayer);
-            _gameEngine = new GameEngine(GameUpdateCheckerFactory.Instance.CreateUpdateChecker(), GameBoard);
+            _gameEngine = new GameEngine(GameUpdateCheckerFactory.Instance.CreateUpdateChecker(GameBoard), GameBoard);
         }
 
         private GameBoard _gameBoard;

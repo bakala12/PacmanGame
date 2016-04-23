@@ -8,6 +8,6 @@ namespace PacmanGame.Engine
     public interface IGameUpdateChecker
     {
         bool CheckCollision(IGameElement element1, IGameElement element2);
-        bool CheckMovement(MovableElement element, GameBoard gameBoard, Direction direction);
+        bool CheckMovement(MovableElement element, Direction direction);
     }
 }

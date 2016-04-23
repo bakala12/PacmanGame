@@ -26,7 +26,7 @@ namespace PacmanGame.Engine
 
         public void MovePlayer(Direction direction)
         {
-            if(!_gameUpdateChecker.CheckMovement(_player, _gameBoard, direction)) return;
+            if(!_gameUpdateChecker.CheckMovement(_player, direction)) return;
             //move player here
             _player.Move(direction);
         }

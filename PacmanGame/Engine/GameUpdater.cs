@@ -8,11 +8,21 @@ using GameControls.Board;
 using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
+using PacmanGame.Graph;
 
 namespace PacmanGame.Engine
 {
     internal class GameUpdateUpdateChecker : IGameUpdateChecker
     {
+        private readonly GameBoard _gameBoard;
+        private readonly IGraph _graph;
+
+        public GameUpdateUpdateChecker(GameBoard board)
+        {
+            _gameBoard = board;
+            _graph = new Graph.Graph(board);
+        }
+
         public bool CheckCollision(IGameElement element1, IGameElement element2)
         {
             Rect rect1 = new Rect(new Point(element1.X, element1.Y), new Size(1,1));
@@ -20,12 +30,12 @@ namespace PacmanGame.Engine
             return rect1.IntersectsWith(rect2);
         }
 
-        public bool CheckMovement(MovableElement movable, GameBoard gameBoard, Direction direction)
+        public bool CheckMovement(MovableElement movable, Direction direction)
         {
             if (direction == Direction.None) return false;
             Rect rect = TryMove(movable, direction);
-            return CheckBoardMovementPossibility(rect, gameBoard) &&
-                gameBoard.Elements.OfType<Block>().Any(b => CheckCollision(b, rect));
+            return CheckBoardMovementPossibility(rect, _gameBoard) &&
+                _gameBoard.Elements.OfType<Block>().Any(b => CheckCollision(b, rect));
         }
 
         private static Rect TryMove(MovableElement movable, Direction direction)

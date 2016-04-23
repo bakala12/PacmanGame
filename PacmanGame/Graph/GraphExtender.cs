@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace PacmanGame.Graph
 {
-    public static class GraphExtender
+    internal static class GraphExtender
     {
-        public static int? GetEdgeWeight(this Graph graph, int start, int end)
+        public static int? GetEdgeWeight(this IGraph graph, int start, int end)
         {
             if (graph.Neighbours[start].Contains(end)) return 1;
             else return null;
         }
 
-        public static int AStar(this Graph graph, int start, int end)
+        public static int AStar(this IGraph graph, int start, int end)
         {
             HashSet<int> close = new HashSet<int>();
             int[] prev = new int[graph.VerticlesCount];

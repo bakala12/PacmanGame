@@ -8,7 +8,7 @@ using GameControls.Interfaces;
 
 namespace PacmanGame.Graph
 {
-    public class Graph
+    internal class Graph : IGraph
     {
         private readonly bool[,] _blocks;
         public int VerticlesCount { get; private set; }

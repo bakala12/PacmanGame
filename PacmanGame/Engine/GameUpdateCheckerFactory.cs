@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameControls.Board;
 
 namespace PacmanGame.Engine
 {
@@ -29,9 +30,9 @@ namespace PacmanGame.Engine
             }
         }
 
-        public IGameUpdateChecker CreateUpdateChecker()
+        public IGameUpdateChecker CreateUpdateChecker(GameBoard gameBoard)
         {
-            return new GameUpdateUpdateChecker();
+            return new GameUpdateUpdateChecker(gameBoard);
         }
     }
 }
