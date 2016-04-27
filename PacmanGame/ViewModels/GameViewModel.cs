@@ -17,7 +17,7 @@ namespace PacmanGame.ViewModels
 {
     public class GameViewModel : ViewModelBase
     {
-        private readonly GameEngine _gameEngine;
+        private GameEngine _gameEngine;
         private GameBoard _gameBoard;
 
         public GameViewModel() : base("Game")
@@ -63,6 +63,14 @@ namespace PacmanGame.ViewModels
             var viewModelChager = (Application.Current as App)?.ViewModelChanger;
             //stop timer here for example
             viewModelChager?.ChangeCurrentViewModel("Pause");
+        }
+
+        public virtual void ResetState()
+        {
+            var s = Application.GetResourceStream(new Uri("Resources/example_board.board", UriKind.Relative));
+            IGameBoardGenerator generator = new ExampleFileGameBoardGenerator(s?.Stream);
+            GameBoard = generator.GenerateBoard(30, 30, 1);
+            _gameEngine = new GameEngine(GameUpdateCheckerFactory.Instance.CreateUpdateChecker(GameBoard), GameBoard);
         }
     }
 }

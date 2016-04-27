@@ -8,5 +8,6 @@ namespace PacmanGame
     {
         ViewModelBase CurrentViewModel { get; }
         void ChangeCurrentViewModel(string name);
+        ViewModelBase GetViewModelByName(string name);
     }
 }
