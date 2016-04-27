@@ -45,14 +45,18 @@ namespace GameControls.Others
             Start();
         }
 
-        public GameTimer() : this(new TimeSpan(0, 0, 0, 1))
+        public GameTimer() : this(TimeSpan.Zero, new TimeSpan(0, 0, 0, 1))
         {
         }
 
-        public GameTimer(TimeSpan timePeriod)
+        public GameTimer(TimeSpan initialValue) : this(initialValue, new TimeSpan(0, 0, 0, 1))
+        {
+        }
+
+        public GameTimer(TimeSpan initialValue, TimeSpan timePeriod)
         {
             _timer = new DispatcherTimer();
-            TimeLeft = TimeSpan.Zero;
+            TimeLeft = initialValue;
             _timer.Interval = timePeriod;
             _timer.Tick += OnTimerTick;
         }
