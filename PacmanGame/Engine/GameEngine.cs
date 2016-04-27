@@ -25,6 +25,10 @@ namespace PacmanGame.Engine
             _player = gameBoard.Children.OfType<Player>().Single();
             _player.Moved += (sender, args) => OnPlayerMoved();
             Timer = new GameTimer();
+            foreach (var result in _gameBoard.Elements.OfType<BonusLife>())
+            {
+                result.Collected += (x, e) => { };
+            }
         }
 
         private readonly IGameUpdateChecker _gameUpdateChecker;
@@ -62,11 +66,32 @@ namespace PacmanGame.Engine
         }
 
         private ITimer _timer;
+        private uint _points;
+        private uint _difficulty;
+        private uint _lifes;
 
         public ITimer Timer
         {
             get { return _timer; }
             private set { _timer = value; OnPropertyChanged(); }
+        }
+
+        public uint Points
+        {
+            get { return _points; }
+            protected set { _points = value; OnPropertyChanged(); }
+        }
+
+        public uint Difficulty
+        {
+            get { return _difficulty; }
+            protected set { _difficulty = value; OnPropertyChanged(); }
+        }
+
+        public uint Lifes
+        {
+            get { return _lifes; }
+            protected set { _lifes = value; OnPropertyChanged(); }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

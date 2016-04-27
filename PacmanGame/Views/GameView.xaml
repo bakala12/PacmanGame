@@ -10,12 +10,22 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="Czas:"/>
             <TextBlock Text="{Binding GameEngine.Timer.TimeLeft}"/>
         </StackPanel>
-        <ContentControl Content="{Binding GameBoard}" Grid.Row="1"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <TextBlock Text="Punkty"/>
+            <TextBlock Text="{Binding GameEngine.Points}"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <TextBlock Text="Życia"/>
+            <TextBlock Text="{Binding GameEngine.Lifes}"/>
+        </StackPanel>
+        <ContentControl Content="{Binding GameBoard}" Grid.Row="3"/>
     </Grid>
 </UserControl>
