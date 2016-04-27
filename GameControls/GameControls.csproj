@@ -59,6 +59,7 @@
     <Compile Include="Elements\GameElement.cs" />
     <Compile Include="Elements\MovableElement.cs" />
     <Compile Include="Elements\Player.cs" />
+    <Compile Include="Elements\Portal.cs" />
     <Compile Include="Interfaces\ICollectable.cs" />
     <Compile Include="Interfaces\IGameElement.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
