@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using GameControls.Board;
 using GameControls.Elements;
 using GameControls.Interfaces;
@@ -48,6 +49,11 @@ namespace PacmanGame.Engine
             foreach (var gameElement in toRemove)
             {
                 _gameBoard.Children.Remove(gameElement);
+            }
+            if (!_gameBoard.Children.OfType<Coin>().Any())
+            {
+                //koniec levelu
+                MessageBox.Show("Gratulacje, koniec gry!");
             }
         }
     }

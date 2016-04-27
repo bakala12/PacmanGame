@@ -23,9 +23,10 @@ namespace PacmanGame.ViewModels
         public GameViewModel() : base("Game")
         {
             var s = Application.GetResourceStream(new Uri("Resources/example_board.board", UriKind.Relative));
-            IGameBoardGenerator generator = new ExampleFileGameBoardGenerator(s.Stream);
+            IGameBoardGenerator generator = new ExampleFileGameBoardGenerator(s?.Stream);
             GameBoard = generator.GenerateBoard(30, 30, 1);
             MoveCommand = new DelegateCommand(MovePlayer);
+            PauseCommand = new DelegateCommand(x=>Pause());
             _gameEngine = new GameEngine(GameUpdateCheckerFactory.Instance.CreateUpdateChecker(GameBoard), GameBoard);
         }
 
@@ -40,8 +41,9 @@ namespace PacmanGame.ViewModels
         }
 
         public ICommand MoveCommand { get; }
+        public ICommand PauseCommand { get; }
 
-        private void MovePlayer(object parameter)
+        public void MovePlayer(object parameter)
         {
             Key key = parameter as Key? ?? Key.None;
             if(key==Key.None) return;
@@ -54,6 +56,13 @@ namespace PacmanGame.ViewModels
             else if (controlKeysAccessor.DownKey == key) direction = Direction.Down;
             else direction = Direction.None;
             _gameEngine.MovePlayer(direction);
+        }
+
+        public void Pause()
+        {
+            var viewModelChager = (Application.Current as App)?.ViewModelChanger;
+            //stop timer here for example
+            viewModelChager?.ChangeCurrentViewModel("Pause");
         }
     }
 }

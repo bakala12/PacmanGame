@@ -92,6 +92,9 @@
     <Compile Include="Views\OptionsView.xaml.cs">
       <DependentUpon>OptionsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PauseView.xaml.cs">
+      <DependentUpon>PauseView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\StartMenuView.xaml.cs">
       <DependentUpon>StartMenuView.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\OptionsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PauseView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

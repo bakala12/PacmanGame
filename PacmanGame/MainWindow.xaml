@@ -14,6 +14,7 @@
         <KeyBinding Key="{Binding RightKey}" Command="{Binding CurrentViewModel.MoveCommand}" CommandParameter="{Binding RightKey}"/>
         <KeyBinding Key="{Binding UpKey}" Command="{Binding CurrentViewModel.MoveCommand}" CommandParameter="{Binding UpKey}"/>
         <KeyBinding Key="{Binding DownKey}" Command="{Binding CurrentViewModel.MoveCommand}" CommandParameter="{Binding DownKey}"/>
+        <KeyBinding Key="Escape" Command="{Binding CurrentViewModel.PauseCommand}"/>
     </Window.InputBindings>
     <Grid>
         <ContentControl Content="{Binding CurrentViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>

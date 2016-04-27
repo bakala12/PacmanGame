@@ -22,4 +22,8 @@
     <DataTemplate DataType="{x:Type vm:GameViewModel}">
         <screens:GameView/>
     </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vm:PauseViewModel}">
+        <screens:PauseView/>
+    </DataTemplate>
 </ResourceDictionary>
