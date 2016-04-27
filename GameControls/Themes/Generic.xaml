@@ -19,6 +19,7 @@
         <GradientStop Color="Red" Offset="0.7"/>
     </LinearGradientBrush>
 
+
     <Style TargetType="{x:Type elements:GameElement}">
         <Setter Property="Template">
             <Setter.Value>
@@ -204,26 +205,19 @@
         <Setter Property="Background" Value="{StaticResource BonusLifeColor}"/>
     </Style>
 
-
     <Style TargetType="{x:Type elements:Portal}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type elements:Portal}">
                     <Viewbox>
                         <Grid>
-                            <Path Fill="{TemplateBinding BorderBrush}"
-                              Data="M 0.05, 0.95
-                                    A 1, 0.4 90 0 1 0.95 0.95 Z"
-                              />
-                            <Path Fill="{TemplateBinding Background}"
-                              Data="M 0.1 0.9
-                                    A 0.95 0.35 90 0 1 0.9 0.9"/>
+                            <Path Fill="{TemplateBinding Background}" Opacity="0.75"
+                                  Data="M 1,1 L 0.9, 0.25 A 0.15, 0.25 90 0 0 0.1, 0.25 L 0,1 Z"/>
                         </Grid>
                     </Viewbox>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="BorderBrush" Value="Blue"/>
-        <Setter Property="Background" Value="Yellow"/>
+        <Setter Property="Background" Value="DarkSlateGray"/>
     </Style>
 </ResourceDictionary>
