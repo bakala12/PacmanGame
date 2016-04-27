@@ -25,10 +25,15 @@ namespace PacmanGame.Engine
             _player = gameBoard.Children.OfType<Player>().Single();
             _player.Moved += (sender, args) => OnPlayerMoved();
             Timer = new GameTimer();
-            foreach (var result in _gameBoard.Elements.OfType<BonusLife>())
+            foreach (var result in _gameBoard.Elements.OfType<Coin>())
             {
-                result.Collected += (x, e) => { };
+                result.Collected += (x, e) => { Points += (x as Coin)?.PointReward ?? 0;
+                                                  if (x is BonusLife) Lifes++;
+                };
             }
+            Lifes = 3;
+            Points = 0;
+            Difficulty = 1;
         }
 
         private readonly IGameUpdateChecker _gameUpdateChecker;
@@ -62,6 +67,7 @@ namespace PacmanGame.Engine
             {
                 //koniec levelu
                 MessageBox.Show("Gratulacje, koniec gry!");
+                Difficulty++;
             }
         }
 

@@ -21,5 +21,10 @@ namespace GameControls.Elements
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(BonusLife), new FrameworkPropertyMetadata(typeof(BonusLife)));
         }
+
+        public BonusLife()
+        {
+            PointReward = 250;
+        }
     }
 }

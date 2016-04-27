@@ -23,11 +23,25 @@ namespace GameControls.Elements
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Coin), new FrameworkPropertyMetadata(typeof(Coin)));
         }
 
+        public Coin()
+        {
+            PointReward = 2;
+        }
+
         public void Collect()
         {
             Collected?.Invoke(this, EventArgs.Empty);
         }
 
         public event EventHandler Collected;
+
+        public uint PointReward
+        {
+            get { return (uint) GetValue(PointRewardProperty); }
+            set { SetValue(PointRewardProperty, value);}
+        }
+
+        public static readonly DependencyProperty PointRewardProperty = 
+            DependencyProperty.Register("PointReward", typeof(uint), typeof(Coin), new FrameworkPropertyMetadata((uint)0));
     }
 }
