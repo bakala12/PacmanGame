@@ -71,7 +71,6 @@ namespace GameControls.Elements
         /// <param name="direction">The dierction in which the element should be moved.</param>
         public virtual void Move(Direction direction)
         {
-            RaiseMovementEvents(direction);
             switch (direction)
             {
                 case Direction.Left:
@@ -87,6 +86,7 @@ namespace GameControls.Elements
                     X += Speed;
                     break;
             }
+            RaiseMovementEvents(direction);
         }
 
         protected virtual void RaiseMovementEvents(Direction direction)
