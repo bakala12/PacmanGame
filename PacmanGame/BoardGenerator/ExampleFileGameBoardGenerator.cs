@@ -85,6 +85,12 @@ namespace PacmanGame.BoardGenerator
                         case "E":
                             element = new Enemy();
                             break;
+                        case "BL":
+                            element = new BonusLife();
+                            break;
+                        case "PO":
+                            element = new Portal();
+                            break;
                         default:
                             throw new NotSupportedException();
                     }
