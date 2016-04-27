@@ -33,7 +33,7 @@ namespace PacmanGame.Engine
             }
             Lifes = 3;
             Points = 0;
-            Difficulty = 1;
+            Difficulty = 0;
         }
 
         private readonly IGameUpdateChecker _gameUpdateChecker;
@@ -56,7 +56,6 @@ namespace PacmanGame.Engine
                 {
                     result.Collect();
                     toRemove.Add(result as GameElement);
-                    //points++
                 }
             }
             foreach (var gameElement in toRemove)
@@ -65,9 +64,16 @@ namespace PacmanGame.Engine
             }
             if (!_gameBoard.Children.OfType<Coin>().Any())
             {
-                //koniec levelu
                 MessageBox.Show("Gratulacje, koniec gry!");
                 Difficulty++;
+                //wypełnij plansze monetami
+            }
+            var portal =
+                _gameBoard.Elements.OfType<Portal>().FirstOrDefault(p => _gameUpdateChecker.CheckCollision(p, _player));
+            if (portal?.ConnectedPortal != null)
+            {
+                _player.X = portal.ConnectedPortal.X;
+                _player.Y = portal.ConnectedPortal.Y;
             }
         }
 

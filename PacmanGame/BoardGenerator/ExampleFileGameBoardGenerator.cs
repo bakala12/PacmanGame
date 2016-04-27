@@ -67,6 +67,7 @@ namespace PacmanGame.BoardGenerator
             using (var sr = new StreamReader(_stream))
             {
                 string line;
+                Portal previousPortal = null;
                 while ((line = sr.ReadLine()) != null)
                 {
                     string[] split = line.Split(' ');
@@ -89,7 +90,11 @@ namespace PacmanGame.BoardGenerator
                             element = new BonusLife();
                             break;
                         case "PO":
-                            element = new Portal();
+                            element = new Portal(previousPortal);
+                            if (previousPortal == null)
+                                previousPortal = (Portal)element;
+                            else
+                                previousPortal = null;
                             break;
                         default:
                             throw new NotSupportedException();

@@ -21,5 +21,27 @@ namespace GameControls.Elements
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Portal), new FrameworkPropertyMetadata(typeof(Portal)));
         }
+
+        public Portal() : this(null)
+        {
+        }
+
+        public Portal(Portal connected)
+        {
+            if(connected?.ConnectedPortal != null)
+                throw new ArgumentException();
+            ConnectedPortal = connected;
+            if(connected!=null)
+                connected.ConnectedPortal = this;
+        }
+
+        public Portal ConnectedPortal
+        {
+            get { return (Portal) GetValue(ConnectedPortalProperty); }
+            protected set { SetValue(ConnectedPortalProperty, value);}
+        }
+
+        public static DependencyProperty ConnectedPortalProperty = 
+            DependencyProperty.Register("ConnectedPortal", typeof(Portal), typeof(Portal), new FrameworkPropertyMetadata(null));
     }
 }
