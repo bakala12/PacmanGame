@@ -15,19 +15,25 @@ using PacmanGame.Engine;
 
 namespace PacmanGame.ViewModels
 {
-    public class GameViewModel : ViewModelBase
+    public class GameViewModel : CloseableViewModel
     {
         private GameEngine _gameEngine;
         private GameBoard _gameBoard;
 
+        protected override void OnViewAppeared()
+        {
+            base.OnViewAppeared();
+            GameEngine?.Timer?.Start();
+        }
+
         public GameViewModel() : base("Game")
         {
-            var s = Application.GetResourceStream(new Uri("Resources/example_board.board", UriKind.Relative));
-            IGameBoardGenerator generator = new ExampleFileGameBoardGenerator(s?.Stream);
-            GameBoard = generator.GenerateBoard(30, 30, 1);
             MoveCommand = new DelegateCommand(MovePlayer);
             PauseCommand = new DelegateCommand(x=>Pause());
-            _gameEngine = new GameEngine(GameUpdateCheckerFactory.Instance.CreateUpdateChecker(GameBoard), GameBoard);
+            ResetState();
+            var timer = GameEngine.Timer as GameTimer;
+            if(timer != null)
+                timer.PropertyChanged +=(x,e)=> OnPropertyChanged();
         }
 
         public GameBoard GameBoard
@@ -38,6 +44,12 @@ namespace PacmanGame.ViewModels
                 _gameBoard = value;
                 OnPropertyChanged();
             }
+        }
+
+        public GameEngine GameEngine
+        {
+            get { return _gameEngine; }
+            private set { _gameEngine = value; OnPropertyChanged();}
         }
 
         public ICommand MoveCommand { get; }
@@ -55,22 +67,22 @@ namespace PacmanGame.ViewModels
             else if (controlKeysAccessor.UpKey == key) direction = Direction.Up;
             else if (controlKeysAccessor.DownKey == key) direction = Direction.Down;
             else direction = Direction.None;
-            _gameEngine.MovePlayer(direction);
+            GameEngine.MovePlayer(direction);
         }
 
         public void Pause()
         {
+            GameEngine.Timer.Stop();
             var viewModelChager = (Application.Current as App)?.ViewModelChanger;
-            //stop timer here for example
             viewModelChager?.ChangeCurrentViewModel("Pause");
         }
 
-        public virtual void ResetState()
+        public void ResetState()
         {
             var s = Application.GetResourceStream(new Uri("Resources/example_board.board", UriKind.Relative));
             IGameBoardGenerator generator = new ExampleFileGameBoardGenerator(s?.Stream);
             GameBoard = generator.GenerateBoard(30, 30, 1);
-            _gameEngine = new GameEngine(GameUpdateCheckerFactory.Instance.CreateUpdateChecker(GameBoard), GameBoard);
+            GameEngine = new GameEngine(GameUpdateCheckerFactory.Instance.CreateUpdateChecker(GameBoard), GameBoard);
         }
     }
 }

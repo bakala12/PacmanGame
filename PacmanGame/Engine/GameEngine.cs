@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -8,10 +10,11 @@ using GameControls.Board;
 using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
+using PacmanGame.Annotations;
 
 namespace PacmanGame.Engine
 {
-    public class GameEngine
+    public class GameEngine : INotifyPropertyChanged
     {
         public GameEngine(IGameUpdateChecker checker, GameBoard gameBoard)
         {
@@ -21,6 +24,7 @@ namespace PacmanGame.Engine
             _gameBoard = gameBoard;
             _player = gameBoard.Children.OfType<Player>().Single();
             _player.Moved += (sender, args) => OnPlayerMoved();
+            Timer = new GameTimer();
         }
 
         private readonly IGameUpdateChecker _gameUpdateChecker;
@@ -55,6 +59,22 @@ namespace PacmanGame.Engine
                 //koniec levelu
                 MessageBox.Show("Gratulacje, koniec gry!");
             }
+        }
+
+        private ITimer _timer;
+
+        public ITimer Timer
+        {
+            get { return _timer; }
+            private set { _timer = value; OnPropertyChanged(); }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
