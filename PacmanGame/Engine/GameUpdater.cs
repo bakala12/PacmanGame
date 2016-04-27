@@ -27,7 +27,8 @@ namespace PacmanGame.Engine
         {
             Rect rect1 = new Rect(new Point(element1.X, element1.Y), new Size(1,1));
             Rect rect2 = new Rect(new Point(element2.X, element2.Y), new Size(1,1));
-            return rect1.IntersectsWith(rect2);
+            Rect intersection = Rect.Intersect(rect1, rect2);
+            return !intersection.IsEmpty && intersection.Width >0 && intersection.Height>0;
         }
 
         public bool CheckMovement(MovableElement movable, Direction direction)

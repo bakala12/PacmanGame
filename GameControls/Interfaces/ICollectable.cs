@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameControls.Interfaces
 {
-    public interface ICollectable
+    public interface ICollectable : IGameElement
     {
         void Collect();
     }

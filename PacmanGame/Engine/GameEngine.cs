@@ -41,12 +41,12 @@ namespace PacmanGame.Engine
         private void OnPlayerMoved()
         {
             IList<GameElement> toRemove = new List<GameElement>();
-            foreach (var result in _gameBoard.Elements.OfType<Coin>())
+            foreach (var result in _gameBoard.Elements.OfType<ICollectable>())
             {
                 if (_gameUpdateChecker.CheckCollision(_player, result))
                 {
                     result.Collect();
-                    toRemove.Add(result);
+                    toRemove.Add(result as GameElement);
                     //points++
                 }
             }
