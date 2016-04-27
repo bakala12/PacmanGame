@@ -53,6 +53,7 @@
     </Compile>
     <Compile Include="Board\GameBoardPanel.cs" />
     <Compile Include="Elements\Block.cs" />
+    <Compile Include="Elements\BonusLife.cs" />
     <Compile Include="Elements\Coin.cs" />
     <Compile Include="Elements\Enemy.cs" />
     <Compile Include="Elements\GameElement.cs" />
