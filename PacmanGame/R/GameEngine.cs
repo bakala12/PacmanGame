@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameControls.Board;
 using GameControls.Interfaces;
+using GameControls.Others;
 using PacmanGame.Engine;
 using PacmanGame.ViewModels;
 
@@ -29,9 +30,9 @@ namespace PacmanGame.R
         {
             _gameBoard = _builder.BuildBoard(state);
             _movementChecker = GameMovementCheckerFactory.Instance.CreateUpdateChecker(_gameBoard);
-            Points = state.Points;
-            Difficulty = state.Difficulty;
-            Lifes = state.Lifes;
+            Points = state?.Points ?? 0;
+            Difficulty = state?.Difficulty ?? 0;
+            Lifes = state?.Lifes ?? 3;
             Timer = _builder.BuildTimer(state);
         }
 
@@ -57,6 +58,11 @@ namespace PacmanGame.R
         {
             get { return _lifes; }
             protected set { _lifes = value; OnPropertyChanged(); }
+        }
+
+        public virtual void MovePlayer(Direction direction)
+        {
+            
         }
     }
 }

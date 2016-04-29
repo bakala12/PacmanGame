@@ -61,7 +61,7 @@
     <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="Engine\GameMovementCheckerFactory.cs" />
     <Compile Include="Engine\GameMovementChecker.cs" />
-    <Compile Include="Engine\IGameUpdateChecker.cs" />
+    <Compile Include="Engine\IGameMovementChecker.cs" />
     <Compile Include="Graph\Graph.cs" />
     <Compile Include="Graph\GraphCreator.cs" />
     <Compile Include="Graph\GraphExtender.cs" />

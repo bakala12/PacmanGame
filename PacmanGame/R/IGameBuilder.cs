@@ -41,7 +41,7 @@ namespace PacmanGame.R
 
         public ITimer BuildTimer(GameState gameState)
         {
-            return new GameTimer(gameState.Time, new TimeSpan(0, 0, 0, 1));
+            return new GameTimer(gameState?.Time ?? TimeSpan.Zero, new TimeSpan(0, 0, 0, 1));
         }
 
         public GameEngine BuildGameEngine(GameState gameState)
