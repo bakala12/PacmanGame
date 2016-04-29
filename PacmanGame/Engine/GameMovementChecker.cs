@@ -12,12 +12,12 @@ using PacmanGame.Graph;
 
 namespace PacmanGame.Engine
 {
-    internal class GameUpdateUpdateChecker : IGameUpdateChecker
+    internal class GameMovementChecker : IGameMovementChecker
     {
         private readonly GameBoard _gameBoard;
         private readonly IGraph _graph;
 
-        public GameUpdateUpdateChecker(GameBoard board)
+        public GameMovementChecker(GameBoard board)
         {
             _gameBoard = board;
             _graph = new Graph.Graph(board);

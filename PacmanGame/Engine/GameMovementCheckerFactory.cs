@@ -7,14 +7,14 @@ using GameControls.Board;
 
 namespace PacmanGame.Engine
 {
-    public class GameUpdateCheckerFactory
+    public class GameMovementCheckerFactory
     {
-        private GameUpdateCheckerFactory() { }
+        private GameMovementCheckerFactory() { }
 
         private static readonly object SyncRoot = new object();
-        private static GameUpdateCheckerFactory _instance;
+        private static GameMovementCheckerFactory _instance;
 
-        public static GameUpdateCheckerFactory Instance
+        public static GameMovementCheckerFactory Instance
         {
             get
             {
@@ -23,16 +23,16 @@ namespace PacmanGame.Engine
                     lock (SyncRoot)
                     {
                         if (_instance == null)
-                            _instance = new GameUpdateCheckerFactory();
+                            _instance = new GameMovementCheckerFactory();
                     }
                 }
                 return _instance;
             }
         }
 
-        public IGameUpdateChecker CreateUpdateChecker(GameBoard gameBoard)
+        public IGameMovementChecker CreateUpdateChecker(GameBoard gameBoard)
         {
-            return new GameUpdateUpdateChecker(gameBoard);
+            return new GameMovementChecker(gameBoard);
         }
     }
 }

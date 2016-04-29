@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameControls.Board;
 using GameControls.Interfaces;
+using PacmanGame.Engine;
 using PacmanGame.ViewModels;
 
 namespace PacmanGame.R
@@ -15,6 +17,8 @@ namespace PacmanGame.R
         private uint _difficulty;
         private uint _lifes;
         private readonly IGameBuilder _builder;
+        private GameBoard _gameBoard;
+        private IGameMovementChecker _movementChecker;
 
         public GameEngine(IGameBuilder builder)
         {
@@ -23,6 +27,8 @@ namespace PacmanGame.R
 
         public void Load(GameState state)
         {
+            _gameBoard = _builder.BuildBoard(state);
+            _movementChecker = GameMovementCheckerFactory.Instance.CreateUpdateChecker(_gameBoard);
             Points = state.Points;
             Difficulty = state.Difficulty;
             Lifes = state.Lifes;

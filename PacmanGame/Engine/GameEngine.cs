@@ -16,7 +16,7 @@ namespace PacmanGame.Engine
 {
     public class GameEngine : INotifyPropertyChanged
     {
-        public GameEngine(IGameUpdateChecker checker, GameBoard gameBoard)
+        public GameEngine(IGameMovementChecker checker, GameBoard gameBoard)
         {
             if(checker==null) throw new ArgumentNullException(nameof(checker));
             _gameUpdateChecker = checker;
@@ -36,7 +36,7 @@ namespace PacmanGame.Engine
             Difficulty = 0;
         }
 
-        private readonly IGameUpdateChecker _gameUpdateChecker;
+        private readonly IGameMovementChecker _gameUpdateChecker;
         private readonly GameBoard _gameBoard;
         private readonly Player _player;
 

@@ -59,8 +59,8 @@
     <Compile Include="BoardGenerator\ExampleFileGameBoardGenerator.cs" />
     <Compile Include="Converters\KeyDisplayConverter.cs" />
     <Compile Include="Engine\GameEngine.cs" />
-    <Compile Include="Engine\GameUpdateCheckerFactory.cs" />
-    <Compile Include="Engine\GameUpdater.cs" />
+    <Compile Include="Engine\GameMovementCheckerFactory.cs" />
+    <Compile Include="Engine\GameMovementChecker.cs" />
     <Compile Include="Engine\IGameUpdateChecker.cs" />
     <Compile Include="Graph\Graph.cs" />
     <Compile Include="Graph\GraphCreator.cs" />
@@ -68,9 +68,11 @@
     <Compile Include="Graph\IGraph.cs" />
     <Compile Include="IHaveControlKeys.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="R\GameEngine.cs" />
     <Compile Include="R\GameState.cs" />
-    <Compile Include="R\GameVm.cs" />
+    <Compile Include="R\GameViewModel.cs" />
     <Compile Include="R\IGameBuilder.cs" />
+    <Compile Include="ViewModels\PropertyChangeNotifier.cs" />
     <Compile Include="ViewModels\CloseableViewModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
     <Compile Include="ViewModels\EndGameViewModel.cs" />

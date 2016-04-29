@@ -18,6 +18,7 @@ namespace PacmanGame.R
     {
         GameBoard BuildBoard(GameState gameState);
         ITimer BuildTimer(GameState gameState);
+        GameEngine BuildGameEngine(GameState gameState);
     }
 
     public class SimpleGameBuilder : IGameBuilder
@@ -41,6 +42,13 @@ namespace PacmanGame.R
         public ITimer BuildTimer(GameState gameState)
         {
             return new GameTimer(gameState.Time, new TimeSpan(0, 0, 0, 1));
+        }
+
+        public GameEngine BuildGameEngine(GameState gameState)
+        {
+            GameEngine engine = new GameEngine(this);
+            engine.Load(gameState);
+            return engine;
         }
 
         #region private helpers
