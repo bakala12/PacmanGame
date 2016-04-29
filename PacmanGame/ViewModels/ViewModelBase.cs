@@ -13,7 +13,7 @@ namespace PacmanGame.ViewModels
     /// Represents a base class for all ViewModels. It supports property changing notification
     /// by implementing INotifyPropertyChanged interface 
     /// </summary>
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    public abstract class ViewModelBase : PropertyChangeNotifier
     {
         /// <summary>
         /// Gets the name of current ViewModel.
@@ -24,26 +24,11 @@ namespace PacmanGame.ViewModels
         /// Initializies a new instance of ViewModelBase class with the specified name.
         /// </summary>
         /// <param name="name">The name of the view model.</param>
-        protected ViewModelBase(string name=null)
+        protected ViewModelBase(string name = null)
         {
-            if(string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Name cannot be neighter null nor empty");
             Name = name;
-        }
-
-        /// <summary>
-        /// An event raised when the property is changed.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// The method which raises the PropertyChanged event for the propertyName property.
-        /// </summary>
-        /// <param name="propertyName">The name of property which has changed.</param>
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
