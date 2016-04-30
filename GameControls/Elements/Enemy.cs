@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GameControls.Interfaces;
+using GameControls.Others;
 
 namespace GameControls.Elements
 {
@@ -20,6 +22,31 @@ namespace GameControls.Elements
         static Enemy()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Enemy), new FrameworkPropertyMetadata(typeof(Enemy)));
+        }
+
+        public Enemy() : this(null)
+        {
+        }
+
+        public Enemy(IMovementAlgorithm movementAlgorithm)
+        {
+            MovementAlgorithm = movementAlgorithm;
+            Speed = 1;
+        }
+
+        public IMovementAlgorithm MovementAlgorithm
+        {
+            get { return (IMovementAlgorithm) GetValue(MovementAlgorithmProperty); }
+            set { SetValue(MovementAlgorithmProperty, value);}
+        }
+
+        public static readonly DependencyProperty MovementAlgorithmProperty = 
+            DependencyProperty.Register("MovementAlgorithm", typeof(IMovementAlgorithm), typeof(Enemy), new FrameworkPropertyMetadata(null));
+
+        public virtual void Move()
+        {
+            Direction direction = MovementAlgorithm?.ProvideDirection(this) ?? Direction.None;
+            Move(direction);
         }
     }
 }

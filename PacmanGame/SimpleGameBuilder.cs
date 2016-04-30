@@ -8,9 +8,10 @@ using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
 using PacmanGame.Engine;
+using PacmanGame.MainInterfaces;
 using PacmanGame.Serialization;
 
-namespace PacmanGame.MainInterfaces
+namespace PacmanGame
 {
     internal class SimpleGameBuilder : IGameBuilder
     {

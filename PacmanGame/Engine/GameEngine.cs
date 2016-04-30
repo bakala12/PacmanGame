@@ -126,7 +126,7 @@ namespace PacmanGame.Engine
         {
             Enemy enemy = sender as Enemy;
             if (enemy == null) return;
-
+            
         }
 
         protected virtual void MoveViaPortal(MovableElement movable)
