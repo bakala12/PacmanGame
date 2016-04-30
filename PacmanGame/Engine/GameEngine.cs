@@ -5,6 +5,7 @@ using GameControls.Board;
 using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
+using PacmanGame.EnemyMovementAlgorithms;
 using PacmanGame.MainInterfaces;
 using PacmanGame.Serialization;
 using PacmanGame.ViewModels;
@@ -21,16 +22,18 @@ namespace PacmanGame.Engine
         private readonly GameBoard _gameBoard;
         private IGameMovementChecker _movementChecker;
         private Player _player;
-        private IList<Tuple<int, int>> _coinsPosition; 
+        private IList<Tuple<int, int>> _coinsPosition;
 
-        public GameEngine(IGameBuilder builder, GameBoard board)
+        public GameEngine(IGameBuilder builder, GameBoard board) : this(builder, board, null) { }
+
+        public GameEngine(IGameBuilder builder, GameBoard board, IEnemyMovementManager enemyMovementManager)
         {
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));
             if (board == null)
                 throw new ArgumentNullException(nameof(board));
             _builder = builder;
-            _gameBoard = board;
+            _gameBoard = board; 
         }
 
         public void Load(GameState state)
@@ -50,8 +53,11 @@ namespace PacmanGame.Engine
             _coinsPosition.Add(new Tuple<int, int>((int)_player.X, (int)_player.Y));
             foreach (var result in _gameBoard.Elements.OfType<Enemy>())
             {
+                result.MovementAlgorithm =
+                    EnemyMovementAlgorithmsFactory.Instance.CreateEnemyMovementAlgorithm(Difficulty);
                 result.Moved += OnEnemyMoved;
             }
+            EnemyMovementManager = new TimeEnemyMovementManager(_gameBoard.Elements.OfType<Enemy>(), _movementChecker, new TimeSpan(0,0,0,0, 200));
             SetCoinsColleted();
         }
 
@@ -99,6 +105,9 @@ namespace PacmanGame.Engine
             get { return _lifes; }
             protected set { _lifes = value; OnPropertyChanged(); }
         }
+
+        public IEnemyMovementManager EnemyMovementManager { get; private set; }
+
         #endregion
 
         public void MovePlayer(Direction direction)

@@ -63,6 +63,7 @@
     <Compile Include="Interfaces\ICollectable.cs" />
     <Compile Include="Interfaces\IGameElement.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
+    <Compile Include="Interfaces\IMovementAlgorithm.cs" />
     <Compile Include="Others\Direction.cs" />
     <Compile Include="Interfaces\ITimer.cs" />
     <Compile Include="Others\MovementEventArgs.cs" />

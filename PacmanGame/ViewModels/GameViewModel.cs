@@ -42,6 +42,7 @@ namespace PacmanGame.ViewModels
         {
             base.OnViewAppeared();
             GameEngine?.Timer?.Start();
+            GameEngine?.EnemyMovementManager?.Start();
         }
 
         public virtual void StartGame()
@@ -73,6 +74,7 @@ namespace PacmanGame.ViewModels
         public virtual void Pause()
         {
             GameEngine.Timer.Stop();
+            GameEngine?.EnemyMovementManager?.Stop();
             var viewModelChager = (Application.Current as App)?.ViewModelChanger;
             viewModelChager?.ChangeCurrentViewModel("Pause");
         }

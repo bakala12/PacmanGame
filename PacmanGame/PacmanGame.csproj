@@ -56,6 +56,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converters\KeyDisplayConverter.cs" />
+    <Compile Include="EnemyMovementAlgorithms\EnemyMovementAlgorithmsFactory.cs" />
+    <Compile Include="EnemyMovementAlgorithms\SimpleRandomMovementAlgorithm.cs" />
+    <Compile Include="Engine\EnemyMovementManager.cs" />
     <Compile Include="Engine\GameMovementCheckerFactory.cs" />
     <Compile Include="Engine\GameMovementChecker.cs" />
     <Compile Include="Engine\IGameMovementChecker.cs" />
@@ -63,8 +66,9 @@
     <Compile Include="Graph\GraphCreator.cs" />
     <Compile Include="Graph\GraphExtender.cs" />
     <Compile Include="Graph\IGraph.cs" />
+    <Compile Include="Engine\IEnemyMovementManager.cs" />
     <Compile Include="MainInterfaces\IHaveControlKeys.cs" />
-    <Compile Include="MainInterfaces\SimpleGameBuilder.cs" />
+    <Compile Include="SimpleGameBuilder.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="Serialization\GameState.cs" />

@@ -42,11 +42,5 @@ namespace GameControls.Elements
 
         public static readonly DependencyProperty MovementAlgorithmProperty = 
             DependencyProperty.Register("MovementAlgorithm", typeof(IMovementAlgorithm), typeof(Enemy), new FrameworkPropertyMetadata(null));
-
-        public virtual void Move()
-        {
-            Direction direction = MovementAlgorithm?.ProvideDirection(this) ?? Direction.None;
-            Move(direction);
-        }
     }
 }
