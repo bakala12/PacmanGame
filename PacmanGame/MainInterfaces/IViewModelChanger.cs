@@ -1,8 +1,6 @@
-﻿using System.Text;
-using System.Threading.Tasks;
-using PacmanGame.ViewModels;
+﻿using PacmanGame.ViewModels;
 
-namespace PacmanGame
+namespace PacmanGame.MainInterfaces
 {
     public interface IViewModelChanger
     {

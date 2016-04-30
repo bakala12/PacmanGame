@@ -6,8 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using PacmanGame.MainInterfaces;
 using PacmanGame.Properties;
-using PacmanGame.R;
 using PacmanGame.ViewModels;
 
 namespace PacmanGame

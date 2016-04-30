@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GameControls.Elements;
-using GameControls.Interfaces;
 
-namespace PacmanGame.R
+namespace PacmanGame.Serialization
 {
     public enum GameElementType
     {

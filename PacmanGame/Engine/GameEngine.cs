@@ -5,7 +5,8 @@ using GameControls.Board;
 using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
-using PacmanGame.R;
+using PacmanGame.MainInterfaces;
+using PacmanGame.Serialization;
 using PacmanGame.ViewModels;
 
 namespace PacmanGame.Engine
@@ -39,14 +40,14 @@ namespace PacmanGame.Engine
             Difficulty = state?.Difficulty ?? 1;
             Lifes = state?.Lifes ?? 3;
             Timer = _builder.BuildTimer(state);
+            _player = _gameBoard.Children.OfType<Player>().Single();
+            _player.Moved += OnPlayerMoved;
             _coinsPosition = new List<Tuple<int, int>>();
             foreach (var result in _gameBoard.Elements.OfType<Coin>())
             {
                 _coinsPosition.Add(new Tuple<int, int>((int)result.X, (int)result.Y));
             }
             _coinsPosition.Add(new Tuple<int, int>((int)_player.X, (int)_player.Y));
-            _player = _gameBoard.Children.OfType<Player>().Single();
-            _player.Moved += OnPlayerMoved;
             foreach (var result in _gameBoard.Elements.OfType<Enemy>())
             {
                 result.Moved += OnEnemyMoved;

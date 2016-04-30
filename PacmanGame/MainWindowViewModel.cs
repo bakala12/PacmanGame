@@ -6,13 +6,13 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using PacmanGame.Annotations;
+using PacmanGame.MainInterfaces;
 using PacmanGame.Properties;
-using PacmanGame.R;
 using PacmanGame.ViewModels;
 
 namespace PacmanGame
 {
-    public class MainWindowViewModel : IViewModelChanger, IHaveControlKeys, INotifyPropertyChanged
+    public class MainWindowViewModel : PropertyChangedNotifier, IViewModelChanger, IHaveControlKeys
     {
         public MainWindowViewModel(IGameBuilder builder)
         {
@@ -37,11 +37,11 @@ namespace PacmanGame
         {
             if (name == "Help" || name == "Options" || name == "Highscores" || name == "EndGame")
             {
-                (Application.Current as App)?.ViewModelChanger.ChangeCurrentViewModel("StartMenu");
+                ChangeCurrentViewModel("StartMenu");
             }
             else if (name == "Pause")
             {
-                (Application.Current as App)?.ViewModelChanger.ChangeCurrentViewModel("Game");
+                ChangeCurrentViewModel("Game");
             }
         }
 
@@ -62,7 +62,7 @@ namespace PacmanGame
 
         public void ChangeCurrentViewModel(string name)
         {
-            if(string.IsNullOrEmpty(name)) return;
+            if (string.IsNullOrEmpty(name)) return;
             var viewModel = ViewModels.FirstOrDefault(vm => vm.Name?.Equals(name) ?? false);
             if (viewModel == null) return;
             CurrentViewModel = viewModel;
@@ -71,21 +71,14 @@ namespace PacmanGame
         public ViewModelBase GetViewModelByName(string name)
         {
             if (string.IsNullOrEmpty(name))
-                throw new ArgumentException("Name cannot be null or empty"); 
+                throw new ArgumentException("Name cannot be null or empty");
             var viewModel = ViewModels.FirstOrDefault(vm => vm.Name?.Equals(name) ?? false);
             if (viewModel == null)
                 throw new ArgumentException("Cannot find view model with the given name");
             return viewModel;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
+        #region IHaveControlKeys implementation
         private Key _upKey;
         private Key _downKey;
         private Key _leftKey;
@@ -131,5 +124,6 @@ namespace PacmanGame
             Settings.Default.UpKey = UpKey;
             Settings.Default.Save();
         }
+        #endregion
     }
 }

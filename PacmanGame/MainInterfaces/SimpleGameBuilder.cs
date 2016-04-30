@@ -1,27 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using GameControls.Board;
 using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
 using PacmanGame.Engine;
+using PacmanGame.Serialization;
 
-namespace PacmanGame.R
+namespace PacmanGame.MainInterfaces
 {
-    public interface IGameBuilder
-    {
-        GameBoard BuildBoard(GameState gameState);
-        ITimer BuildTimer(GameState gameState);
-        GameEngine BuildGameEngine(GameState gameState, GameBoard board);
-    }
-
-    public class SimpleGameBuilder : IGameBuilder
+    internal class SimpleGameBuilder : IGameBuilder
     {
         private readonly string _path;
 
