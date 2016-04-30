@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using GameControls.Board;
+using GameControls.Elements;
 using GameControls.Others;
 using PacmanGame.Engine;
 using PacmanGame.MainInterfaces;
@@ -54,6 +56,8 @@ namespace PacmanGame.ViewModels
         {
             GameBoard = _builder.BuildBoard(state);
             GameEngine = _builder.BuildGameEngine(state, GameBoard);
+            Player player = GameBoard.Elements.OfType<Player>().Single();
+            player.Dead += (x,e)=> OnGameEnded();
         }
 
         public virtual void MovePlayer(object parameter)
@@ -77,6 +81,18 @@ namespace PacmanGame.ViewModels
             GameEngine?.EnemyMovementManager?.Stop();
             var viewModelChager = (Application.Current as App)?.ViewModelChanger;
             viewModelChager?.ChangeCurrentViewModel("Pause");
+        }
+
+        public virtual void OnGameEnded()
+        {
+            GameEngine.Timer.Stop();
+            GameEngine.EnemyMovementManager.Stop();
+            TimeSpan time = GameEngine.Timer.TimeLeft;
+            //porównanie z highscorami, ewentualny zapis
+            //jeśli dobre, przekieruj do widoku końca gry
+            MessageBox.Show($"Koniec gry, czas: {time}");
+            var viewModelChager = (Application.Current as App)?.ViewModelChanger;
+            viewModelChager?.ChangeCurrentViewModel("StartMenu");
         }
     }
 }

@@ -96,5 +96,22 @@ namespace GameControls.Elements
             base.Move(direction);
             Direction = direction;
         }
+
+        public void Die()
+        {
+            IsAlive = false;
+            RoutedEventArgs args = new RoutedEventArgs(DeadEvent);
+            RaiseEvent(args);
+        }
+
+        public event RoutedEventHandler Dead
+        {
+            add { AddHandler(DeadEvent, value);}
+            remove { RemoveHandler(DeadEvent, value);}
+        }
+
+        public static readonly RoutedEvent DeadEvent =
+            EventManager.RegisterRoutedEvent("Dead", RoutingStrategy.Bubble, typeof (RoutedEventHandler),
+                typeof (Player));
     }
 }

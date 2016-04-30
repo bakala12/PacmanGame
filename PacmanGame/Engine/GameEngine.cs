@@ -126,6 +126,7 @@ namespace PacmanGame.Engine
         protected virtual void OnPlayerMoved(object sender, MovementEventArgs e)
         {
             CheckCollisionWithCoins();
+            CheckCollisionWithEnemies();
             MoveViaPortal(_player);
             if (!_gameBoard.Elements.OfType<Coin>().Any())
             {
@@ -138,7 +139,8 @@ namespace PacmanGame.Engine
         {
             Enemy enemy = sender as Enemy;
             if (enemy == null) return;
-            
+            CheckCollisionWithEnemies();
+            MoveViaPortal(enemy);
         }
 
         protected virtual void MoveViaPortal(MovableElement movable)
@@ -163,7 +165,13 @@ namespace PacmanGame.Engine
 
         protected virtual void CheckCollisionWithEnemies()
         {
-            
+            Enemy enemy = EnemyMovementManager.Enemies.FirstOrDefault(x => _movementChecker.CheckCollision(_player, x));
+            if (enemy != null)
+            {
+                Lifes--;
+            }
+            if(Lifes==0)
+                _player.Die();
         }
 
         protected virtual void FillBoardWithCoins()
