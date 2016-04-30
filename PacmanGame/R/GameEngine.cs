@@ -22,6 +22,7 @@ namespace PacmanGame.R
         private readonly GameBoard _gameBoard;
         private IGameMovementChecker _movementChecker;
         private Player _player;
+        private IList<Tuple<int, int>> _coinsPosition; 
 
         public GameEngine(IGameBuilder builder, GameBoard board)
         {
@@ -40,12 +41,23 @@ namespace PacmanGame.R
             Difficulty = state?.Difficulty ?? 1;
             Lifes = state?.Lifes ?? 3;
             Timer = _builder.BuildTimer(state);
+            _coinsPosition = new List<Tuple<int, int>>();
+            foreach (var result in _gameBoard.Elements.OfType<Coin>())
+            {
+                _coinsPosition.Add(new Tuple<int, int>((int)result.X, (int)result.Y));
+            }
+            _coinsPosition.Add(new Tuple<int, int>((int)_player.X, (int)_player.Y));
             _player = _gameBoard.Children.OfType<Player>().Single();
             _player.Moved += OnPlayerMoved;
             foreach (var result in _gameBoard.Elements.OfType<Enemy>())
             {
                 result.Moved += OnEnemyMoved;
             }
+            SetCoinsColleted();
+        }
+
+        private void SetCoinsColleted()
+        {
             foreach (var result in _gameBoard.Elements.OfType<Coin>())
             {
                 result.Collected += (x, e) =>
@@ -104,6 +116,11 @@ namespace PacmanGame.R
         {
             CheckCollisionWithCoins();
             MoveViaPortal(_player);
+            if (!_gameBoard.Elements.OfType<Coin>().Any())
+            {
+                Difficulty++;
+                FillBoardWithCoins();
+            }
         }
 
         protected virtual void OnEnemyMoved(object sender, MovementEventArgs e)
@@ -136,6 +153,19 @@ namespace PacmanGame.R
         protected virtual void CheckCollisionWithEnemies()
         {
             
+        }
+
+        protected virtual void FillBoardWithCoins()
+        {
+            foreach (var coin in _coinsPosition.Select(tuple => new Coin
+            {
+                X = tuple.Item1,
+                Y = tuple.Item2
+            }))
+            {
+                _gameBoard.Children.Add(coin);
+            }
+            SetCoinsColleted();
         }
     }
 }
