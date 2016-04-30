@@ -70,13 +70,12 @@
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="R\GameEngine.cs" />
     <Compile Include="R\GameState.cs" />
-    <Compile Include="R\GameViewModel.cs" />
+    <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="R\IGameBuilder.cs" />
     <Compile Include="ViewModels\PropertyChangeNotifier.cs" />
     <Compile Include="ViewModels\CloseableViewModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
     <Compile Include="ViewModels\EndGameViewModel.cs" />
-    <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="ViewModels\HelpViewModel.cs" />
     <Compile Include="ViewModels\HighscoresViewModel.cs" />
     <Compile Include="IViewModelChanger.cs" />

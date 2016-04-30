@@ -7,13 +7,14 @@ using System.Windows;
 using System.Windows.Input;
 using PacmanGame.Annotations;
 using PacmanGame.Properties;
+using PacmanGame.R;
 using PacmanGame.ViewModels;
 
 namespace PacmanGame
 {
     public class MainWindowViewModel : IViewModelChanger, IHaveControlKeys, INotifyPropertyChanged
     {
-        public MainWindowViewModel()
+        public MainWindowViewModel(IGameBuilder builder)
         {
             var vm = new List<ViewModelBase>
             {
@@ -21,7 +22,7 @@ namespace PacmanGame
                 new HelpViewModel(),
                 new OptionsViewModel(),
                 new HighscoresViewModel(),
-                new GameViewModel(),
+                new GameViewModel(builder),
                 new EndGameViewModel(),
                 new PauseViewModel()
             };

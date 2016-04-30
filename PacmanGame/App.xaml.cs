@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using PacmanGame.Properties;
+using PacmanGame.R;
 using PacmanGame.ViewModels;
 
 namespace PacmanGame
@@ -23,7 +24,8 @@ namespace PacmanGame
         {
             base.OnStartup(e);
             DefaultControls();
-            MainWindowViewModel vm = new MainWindowViewModel();
+            IGameBuilder builder = new SimpleGameBuilder();
+            MainWindowViewModel vm = new MainWindowViewModel(builder);
             ViewModelChanger = vm;
             ControlKeysAccessor = vm;
             ViewModelChanger.ChangeCurrentViewModel("StartMenu");

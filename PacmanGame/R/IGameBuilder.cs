@@ -23,13 +23,11 @@ namespace PacmanGame.R
 
     public class SimpleGameBuilder : IGameBuilder
     {
-        private readonly Stream _stream;
+        private readonly string _path;
 
-        public SimpleGameBuilder(Stream stream = null)
+        public SimpleGameBuilder(string path = null)
         {
-            if (stream == null)
-                _stream = Application.GetResourceStream(new Uri("Resources/example_board.board", UriKind.Relative))?.Stream;
-            _stream = stream;
+            _path = path ?? "Resources/example_board.board";
         }
 
         public GameBoard BuildBoard(GameState gameState)
@@ -59,7 +57,9 @@ namespace PacmanGame.R
         private IList<GameElement> ReadFile()
         {
             IList<GameElement> elements = new List<GameElement>();
-            using (var sr = new StreamReader(_stream))
+            Stream stream = Application.GetResourceStream(new Uri(_path, UriKind.Relative))?.Stream;
+            if(stream == null) throw new InvalidOperationException("Cannot load gameboard");
+            using (var sr = new StreamReader(stream))
             {
                 string line;
                 Portal previousPortal = null;
