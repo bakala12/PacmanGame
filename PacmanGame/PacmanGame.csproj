@@ -72,7 +72,7 @@
     <Compile Include="R\GameState.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="R\IGameBuilder.cs" />
-    <Compile Include="ViewModels\PropertyChangeNotifier.cs" />
+    <Compile Include="ViewModels\PropertyChangedNotifier.cs" />
     <Compile Include="ViewModels\CloseableViewModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
     <Compile Include="ViewModels\EndGameViewModel.cs" />

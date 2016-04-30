@@ -4,7 +4,11 @@ using PacmanGame.Annotations;
 
 namespace PacmanGame.ViewModels
 {
-    public class PropertyChangeNotifier : INotifyPropertyChanged
+    /// <summary>
+    /// Provides a basic way to inform WPF binding system that a property has changed.
+    /// This class provides an implementation of INotifyPropertyChanged interface. 
+    /// </summary>
+    public abstract class PropertyChangedNotifier : INotifyPropertyChanged
     {
         /// <summary>
         /// An event raised when the property is changed.
@@ -14,7 +18,10 @@ namespace PacmanGame.ViewModels
         /// <summary>
         /// The method which raises the PropertyChanged event for the propertyName property.
         /// </summary>
-        /// <param name="propertyName">The name of property which has changed.</param>
+        /// <param name="propertyName">
+        /// The name of property which has changed.
+        /// The name can be taken from setter automatically by the CallerMemberName attribute.
+        /// </param>
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

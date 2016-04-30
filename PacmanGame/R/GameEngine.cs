@@ -12,7 +12,7 @@ using PacmanGame.ViewModels;
 
 namespace PacmanGame.R
 {
-    public class GameEngine : PropertyChangeNotifier
+    public class GameEngine : PropertyChangedNotifier
     {
         private ITimer _timer;
         private uint _points;

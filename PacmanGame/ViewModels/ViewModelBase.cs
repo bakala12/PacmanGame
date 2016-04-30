@@ -13,7 +13,7 @@ namespace PacmanGame.ViewModels
     /// Represents a base class for all ViewModels. It supports property changing notification
     /// by implementing INotifyPropertyChanged interface 
     /// </summary>
-    public abstract class ViewModelBase : PropertyChangeNotifier
+    public abstract class ViewModelBase : PropertyChangedNotifier
     {
         /// <summary>
         /// Gets the name of current ViewModel.
