@@ -14,7 +14,7 @@ namespace PacmanGame.ViewModels
         private GameEngine _gameEngine;
 
         public ICommand PauseCommand { get; }
-        public ICommand MovePlayerCommand { get; }
+        public ICommand MoveCommand { get; }
 
         public GameBoard GameBoard
         {
@@ -33,7 +33,7 @@ namespace PacmanGame.ViewModels
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             _builder = builder;
             PauseCommand = new DelegateCommand(x => Pause());
-            MovePlayerCommand = new DelegateCommand(MovePlayer);
+            MoveCommand = new DelegateCommand(MovePlayer);
         }
 
         protected override void OnViewAppeared()
@@ -50,7 +50,7 @@ namespace PacmanGame.ViewModels
         public virtual void StartGame(GameState state)
         {
             GameBoard = _builder.BuildBoard(state);
-            GameEngine = _builder.BuildGameEngine(state);
+            GameEngine = _builder.BuildGameEngine(state, GameBoard);
         }
 
         public virtual void MovePlayer(object parameter)

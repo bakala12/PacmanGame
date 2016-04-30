@@ -39,7 +39,7 @@ namespace PacmanGame.ViewModels
         {
             IViewModelChanger changer =(Application.Current as App)?.ViewModelChanger;
             GameViewModel gvm = changer?.GetViewModelByName("Game") as GameViewModel;
-            gvm.StartGame();
+            gvm?.StartGame();
             changer?.ChangeCurrentViewModel("Game");
         }
 
