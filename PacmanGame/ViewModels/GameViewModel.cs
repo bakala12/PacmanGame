@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using GameControls.Board;
 using GameControls.Others;
+using PacmanGame.Engine;
 using PacmanGame.R;
 
 namespace PacmanGame.ViewModels

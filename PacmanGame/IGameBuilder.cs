@@ -10,7 +10,7 @@ using GameControls.Board;
 using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
-using PacmanGame.BoardGenerator;
+using PacmanGame.Engine;
 
 namespace PacmanGame.R
 {

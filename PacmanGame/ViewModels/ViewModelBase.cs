@@ -10,8 +10,7 @@ using PacmanGame.Annotations;
 namespace PacmanGame.ViewModels
 {
     /// <summary>
-    /// Represents a base class for all ViewModels. It supports property changing notification
-    /// by implementing INotifyPropertyChanged interface 
+    /// Represents a base class for all ViewModels.
     /// </summary>
     public abstract class ViewModelBase : PropertyChangedNotifier
     {
@@ -24,7 +23,7 @@ namespace PacmanGame.ViewModels
         /// Initializies a new instance of ViewModelBase class with the specified name.
         /// </summary>
         /// <param name="name">The name of the view model.</param>
-        protected ViewModelBase(string name = null)
+        protected ViewModelBase(string name)
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Name cannot be neighter null nor empty");

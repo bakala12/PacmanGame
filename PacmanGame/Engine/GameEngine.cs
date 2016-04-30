@@ -1,91 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using GameControls.Board;
 using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
-using PacmanGame.Annotations;
+using PacmanGame.R;
+using PacmanGame.ViewModels;
 
 namespace PacmanGame.Engine
 {
-    public class GameEngine : INotifyPropertyChanged
+    public class GameEngine : PropertyChangedNotifier
     {
-        public GameEngine(IGameMovementChecker checker, GameBoard gameBoard)
-        {
-            if(checker==null) throw new ArgumentNullException(nameof(checker));
-            _gameUpdateChecker = checker;
-            if(gameBoard ==null) throw new ArgumentNullException(nameof(gameBoard));
-            _gameBoard = gameBoard;
-            _player = gameBoard.Children.OfType<Player>().Single();
-            _player.Moved += (sender, args) => OnPlayerMoved();
-            Timer = new GameTimer();
-            foreach (var result in _gameBoard.Elements.OfType<Coin>())
-            {
-                result.Collected += (x, e) => { Points += (x as Coin)?.PointReward ?? 0;
-                                                  if (x is BonusLife) Lifes++;
-                };
-            }
-            Lifes = 3;
-            Points = 0;
-            Difficulty = 0;
-        }
-
-        private readonly IGameMovementChecker _gameUpdateChecker;
-        private readonly GameBoard _gameBoard;
-        private readonly Player _player;
-
-        public void MovePlayer(Direction direction)
-        {
-            if(!_gameUpdateChecker.CheckMovement(_player, direction)) return;
-            //move player here
-            _player.Move(direction);
-        }
-
-        private void OnPlayerMoved()
-        {
-            IList<GameElement> toRemove = new List<GameElement>();
-            foreach (var result in _gameBoard.Elements.OfType<ICollectable>())
-            {
-                if (_gameUpdateChecker.CheckCollision(_player, result))
-                {
-                    result.Collect();
-                    toRemove.Add(result as GameElement);
-                }
-            }
-            foreach (var gameElement in toRemove)
-            {
-                _gameBoard.Children.Remove(gameElement);
-            }
-            if (!_gameBoard.Children.OfType<Coin>().Any())
-            {
-                MessageBox.Show("Gratulacje, koniec gry!");
-                Difficulty++;
-                //wypełnij plansze monetami
-            }
-            var portal =
-                _gameBoard.Elements.OfType<Portal>().FirstOrDefault(p => _gameUpdateChecker.CheckCollision(p, _player));
-            if (portal?.ConnectedPortal != null)
-            {
-                _player.X = portal.ConnectedPortal.X;
-                _player.Y = portal.ConnectedPortal.Y;
-            }
-        }
-
         private ITimer _timer;
         private uint _points;
         private uint _difficulty;
         private uint _lifes;
+        private readonly IGameBuilder _builder;
+        private readonly GameBoard _gameBoard;
+        private IGameMovementChecker _movementChecker;
+        private Player _player;
+        private IList<Tuple<int, int>> _coinsPosition; 
 
+        public GameEngine(IGameBuilder builder, GameBoard board)
+        {
+            if (builder == null)
+                throw new ArgumentNullException(nameof(builder));
+            if (board == null)
+                throw new ArgumentNullException(nameof(board));
+            _builder = builder;
+            _gameBoard = board;
+        }
+
+        public void Load(GameState state)
+        {
+            _movementChecker = GameMovementCheckerFactory.Instance.CreateUpdateChecker(_gameBoard);
+            Points = state?.Points ?? 0;
+            Difficulty = state?.Difficulty ?? 1;
+            Lifes = state?.Lifes ?? 3;
+            Timer = _builder.BuildTimer(state);
+            _coinsPosition = new List<Tuple<int, int>>();
+            foreach (var result in _gameBoard.Elements.OfType<Coin>())
+            {
+                _coinsPosition.Add(new Tuple<int, int>((int)result.X, (int)result.Y));
+            }
+            _coinsPosition.Add(new Tuple<int, int>((int)_player.X, (int)_player.Y));
+            _player = _gameBoard.Children.OfType<Player>().Single();
+            _player.Moved += OnPlayerMoved;
+            foreach (var result in _gameBoard.Elements.OfType<Enemy>())
+            {
+                result.Moved += OnEnemyMoved;
+            }
+            SetCoinsColleted();
+        }
+
+        private void SetCoinsColleted()
+        {
+            foreach (var result in _gameBoard.Elements.OfType<Coin>())
+            {
+                result.Collected += (x, e) =>
+                {
+                    _gameBoard.Children.Remove(x as Coin);
+                    uint points = 0;
+                    if (x is BonusLife)
+                    {
+                        Lifes++;
+                        points += (x as BonusLife).PointReward;
+                    }
+                    else
+                        points += (x as Coin)?.PointReward * Difficulty ?? 0;
+                    Points += points;
+                };
+            }
+        }
+
+        #region Game properties
         public ITimer Timer
         {
             get { return _timer; }
-            private set { _timer = value; OnPropertyChanged(); }
+            protected set { _timer = value; OnPropertyChanged(); }
         }
 
         public uint Points
@@ -105,13 +98,72 @@ namespace PacmanGame.Engine
             get { return _lifes; }
             protected set { _lifes = value; OnPropertyChanged(); }
         }
+        #endregion
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        public void MovePlayer(Direction direction)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if (!_movementChecker.CheckMovement(_player, direction)) return;
+            MoveElement(_player, direction);
+        }
+        protected virtual void MoveElement(IMovable movable, Direction direction)
+        {
+            movable.Move(direction);
+        }
+
+        protected virtual void OnPlayerMoved(object sender, MovementEventArgs e)
+        {
+            CheckCollisionWithCoins();
+            MoveViaPortal(_player);
+            if (!_gameBoard.Elements.OfType<Coin>().Any())
+            {
+                Difficulty++;
+                FillBoardWithCoins();
+            }
+        }
+
+        protected virtual void OnEnemyMoved(object sender, MovementEventArgs e)
+        {
+            Enemy enemy = sender as Enemy;
+            if (enemy == null) return;
+
+        }
+
+        protected virtual void MoveViaPortal(MovableElement movable)
+        {
+            var portal =
+                _gameBoard.Elements.OfType<Portal>().FirstOrDefault(p => _movementChecker.CheckCollision(p, movable));
+            if (portal?.ConnectedPortal != null)
+            {
+                movable.X = portal.ConnectedPortal.X;
+                movable.Y = portal.ConnectedPortal.Y;
+            }
+        }
+
+        protected virtual void CheckCollisionWithCoins()
+        {
+            var coins = _gameBoard.Elements.OfType<Coin>().Where(x => _movementChecker.CheckCollision(x, _player)).ToList();
+            foreach (var coin in coins)
+            {
+                coin?.Collect();
+            }
+        }
+
+        protected virtual void CheckCollisionWithEnemies()
+        {
+            
+        }
+
+        protected virtual void FillBoardWithCoins()
+        {
+            foreach (var coin in _coinsPosition.Select(tuple => new Coin
+            {
+                X = tuple.Item1,
+                Y = tuple.Item2
+            }))
+            {
+                _gameBoard.Children.Add(coin);
+            }
+            SetCoinsColleted();
         }
     }
 }

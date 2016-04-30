@@ -55,10 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="BoardGenerator\IGameBoardGenerator.cs" />
-    <Compile Include="BoardGenerator\ExampleFileGameBoardGenerator.cs" />
     <Compile Include="Converters\KeyDisplayConverter.cs" />
-    <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="Engine\GameMovementCheckerFactory.cs" />
     <Compile Include="Engine\GameMovementChecker.cs" />
     <Compile Include="Engine\IGameMovementChecker.cs" />
@@ -68,10 +65,10 @@
     <Compile Include="Graph\IGraph.cs" />
     <Compile Include="IHaveControlKeys.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="R\GameEngine.cs" />
-    <Compile Include="R\GameState.cs" />
+    <Compile Include="Engine\GameEngine.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
-    <Compile Include="R\IGameBuilder.cs" />
+    <Compile Include="IGameBuilder.cs" />
     <Compile Include="ViewModels\PropertyChangedNotifier.cs" />
     <Compile Include="ViewModels\CloseableViewModel.cs" />
     <Compile Include="ViewModels\DelegateCommand.cs" />
@@ -178,6 +175,7 @@
       <Name>GameControls</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

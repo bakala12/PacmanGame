@@ -8,7 +8,7 @@ using System.Windows.Input;
 namespace PacmanGame.ViewModels
 {
     /// <summary>
-    /// Represents a ViewModel that supports close opertation. 
+    /// Represents a ViewModel that supports close opertation.
     /// </summary>
     public abstract class CloseableViewModel : ViewModelBase
     {
