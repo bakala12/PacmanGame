@@ -18,5 +18,8 @@
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;Key&gt;Down&lt;/Key&gt;</Value>
     </Setting>
+    <Setting Name="EnemyMovementInterval" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

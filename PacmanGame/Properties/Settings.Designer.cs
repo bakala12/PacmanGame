@@ -70,5 +70,17 @@ namespace PacmanGame.Properties {
                 this["DownKey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public uint EnemyMovementInterval {
+            get {
+                return ((uint)(this["EnemyMovementInterval"]));
+            }
+            set {
+                this["EnemyMovementInterval"] = value;
+            }
+        }
     }
 }

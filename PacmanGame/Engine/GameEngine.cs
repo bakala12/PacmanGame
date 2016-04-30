@@ -7,6 +7,7 @@ using GameControls.Interfaces;
 using GameControls.Others;
 using PacmanGame.EnemyMovementAlgorithms;
 using PacmanGame.MainInterfaces;
+using PacmanGame.Properties;
 using PacmanGame.Serialization;
 using PacmanGame.ViewModels;
 
@@ -57,7 +58,9 @@ namespace PacmanGame.Engine
                     EnemyMovementAlgorithmsFactory.Instance.CreateEnemyMovementAlgorithm(Difficulty);
                 result.Moved += OnEnemyMoved;
             }
-            EnemyMovementManager = new TimeEnemyMovementManager(_gameBoard.Elements.OfType<Enemy>(), _movementChecker, new TimeSpan(0,0,0,0, 200));
+            uint enemyMovementInterval = Settings.Default.EnemyMovementInterval;
+            EnemyMovementManager = new TimeEnemyMovementManager(_gameBoard.Elements.OfType<Enemy>(), 
+                _movementChecker, TimeSpan.FromMilliseconds(enemyMovementInterval));
             SetCoinsColleted();
         }
 
