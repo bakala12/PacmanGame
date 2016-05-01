@@ -24,6 +24,7 @@ namespace PacmanGame.Engine
         private IGameMovementChecker _movementChecker;
         private Player _player;
         private IList<Tuple<int, int>> _coinsPosition;
+        private AdditionalLifeGenerator _lifesGenerator;
 
         public GameEngine(IGameBuilder builder, GameBoard board) : this(builder, board, null) { }
 
@@ -34,7 +35,7 @@ namespace PacmanGame.Engine
             if (board == null)
                 throw new ArgumentNullException(nameof(board));
             _builder = builder;
-            _gameBoard = board; 
+            _gameBoard = board;
         }
 
         public void Load(GameState state)
@@ -59,9 +60,26 @@ namespace PacmanGame.Engine
                 result.Moved += OnEnemyMoved;
             }
             uint enemyMovementInterval = Settings.Default.EnemyMovementInterval;
-            EnemyMovementManager = new TimeEnemyMovementManager(_gameBoard.Elements.OfType<Enemy>(), 
+            EnemyMovementManager = new TimeEnemyMovementManager(_gameBoard.Elements.OfType<Enemy>(),
                 _movementChecker, TimeSpan.FromMilliseconds(enemyMovementInterval));
             SetCoinsColleted();
+            //refactor needed
+            _lifesGenerator = new AdditionalLifeGenerator(_coinsPosition);
+            _lifesGenerator.Generated += (sender, args) =>
+            {
+                BonusLife life = _lifesGenerator.GeneratedLife;
+                if (life == null) return;
+                life.Collected += (o, eventArgs) =>
+                {
+                    _gameBoard.Children.Remove(o as Coin);
+                    Lifes++;
+                    Points += (o as BonusLife)?.PointReward ?? 0;
+                };
+                life.Disappeared += (o, eventArgs) => _gameBoard.Children.Remove(o as BonusLife);
+                _gameBoard.Children.Add(life);
+                life.Appear();
+            };
+            _lifesGenerator.Start();
         }
 
         private void SetCoinsColleted()
@@ -170,7 +188,7 @@ namespace PacmanGame.Engine
             {
                 Lifes--;
             }
-            if(Lifes==0)
+            if (Lifes == 0)
                 _player.Die();
         }
 

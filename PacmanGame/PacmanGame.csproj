@@ -58,6 +58,7 @@
     <Compile Include="Converters\KeyDisplayConverter.cs" />
     <Compile Include="EnemyMovementAlgorithms\EnemyMovementAlgorithmsFactory.cs" />
     <Compile Include="EnemyMovementAlgorithms\SimpleRandomMovementAlgorithm.cs" />
+    <Compile Include="Engine\AdditionalLifeGenerator.cs" />
     <Compile Include="Engine\EnemyMovementManager.cs" />
     <Compile Include="Engine\GameMovementCheckerFactory.cs" />
     <Compile Include="Engine\GameMovementChecker.cs" />
