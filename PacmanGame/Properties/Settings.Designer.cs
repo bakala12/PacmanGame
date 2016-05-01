@@ -82,5 +82,16 @@ namespace PacmanGame.Properties {
                 this["EnemyMovementInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.Generic.List<PacmanGame.Highscores.Highscore> Highscores {
+            get {
+                return ((global::System.Collections.Generic.List<PacmanGame.Highscores.Highscore>)(this["Highscores"]));
+            }
+            set {
+                this["Highscores"] = value;
+            }
+        }
     }
 }

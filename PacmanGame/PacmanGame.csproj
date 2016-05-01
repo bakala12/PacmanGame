@@ -68,6 +68,8 @@
     <Compile Include="Graph\GraphExtender.cs" />
     <Compile Include="Graph\IGraph.cs" />
     <Compile Include="Engine\IEnemyMovementManager.cs" />
+    <Compile Include="Highscores\Highscore.cs" />
+    <Compile Include="Highscores\HighscoreList.cs" />
     <Compile Include="MainInterfaces\IHaveControlKeys.cs" />
     <Compile Include="Serialization\GameSerializer.cs" />
     <Compile Include="SimpleGameBuilder.cs" />
@@ -182,7 +184,6 @@
       <Name>GameControls</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

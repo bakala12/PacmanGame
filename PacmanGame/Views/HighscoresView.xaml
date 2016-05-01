@@ -8,6 +8,23 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <StackPanel>
         <TextBlock Text="Najlepsze wyniki"/>
+        <ListView ItemsSource="{Binding HighscoreList.Highscores}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding PlayerName}" Grid.Column="0"/>
+                        <TextBlock Text="{Binding Points}" Grid.Column="1"/>
+                        <TextBlock Text="{Binding GameTime}" Grid.Column="2"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Content="Wyczyść wyniki" Command="{Binding ClearHighscoresCommand}"/>
         <Button Content="Powrót" Command="{Binding ReturnCommand}"/>
     </StackPanel>
 </UserControl>
