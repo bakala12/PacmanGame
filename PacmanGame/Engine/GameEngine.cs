@@ -82,6 +82,30 @@ namespace PacmanGame.Engine
             _lifesGenerator.Start();
         }
 
+        public GameState SaveState()
+        {
+            GameState gameState = new GameState()
+            {
+                Points = Points, Difficulty = Difficulty, Lifes = Lifes, Time = Timer.TimeLeft
+            };
+            List<GameElementInfo> list= new List<GameElementInfo>();
+            foreach (var result in _gameBoard.Children.OfType<GameElement>())
+            {
+                var info = new GameElementInfo();
+                info.X = result.X;
+                info.Y = result.Y;
+                if(result is Player) info.Type = GameElementType.Player;
+                if(result is Coin) info.Type = GameElementType.Coin;
+                if(result is BonusLife) info.Type = GameElementType.BonusLife;
+                if(result is Enemy) info.Type = GameElementType.Enemy;
+                if(result is Block) info.Type = GameElementType.Block;
+                if (result is Portal) info.Type = GameElementType.Portal;
+                list.Add(info);
+            }
+            gameState.GameElements = list;
+            return gameState;
+        }
+
         private void SetCoinsColleted()
         {
             foreach (var result in _gameBoard.Elements.OfType<Coin>())

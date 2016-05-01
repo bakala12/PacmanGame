@@ -69,6 +69,7 @@
     <Compile Include="Graph\IGraph.cs" />
     <Compile Include="Engine\IEnemyMovementManager.cs" />
     <Compile Include="MainInterfaces\IHaveControlKeys.cs" />
+    <Compile Include="Serialization\GameSerializer.cs" />
     <Compile Include="SimpleGameBuilder.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Engine\GameEngine.cs" />

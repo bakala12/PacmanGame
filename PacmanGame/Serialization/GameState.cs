@@ -3,11 +3,13 @@ using System.Collections.Generic;
 
 namespace PacmanGame.Serialization
 {
+    [Serializable]
     public enum GameElementType
     {
         Block, Coin, Portal, BonusLife, Player, Enemy
     }
 
+    [Serializable]
     public class GameElementInfo
     {
         public double X { get; set; }
@@ -15,6 +17,7 @@ namespace PacmanGame.Serialization
         public GameElementType Type { get; set; }
     }
 
+    [Serializable]
     public class GameState
     {
         public GameState()
@@ -30,6 +33,6 @@ namespace PacmanGame.Serialization
         public uint Difficulty { get; set; }
         public uint Lifes { get; set; }
         public TimeSpan Time { get; set; }
-        public IList<GameElementInfo> GameElements { get; set; } 
+        public List<GameElementInfo> GameElements { get; set; } 
     }
 }

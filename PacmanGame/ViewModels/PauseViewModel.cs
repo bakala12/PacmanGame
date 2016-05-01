@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.Win32;
 using PacmanGame.MainInterfaces;
+using PacmanGame.Serialization;
 
 namespace PacmanGame.ViewModels
 {
@@ -24,9 +27,16 @@ namespace PacmanGame.ViewModels
         {
             IViewModelChanger changer = (Application.Current as App)?.ViewModelChanger;
             var gvm = changer?.GetViewModelByName("Game");
-            //var state = (gvm as GameViewModel)?.GameState;
-            //Saving with dedicating class
-            MessageBox.Show("Zapisano");
+            var state = (gvm as GameViewModel)?.GameEngine?.SaveState();
+            GameSerializer serializer = new GameSerializer();
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Stan gry pacman (*.pacsv) | *.pacsv";
+            if (dialog.ShowDialog() == true)
+            {
+                string path = Path.GetFullPath(dialog.FileName);
+                serializer.SaveGame(state, path);
+                MessageBox.Show("Zapisano");
+            }
         }
 
         public virtual void BackToMenu()
