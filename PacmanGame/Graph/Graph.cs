@@ -24,6 +24,7 @@ namespace PacmanGame.Graph
             }
             this._blocks = bl;
             ConstructGraph();
+            ConstructPortals(gameBoard);
         }
 
         public Graph(bool[,] blocks)
@@ -46,6 +47,22 @@ namespace PacmanGame.Graph
                     if (i + 1 < _blocks.GetLength(0) && !_blocks[i + 1, j]) Neighbours[_blocks.GetLength(1) * i + j].Add(_blocks.GetLength(1) * (i + 1) + j);
                     if (j - 1 >= 0 && !_blocks[i, j - 1]) Neighbours[_blocks.GetLength(1) * i + j].Add(_blocks.GetLength(1) * i + j - 1);
                     if (j + 1 < _blocks.GetLength(1) && !_blocks[i, j + 1]) Neighbours[_blocks.GetLength(1) * i + j].Add(_blocks.GetLength(1) * i + j + 1);
+                }
+            }
+        }
+
+        private void ConstructPortals(GameBoard board)
+        {
+            var portals = board.Elements.OfType<Portal>();
+            foreach (var portal in portals)
+            {
+                int v = _blocks.GetLength(1)*(int) portal.X + (int) portal.Y;
+                if (portal.ConnectedPortal != null)
+                {
+                    var portal1 = portal.ConnectedPortal;
+                    int conn = _blocks.GetLength(1) * (int)portal1.X + (int)portal1.Y;
+                    Neighbours[v].Add(conn);
+                    Neighbours[conn].Add(v);
                 }
             }
         }
