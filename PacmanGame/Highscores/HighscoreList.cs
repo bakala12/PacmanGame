@@ -58,7 +58,7 @@ namespace PacmanGame.Highscores
             RefreshList();
             var highscoresCopy = new List<Highscore>(Highscores);
             highscoresCopy.Add(highscore);
-            highscoresCopy.Sort();
+            highscoresCopy.Sort(_comparer);
             return highscoresCopy.IndexOf(highscore);
         }
     }
