@@ -11,22 +11,18 @@ namespace PacmanGame.Highscores
 {
     public class HighscoreList : PropertyChangedNotifier
     {
-        private List<Highscore> _highsocres;
-        private readonly IComparer<Highscore> _comparer = new HighscoreComparer(); 
+        private List<Highscore> _highscores;
+        private readonly IComparer<Highscore> _comparer = new HighscoreComparer();
 
-        public HighscoreList() : this(Settings.Default.Highscores ?? new List<Highscore>())
+        public HighscoreList()
         {
-        }
-
-        public HighscoreList(IList<Highscore> highscores)
-        {
-            Highscores = new List<Highscore>(highscores);   
+            RefreshList();
         }
 
         public List<Highscore> Highscores
         {
-            get { return _highsocres; }
-            protected set { _highsocres = value; OnPropertyChanged(); }
+            get { return _highscores; }
+            protected set { _highscores = value; OnPropertyChanged(); }
         }
 
         public void AddHighscore(Highscore highscore)
@@ -45,10 +41,25 @@ namespace PacmanGame.Highscores
 
         protected virtual void SaveChanges()
         {
-            Highscores.Sort(_comparer);
-            OnPropertyChanged(nameof(Highscores));
             Settings.Default.Highscores = Highscores.ToList();
             Settings.Default.Save();
+            RefreshList();
+        }
+
+        public void RefreshList()
+        {
+            Highscores = Settings.Default.Highscores ?? new List<Highscore>();
+            Highscores.Sort(_comparer);
+            OnPropertyChanged(nameof(Highscores));
+        }
+
+        public int GetPosition(Highscore highscore)
+        {
+            RefreshList();
+            var highscoresCopy = new List<Highscore>(Highscores);
+            highscoresCopy.Add(highscore);
+            highscoresCopy.Sort();
+            return highscoresCopy.IndexOf(highscore);
         }
     }
 }

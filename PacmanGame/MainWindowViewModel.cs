@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using PacmanGame.Annotations;
+using PacmanGame.Highscores;
 using PacmanGame.MainInterfaces;
 using PacmanGame.Properties;
 using PacmanGame.ViewModels;
@@ -14,16 +15,16 @@ namespace PacmanGame
 {
     public class MainWindowViewModel : PropertyChangedNotifier, IViewModelChanger, IHaveControlKeys
     {
-        public MainWindowViewModel(IGameBuilder builder)
+        public MainWindowViewModel(IGameBuilder builder, HighscoreList highscores)
         {
             var vm = new List<ViewModelBase>
             {
                 new StartMenuViewModel(),
                 new HelpViewModel(),
                 new OptionsViewModel(),
-                new HighscoresViewModel(),
+                new HighscoresViewModel(highscores),
                 new GameViewModel(builder),
-                new EndGameViewModel(),
+                new EndGameViewModel(highscores),
                 new PauseViewModel()
             };
             foreach (var result in vm.OfType<CloseableViewModel>())

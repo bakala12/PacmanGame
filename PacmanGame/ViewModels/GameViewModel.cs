@@ -88,11 +88,12 @@ namespace PacmanGame.ViewModels
             GameEngine.Timer.Stop();
             GameEngine.EnemyMovementManager.Stop();
             TimeSpan time = GameEngine.Timer.TimeLeft;
-            //porównanie z highscorami, ewentualny zapis
-            //jeśli dobre, przekieruj do widoku końca gry
-            MessageBox.Show($"Koniec gry, czas: {time}");
             var viewModelChager = (Application.Current as App)?.ViewModelChanger;
-            viewModelChager?.ChangeCurrentViewModel("StartMenu");
+            var endGameViewModel = viewModelChager?.GetViewModelByName("EndGame") as EndGameViewModel;
+            if(endGameViewModel == null) throw new InvalidOperationException();
+            endGameViewModel.Points = GameEngine.Points;
+            endGameViewModel.GameTime = time;
+            viewModelChager?.ChangeCurrentViewModel("EndGame");
         }
     }
 }

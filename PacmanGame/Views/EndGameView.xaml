@@ -4,17 +4,37 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacmanGame.Views"
+             xmlns:converters="clr-namespace:PacmanGame.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Imię gracza: "/>
-            <TextBox Text="{Binding PlayerName}" Grid.Column="1"/>
-        </Grid>
-        <Button Content="Zapisz" Command="{Binding SaveCommand}"/>
-    </StackPanel>
+    <UserControl.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Koniec gry!"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Zdobyte punkty: "/>
+                <TextBlock Text="Czas gry: " Grid.Row="1" Grid.Column="0"/>
+                <TextBlock Text="{Binding Points}" Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="{Binding GameTime}" Grid.Row="1" Grid.Column="1"/>
+            </Grid>
+            <StackPanel Visibility="{Binding IsHighscore, Converter={StaticResource BoolToVisibilityConverter}}">
+                <TextBlock Text="Gratulacje!"/>
+                <TextBlock Text="Nowy najlepszy wynik!"/>
+                <TextBlock Text="Wpisz swoje imię:"/>
+                <TextBox Text="{Binding PlayerName}"/>
+                <Button Content="Zapisz" Command="{Binding SaveCommand}"/>
+            </StackPanel>
+            <Button Content="Powrót do menu" Command="{Binding ReturnCommand}"/>
+        </StackPanel>
+    </Grid>
 </UserControl>

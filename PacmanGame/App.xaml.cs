@@ -26,7 +26,7 @@ namespace PacmanGame
             base.OnStartup(e);
             DefaultControls();
             IGameBuilder builder = new SimpleGameBuilder();
-            MainWindowViewModel vm = new MainWindowViewModel(builder);
+            MainWindowViewModel vm = new MainWindowViewModel(builder, new HighscoreList());
             ViewModelChanger = vm;
             ControlKeysAccessor = vm;
             ViewModelChanger.ChangeCurrentViewModel("StartMenu");
