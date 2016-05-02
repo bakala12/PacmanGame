@@ -11,16 +11,23 @@ namespace PacmanGame.Highscores
 {
     public class HighscoreList : PropertyChangedNotifier
     {
+        private List<Highscore> _highsocres;
+        private readonly IComparer<Highscore> _comparer = new HighscoreComparer(); 
+
         public HighscoreList() : this(Settings.Default.Highscores ?? new List<Highscore>())
         {
         }
 
         public HighscoreList(IList<Highscore> highscores)
         {
-            Highscores = new ObservableCollection<Highscore>(highscores);   
+            Highscores = new List<Highscore>(highscores);   
         }
 
-        public ObservableCollection<Highscore> Highscores { get; }
+        public List<Highscore> Highscores
+        {
+            get { return _highsocres; }
+            protected set { _highsocres = value; OnPropertyChanged(); }
+        }
 
         public void AddHighscore(Highscore highscore)
         {
@@ -38,6 +45,8 @@ namespace PacmanGame.Highscores
 
         protected virtual void SaveChanges()
         {
+            Highscores.Sort(_comparer);
+            OnPropertyChanged(nameof(Highscores));
             Settings.Default.Highscores = Highscores.ToList();
             Settings.Default.Save();
         }
