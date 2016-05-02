@@ -26,4 +26,8 @@
     <DataTemplate DataType="{x:Type vm:PauseViewModel}">
         <screens:PauseView/>
     </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vm:EndGameViewModel}">
+        <screens:EndGameView/>
+    </DataTemplate>
 </ResourceDictionary>
