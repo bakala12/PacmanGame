@@ -30,6 +30,7 @@ namespace PacmanGame.Highscores
             if(highscore==null)
                 throw new ArgumentNullException(nameof(highscore));
             Highscores.Add(highscore);
+            RemoveRendundantElements();
             SaveChanges();
         }
 
@@ -53,13 +54,17 @@ namespace PacmanGame.Highscores
             OnPropertyChanged(nameof(Highscores));
         }
 
-        public int GetPosition(Highscore highscore)
+        public bool IsHighscore(Highscore highscore)
         {
-            RefreshList();
-            var highscoresCopy = new List<Highscore>(Highscores);
-            highscoresCopy.Add(highscore);
-            highscoresCopy.Sort(_comparer);
-            return highscoresCopy.IndexOf(highscore);
+            return Highscores.Count < 10 || _comparer.Compare(highscore, Highscores.Last()) <0;
+        }
+
+        private void RemoveRendundantElements()
+        {
+            if (Highscores.Count <= 10) return;
+            for(int i=10; i<Highscores.Count; i++)
+                Highscores.RemoveAt(i);
+            OnPropertyChanged(nameof(Highscores));
         }
     }
 }

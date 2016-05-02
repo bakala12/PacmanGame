@@ -20,8 +20,7 @@ namespace PacmanGame.ViewModels
         protected override void OnViewAppeared()
         {
             _highscores.RefreshList();
-            int pos = _highscores.GetPosition(CreateHighscore());
-            IsHighscore = pos <= 10;
+            IsHighscore = _highscores.IsHighscore(CreateHighscore());
         }
 
         public EndGameViewModel(HighscoreList highscores) : base("EndGame")
