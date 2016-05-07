@@ -17,9 +17,9 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding PlayerName}" Grid.Column="0"/>
-                        <TextBlock Text="{Binding Points}" Grid.Column="1"/>
-                        <TextBlock Text="{Binding GameTime}" Grid.Column="2"/>
+                        <TextBlock Text="{Binding PlayerName}" Grid.Column="0" Margin="5"/>
+                        <TextBlock Text="{Binding Points}" Grid.Column="1" Margin="5"/>
+                        <TextBlock Text="{Binding GameTime}" Grid.Column="2" Margin="5"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

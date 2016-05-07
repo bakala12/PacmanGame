@@ -24,5 +24,8 @@
     <Setting Name="Highscores" Type="System.Collections.Generic.List&lt;PacmanGame.Highscores.Highscore&gt;" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="RememberedHighscoresCount" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -13,6 +13,7 @@ namespace PacmanGame.Highscores
     {
         private List<Highscore> _highscores;
         private readonly IComparer<Highscore> _comparer = new HighscoreComparer();
+        private uint _rememberedHighscoresCount;
 
         public HighscoreList()
         {
@@ -50,19 +51,21 @@ namespace PacmanGame.Highscores
         public void RefreshList()
         {
             Highscores = Settings.Default.Highscores ?? new List<Highscore>();
+            _rememberedHighscoresCount = Settings.Default.RememberedHighscoresCount;
+            RemoveRendundantElements();
             Highscores.Sort(_comparer);
             OnPropertyChanged(nameof(Highscores));
         }
 
         public bool IsHighscore(Highscore highscore)
         {
-            return Highscores.Count < 10 || _comparer.Compare(highscore, Highscores.Last()) <0;
+            return Highscores.Count < _rememberedHighscoresCount || _comparer.Compare(highscore, Highscores.Last()) <0;
         }
 
         private void RemoveRendundantElements()
         {
-            if (Highscores.Count <= 10) return;
-            for(int i=10; i<Highscores.Count; i++)
+            if (Highscores.Count <= _rememberedHighscoresCount) return;
+            for(int i=(int)_rememberedHighscoresCount; i<Highscores.Count; i++)
                 Highscores.RemoveAt(i);
             OnPropertyChanged(nameof(Highscores));
         }

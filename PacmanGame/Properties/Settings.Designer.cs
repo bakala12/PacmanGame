@@ -93,5 +93,17 @@ namespace PacmanGame.Properties {
                 this["Highscores"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public uint RememberedHighscoresCount {
+            get {
+                return ((uint)(this["RememberedHighscoresCount"]));
+            }
+            set {
+                this["RememberedHighscoresCount"] = value;
+            }
+        }
     }
 }
