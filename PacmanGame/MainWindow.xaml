@@ -4,12 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:local="clr-namespace:PacmanGame"
-        xmlns:vm="clr-namespace:PacmanGame.ViewModels"
-        xmlns:views="clr-namespace:PacmanGame.Views"
-        xmlns:keys="clr-namespace:System.Windows.Input;assembly=WindowsBase"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Pacman 2000" Height="350" Width="525" TitleCaps="False" WindowState="Maximized"
+        ResizeMode="NoResize" IconTemplate="{StaticResource WindowIcon}" IgnoreTaskbarOnMaximize="True"
+        WindowStyle="None">
     <Window.InputBindings>
         <KeyBinding Key="{Binding LeftKey}" Command="{Binding CurrentViewModel.MoveCommand}" CommandParameter="{Binding LeftKey}"/>
         <KeyBinding Key="{Binding RightKey}" Command="{Binding CurrentViewModel.MoveCommand}" CommandParameter="{Binding RightKey}"/>
@@ -18,6 +16,8 @@
         <KeyBinding Key="Escape" Command="{Binding CurrentViewModel.PauseCommand}"/>
     </Window.InputBindings>
     <Grid>
-        <ContentControl Content="{Binding CurrentViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <ContentControl Content="{Binding CurrentViewModel}"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"/>
     </Grid>
 </Controls:MetroWindow>

@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:PacmanGame.ViewModels"
+                    xmlns:con="clr-namespace:GameControls.Elements;assembly=GameControls"
                     xmlns:screens="clr-namespace:PacmanGame.Views">
     
     <DataTemplate DataType="{x:Type vm:StartMenuViewModel}">
@@ -29,5 +30,11 @@
     
     <DataTemplate DataType="{x:Type vm:EndGameViewModel}">
         <screens:EndGameView/>
+    </DataTemplate>
+    
+    <DataTemplate x:Key="WindowIcon">
+        <Viewbox Margin="5">
+            <con:Player Width="20" Height="20" Background="Yellow" IsAlive="False" IsEnabled="False"/>
+        </Viewbox>
     </DataTemplate>
 </ResourceDictionary>
