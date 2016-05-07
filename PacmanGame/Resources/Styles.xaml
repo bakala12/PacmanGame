@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <SolidColorBrush Color="LightGray" x:Key="HighscoresGridLineBrush"/>
-    
+
     <Style TargetType="{x:Type DataGrid}" x:Key="HighscoresListStyle">
         <Setter Property="CanUserResizeColumns" Value="False"/>
         <Setter Property="CanUserAddRows" Value="False"/>
@@ -40,5 +40,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>
