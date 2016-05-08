@@ -4,24 +4,37 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacmanGame.Views"
+             xmlns:con="clr-namespace:GameControls.Elements;assembly=GameControls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Grid Style="{StaticResource PanelStyle}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Pacman 2000" Grid.Row="0"/>
-        <Button Content="Nowa gra" Command="{Binding NewGameCommand}" Grid.Row="1"/>
-        <Button Content="Wczytaj grę" Command="{Binding LoadGameCommand}" Grid.Row="2"/>
-        <Button Content="Najlepsze wyniki" Command="{Binding ShowHighscoresCommand}" Grid.Row="3"/>
-        <Button Content="Ustawienia" Command="{Binding ShowOptionsCommand}" Grid.Row="4"/>
-        <Button Content="Pomoc" Command="{Binding ShowHelpCommand}" Grid.Row="5"/>
-        <Button Content="Wyjście" Command="{Binding ExitCommand}" Grid.Row="6"/>
+        <DockPanel Grid.Row="1" Style="{StaticResource PanelStyle}">
+            <con:Player Style="{StaticResource PlayerMenuStyle}" Direction="Right"/>
+        </DockPanel>
+        <DockPanel Grid.Row="0" Style="{StaticResource PanelStyle}">
+            <Image Source="pack://application:,,,/Resources/pacman1.jpg" />
+        </DockPanel>
+        <Grid Grid.Row="2" Style="{StaticResource PanelStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Content="Nowa gra" Command="{Binding NewGameCommand}" Grid.Row="0" Style="{StaticResource StartMenuButtonStyle}"/>
+            <Button Content="Wczytaj grę" Command="{Binding LoadGameCommand}" Grid.Row="1" Style="{StaticResource StartMenuButtonStyle}"/>
+            <Button Content="Najlepsze wyniki" Command="{Binding ShowHighscoresCommand}" Grid.Row="2" Style="{StaticResource StartMenuButtonStyle}"/>
+            <Button Content="Ustawienia" Command="{Binding ShowOptionsCommand}" Grid.Row="3" Style="{StaticResource StartMenuButtonStyle}"/>
+            <Button Content="Pomoc" Command="{Binding ShowHelpCommand}" Grid.Row="4" Style="{StaticResource StartMenuButtonStyle}"/>
+            <Button Content="Wyjście" Command="{Binding ExitCommand}" Grid.Row="5" Style="{StaticResource StartMenuButtonStyle}"/>
+        </Grid>
     </Grid>
 </UserControl>

@@ -34,7 +34,7 @@
     
     <DataTemplate x:Key="WindowIcon">
         <Viewbox Margin="5">
-            <con:Player Width="20" Height="20" Background="Yellow" IsAlive="False" IsEnabled="False"/>
+            <con:Player Width="20" Height="20" Background="Yellow" IsAlive="False" IsEnabled="False" />
         </Viewbox>
     </DataTemplate>
 </ResourceDictionary>
