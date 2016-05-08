@@ -3,6 +3,9 @@
                     xmlns:e="clr-namespace:GameControls.Elements;assembly=GameControls">
 
     <SolidColorBrush Color="LightGray" x:Key="HighscoresGridLineBrush"/>
+    <SolidColorBrush Color="Black" x:Key="BackgroundBrush"/>
+    <SolidColorBrush Color="White" x:Key="ForegroundBrush"/>
+    <SolidColorBrush Color="DeepSkyBlue" x:Key="SelectedButtonBrush"/>
 
     <Style TargetType="{x:Type DataGrid}" x:Key="HighscoresListStyle">
         <Setter Property="CanUserResizeColumns" Value="False"/>
@@ -21,6 +24,15 @@
                 <Style TargetType="{x:Type DataGridCell}">
                     <Setter Property="VerticalAlignment" Value="Center"/>
                     <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                    <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="Margin" Value="5"/>
+                    <Setter Property="BorderThickness" Value="0"/>
+                    <Setter Property="BorderBrush" Value="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                    <Setter Property="FontStyle" Value="Normal"/>
+                    <Setter Property="FontWeight" Value="Normal"/>
+                    <Setter Property="TextBlock.TextDecorations" Value="{x:Null}"/>
                 </Style>
             </Setter.Value>
         </Setter>
@@ -31,15 +43,28 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                                <TextBlock Text="{TemplateBinding Content}"
-                                           HorizontalAlignment="Center" 
-                                           VerticalAlignment="Center"/>
+                                <Border Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding Foreground}"
+                                        BorderThickness="0,3,0,3" Padding="5">
+                                    <TextBlock Text="{TemplateBinding Content}"
+                                           HorizontalAlignment="Stretch" 
+                                           VerticalAlignment="Stretch"
+                                           TextAlignment="Center" FontSize="15"
+                                           Background="{TemplateBinding Background}"
+                                           Foreground="{TemplateBinding Foreground}"
+                                          />
+                                </Border>
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
                 </Style>
             </Setter.Value>
         </Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource HighscoresGridLineBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="RowBackground" Value="{StaticResource BackgroundBrush}"/>
     </Style>
 
     <Style TargetType="{x:Type TextBlock}" x:Key="CenteredTextBlock">
@@ -69,8 +94,8 @@
                                VerticalAlignment="Center"
                                TextAlignment="Center"
                                Foreground="{TemplateBinding Foreground}" FontSize="18"/>
-                        <e:Enemy Grid.Column="0" Opacity="0" Name="BonusLife" Width="30" Background="DeepSkyBlue"/>
-                        <e:Enemy Grid.Column="2" Opacity="{Binding Opacity, ElementName= BonusLife}" Width="30" Background="DeepSkyBlue"/>
+                        <e:Enemy Grid.Column="0" Opacity="0" Name="BonusLife" Width="30" Background="{StaticResource SelectedButtonBrush}"/>
+                        <e:Enemy Grid.Column="2" Opacity="{Binding Opacity, ElementName= BonusLife}" Width="30" Background="{StaticResource SelectedButtonBrush}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <EventTrigger RoutedEvent="MouseEnter">
@@ -97,11 +122,18 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Background" Value="Black"/>
-        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
     </Style>
 
     <Style TargetType="{x:Type Panel}" x:Key="PanelStyle">
-        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
     </Style>
+    
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource CenteredTextBlock}" x:Key="HighscoresHeaderStyle">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+    
 </ResourceDictionary>
