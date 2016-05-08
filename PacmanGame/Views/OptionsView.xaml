@@ -10,13 +10,13 @@
     <UserControl.Resources>
         <converters:KeyDisplayConverter x:Key="KeyDisplayConverter"/>
     </UserControl.Resources>
-    <Grid>
+    <Grid Style="{StaticResource PanelStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="4*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Sterowanie" Grid.Row="0"/>
+        <TextBlock Text="Sterowanie" Grid.Row="0" Style="{StaticResource HighscoresHeaderStyle}"/>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -29,10 +29,10 @@
                 <ColumnDefinition Width="0.3*"/>
                 <ColumnDefinition Width="0.3*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Ruch w lewo" Grid.Row="0" Grid.Column="0"/>
-            <TextBlock Text="Ruch w prawo" Grid.Row="1" Grid.Column="0"/>
-            <TextBlock Text="Ruch w górę" Grid.Row="2" Grid.Column="0"/>
-            <TextBlock Text="Ruch w dół" Grid.Row="3" Grid.Column="0"/>
+            <TextBlock Text="Ruch w lewo" Grid.Row="0" Grid.Column="0" Style="{StaticResource OptionTextBlockStyle}" />
+            <TextBlock Text="Ruch w prawo" Grid.Row="1" Grid.Column="0" Style="{StaticResource OptionTextBlockStyle}"/>
+            <TextBlock Text="Ruch w górę" Grid.Row="2" Grid.Column="0" Style="{StaticResource OptionTextBlockStyle}"/>
+            <TextBlock Text="Ruch w dół" Grid.Row="3" Grid.Column="0" Style="{StaticResource OptionTextBlockStyle}"/>
             <TextBlock Grid.Row="0" Grid.Column="1">
                 <TextBlock.Text>
                     <MultiBinding Converter="{StaticResource KeyDisplayConverter}">
@@ -65,10 +65,10 @@
                     </MultiBinding>
                 </TextBlock.Text>
             </TextBlock>
-            <Button Content="Zmień" Command="{Binding ChangeKeyCommand}" CommandParameter="Left" Grid.Row="0" Grid.Column="2"/>
-            <Button Content="Zmień" Command="{Binding ChangeKeyCommand}" CommandParameter="Right" Grid.Row="1" Grid.Column="2"/>
-            <Button Content="Zmień" Command="{Binding ChangeKeyCommand}" CommandParameter="Up" Grid.Row="2" Grid.Column="2"/>
-            <Button Content="Zmień" Command="{Binding ChangeKeyCommand}" CommandParameter="Down" Grid.Row="3" Grid.Column="2"/>
+            <Button Content="Zmień" Command="{Binding ChangeKeyCommand}" CommandParameter="Left" Grid.Row="0" Grid.Column="2" Style="{StaticResource ChangeControlButtonStyle}"/>
+            <Button Content="Zmień" Command="{Binding ChangeKeyCommand}" CommandParameter="Right" Grid.Row="1" Grid.Column="2" Style="{StaticResource ChangeControlButtonStyle}"/>
+            <Button Content="Zmień" Command="{Binding ChangeKeyCommand}" CommandParameter="Up" Grid.Row="2" Grid.Column="2" Style="{StaticResource ChangeControlButtonStyle}"/>
+            <Button Content="Zmień" Command="{Binding ChangeKeyCommand}" CommandParameter="Down" Grid.Row="3" Grid.Column="2" Style="{StaticResource ChangeControlButtonStyle}"/>
         </Grid>
         <Button Content="Powrót" Command="{Binding ReturnCommand}" Grid.Row="2"/>
     </Grid>

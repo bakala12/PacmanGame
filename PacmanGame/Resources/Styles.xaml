@@ -129,11 +129,80 @@
     <Style TargetType="{x:Type Panel}" x:Key="PanelStyle">
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
     </Style>
-    
+
     <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource CenteredTextBlock}" x:Key="HighscoresHeaderStyle">
         <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
         <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
         <Setter Property="FontSize" Value="16"/>
     </Style>
+
+    <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource CenteredTextBlock}" x:Key="OptionTextBlockStyle">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+        <Setter Property="FontSize" Value="13"/>
+    </Style>
     
+    <Style TargetType="{x:Type ToolTip}" x:Key="ChangeControlButtonToolTipStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToolTip}">
+                    <Grid Style="{StaticResource PanelStyle}">
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                                   Foreground="{StaticResource ForegroundBrush}" FontSize="12">
+                            <ContentPresenter/>
+                        </TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type Button}" x:Key="ChangeControlButtonStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <TextBlock Foreground="{TemplateBinding Foreground}"
+                               Background="{TemplateBinding Background}"
+                               Text="{TemplateBinding Content}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               FontSize="20"
+                               ToolTip="{TemplateBinding ToolTip}"/>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
+                                                    From="White" To="DeepSkyBlue" Duration="0:0:0.5"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="(Foreground).(SolidColorBrush.Color)"
+                                                    To="White" From="DeepSkyBlue" Duration="0:0:0.5"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}"/>
+        <Setter Property="ToolTip">
+            <Setter.Value>
+                <ToolTip Content="Wciśnij przycisk a następnie wybierz klawisz"
+                         Style="{StaticResource ChangeControlButtonToolTipStyle}"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="{x:Type Button}" x:Key="ReturnButtonStyle">
+        
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="KeyDisplayTextBlock">
+        
+    </Style>
 </ResourceDictionary>
