@@ -11,8 +11,6 @@ namespace PacmanGame.Highscores
         private TimeSpan _gameTime;
         private uint _time;
 
-        public Highscore() { }
-
         public string PlayerName { get; set; }
         public uint Points { get; set; }
 

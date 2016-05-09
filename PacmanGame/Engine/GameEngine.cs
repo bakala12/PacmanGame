@@ -124,7 +124,6 @@ namespace PacmanGame.Engine
             }
         }
 
-        #region Game properties
         public ITimer Timer { get; protected set; }
 
         public uint Points { get; protected set; }
@@ -134,8 +133,6 @@ namespace PacmanGame.Engine
         public uint Lifes { get; protected set; }
 
         public IEnemyMovementManager EnemyMovementManager { get; private set; }
-
-        #endregion
 
         public void MovePlayer(Direction direction)
         {

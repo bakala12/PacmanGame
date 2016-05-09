@@ -81,34 +81,14 @@ namespace PacmanGame
         }
 
         #region IHaveControlKeys implementation
-        private Key _upKey;
-        private Key _downKey;
-        private Key _leftKey;
-        private Key _rightKey;
 
-        public Key UpKey
-        {
-            get { return _upKey; }
-            set { _upKey = value;  }
-        }
+        public Key UpKey { get; set; }
 
-        public Key LeftKey
-        {
-            get { return _leftKey; }
-            set { _leftKey = value;  }
-        }
+        public Key LeftKey { get; set; }
 
-        public Key DownKey
-        {
-            get { return _downKey; }
-            set { _downKey = value;  }
-        }
+        public Key DownKey { get; set; }
 
-        public Key RightKey
-        {
-            get { return _rightKey; }
-            set { _rightKey = value;  }
-        }
+        public Key RightKey { get; set; }
 
         public void LoadControlKeys()
         {

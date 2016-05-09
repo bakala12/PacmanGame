@@ -51,7 +51,6 @@ namespace PacmanGame.Highscores
             _rememberedHighscoresCount = Settings.Default.RememberedHighscoresCount;
             RemoveRendundantElements();
             Highscores.Sort(_comparer);
-            //OnPropertyChanged(nameof(Highscores));
         }
 
         public bool IsHighscore(Highscore highscore)
@@ -64,7 +63,6 @@ namespace PacmanGame.Highscores
             if (Highscores.Count <= _rememberedHighscoresCount) return;
             for(int i=(int)_rememberedHighscoresCount; i<Highscores.Count; i++)
                 Highscores.RemoveAt(i);
-            //OnPropertyChanged(nameof(Highscores));
         }
     }
 }
