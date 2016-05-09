@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Prism.Commands;
 
 namespace PacmanGame.ViewModels
 {
@@ -18,7 +19,7 @@ namespace PacmanGame.ViewModels
         /// <param name="name">Name of the view model.</param>
         protected CloseableViewModel(string name = null) : base(name)
         {
-            ReturnCommand = new DelegateCommand(x=>Close());
+            ReturnCommand = new DelegateCommand<object>(x=>Close());
             ViewAppeared += (sender, args) => OnViewAppeared();
         }
 

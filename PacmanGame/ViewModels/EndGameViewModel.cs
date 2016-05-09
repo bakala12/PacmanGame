@@ -5,6 +5,7 @@ using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Commander;
 using PacmanGame.Highscores;
 
 namespace PacmanGame.ViewModels
@@ -24,7 +25,6 @@ namespace PacmanGame.ViewModels
             _highscores = highscores;
             PlayerName = "";
             IsHighscore = false;
-            SaveCommand = new DelegateCommand(x=>SaveHighscore());
         }
 
         public uint Points { get; set; }
@@ -35,8 +35,7 @@ namespace PacmanGame.ViewModels
 
         public bool IsHighscore { get; protected set; }
 
-        public ICommand SaveCommand { get; }
-
+        [OnCommand("SaveCommand")]
         public virtual void SaveHighscore()
         {
             if(!IsHighscore) return;

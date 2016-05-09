@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using Commander;
 using PacmanGame.MainInterfaces;
 
 namespace PacmanGame.ViewModels
@@ -19,7 +20,6 @@ namespace PacmanGame.ViewModels
         {
             if(accessor==null) throw new ArgumentNullException(nameof(accessor));
             Accessor = accessor;
-            ChangeKeyCommand = new DelegateCommand(ChangeKey);
         }
 
         protected override void OnViewAppeared()
@@ -59,8 +59,6 @@ namespace PacmanGame.ViewModels
         public bool IsUpError { get; protected set; }
 
         public bool IsDownError { get; protected set; }
-
-        public ICommand ChangeKeyCommand { get; }
         #endregion
 
         public void Load()
@@ -112,6 +110,7 @@ namespace PacmanGame.ViewModels
             base.Close();
         }
 
+        [OnCommand("ChangeKeyCommand")]
         public void ChangeKey(object parameter)
         {
             ActiveLeft = false;

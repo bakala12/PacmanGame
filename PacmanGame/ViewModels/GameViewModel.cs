@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using Commander;
 using GameControls.Board;
 using GameControls.Elements;
 using GameControls.Others;
@@ -15,9 +16,6 @@ namespace PacmanGame.ViewModels
     {
         private readonly IGameBuilder _builder;
 
-        public ICommand PauseCommand { get; }
-        public ICommand MoveCommand { get; }
-
         public GameBoard GameBoard { get; protected set; }
 
         public GameEngine GameEngine { get; protected set; }
@@ -26,8 +24,6 @@ namespace PacmanGame.ViewModels
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             _builder = builder;
-            PauseCommand = new DelegateCommand(x => Pause());
-            MoveCommand = new DelegateCommand(MovePlayer);
         }
 
         protected override void OnViewAppeared()
@@ -50,6 +46,7 @@ namespace PacmanGame.ViewModels
             player.Dead += (x,e)=> OnGameEnded();
         }
 
+        [OnCommand("MoveCommand")]
         public virtual void MovePlayer(object parameter)
         {
             Key key = parameter as Key? ?? Key.None;
@@ -65,6 +62,7 @@ namespace PacmanGame.ViewModels
             GameEngine.MovePlayer(direction);
         }
 
+        [OnCommand("PauseCommand")]
         public virtual void Pause()
         {
             GameEngine.Timer.Stop();

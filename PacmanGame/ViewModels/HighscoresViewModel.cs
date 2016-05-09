@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using PacmanGame.Highscores;
 using System.Windows;
+using Commander;
 
 namespace PacmanGame.ViewModels
 {
@@ -19,11 +20,14 @@ namespace PacmanGame.ViewModels
         public HighscoresViewModel(HighscoreList highscoreList) : base("Highscores")
         {
             HighscoreList = highscoreList;
-            ClearHighscoresCommand = new DelegateCommand(x => HighscoreList.ClearAllHighscores());
         }
 
         public HighscoreList HighscoreList { get; set; }
 
-        public ICommand ClearHighscoresCommand { get; }
+        [OnCommand("ClearHighscoresCommand")]
+        protected virtual void ClearAllHighscores()
+        {
+            HighscoreList.ClearAllHighscores();
+        }
     }
 }

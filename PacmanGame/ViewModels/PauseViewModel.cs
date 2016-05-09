@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Commander;
 using Microsoft.Win32;
 using PacmanGame.MainInterfaces;
 using PacmanGame.Serialization;
@@ -16,13 +17,9 @@ namespace PacmanGame.ViewModels
     {
         public PauseViewModel() : base("Pause")
         {
-            BackToMenuCommand = new DelegateCommand(x=>BackToMenu());
-            SaveGameCommand = new DelegateCommand(x=> SaveGame());
         }
 
-        public ICommand SaveGameCommand { get; }
-        public ICommand BackToMenuCommand { get; }
-
+        [OnCommand("SaveGameCommand")]
         public virtual void SaveGame()
         {
             IViewModelChanger changer = (Application.Current as App)?.ViewModelChanger;
@@ -39,6 +36,7 @@ namespace PacmanGame.ViewModels
             }
         }
 
+        [OnCommand("BackToMenuCommand")]
         public virtual void BackToMenu()
         {
             if (MessageBoxResult.OK == MessageBox.Show("Jeśli przejdziesz do menu stracisz niezapisany postęp gry", "Uwaga", MessageBoxButton.OKCancel))
