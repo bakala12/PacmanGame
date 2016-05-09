@@ -21,9 +21,16 @@ namespace PacmanGame.ViewModels
         private bool _activeRight;
         private bool _activeUp;
         private bool _activeDown;
+        private bool _isLeftError;
+        private bool _isRightError;
+        private bool _isUpError;
+        private bool _isDownError;
+        protected IHaveControlKeys Accessor { get; }
 
-        public OptionsViewModel() : base("Options")
+        public OptionsViewModel(IHaveControlKeys accessor) : base("Options")
         {
+            if(accessor==null) throw new ArgumentNullException(nameof(accessor));
+            Accessor = accessor;
             ChangeKeyCommand = new DelegateCommand(ChangeKey);
         }
 
@@ -34,8 +41,13 @@ namespace PacmanGame.ViewModels
             ActiveDown = false;
             ActiveUp = false;
             ActiveRight = false;
+            IsLeftError = false;
+            IsRightError = false;
+            IsDownError = false;
+            IsUpError = false;
         }
 
+        #region Properties
         public Key UpKey
         {
             get { return _upKey; }
@@ -59,8 +71,6 @@ namespace PacmanGame.ViewModels
             get { return _rightKey; }
             set { _rightKey = value; OnPropertyChanged(); }
         }
-
-        public ICommand ChangeKeyCommand { get; }
 
         public bool ActiveDown
         {
@@ -86,15 +96,47 @@ namespace PacmanGame.ViewModels
             set { _activeRight = value; OnPropertyChanged(); }
         }
 
+        public bool IsLeftError
+        {
+            get { return _isLeftError; }
+            protected set { _isLeftError = value; OnPropertyChanged(); }
+        }
+
+        public bool IsRightError
+        {
+            get { return _isRightError; }
+            protected set { _isRightError = value; OnPropertyChanged(); }
+        }
+        public bool IsUpError
+        {
+            get { return _isUpError; }
+            protected set { _isUpError = value; OnPropertyChanged(); }
+        }
+        public bool IsDownError
+        {
+            get { return _isDownError; }
+            protected set { _isDownError = value; OnPropertyChanged(); }
+        }
+
+        public ICommand ChangeKeyCommand { get; }
+        #endregion
+
+        public void Load()
+        {
+            Accessor.LoadControlKeys();
+            RightKey = Accessor.RightKey;
+            LeftKey = Accessor.LeftKey;
+            UpKey = Accessor.UpKey;
+            DownKey = Accessor.DownKey;
+        }
+
         public void Save()
         {
-            IHaveControlKeys accessor = (Application.Current as App)?.ControlKeysAccessor;
-            if (accessor == null) return;
-            accessor.RightKey = RightKey;
-            accessor.LeftKey = LeftKey;
-            accessor.UpKey = UpKey;
-            accessor.DownKey = DownKey;
-            accessor.SaveControlKeys();
+            Accessor.RightKey = RightKey;
+            Accessor.LeftKey = LeftKey;
+            Accessor.UpKey = UpKey;
+            Accessor.DownKey = DownKey;
+            Accessor.SaveControlKeys();
         }
 
         public void OnKeyDown(object sender, KeyEventArgs e)
@@ -104,7 +146,7 @@ namespace PacmanGame.ViewModels
                 LeftKey = e.Key;
                 ActiveLeft = false;
             }
-            else if(ActiveRight)
+            else if (ActiveRight)
             {
                 RightKey = e.Key;
                 ActiveRight = false;
@@ -120,17 +162,6 @@ namespace PacmanGame.ViewModels
                 ActiveUp = false;
             }
             Save();
-        }
-
-        public void Load()
-        {
-            IHaveControlKeys accessor = (Application.Current as App)?.ControlKeysAccessor;
-            if (accessor == null) return;
-            accessor.LoadControlKeys();
-            RightKey = accessor.RightKey;
-            LeftKey = accessor.LeftKey;
-            UpKey = accessor.UpKey;
-            DownKey = accessor.DownKey;
         }
 
         protected override void Close()

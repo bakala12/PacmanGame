@@ -21,7 +21,7 @@ namespace PacmanGame
             {
                 new StartMenuViewModel(),
                 new HelpViewModel(),
-                new OptionsViewModel(),
+                new OptionsViewModel(this),
                 new HighscoresViewModel(highscores),
                 new GameViewModel(builder),
                 new EndGameViewModel(highscores),

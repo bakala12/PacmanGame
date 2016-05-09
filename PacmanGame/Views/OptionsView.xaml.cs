@@ -25,7 +25,5 @@ namespace PacmanGame.Views
         {
             InitializeComponent();
         }
-
-        private void OptionsView_OnKeyDown(object sender, KeyEventArgs e) => (DataContext as OptionsViewModel)?.OnKeyDown(sender, e);
     }
 }
