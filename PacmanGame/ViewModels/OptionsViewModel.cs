@@ -13,18 +13,6 @@ namespace PacmanGame.ViewModels
 {
     public class OptionsViewModel : CloseableViewModel
     {
-        private Key _upKey;
-        private Key _downKey;
-        private Key _leftKey;
-        private Key _rightKey;
-        private bool _activeLeft;
-        private bool _activeRight;
-        private bool _activeUp;
-        private bool _activeDown;
-        private bool _isLeftError;
-        private bool _isRightError;
-        private bool _isUpError;
-        private bool _isDownError;
         protected IHaveControlKeys Accessor { get; }
 
         public OptionsViewModel(IHaveControlKeys accessor) : base("Options")
@@ -48,75 +36,29 @@ namespace PacmanGame.ViewModels
         }
 
         #region Properties
-        public Key UpKey
-        {
-            get { return _upKey; }
-            set { _upKey = value; OnPropertyChanged(); }
-        }
+        public Key UpKey { get; set; }
 
-        public Key DownKey
-        {
-            get { return _downKey; }
-            set { _downKey = value; OnPropertyChanged(); }
-        }
+        public Key DownKey { get; set; }
 
-        public Key LeftKey
-        {
-            get { return _leftKey; }
-            set { _leftKey = value; OnPropertyChanged(); }
-        }
+        public Key LeftKey { get; set; }
 
-        public Key RightKey
-        {
-            get { return _rightKey; }
-            set { _rightKey = value; OnPropertyChanged(); }
-        }
+        public Key RightKey { get; set; }
 
-        public bool ActiveDown
-        {
-            get { return _activeDown; }
-            set { _activeDown = value; OnPropertyChanged(); }
-        }
+        public bool ActiveDown { get; set; }
 
-        public bool ActiveUp
-        {
-            get { return _activeUp; }
-            set { _activeUp = value; OnPropertyChanged(); }
-        }
+        public bool ActiveUp { get; set; }
 
-        public bool ActiveLeft
-        {
-            get { return _activeLeft; }
-            set { _activeLeft = value; OnPropertyChanged(); }
-        }
+        public bool ActiveLeft { get; set; }
 
-        public bool ActiveRight
-        {
-            get { return _activeRight; }
-            set { _activeRight = value; OnPropertyChanged(); }
-        }
+        public bool ActiveRight { get; set; }
 
-        public bool IsLeftError
-        {
-            get { return _isLeftError; }
-            protected set { _isLeftError = value; OnPropertyChanged(); }
-        }
+        public bool IsLeftError { get; protected set; }
 
-        public bool IsRightError
-        {
-            get { return _isRightError; }
-            protected set { _isRightError = value; OnPropertyChanged(); }
-        }
-        public bool IsUpError
-        {
-            get { return _isUpError; }
-            protected set { _isUpError = value; OnPropertyChanged(); }
-        }
-        public bool IsDownError
-        {
-            get { return _isDownError; }
-            protected set { _isDownError = value; OnPropertyChanged(); }
-        }
+        public bool IsRightError { get; protected set; }
+
+        public bool IsUpError { get; protected set; }
+
+        public bool IsDownError { get; protected set; }
 
         public ICommand ChangeKeyCommand { get; }
         #endregion

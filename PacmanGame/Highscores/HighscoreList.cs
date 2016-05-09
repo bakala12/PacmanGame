@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using PacmanGame.Properties;
 using PacmanGame.ViewModels;
+using PropertyChanged;
 
 namespace PacmanGame.Highscores
 {
-    public class HighscoreList : PropertyChangedNotifier
+    [ImplementPropertyChanged]
+    public class HighscoreList
     {
-        private List<Highscore> _highscores;
         private readonly IComparer<Highscore> _comparer = new HighscoreComparer();
         private uint _rememberedHighscoresCount;
 
@@ -20,11 +21,7 @@ namespace PacmanGame.Highscores
             RefreshList();
         }
 
-        public List<Highscore> Highscores
-        {
-            get { return _highscores; }
-            protected set { _highscores = value; OnPropertyChanged(); }
-        }
+        public List<Highscore> Highscores { get; protected set; }
 
         public void AddHighscore(Highscore highscore)
         {
@@ -54,7 +51,7 @@ namespace PacmanGame.Highscores
             _rememberedHighscoresCount = Settings.Default.RememberedHighscoresCount;
             RemoveRendundantElements();
             Highscores.Sort(_comparer);
-            OnPropertyChanged(nameof(Highscores));
+            //OnPropertyChanged(nameof(Highscores));
         }
 
         public bool IsHighscore(Highscore highscore)
@@ -67,7 +64,7 @@ namespace PacmanGame.Highscores
             if (Highscores.Count <= _rememberedHighscoresCount) return;
             for(int i=(int)_rememberedHighscoresCount; i<Highscores.Count; i++)
                 Highscores.RemoveAt(i);
-            OnPropertyChanged(nameof(Highscores));
+            //OnPropertyChanged(nameof(Highscores));
         }
     }
 }

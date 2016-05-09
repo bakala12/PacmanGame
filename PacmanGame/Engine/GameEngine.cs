@@ -10,15 +10,13 @@ using PacmanGame.MainInterfaces;
 using PacmanGame.Properties;
 using PacmanGame.Serialization;
 using PacmanGame.ViewModels;
+using PropertyChanged;
 
 namespace PacmanGame.Engine
 {
-    public class GameEngine : PropertyChangedNotifier
+    [ImplementPropertyChanged]
+    public class GameEngine
     {
-        private ITimer _timer;
-        private uint _points;
-        private uint _difficulty;
-        private uint _lifes;
         private readonly IGameBuilder _builder;
         private readonly GameBoard _gameBoard;
         private IGameMovementChecker _movementChecker;
@@ -127,29 +125,13 @@ namespace PacmanGame.Engine
         }
 
         #region Game properties
-        public ITimer Timer
-        {
-            get { return _timer; }
-            protected set { _timer = value; OnPropertyChanged(); }
-        }
+        public ITimer Timer { get; protected set; }
 
-        public uint Points
-        {
-            get { return _points; }
-            protected set { _points = value; OnPropertyChanged(); }
-        }
+        public uint Points { get; protected set; }
 
-        public uint Difficulty
-        {
-            get { return _difficulty; }
-            protected set { _difficulty = value; OnPropertyChanged(); }
-        }
+        public uint Difficulty { get; protected set; }
 
-        public uint Lifes
-        {
-            get { return _lifes; }
-            protected set { _lifes = value; OnPropertyChanged(); }
-        }
+        public uint Lifes { get; protected set; }
 
         public IEnemyMovementManager EnemyMovementManager { get; private set; }
 

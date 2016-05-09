@@ -11,10 +11,6 @@ namespace PacmanGame.ViewModels
 {
     public class EndGameViewModel : CloseableViewModel
     {
-        private string _playerName;
-        private bool _isHighscore;
-        private uint _points;
-        private TimeSpan _gameTime;
         private readonly HighscoreList _highscores;
 
         protected override void OnViewAppeared()
@@ -31,29 +27,13 @@ namespace PacmanGame.ViewModels
             SaveCommand = new DelegateCommand(x=>SaveHighscore());
         }
 
-        public uint Points
-        {
-            get { return _points; }
-            set { _points = value; OnPropertyChanged(); }
-        }
+        public uint Points { get; set; }
 
-        public TimeSpan GameTime
-        {
-            get { return _gameTime; }
-            set { _gameTime = value; OnPropertyChanged(); }
-        }
+        public TimeSpan GameTime { get; set; }
 
-        public string PlayerName
-        {
-            get { return _playerName; }
-            set { _playerName = value; OnPropertyChanged(); }
-        }
+        public string PlayerName { get; set; }
 
-        public bool IsHighscore
-        {
-            get { return _isHighscore; }
-            protected set { _isHighscore = value; OnPropertyChanged(); }
-        }
+        public bool IsHighscore { get; protected set; }
 
         public ICommand SaveCommand { get; }
 

@@ -10,10 +10,12 @@ using PacmanGame.Highscores;
 using PacmanGame.MainInterfaces;
 using PacmanGame.Properties;
 using PacmanGame.ViewModels;
+using PropertyChanged;
 
 namespace PacmanGame
 {
-    public class MainWindowViewModel : PropertyChangedNotifier, IViewModelChanger, IHaveControlKeys
+    [ImplementPropertyChanged]
+    public class MainWindowViewModel : IViewModelChanger, IHaveControlKeys
     {
         public MainWindowViewModel(IGameBuilder builder, HighscoreList highscores)
         {
@@ -55,8 +57,7 @@ namespace PacmanGame
             get { return _currentViewModel; }
             set
             {
-                _currentViewModel = value;
-                OnPropertyChanged();
+                _currentViewModel = value;      
                 (CurrentViewModel as CloseableViewModel)?.RaiseViewAppearedEvent();
             }
         }
@@ -88,25 +89,25 @@ namespace PacmanGame
         public Key UpKey
         {
             get { return _upKey; }
-            set { _upKey = value; OnPropertyChanged(); }
+            set { _upKey = value;  }
         }
 
         public Key LeftKey
         {
             get { return _leftKey; }
-            set { _leftKey = value; OnPropertyChanged(); }
+            set { _leftKey = value;  }
         }
 
         public Key DownKey
         {
             get { return _downKey; }
-            set { _downKey = value; OnPropertyChanged(); }
+            set { _downKey = value;  }
         }
 
         public Key RightKey
         {
             get { return _rightKey; }
-            set { _rightKey = value; OnPropertyChanged(); }
+            set { _rightKey = value;  }
         }
 
         public void LoadControlKeys()

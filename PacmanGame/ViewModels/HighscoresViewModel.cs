@@ -11,12 +11,9 @@ namespace PacmanGame.ViewModels
 {
     public class HighscoresViewModel : CloseableViewModel
     {
-        private HighscoreList _highscoreList;
-
         protected override void OnViewAppeared()
         {
             HighscoreList.RefreshList();
-            OnPropertyChanged(nameof(HighscoreList));
         }
 
         public HighscoresViewModel(HighscoreList highscoreList) : base("Highscores")
@@ -25,11 +22,7 @@ namespace PacmanGame.ViewModels
             ClearHighscoresCommand = new DelegateCommand(x => HighscoreList.ClearAllHighscores());
         }
 
-        public HighscoreList HighscoreList
-        {
-            get { return _highscoreList; }
-            set { _highscoreList = value; OnPropertyChanged(); }
-        }
+        public HighscoreList HighscoreList { get; set; }
 
         public ICommand ClearHighscoresCommand { get; }
     }

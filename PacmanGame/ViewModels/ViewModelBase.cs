@@ -6,13 +6,15 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using PacmanGame.Annotations;
+using PropertyChanged;
 
 namespace PacmanGame.ViewModels
 {
     /// <summary>
     /// Represents a base class for all ViewModels.
     /// </summary>
-    public abstract class ViewModelBase : PropertyChangedNotifier
+    [ImplementPropertyChanged]
+    public abstract class ViewModelBase
     {
         /// <summary>
         /// Gets the name of current ViewModel.

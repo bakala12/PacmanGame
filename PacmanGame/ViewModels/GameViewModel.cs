@@ -14,23 +14,13 @@ namespace PacmanGame.ViewModels
     public class GameViewModel : CloseableViewModel
     {
         private readonly IGameBuilder _builder;
-        private GameBoard _gameBoard;
-        private GameEngine _gameEngine;
 
         public ICommand PauseCommand { get; }
         public ICommand MoveCommand { get; }
 
-        public GameBoard GameBoard
-        {
-            get { return _gameBoard; }
-            protected set { _gameBoard = value; OnPropertyChanged(); }
-        }
+        public GameBoard GameBoard { get; protected set; }
 
-        public GameEngine GameEngine
-        {
-            get { return _gameEngine; }
-            protected set { _gameEngine = value; OnPropertyChanged(); }
-        }
+        public GameEngine GameEngine { get; protected set; }
 
         public GameViewModel(IGameBuilder builder) : base("Game")
         {
