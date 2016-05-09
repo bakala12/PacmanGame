@@ -90,7 +90,7 @@
     <Compile Include="Engine\EnemyMovementManager.cs" />
     <Compile Include="Engine\GameMovementCheckerFactory.cs" />
     <Compile Include="Engine\GameMovementChecker.cs" />
-    <Compile Include="Engine\IGameMovementChecker.cs" />
+    <Compile Include="MainInterfaces\IGameMovementChecker.cs" />
     <Compile Include="Graph\Graph.cs" />
     <Compile Include="Graph\GraphCreator.cs" />
     <Compile Include="Graph\GraphExtender.cs" />
@@ -101,6 +101,7 @@
     <Compile Include="Highscores\HighscoreList.cs" />
     <Compile Include="MainInterfaces\IHaveControlKeys.cs" />
     <Compile Include="Serialization\GameSerializer.cs" />
+    <Compile Include="MainInterfaces\IGameSerializer.cs" />
     <Compile Include="SimpleGameBuilder.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Engine\GameEngine.cs" />

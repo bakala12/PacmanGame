@@ -7,6 +7,7 @@ using System.Windows.Threading;
 using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
+using PacmanGame.MainInterfaces;
 
 namespace PacmanGame.Engine
 {

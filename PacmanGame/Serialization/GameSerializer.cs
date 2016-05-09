@@ -9,10 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using PacmanGame.MainInterfaces;
 
 namespace PacmanGame.Serialization
 {
-    public class GameSerializer
+    internal class GameSerializer : IGameSerializer
     {
         public void SaveGame(GameState state, string path)
         {

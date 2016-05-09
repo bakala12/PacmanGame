@@ -9,6 +9,7 @@ using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
 using PacmanGame.Graph;
+using PacmanGame.MainInterfaces;
 
 namespace PacmanGame.Engine
 {

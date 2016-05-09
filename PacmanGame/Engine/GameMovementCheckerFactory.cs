@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameControls.Board;
+using PacmanGame.MainInterfaces;
 
 namespace PacmanGame.Engine
 {

@@ -1,9 +1,8 @@
-using GameControls.Board;
 using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
 
-namespace PacmanGame.Engine
+namespace PacmanGame.MainInterfaces
 {
     public interface IGameMovementChecker
     {

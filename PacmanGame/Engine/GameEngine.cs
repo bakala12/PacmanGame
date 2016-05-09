@@ -139,6 +139,7 @@ namespace PacmanGame.Engine
             if (!_movementChecker.CheckMovement(_player, direction)) return;
             MoveElement(_player, direction);
         }
+
         protected virtual void MoveElement(IMovable movable, Direction direction)
         {
             movable.Move(direction);
