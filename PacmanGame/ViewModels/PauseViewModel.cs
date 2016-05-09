@@ -15,23 +15,28 @@ namespace PacmanGame.ViewModels
 {
     public class PauseViewModel : CloseableViewModel
     {
-        public PauseViewModel() : base("Pause")
+        private readonly IViewModelChanger _viewModelChanger;
+        private readonly IGameSerializer _gameSerializer;
+
+        public PauseViewModel(IViewModelChanger viewModelChanger, IGameSerializer gameSerializer) : base("Pause")
         {
+            if(viewModelChanger == null) throw new ArgumentNullException(nameof(viewModelChanger));
+            _viewModelChanger = viewModelChanger;
+            if(gameSerializer == null) throw new ArgumentNullException(nameof(gameSerializer));
+            _gameSerializer = gameSerializer;
         }
 
         [OnCommand("SaveGameCommand")]
         public virtual void SaveGame()
         {
-            IViewModelChanger changer = (Application.Current as App)?.ViewModelChanger;
-            var gvm = changer?.GetViewModelByName("Game");
+            var gvm = _viewModelChanger?.GetViewModelByName("Game");
             var state = (gvm as GameViewModel)?.GameEngine?.SaveState();
-            GameSerializer serializer = new GameSerializer();
             SaveFileDialog dialog = new SaveFileDialog();
             dialog.Filter = "Stan gry pacman (*.pacsv) | *.pacsv";
             if (dialog.ShowDialog() == true)
             {
                 string path = Path.GetFullPath(dialog.FileName);
-                serializer.SaveGame(state, path);
+                _gameSerializer.SaveGame(state, path);
                 MessageBox.Show("Zapisano");
             }
         }
@@ -41,8 +46,7 @@ namespace PacmanGame.ViewModels
         {
             if (MessageBoxResult.OK == MessageBox.Show("Jeśli przejdziesz do menu stracisz niezapisany postęp gry", "Uwaga", MessageBoxButton.OKCancel))
             {
-                IViewModelChanger changer = (Application.Current as App)?.ViewModelChanger;
-                changer?.ChangeCurrentViewModel("StartMenu");
+                _viewModelChanger?.ChangeCurrentViewModel("StartMenu");
             }
         }
     }

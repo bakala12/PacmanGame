@@ -9,6 +9,7 @@ using System.Windows.Input;
 using PacmanGame.Highscores;
 using PacmanGame.MainInterfaces;
 using PacmanGame.Properties;
+using PacmanGame.Serialization;
 using PacmanGame.ViewModels;
 
 namespace PacmanGame
@@ -18,25 +19,28 @@ namespace PacmanGame
     /// </summary>
     public partial class App : Application
     {
-        public IViewModelChanger ViewModelChanger { get; private set; }
-        public IHaveControlKeys ControlKeysAccessor { get; private set; }
-
+        /// <summary>
+        /// Configurates application startup behaviour.
+        /// </summary>
+        /// <param name="e">Event arguments</param>
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             DefaultControls();
+            IGameSerializer serializer = new GameSerializer();
             IGameBuilder builder = new SimpleGameBuilder();
-            MainWindowViewModel vm = new MainWindowViewModel(builder, new HighscoreList());
-            ViewModelChanger = vm;
-            ControlKeysAccessor = vm;
-            ViewModelChanger.ChangeCurrentViewModel("StartMenu");
+            MainWindowViewModel vm = new MainWindowViewModel(builder, new HighscoreList(), serializer);
             MainWindow window = new MainWindow();
             Current.MainWindow = window;
-            window.DataContext = ViewModelChanger;
-            ControlKeysAccessor.LoadControlKeys();
+            window.DataContext = vm;
+            vm.ChangeCurrentViewModel("StartMenu");
+            vm.LoadControlKeys();
             Current.MainWindow.Show();
         }
 
+        /// <summary>
+        /// Loads the dafault player controls if they are not set.
+        /// </summary>
         private void DefaultControls()
         {
             if (Settings.Default.LeftKey == Key.None)

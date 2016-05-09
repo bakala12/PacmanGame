@@ -16,20 +16,23 @@ namespace PacmanGame.ViewModels
 {
     public class StartMenuViewModel : ViewModelBase
     {
-        /// <summary>
-        /// Initializes a new instance of StartMenuViewModel class
-        /// </summary>
-        public StartMenuViewModel() : base("StartMenu")
+        private readonly IViewModelChanger _viewModelChanger;
+        private readonly IGameSerializer _gameSerializer;
+
+        public StartMenuViewModel(IViewModelChanger viewModelChanger, IGameSerializer gameSerializer) : base("StartMenu")
         {
+            if (viewModelChanger == null) throw new ArgumentNullException(nameof(viewModelChanger));
+            _viewModelChanger = viewModelChanger;
+            if (gameSerializer == null) throw new ArgumentNullException(nameof(gameSerializer));
+            _gameSerializer = gameSerializer;
         }
 
         [OnCommand("NewGameCommand")]
         protected virtual void NewGame(GameState state = null)
         {
-            IViewModelChanger changer =(Application.Current as App)?.ViewModelChanger;
-            GameViewModel gvm = changer?.GetViewModelByName("Game") as GameViewModel;
+            GameViewModel gvm = _viewModelChanger?.GetViewModelByName("Game") as GameViewModel;
             gvm?.StartGame(state);
-            changer?.ChangeCurrentViewModel("Game");
+            _viewModelChanger?.ChangeCurrentViewModel("Game");
         }
 
         [OnCommand("LoadGameCommand")]
@@ -39,8 +42,7 @@ namespace PacmanGame.ViewModels
             dialog.Filter = "Pacman game state (*.pacsv)|*.pacsv";
             if (dialog.ShowDialog() == true)
             {
-                GameSerializer serializer = new GameSerializer();
-                var state = serializer.LoadGame(Path.GetFullPath(dialog.FileName));
+                var state = _gameSerializer.LoadGame(Path.GetFullPath(dialog.FileName));
                 NewGame(state);
             }
         }
@@ -48,19 +50,19 @@ namespace PacmanGame.ViewModels
         [OnCommand("ShowHighscoresCommand")]
         protected virtual void ShowHighscores()
         {
-            (Application.Current as App)?.ViewModelChanger.ChangeCurrentViewModel("Highscores");
+            _viewModelChanger.ChangeCurrentViewModel("Highscores");
         }
 
         [OnCommand("ShowOptionsCommand")]
         protected virtual void ShowOptions()
         {
-            (Application.Current as App)?.ViewModelChanger.ChangeCurrentViewModel("Options");
+            _viewModelChanger.ChangeCurrentViewModel("Options");
         }
 
         [OnCommand("ShowHelpCommand")]
         protected virtual void ShowHelp()
         {
-            (Application.Current as App)?.ViewModelChanger.ChangeCurrentViewModel("Help");
+            _viewModelChanger.ChangeCurrentViewModel("Help");
         }
 
         [OnCommand("ExitCommand")]

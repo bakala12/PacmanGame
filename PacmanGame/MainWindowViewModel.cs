@@ -15,19 +15,19 @@ using PropertyChanged;
 namespace PacmanGame
 {
     [ImplementPropertyChanged]
-    public class MainWindowViewModel : IViewModelChanger, IHaveControlKeys
+    internal class MainWindowViewModel : IViewModelChanger, IHaveControlKeys
     {
-        public MainWindowViewModel(IGameBuilder builder, HighscoreList highscores)
+        public MainWindowViewModel(IGameBuilder builder, HighscoreList highscores, IGameSerializer gameSerializer)
         {
             var vm = new List<ViewModelBase>
             {
-                new StartMenuViewModel(),
+                new StartMenuViewModel(this, gameSerializer),
                 new HelpViewModel(),
                 new OptionsViewModel(this),
                 new HighscoresViewModel(highscores),
-                new GameViewModel(builder),
+                new GameViewModel(builder, this, this),
                 new EndGameViewModel(highscores),
-                new PauseViewModel()
+                new PauseViewModel(this, gameSerializer)
             };
             foreach (var result in vm.OfType<CloseableViewModel>())
             {
