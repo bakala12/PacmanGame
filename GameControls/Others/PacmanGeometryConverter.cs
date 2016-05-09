@@ -10,8 +10,20 @@ using System.Windows.Media;
 
 namespace GameControls.Others
 {
+    /// <summary>
+    /// A converter that converts Player's dimentions, direction and angle to a geomerty of the Pacman.
+    /// This allows appropriate Player styling and animating the mouse move of the Pacman. 
+    /// </summary>
     public class PacmanGeometryConverter : IMultiValueConverter
     {
+        /// <summary>
+        /// Converts the specified values to the specified object of the requested type.
+        /// </summary>
+        /// <param name="values">The values which should be converted.</param>
+        /// <param name="targetType">The requested result type of the conversion.</param>
+        /// <param name="parameter">The parameter of the converter.</param>
+        /// <param name="culture">The information of the culture.</param>
+        /// <returns>The result of the conversion.</returns>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             Direction? direction = values[0] as Direction?;
@@ -56,6 +68,14 @@ namespace GameControls.Others
             return geometry;
         }
 
+        /// <summary>
+        /// Defines back conversion.
+        /// </summary>
+        /// <param name="value">The value which should be converted back.</param>
+        /// <param name="targetTypes">The requested result types of the backward conversion.</param>
+        /// <param name="parameter">The parameter of the converter.</param>
+        /// <param name="culture">The information of the culture.</param>
+        /// <returns>The result of the backward conversion.</returns>
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

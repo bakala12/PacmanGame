@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 
 namespace GameControls.Elements
 {
+    /// <summary>
+    /// Represents a simple block element in the game.
+    /// </summary>
     public class Block : GameElement
     {
         static Block()

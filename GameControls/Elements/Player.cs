@@ -97,6 +97,9 @@ namespace GameControls.Elements
             Direction = direction;
         }
 
+        /// <summary>
+        /// Kills the current Player.
+        /// </summary>
         public void Die()
         {
             IsAlive = false;
@@ -104,12 +107,18 @@ namespace GameControls.Elements
             RaiseEvent(args);
         }
 
+        /// <summary>
+        /// Occurs when the current Player died.
+        /// </summary>
         public event RoutedEventHandler Dead
         {
             add { AddHandler(DeadEvent, value);}
             remove { RemoveHandler(DeadEvent, value);}
         }
 
+        /// <summary>
+        /// The RoutedEvent associated with the Dead event.
+        /// </summary>
         public static readonly RoutedEvent DeadEvent =
             EventManager.RegisterRoutedEvent("Dead", RoutingStrategy.Bubble, typeof (RoutedEventHandler),
                 typeof (Player));

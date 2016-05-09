@@ -89,6 +89,10 @@ namespace GameControls.Elements
             RaiseMovementEvents(direction);
         }
 
+        /// <summary>
+        /// Raises an event associated with the move in the given direction.
+        /// </summary>
+        /// <param name="direction">The direction of the move.</param>
         protected virtual void RaiseMovementEvents(Direction direction)
         {
             RoutedEvent routedEvent;
