@@ -6,12 +6,17 @@
              xmlns:local="clr-namespace:PacmanGame.Views"
              xmlns:converters ="clr-namespace:PacmanGame.Converters"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:ext="clr-namespace:PacmanGame.Extensions"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <converters:KeyDisplayConverter x:Key="KeyDisplayConverter"/>
     </UserControl.Resources>
-    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="KeyDown">
+            <ext:InvokeCommandOnEventAction Command="{Binding OnKeyDownCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid Style="{StaticResource PanelStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

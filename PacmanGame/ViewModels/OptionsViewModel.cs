@@ -79,8 +79,11 @@ namespace PacmanGame.ViewModels
             Accessor.SaveControlKeys();
         }
 
-        public void OnKeyDown(object sender, KeyEventArgs e)
+        [OnCommand("OnKeyDownCommand")]
+        public void OnKeyDown(object parameter)
         {
+            var e = parameter as KeyEventArgs;
+            if(e==null) return;
             if (ActiveLeft)
             {
                 LeftKey = e.Key;
