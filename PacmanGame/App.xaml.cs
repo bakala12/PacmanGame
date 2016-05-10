@@ -10,6 +10,7 @@ using PacmanGame.Highscores;
 using PacmanGame.MainInterfaces;
 using PacmanGame.Properties;
 using PacmanGame.Serialization;
+using PacmanGame.Validation;
 using PacmanGame.ViewModels;
 
 namespace PacmanGame
@@ -29,7 +30,8 @@ namespace PacmanGame
             DefaultControls();
             IGameSerializer serializer = new GameSerializer();
             IGameBuilder builder = new SimpleGameBuilder();
-            MainWindowViewModel vm = new MainWindowViewModel(builder, new HighscoreList(), serializer);
+            IKeysValidator validator = new KeysValidator();
+            MainWindowViewModel vm = new MainWindowViewModel(builder, new HighscoreList(), serializer, validator);
             MainWindow window = new MainWindow();
             Current.MainWindow = window;
             window.DataContext = vm;

@@ -6,6 +6,7 @@
     <SolidColorBrush Color="Black" x:Key="BackgroundBrush"/>
     <SolidColorBrush Color="White" x:Key="ForegroundBrush"/>
     <SolidColorBrush Color="DeepSkyBlue" x:Key="SelectedButtonBrush"/>
+    <SolidColorBrush Color="Red" x:Key="ErrorForegroundBrush"/>
 
     <Style TargetType="{x:Type DataGrid}" x:Key="HighscoresListStyle">
         <Setter Property="CanUserResizeColumns" Value="False"/>
@@ -223,5 +224,10 @@
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Width" Value="50"/>
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="ErrorMessageStyle" BasedOn="{StaticResource CenteredTextBlock}">
+        <Setter Property="Foreground" Value="{StaticResource ErrorForegroundBrush}"/>
+        <Setter Property="FontSize" Value="12"/>
     </Style>
 </ResourceDictionary>

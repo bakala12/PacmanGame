@@ -101,12 +101,15 @@
     <Compile Include="Highscores\HighscoreComparer.cs" />
     <Compile Include="Highscores\HighscoreList.cs" />
     <Compile Include="MainInterfaces\IHaveControlKeys.cs" />
+    <Compile Include="MainInterfaces\IKeysValidator.cs" />
     <Compile Include="Serialization\GameSerializer.cs" />
     <Compile Include="MainInterfaces\IGameSerializer.cs" />
     <Compile Include="SimpleGameBuilder.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Engine\GameEngine.cs" />
     <Compile Include="Serialization\GameState.cs" />
+    <Compile Include="Validation\KeyFunction.cs" />
+    <Compile Include="Validation\KeysValidator.cs" />
     <Compile Include="ViewModels\GameViewModel.cs" />
     <Compile Include="MainInterfaces\IGameBuilder.cs" />
     <Compile Include="ViewModels\CloseableViewModel.cs" />
@@ -152,6 +155,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\PlayerStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

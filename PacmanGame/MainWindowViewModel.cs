@@ -17,13 +17,13 @@ namespace PacmanGame
     [ImplementPropertyChanged]
     internal class MainWindowViewModel : IViewModelChanger, IHaveControlKeys
     {
-        public MainWindowViewModel(IGameBuilder builder, HighscoreList highscores, IGameSerializer gameSerializer)
+        public MainWindowViewModel(IGameBuilder builder, HighscoreList highscores, IGameSerializer gameSerializer, IKeysValidator validator)
         {
             var vm = new List<ViewModelBase>
             {
                 new StartMenuViewModel(this, gameSerializer),
                 new HelpViewModel(),
-                new OptionsViewModel(this),
+                new OptionsViewModel(this, validator),
                 new HighscoresViewModel(highscores),
                 new GameViewModel(builder, this, this),
                 new EndGameViewModel(highscores),

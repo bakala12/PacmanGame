@@ -7,32 +7,34 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using Commander;
 using PacmanGame.MainInterfaces;
+using PacmanGame.Validation;
 
 namespace PacmanGame.ViewModels
 {
     public class OptionsViewModel : CloseableViewModel
     {
         protected IHaveControlKeys Accessor { get; }
+        private readonly IKeysValidator _vaidator;
+        private readonly DispatcherTimer _timer;
 
-        public OptionsViewModel(IHaveControlKeys accessor) : base("Options")
+        public OptionsViewModel(IHaveControlKeys accessor, IKeysValidator validator) : base("Options")
         {
-            if(accessor==null) throw new ArgumentNullException(nameof(accessor));
+            if (accessor == null) throw new ArgumentNullException(nameof(accessor));
             Accessor = accessor;
+            if (validator == null) throw new ArgumentNullException(nameof(validator));
+            _vaidator = validator;
+            _timer = new DispatcherTimer();
+            _timer.Interval = new TimeSpan(0, 0, 0, 1);
+            _timer.Tick += (x, e) => ClearAllActiveKeysAndErrors();
         }
 
         protected override void OnViewAppeared()
         {
             Load();
-            ActiveLeft = false;
-            ActiveDown = false;
-            ActiveUp = false;
-            ActiveRight = false;
-            IsLeftError = false;
-            IsRightError = false;
-            IsDownError = false;
-            IsUpError = false;
+            ClearAllActiveKeysAndErrors();
         }
 
         #region Properties
@@ -59,9 +61,15 @@ namespace PacmanGame.ViewModels
         public bool IsUpError { get; protected set; }
 
         public bool IsDownError { get; protected set; }
+
+        public string ErrorMessage { get; protected set; }
+
+        public bool HasErrors => IsLeftError || IsRightError || IsUpError || IsDownError;
+
+        public bool IsActive => ActiveLeft || ActiveRight || ActiveDown || ActiveUp;
         #endregion
 
-        public void Load()
+        protected virtual void Load()
         {
             Accessor.LoadControlKeys();
             RightKey = Accessor.RightKey;
@@ -70,7 +78,7 @@ namespace PacmanGame.ViewModels
             DownKey = Accessor.DownKey;
         }
 
-        public void Save()
+        protected virtual void Save()
         {
             Accessor.RightKey = RightKey;
             Accessor.LeftKey = LeftKey;
@@ -82,44 +90,84 @@ namespace PacmanGame.ViewModels
         [OnCommand("OnKeyDownCommand")]
         public void OnKeyDown(object parameter)
         {
-            var e = parameter as KeyEventArgs;
-            if(e==null) return;
+            KeyEventArgs e = parameter as KeyEventArgs;
+            if (e == null) return;
+            Key key = e.Key;
+            var allKeys = ProvideKeys();
             if (ActiveLeft)
             {
-                LeftKey = e.Key;
-                ActiveLeft = false;
+                if (_vaidator.ValidateKey(key, KeyFunction.Left, allKeys))
+                {
+                    LeftKey = key;
+                }
+                else
+                {
+                    IsLeftError = true;
+                }
             }
             else if (ActiveRight)
             {
-                RightKey = e.Key;
-                ActiveRight = false;
-            }
-            else if (ActiveDown)
-            {
-                DownKey = e.Key;
-                ActiveDown = false;
+                if (_vaidator.ValidateKey(key, KeyFunction.Right, allKeys))
+                {
+                    RightKey = key;
+                }
+                else
+                {
+                    IsRightError = true;
+                }
             }
             else if (ActiveUp)
             {
-                UpKey = e.Key;
-                ActiveUp = false;
+                if (_vaidator.ValidateKey(key, KeyFunction.Up, allKeys))
+                {
+                    UpKey = key;
+                }
+                else
+                {
+                    IsUpError = true;
+                }
             }
-            Save();
+            else if (ActiveDown)
+            {
+                if (_vaidator.ValidateKey(key, KeyFunction.Down, allKeys))
+                {
+                    DownKey = key;
+                }
+                else
+                {
+                    IsDownError = true;
+                }
+            }
+            if (!HasErrors)
+            {
+                ClearAllActiveKeysAndErrors();
+                Save();
+            }
+            else
+            {
+                Error();
+            }
+        }
+
+        protected virtual void Error()
+        {
+            _timer.Stop();
+            ErrorMessage = "Podany klawisz nie może zostać ustawiony";
+            _timer.Start();
         }
 
         protected override void Close()
         {
-            Save();
+            if (!HasErrors && !IsActive) Save();
+            _timer.Stop();
+            ClearAllActiveKeysAndErrors();
             base.Close();
         }
 
         [OnCommand("ChangeKeyCommand")]
         public void ChangeKey(object parameter)
         {
-            ActiveLeft = false;
-            ActiveRight = false;
-            ActiveDown = false;
-            ActiveUp = false;
+            ClearAllActiveKeysAndErrors();
             switch (parameter?.ToString())
             {
                 case "Left":
@@ -137,6 +185,31 @@ namespace PacmanGame.ViewModels
                 default:
                     return;
             }
+        }
+
+        private IList<KeyValuePair<KeyFunction, Key>> ProvideKeys()
+        {
+            IList<KeyValuePair<KeyFunction, Key>> keys = new List<KeyValuePair<KeyFunction, Key>>();
+            keys.Add(new KeyValuePair<KeyFunction, Key>(KeyFunction.Left, LeftKey));
+            keys.Add(new KeyValuePair<KeyFunction, Key>(KeyFunction.Right, RightKey));
+            keys.Add(new KeyValuePair<KeyFunction, Key>(KeyFunction.Up, UpKey));
+            keys.Add(new KeyValuePair<KeyFunction, Key>(KeyFunction.Down, DownKey));
+            keys.Add(new KeyValuePair<KeyFunction, Key>(KeyFunction.Pause, Key.Escape));
+            return keys;
+        }
+
+        private void ClearAllActiveKeysAndErrors()
+        {
+            _timer.Stop();
+            ActiveLeft = false;
+            ActiveRight = false;
+            ActiveDown = false;
+            ActiveUp = false;
+            IsLeftError = false;
+            IsRightError = false;
+            IsDownError = false;
+            IsUpError = false;
+            ErrorMessage = null;
         }
     }
 }
