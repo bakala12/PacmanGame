@@ -4,12 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacmanGame.Views"
+             xmlns:e="clr-namespace:GameControls.Elements;assembly=GameControls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
-        <TextBlock Text="Pauza"/>
-        <Button Content="Kontynuuj grę" Command="{Binding ReturnCommand}"/>
-        <Button Content="Zapisz grę" Command="{Binding SaveGameCommand}"/>
-        <Button Content="Powrót do menu" Command="{Binding BackToMenuCommand}"/>
-    </StackPanel>
+    <Grid Style="{StaticResource PanelStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <TextBlock Text="Pauza" Style="{StaticResource PauseHeaderStyle}"/>
+        </Grid>
+        <e:Player Style="{StaticResource PlayerMenuStyle}" Direction="Right" Grid.Row="1"/>
+        <Grid Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Content="Kontynuuj grę" Command="{Binding ReturnCommand}" Grid.Row="0" Style="{StaticResource StartMenuButtonStyle}"/>
+            <Button Content="Zapisz grę" Command="{Binding SaveGameCommand}" Grid.Row="1" Style="{StaticResource StartMenuButtonStyle}"/>
+            <Button Content="Powrót do menu" Command="{Binding BackToMenuCommand}" Grid.Row="2" Style="{StaticResource StartMenuButtonStyle}"/>
+        </Grid>
+    </Grid>
 </UserControl>

@@ -12,7 +12,8 @@
     <SolidColorBrush Color="White" x:Key="ForegroundBrush"/>
     <SolidColorBrush Color="DeepSkyBlue" x:Key="SelectedButtonBrush"/>
     <SolidColorBrush Color="Red" x:Key="ErrorForegroundBrush"/>
-
+    <SolidColorBrush Color="Yellow" x:Key="YellowBrush"/>
+    
     <Style TargetType="{x:Type DataGrid}" x:Key="HighscoresListStyle">
         <Setter Property="CanUserResizeColumns" Value="False"/>
         <Setter Property="CanUserAddRows" Value="False"/>
@@ -262,5 +263,16 @@
     <Style TargetType="{x:Type Panel}" x:Key="CenteredPanelStyle" BasedOn="{StaticResource PanelStyle}">
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
+    </Style>
+    
+    <Style TargetType="{x:Type TextBlock}" x:Key="PauseHeaderStyle" BasedOn="{StaticResource HighscoresHeaderStyle}">
+        <Setter Property="Foreground" Value="{StaticResource YellowBrush}"/>
+        <Setter Property="FontSize" Value="60"/>
+        <Setter Property="DockPanel.Dock" Value="Top"/>
+        <Setter Property="Effect">
+            <Setter.Value>
+                <DropShadowEffect Color="YellowGreen" BlurRadius="50"/>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

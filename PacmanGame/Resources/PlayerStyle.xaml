@@ -5,7 +5,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/GameControls;component/Themes/Generic.xaml"/>
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style TargetType="{x:Type p:Player}" BasedOn="{StaticResource PlayerStyle}" x:Key="PlayerMenuStyle">
         <Style.Triggers>
             <Trigger Property="IsAlive" Value="True">
@@ -24,4 +24,5 @@
         <Setter Property="HorizontalAlignment" Value="Left"/>
         <Setter Property="Width" Value="20"/>
     </Style>
+    
 </ResourceDictionary>
