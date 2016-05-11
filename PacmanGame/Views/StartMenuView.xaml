@@ -17,7 +17,7 @@
             <con:Player Style="{StaticResource PlayerMenuStyle}" Direction="Right"/>
         </DockPanel>
         <DockPanel Grid.Row="0" Style="{StaticResource PanelStyle}">
-            <Image Source="pack://application:,,,/Resources/pacman1.jpg" />
+            <Image Source="pack://application:,,,/Resources/Images/pacman1.jpg" />
         </DockPanel>
         <Grid Grid.Row="2" Style="{StaticResource PanelStyle}">
             <Grid.RowDefinitions>

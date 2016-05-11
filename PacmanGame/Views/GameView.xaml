@@ -7,30 +7,35 @@
              xmlns:board="clr-namespace:GameControls.Board;assembly=GameControls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+    <Grid Style="{StaticResource PanelStyle}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="Czas: "/>
-            <TextBlock Text="{Binding GameEngine.Timer.TimeLeft}"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <TextBlock Text="Punkty: "/>
-            <TextBlock Text="{Binding GameEngine.Points}"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <TextBlock Text="Życia: "/>
-            <TextBlock Text="{Binding GameEngine.Lifes}"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="3">
-            <TextBlock Text="Poziom: "/>
-            <TextBlock Text="{Binding GameEngine.Difficulty}"/>
-        </StackPanel>
-        <ContentControl Content="{Binding GameBoard}" Grid.Row="4"/>
+        <Grid Style="{StaticResource PanelStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal" Grid.Column="3" Style="{StaticResource CenteredPanelStyle}">
+                <TextBlock Text="Czas: " Style="{StaticResource HighscoresHeaderStyle}"/>
+                <TextBlock Text="{Binding GameEngine.Timer.TimeLeft}" Style="{StaticResource HighscoresHeaderStyle}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Style="{StaticResource CenteredPanelStyle}">
+                <TextBlock Text="Punkty: " Style="{StaticResource HighscoresHeaderStyle}"/>
+                <TextBlock Text="{Binding GameEngine.Points}" Style="{StaticResource HighscoresHeaderStyle}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="2" Style="{StaticResource CenteredPanelStyle}">
+                <TextBlock Text="Życia: " Style="{StaticResource HighscoresHeaderStyle}"/>
+                <Label Content="{Binding GameEngine.Lifes}" Style="{StaticResource LifesTextBox}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Style="{StaticResource CenteredPanelStyle}">
+                <TextBlock Text="Poziom: " Style="{StaticResource HighscoresHeaderStyle}"/>
+                <TextBlock Text="{Binding GameEngine.Difficulty}" Style="{StaticResource HighscoresHeaderStyle}"/>
+            </StackPanel>
+        </Grid>
+        <ContentControl Content="{Binding GameBoard}" Grid.Row="1"/>
     </Grid>
 </UserControl>
