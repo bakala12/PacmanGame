@@ -27,7 +27,7 @@ namespace PacmanGame.ViewModels
             if (validator == null) throw new ArgumentNullException(nameof(validator));
             _vaidator = validator;
             _timer = new DispatcherTimer();
-            _timer.Interval = new TimeSpan(0, 0, 0, 1);
+            _timer.Interval = TimeSpan.FromMilliseconds(1000);
             _timer.Tick += (x, e) => ClearAllActiveKeysAndErrors();
         }
 
