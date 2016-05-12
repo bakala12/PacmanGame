@@ -18,6 +18,7 @@ namespace PacmanGame.ViewModels
         {
             _highscores.RefreshList();
             IsHighscore = _highscores.IsHighscore(CreateHighscore());
+            PlayerName = null;
         }
 
         public EndGameViewModel(HighscoreList highscores) : base("EndGame")

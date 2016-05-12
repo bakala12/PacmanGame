@@ -18,21 +18,16 @@
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="2*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Zdobyte punkty:" Grid.Row="1" Grid.Column="1" Style="{StaticResource HighscoresHeaderStyle}"/>
-                <TextBlock Text="{Binding Points}" Grid.Row="1" Grid.Column="3" Style="{StaticResource HighscoresHeaderStyle}"/>
-                <TextBlock Text="Czas gry:" Grid.Row="3" Grid.Column="1" Style="{StaticResource HighscoresHeaderStyle}"/>
-                <TextBlock Text="{Binding GameTime}" Grid.Row="3" Grid.Column="3" Style="{StaticResource HighscoresHeaderStyle}"/>
+                <TextBlock Text="Zdobyte punkty:" Grid.Row="0" Grid.Column="0" Style="{StaticResource EndGameHeaderStyle}"/>
+                <TextBlock Text="{Binding Points}" Grid.Row="0" Grid.Column="1" Style="{StaticResource EndGamePointsStyle}"/>
+                <TextBlock Text="Czas gry:" Grid.Row="1" Grid.Column="0" Style="{StaticResource EndGameHeaderStyle}"/>
+                <TextBlock Text="{Binding GameTime}" Grid.Row="1" Grid.Column="1" Style="{StaticResource EndGamePointsStyle}"/>
             </Grid>
             <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
@@ -40,7 +35,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Style="{StaticResource HighscoresHeaderStyle}" Text="Wpisz swoje imię"/>
-                <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Text="{Binding PlayerName}"
+                <TextBox Text="{Binding PlayerName}" Style="{StaticResource PlayerNameTextBoxStyle}"
                          Grid.Row="1"/>
             </Grid>
             <Grid Grid.Row="3">
@@ -62,22 +57,16 @@
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Zdobyte punkty:" Grid.Row="1" Grid.Column="1" Style="{StaticResource HighscoresHeaderStyle}"/>
-                <TextBlock Text="{Binding Points}" Grid.Row="1" Grid.Column="3" Style="{StaticResource HighscoresHeaderStyle}"/>
-                <TextBlock Text="Czas gry:" Grid.Row="3" Grid.Column="1" Style="{StaticResource HighscoresHeaderStyle}"/>
-                <TextBlock Text="{Binding GameTime}" Grid.Row="3" Grid.Column="3" Style="{StaticResource HighscoresHeaderStyle}"/>
+                <TextBlock Text="Zdobyte punkty:" Style="{StaticResource EndGameHeaderStyle}"/>
+                <TextBlock Text="{Binding Points}" Grid.Row="0" Grid.Column="1" Style="{StaticResource EndGamePointsStyle}"/>
+                <TextBlock Text="Czas gry:" Grid.Row="1" Grid.Column="0" Style="{StaticResource EndGameHeaderStyle}"/>
+                <TextBlock Text="{Binding GameTime}" Grid.Row="1" Grid.Column="1" Style="{StaticResource EndGamePointsStyle}"/>
             </Grid>
             <Button Content="Powrót do menu" Command="{Binding ReturnCommand}" Grid.Row="2" Style="{StaticResource StartMenuButtonStyle}"/>
         </Grid>
