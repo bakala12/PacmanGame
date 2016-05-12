@@ -1,9 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-                    xmlns:converters="clr-namespace:PacmanGame.Converters">
+                    xmlns:converters="clr-namespace:PacmanGame.Converters"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
     
     <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
     <converters:KeyDisplayConverter x:Key="KeyDisplayConverter"/>
     <converters:LifesConverter x:Key="LifesConverter"/>
 
+    <sys:Boolean x:Key="True">True</sys:Boolean>
+    <sys:Boolean x:Key="False">False</sys:Boolean>
 </ResourceDictionary>

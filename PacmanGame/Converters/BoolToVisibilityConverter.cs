@@ -14,7 +14,8 @@ namespace PacmanGame.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool v = value as bool? ?? false;
-            return v ? Visibility.Visible : Visibility.Collapsed;
+            bool p = parameter as bool? ?? false;
+            return (v ^ p )? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

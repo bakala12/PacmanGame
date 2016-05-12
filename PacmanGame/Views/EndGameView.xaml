@@ -4,37 +4,82 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:PacmanGame.Views"
-             xmlns:converters="clr-namespace:PacmanGame.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-    </UserControl.Resources>
-    <Grid>
-        <StackPanel>
-            <TextBlock Text="Koniec gry!"/>
-            <Grid>
+    <Grid Style="{StaticResource PanelStyle}">
+        <Grid Visibility="{Binding IsHighscore, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Nowy najlepszy wynik!" Style="{StaticResource HighscoresHeaderStyle}"/>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                <TextBlock Text="Zdobyte punkty:" Grid.Row="1" Grid.Column="1" Style="{StaticResource HighscoresHeaderStyle}"/>
+                <TextBlock Text="{Binding Points}" Grid.Row="1" Grid.Column="3" Style="{StaticResource HighscoresHeaderStyle}"/>
+                <TextBlock Text="Czas gry:" Grid.Row="3" Grid.Column="1" Style="{StaticResource HighscoresHeaderStyle}"/>
+                <TextBlock Text="{Binding GameTime}" Grid.Row="3" Grid.Column="3" Style="{StaticResource HighscoresHeaderStyle}"/>
+            </Grid>
+            <Grid Grid.Row="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <TextBlock Text="Zdobyte punkty: "/>
-                <TextBlock Text="Czas gry: " Grid.Row="1" Grid.Column="0"/>
-                <TextBlock Text="{Binding Points}" Grid.Row="0" Grid.Column="1"/>
-                <TextBlock Text="{Binding GameTime}" Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Style="{StaticResource HighscoresHeaderStyle}" Text="Wpisz swoje imię"/>
+                <TextBox HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Text="{Binding PlayerName}"
+                         Grid.Row="1"/>
             </Grid>
-            <StackPanel Visibility="{Binding IsHighscore, Converter={StaticResource BoolToVisibilityConverter}}">
-                <TextBlock Text="Gratulacje!"/>
-                <TextBlock Text="Nowy najlepszy wynik!"/>
-                <TextBlock Text="Wpisz swoje imię:"/>
-                <TextBox Text="{Binding PlayerName}"/>
-                <Button Content="Zapisz" Command="{Binding SaveCommand}"/>
-            </StackPanel>
-            <Button Content="Powrót do menu" Command="{Binding ReturnCommand}"/>
-        </StackPanel>
+            <Grid Grid.Row="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button Content="Zapisz" Command="{Binding SaveCommand}" Grid.Row="0" Style="{StaticResource StartMenuButtonStyle}"/>
+                <Button Content="Powrót do menu" Command="{Binding ReturnCommand}" Grid.Row="1" Style="{StaticResource StartMenuButtonStyle}"/>
+            </Grid>
+        </Grid>
+        <Grid Visibility="{Binding IsHighscore, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter={StaticResource True}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Koniec gry!" Style="{StaticResource HighscoresHeaderStyle}"/>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Zdobyte punkty:" Grid.Row="1" Grid.Column="1" Style="{StaticResource HighscoresHeaderStyle}"/>
+                <TextBlock Text="{Binding Points}" Grid.Row="1" Grid.Column="3" Style="{StaticResource HighscoresHeaderStyle}"/>
+                <TextBlock Text="Czas gry:" Grid.Row="3" Grid.Column="1" Style="{StaticResource HighscoresHeaderStyle}"/>
+                <TextBlock Text="{Binding GameTime}" Grid.Row="3" Grid.Column="3" Style="{StaticResource HighscoresHeaderStyle}"/>
+            </Grid>
+            <Button Content="Powrót do menu" Command="{Binding ReturnCommand}" Grid.Row="2" Style="{StaticResource StartMenuButtonStyle}"/>
+        </Grid>
     </Grid>
 </UserControl>
