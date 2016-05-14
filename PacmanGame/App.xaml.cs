@@ -6,12 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using PacmanGame.Highscores;
+using Autofac;
 using PacmanGame.MainInterfaces;
 using PacmanGame.Properties;
-using PacmanGame.Serialization;
-using PacmanGame.Validation;
-using PacmanGame.ViewModels;
 
 namespace PacmanGame
 {
@@ -27,12 +24,10 @@ namespace PacmanGame
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            IGameSerializer serializer = new GameSerializer();
-            IGameBuilder builder = new SimpleGameBuilder();
-            IKeysValidator validator = new KeysValidator();
-            ISettingsProvider provider = new SettingsProvider();
+            var container = Configuration.Configure();
+            var provider = container.Resolve<ISettingsProvider>();
             DefaultControls(provider);
-            MainWindowViewModel vm = new MainWindowViewModel(builder, new HighscoreList(provider), serializer, validator, provider);
+            MainWindowViewModel vm = container.Resolve<MainWindowViewModel>();
             MainWindow window = new MainWindow();
             Current.MainWindow = window;
             window.DataContext = vm;
@@ -56,5 +51,5 @@ namespace PacmanGame
                 provider.DownKey = Key.Down;
             provider.Save();
         }
-    } 
+    }
 }

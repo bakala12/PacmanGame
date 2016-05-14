@@ -98,19 +98,19 @@ namespace PacmanGame
 
         public void LoadControlKeys()
         {
-            LeftKey = _provider.LeftKey;
+            LeftKey = Settings.Default.LeftKey;
             RightKey = _provider.RightKey;
             UpKey = _provider.UpKey;
-            DownKey = _provider.DownKey;
+            DownKey = Settings.Default.DownKey;
         }
 
         public void SaveControlKeys()
         {
-            _provider.DownKey = DownKey;
-            _provider.LeftKey = LeftKey;
-            _provider.RightKey = RightKey;
-            _provider.UpKey = UpKey;
-            _provider.Save();
+            Settings.Default.DownKey = DownKey;
+            Settings.Default.LeftKey = LeftKey;
+            Settings.Default.RightKey = RightKey;
+            Settings.Default.UpKey = UpKey;
+            Settings.Default.Save();
         }
         #endregion
     }
