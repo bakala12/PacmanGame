@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacmanGame", "PacmanGame\Pa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameControls", "GameControls\GameControls.csproj", "{02C0CF74-4EC4-4B90-8E14-44E91A2624C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PacmanProjectTests", "PacmanProjectTests\PacmanProjectTests.csproj", "{930B5CF9-3C7C-4550-A225-5324B049DFCD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{02C0CF74-4EC4-4B90-8E14-44E91A2624C1} = {02C0CF74-4EC4-4B90-8E14-44E91A2624C1}
+		{5734A69D-223E-40F5-8BFD-0CFBEE6880A8} = {5734A69D-223E-40F5-8BFD-0CFBEE6880A8}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,10 @@ Global
 		{02C0CF74-4EC4-4B90-8E14-44E91A2624C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02C0CF74-4EC4-4B90-8E14-44E91A2624C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02C0CF74-4EC4-4B90-8E14-44E91A2624C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{930B5CF9-3C7C-4550-A225-5324B049DFCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{930B5CF9-3C7C-4550-A225-5324B049DFCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{930B5CF9-3C7C-4550-A225-5324B049DFCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{930B5CF9-3C7C-4550-A225-5324B049DFCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
