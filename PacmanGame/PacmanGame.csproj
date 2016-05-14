@@ -92,6 +92,7 @@
     <Compile Include="Engine\EnemyMovementManager.cs" />
     <Compile Include="Engine\GameMovementCheckerFactory.cs" />
     <Compile Include="Engine\GameMovementChecker.cs" />
+    <Compile Include="ISettingsProvider.cs" />
     <Compile Include="MainInterfaces\IGameMovementChecker.cs" />
     <Compile Include="Graph\Graph.cs" />
     <Compile Include="Graph\GraphCreator.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="MainInterfaces\IKeysValidator.cs" />
     <Compile Include="Serialization\GameSerializer.cs" />
     <Compile Include="MainInterfaces\IGameSerializer.cs" />
+    <Compile Include="SettingsProvider.cs" />
     <Compile Include="SimpleGameBuilder.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Engine\GameEngine.cs" />

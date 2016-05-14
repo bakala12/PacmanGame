@@ -34,9 +34,9 @@ namespace PacmanGame
             return new GameTimer(gameState?.Time ?? TimeSpan.Zero, new TimeSpan(0, 0, 0, 1));
         }
 
-        public GameEngine BuildGameEngine(GameState gameState, GameBoard board)
+        public GameEngine BuildGameEngine(GameState gameState, GameBoard board, ISettingsProvider provider)
         {
-            GameEngine engine = new GameEngine(this, board);
+            GameEngine engine = new GameEngine(this, board, provider);
             engine.Load(gameState);
             return engine;
         }

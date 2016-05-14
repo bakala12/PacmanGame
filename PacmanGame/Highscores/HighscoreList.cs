@@ -15,9 +15,12 @@ namespace PacmanGame.Highscores
     {
         private readonly IComparer<Highscore> _comparer = new HighscoreComparer();
         private uint _rememberedHighscoresCount;
+        private ISettingsProvider _provider;
 
-        public HighscoreList()
+        public HighscoreList(ISettingsProvider provider)
         {
+            if(provider==null) throw new ArgumentNullException(nameof(provider));
+            _provider = provider;
             RefreshList();
         }
 
@@ -40,15 +43,15 @@ namespace PacmanGame.Highscores
 
         protected virtual void SaveChanges()
         {
-            Settings.Default.Highscores = Highscores.ToList();
-            Settings.Default.Save();
+            _provider.Highscores = Highscores.ToList();
+            _provider.Save();
             RefreshList();
         }
 
         public void RefreshList()
         {
-            Highscores = Settings.Default.Highscores ?? new List<Highscore>();
-            _rememberedHighscoresCount = Settings.Default.RememberedHighscoresCount;
+            Highscores = _provider.Highscores ?? new List<Highscore>();
+            _rememberedHighscoresCount = _provider.RememberedHighscoresCount;
             RemoveRendundantElements();
         }
 

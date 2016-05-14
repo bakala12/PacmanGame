@@ -105,5 +105,17 @@ namespace PacmanGame.Properties {
                 this["RememberedHighscoresCount"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n<Key>Escape</Key>")]
+        public global::System.Windows.Input.Key PauseKey {
+            get {
+                return ((global::System.Windows.Input.Key)(this["PauseKey"]));
+            }
+            set {
+                this["PauseKey"] = value;
+            }
+        }
     }
 }

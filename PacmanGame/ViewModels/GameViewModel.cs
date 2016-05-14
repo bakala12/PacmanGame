@@ -19,12 +19,13 @@ namespace PacmanGame.ViewModels
         private readonly IGameBuilder _builder;
         private readonly IHaveControlKeys _accessor;
         private readonly IViewModelChanger _viewModelChanger;
+        private readonly ISettingsProvider _provider;
 
         public GameBoard GameBoard { get; protected set; }
 
         public GameEngine GameEngine { get; protected set; }
 
-        public GameViewModel(IGameBuilder builder, IViewModelChanger viewModelChanger, IHaveControlKeys accessor) : base("Game")
+        public GameViewModel(IGameBuilder builder, IViewModelChanger viewModelChanger, IHaveControlKeys accessor, ISettingsProvider provider) : base("Game")
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
             _builder = builder;
@@ -32,6 +33,8 @@ namespace PacmanGame.ViewModels
             _accessor = accessor;
             if(viewModelChanger==null) throw new ArgumentNullException(nameof(viewModelChanger));
             _viewModelChanger = viewModelChanger;
+            if(provider == null) throw new ArgumentNullException(nameof(provider));
+            _provider = provider;
         }
 
         protected override void OnViewAppeared()
@@ -49,7 +52,7 @@ namespace PacmanGame.ViewModels
         public virtual void StartGame(GameState state)
         {
             GameBoard = _builder.BuildBoard(state);
-            GameEngine = _builder.BuildGameEngine(state, GameBoard);
+            GameEngine = _builder.BuildGameEngine(state, GameBoard, _provider);
             Player player = GameBoard.Elements.OfType<Player>().Single();
             player.Dead += (x,e)=> OnGameEnded();
         }

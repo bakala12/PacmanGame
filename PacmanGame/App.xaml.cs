@@ -27,11 +27,12 @@ namespace PacmanGame
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            DefaultControls();
             IGameSerializer serializer = new GameSerializer();
             IGameBuilder builder = new SimpleGameBuilder();
             IKeysValidator validator = new KeysValidator();
-            MainWindowViewModel vm = new MainWindowViewModel(builder, new HighscoreList(), serializer, validator);
+            ISettingsProvider provider = new SettingsProvider();
+            DefaultControls(provider);
+            MainWindowViewModel vm = new MainWindowViewModel(builder, new HighscoreList(provider), serializer, validator, provider);
             MainWindow window = new MainWindow();
             Current.MainWindow = window;
             window.DataContext = vm;
@@ -43,17 +44,17 @@ namespace PacmanGame
         /// <summary>
         /// Loads the dafault player controls if they are not set.
         /// </summary>
-        private void DefaultControls()
+        private void DefaultControls(ISettingsProvider provider)
         {
-            if (Settings.Default.LeftKey == Key.None)
-                Settings.Default.LeftKey = Key.Left;
-            if (Settings.Default.RightKey == Key.None)
-                Settings.Default.RightKey = Key.Right;
-            if (Settings.Default.UpKey == Key.None)
-                Settings.Default.UpKey = Key.Up;
-            if (Settings.Default.DownKey == Key.None)
-                Settings.Default.DownKey = Key.Down;
-            Settings.Default.Save();
+            if (provider.LeftKey == Key.None)
+                provider.LeftKey = Key.Left;
+            if (provider.RightKey == Key.None)
+                provider.RightKey = Key.Right;
+            if (provider.UpKey == Key.None)
+                provider.UpKey = Key.Up;
+            if (provider.DownKey == Key.None)
+                provider.DownKey = Key.Down;
+            provider.Save();
         }
     } 
 }

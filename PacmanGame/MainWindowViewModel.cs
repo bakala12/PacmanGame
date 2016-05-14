@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using PacmanGame.Annotations;
@@ -17,16 +18,20 @@ namespace PacmanGame
     [ImplementPropertyChanged]
     internal class MainWindowViewModel : IViewModelChanger, IHaveControlKeys
     {
+        private readonly ISettingsProvider _provider;
+
         public MainWindowViewModel(IGameBuilder builder, HighscoreList highscores, IGameSerializer gameSerializer,
-            IKeysValidator validator)
+            IKeysValidator validator, ISettingsProvider provider)
         {
+            if(provider==null) throw new ArgumentNullException(nameof(provider));
+            _provider = provider;
             var vm = new List<ViewModelBase>
             {
                 new StartMenuViewModel(this, gameSerializer),
                 new HelpViewModel(),
                 new OptionsViewModel(this, validator),
                 new HighscoresViewModel(highscores),
-                new GameViewModel(builder, this, this),
+                new GameViewModel(builder, this, this, provider),
                 new EndGameViewModel(highscores),
                 new PauseViewModel(this, gameSerializer)
             };
@@ -93,19 +98,19 @@ namespace PacmanGame
 
         public void LoadControlKeys()
         {
-            LeftKey = Settings.Default.LeftKey;
-            RightKey = Settings.Default.RightKey;
-            UpKey = Settings.Default.UpKey;
-            DownKey = Settings.Default.DownKey;
+            LeftKey = _provider.LeftKey;
+            RightKey = _provider.RightKey;
+            UpKey = _provider.UpKey;
+            DownKey = _provider.DownKey;
         }
 
         public void SaveControlKeys()
         {
-            Settings.Default.DownKey = DownKey;
-            Settings.Default.LeftKey = LeftKey;
-            Settings.Default.RightKey = RightKey;
-            Settings.Default.UpKey = UpKey;
-            Settings.Default.Save();
+            _provider.DownKey = DownKey;
+            _provider.LeftKey = LeftKey;
+            _provider.RightKey = RightKey;
+            _provider.UpKey = UpKey;
+            _provider.Save();
         }
         #endregion
     }

@@ -27,5 +27,9 @@
     <Setting Name="RememberedHighscoresCount" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
+    <Setting Name="PauseKey" Type="System.Windows.Input.Key" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;Key&gt;Escape&lt;/Key&gt;</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

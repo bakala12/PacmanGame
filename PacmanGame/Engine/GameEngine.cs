@@ -23,15 +23,16 @@ namespace PacmanGame.Engine
         private Player _player;
         private IList<Tuple<int, int>> _coinsPosition;
         private AdditionalLifeGenerator _lifesGenerator;
+        private readonly ISettingsProvider _provider;
 
-        public GameEngine(IGameBuilder builder, GameBoard board) : this(builder, board, null) { }
-
-        public GameEngine(IGameBuilder builder, GameBoard board, IEnemyMovementManager enemyMovementManager)
+        public GameEngine(IGameBuilder builder, GameBoard board, ISettingsProvider provider)
         {
             if (builder == null)
                 throw new ArgumentNullException(nameof(builder));
             if (board == null)
                 throw new ArgumentNullException(nameof(board));
+            if(provider==null) throw new ArgumentNullException(nameof(provider));
+            _provider = provider;
             _builder = builder;
             _gameBoard = board;
         }
@@ -57,7 +58,7 @@ namespace PacmanGame.Engine
                     EnemyMovementAlgorithmsFactory.Instance.CreateEnemyMovementAlgorithm(Difficulty);
                 result.Moved += OnEnemyMoved;
             }
-            uint enemyMovementInterval = Settings.Default.EnemyMovementInterval;
+            uint enemyMovementInterval = _provider.EnemyMovementInterval;
             EnemyMovementManager = new TimeEnemyMovementManager(_gameBoard.Elements.OfType<Enemy>(),
                 _movementChecker, TimeSpan.FromMilliseconds(enemyMovementInterval));
             SetCoinsColleted();

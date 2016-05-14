@@ -9,6 +9,6 @@ namespace PacmanGame.MainInterfaces
     {
         GameBoard BuildBoard(GameState gameState);
         ITimer BuildTimer(GameState gameState);
-        GameEngine BuildGameEngine(GameState gameState, GameBoard board);
+        GameEngine BuildGameEngine(GameState gameState, GameBoard board, ISettingsProvider provider);
     }
 }
