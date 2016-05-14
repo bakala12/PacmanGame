@@ -50,7 +50,6 @@ namespace PacmanGame.Highscores
             Highscores = Settings.Default.Highscores ?? new List<Highscore>();
             _rememberedHighscoresCount = Settings.Default.RememberedHighscoresCount;
             RemoveRendundantElements();
-            Highscores.Sort(_comparer);
         }
 
         public bool IsHighscore(Highscore highscore)
@@ -60,6 +59,7 @@ namespace PacmanGame.Highscores
 
         private void RemoveRendundantElements()
         {
+            Highscores.Sort(_comparer);
             if (Highscores.Count <= _rememberedHighscoresCount) return;
             for(int i=(int)_rememberedHighscoresCount; i<Highscores.Count; i++)
                 Highscores.RemoveAt(i);
