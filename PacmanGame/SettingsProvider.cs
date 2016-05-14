@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using PacmanGame.Highscores;
+using PacmanGame.MainInterfaces;
 using PacmanGame.Properties;
 
 namespace PacmanGame

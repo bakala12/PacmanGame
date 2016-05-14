@@ -101,7 +101,7 @@
     <Compile Include="Engine\EnemyMovementManager.cs" />
     <Compile Include="Engine\GameMovementCheckerFactory.cs" />
     <Compile Include="Engine\GameMovementChecker.cs" />
-    <Compile Include="ISettingsProvider.cs" />
+    <Compile Include="MainInterfaces\ISettingsProvider.cs" />
     <Compile Include="MainInterfaces\IGameMovementChecker.cs" />
     <Compile Include="Graph\Graph.cs" />
     <Compile Include="Graph\GraphCreator.cs" />
