@@ -46,6 +46,7 @@ namespace PacmanGame.Engine
             Timer = _builder.BuildTimer(state);
             _player = _gameBoard.Children.OfType<Player>().Single();
             _player.Moved += OnPlayerMoved;
+            _player.Direction = state?.PlayerDirection ?? Direction.Left;
             _coinsPosition = new List<Tuple<int, int>>();
             foreach (var result in _gameBoard.Elements.OfType<Coin>())
             {
@@ -85,7 +86,11 @@ namespace PacmanGame.Engine
         {
             GameState gameState = new GameState()
             {
-                Points = Points, Difficulty = Difficulty, Lifes = Lifes, Time = Timer.TimeLeft
+                Points = Points,
+                Difficulty = Difficulty,
+                Lifes = Lifes,
+                Time = Timer.TimeLeft,
+                PlayerDirection = _player.Direction
             };
             List<GameElementInfo> list= new List<GameElementInfo>();
             int id = 1;

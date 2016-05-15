@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using GameControls.Others;
 
 namespace PacmanGame.Serialization
 {
@@ -23,5 +24,6 @@ namespace PacmanGame.Serialization
         public TimeSpan Time { get; set; }
         public List<GameElementInfo> GameElements { get; set; }
         public PortalConnetcionList ConnetedPortals { get; set; }
+        public Direction PlayerDirection { get; set; }
     }
 }
