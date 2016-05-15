@@ -31,5 +31,14 @@
       <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;Key&gt;Escape&lt;/Key&gt;</Value>
     </Setting>
+    <Setting Name="BoardWidth" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="BoardHeight" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">30</Value>
+    </Setting>
+    <Setting Name="BoardFilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/Resources/example_board.board</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

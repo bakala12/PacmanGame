@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using GameControls.Board;
 using GameControls.Elements;
@@ -16,22 +17,28 @@ namespace PacmanGame
     internal class SimpleGameBuilder : IGameBuilder
     {
         private readonly string _path;
+        private readonly uint _width;
+        private readonly uint _height;
 
-        public SimpleGameBuilder(string path = null)
+        public SimpleGameBuilder(ISettingsProvider provider)
         {
-            _path = path ?? "Resources/example_board.board";
+            _path = provider.BoardFilePath;
+            _width = provider.BoardWidth;
+            _height = provider.BoardHeight;
         }
 
         public GameBoard BuildBoard(GameState gameState)
         {
             if (gameState == null)
-                return new GameBoard(30, 30, ReadFile());
-            return new GameBoard(30,30, GenerateElements(gameState.GameElements));
+                return new GameBoard(_width, _height, ReadFile());
+            var elements = GenerateElements(gameState.GameElements);
+            ConnectPortals(elements.OfType<Portal>().ToList(), gameState);
+            return new GameBoard(_width,_height, elements);
         }
 
         public ITimer BuildTimer(GameState gameState)
         {
-            return new GameTimer(gameState?.Time ?? TimeSpan.Zero, new TimeSpan(0, 0, 0, 1));
+            return new GameTimer(gameState?.Time ?? TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
 
         public GameEngine BuildGameEngine(GameState gameState, GameBoard board, ISettingsProvider provider)
@@ -50,7 +57,7 @@ namespace PacmanGame
         {
             IList<GameElement> elements = new List<GameElement>();
             Stream stream = Application.GetResourceStream(new Uri(_path, UriKind.Relative))?.Stream;
-            if(stream == null) throw new InvalidOperationException("Cannot load gameboard");
+            if (stream == null) throw new InvalidOperationException("Cannot load gameboard");
             using (var sr = new StreamReader(stream))
             {
                 string line;
@@ -109,7 +116,7 @@ namespace PacmanGame
                         element = new Coin();
                         break;
                     case GameElementType.Portal:
-                        element = new Portal();
+                        element = new Portal() { PortalId = gameElementInfo.Id };
                         break;
                     case GameElementType.BonusLife:
                         element = new BonusLife();
@@ -129,6 +136,20 @@ namespace PacmanGame
             }
             return elements;
         }
+
+        private void ConnectPortals(IList<Portal> portals, GameState state)
+        {
+            foreach (var connetedPortal in state.ConnetedPortals)
+            {
+                Portal p1 = portals.FirstOrDefault(x => x.PortalId == connetedPortal.Item1);
+                Portal p2 = portals.FirstOrDefault(x => x.PortalId == connetedPortal.Item2);
+                if (p1 != null && p1.ConnectedPortal == null)
+                    p1.ConnectedPortal = p2;
+                if (p2 != null && p2.ConnectedPortal == null)
+                    p2.ConnectedPortal = p1;
+            }
+        }
+
         #endregion
     }
 }

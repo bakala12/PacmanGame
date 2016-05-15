@@ -14,7 +14,7 @@ namespace PacmanGame
             builder.RegisterInstance(new GameSerializer()).AsImplementedInterfaces();
             builder.RegisterInstance(new KeysValidator()).AsImplementedInterfaces();
             builder.RegisterInstance(new SettingsProvider()).AsImplementedInterfaces();
-            builder.RegisterInstance(new SimpleGameBuilder()).AsImplementedInterfaces();
+            builder.RegisterType<SimpleGameBuilder>().AsImplementedInterfaces();
 
             builder.RegisterType<HighscoreList>().AsSelf();
 

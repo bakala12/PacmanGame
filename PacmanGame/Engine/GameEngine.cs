@@ -88,6 +88,7 @@ namespace PacmanGame.Engine
                 Points = Points, Difficulty = Difficulty, Lifes = Lifes, Time = Timer.TimeLeft
             };
             List<GameElementInfo> list= new List<GameElementInfo>();
+            int id = 1;
             foreach (var result in _gameBoard.Children.OfType<GameElement>())
             {
                 var info = new GameElementInfo();
@@ -98,7 +99,27 @@ namespace PacmanGame.Engine
                 if(result is BonusLife) info.Type = GameElementType.BonusLife;
                 if(result is Enemy) info.Type = GameElementType.Enemy;
                 if(result is Block) info.Type = GameElementType.Block;
-                if (result is Portal) info.Type = GameElementType.Portal;
+                if (result is Portal)
+                {
+                    var p = (Portal)result;
+                    int connId=0;
+                    if (p.PortalId == 0)
+                    {
+                        info.Id = id++;
+                        connId = id++;
+                        p.PortalId = info.Id;
+                        if (p.ConnectedPortal != null)
+                            p.ConnectedPortal.PortalId = connId;
+                    }
+                    else
+                    {
+                        info.Id = p.PortalId;
+                        connId = p.ConnectedPortal.PortalId;
+                    }
+
+                    info.Type = GameElementType.Portal;
+                    gameState.ConnetedPortals.Add(new Tuple<int, int>(connId, info.Id));
+                }
                 list.Add(info);
             }
             gameState.GameElements = list;

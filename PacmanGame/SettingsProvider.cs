@@ -22,6 +22,9 @@ namespace PacmanGame
             Highscores = Settings.Default.Highscores;
             RememberedHighscoresCount = Settings.Default.RememberedHighscoresCount;
             EnemyMovementInterval = Settings.Default.EnemyMovementInterval;
+            BoardWidth = Settings.Default.BoardWidth;
+            BoardHeight = Settings.Default.BoardHeight;
+            BoardFilePath = Settings.Default.BoardFilePath;
         }
 
         public Key LeftKey { get; set; }
@@ -32,6 +35,9 @@ namespace PacmanGame
         public List<Highscore> Highscores { get; set; }
         public uint RememberedHighscoresCount { get; }
         public uint EnemyMovementInterval { get; set; }
+        public uint BoardWidth { get; }
+        public uint BoardHeight { get; }
+        public string BoardFilePath { get; }
 
         public void Save()
         {

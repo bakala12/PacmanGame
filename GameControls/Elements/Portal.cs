@@ -55,13 +55,28 @@ namespace GameControls.Elements
         public Portal ConnectedPortal
         {
             get { return (Portal) GetValue(ConnectedPortalProperty); }
-            protected set { SetValue(ConnectedPortalProperty, value);}
+            set { SetValue(ConnectedPortalProperty, value);}
+        }
+
+        /// <summary>
+        /// The Id of the portal.
+        /// </summary>
+        public int PortalId
+        {
+            get { return (int) GetValue(PortalIdProperty); }
+            set { SetValue(PortalIdProperty, value);}
         }
 
         /// <summary>
         /// A DependencyProperty for storing ConnectedPortal property.
         /// </summary>
-        public static DependencyProperty ConnectedPortalProperty = 
+        public static readonly DependencyProperty ConnectedPortalProperty = 
             DependencyProperty.Register("ConnectedPortal", typeof(Portal), typeof(Portal), new FrameworkPropertyMetadata(null));
+
+        /// <summary>
+        /// A DependencyProperty for storing PortalId property.
+        /// </summary>
+        public static readonly DependencyProperty PortalIdProperty = 
+            DependencyProperty.Register("PortalId", typeof(int), typeof(Portal), new FrameworkPropertyMetadata(0));
     }
 }

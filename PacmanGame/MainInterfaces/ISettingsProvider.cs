@@ -14,6 +14,9 @@ namespace PacmanGame.MainInterfaces
         List<Highscore> Highscores { get; set; }
         uint RememberedHighscoresCount { get; }
         uint EnemyMovementInterval { get; set; }
+        uint BoardWidth { get; }
+        uint BoardHeight { get; }
+        string BoardFilePath { get; }
         void Save();
     }
 }

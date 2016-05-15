@@ -117,5 +117,41 @@ namespace PacmanGame.Properties {
                 this["PauseKey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public uint BoardWidth {
+            get {
+                return ((uint)(this["BoardWidth"]));
+            }
+            set {
+                this["BoardWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public uint BoardHeight {
+            get {
+                return ((uint)(this["BoardHeight"]));
+            }
+            set {
+                this["BoardHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/Resources/example_board.board")]
+        public string BoardFilePath {
+            get {
+                return ((string)(this["BoardFilePath"]));
+            }
+            set {
+                this["BoardFilePath"] = value;
+            }
+        }
     }
 }

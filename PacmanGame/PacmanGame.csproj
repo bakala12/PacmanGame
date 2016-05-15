@@ -113,8 +113,12 @@
     <Compile Include="Highscores\HighscoreList.cs" />
     <Compile Include="MainInterfaces\IHaveControlKeys.cs" />
     <Compile Include="MainInterfaces\IKeysValidator.cs" />
+    <Compile Include="Serialization\GameElementInfo.cs" />
+    <Compile Include="Serialization\GameElementType.cs" />
     <Compile Include="Serialization\GameSerializer.cs" />
     <Compile Include="MainInterfaces\IGameSerializer.cs" />
+    <Compile Include="Serialization\PortalConnetcionList.cs" />
+    <Compile Include="Serialization\TupleComparer.cs" />
     <Compile Include="SettingsProvider.cs" />
     <Compile Include="SimpleGameBuilder.cs" />
     <Compile Include="Properties\Annotations.cs" />
