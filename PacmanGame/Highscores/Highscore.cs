@@ -20,7 +20,7 @@ namespace PacmanGame.Highscores
             set
             {
                 _gameTime = value;
-                Time = (uint)_gameTime.Seconds;
+                Time = (uint)_gameTime.TotalSeconds;
             }
         }
 
