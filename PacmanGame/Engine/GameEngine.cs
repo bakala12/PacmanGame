@@ -6,6 +6,7 @@ using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
 using PacmanGame.EnemyMovementAlgorithms;
+using PacmanGame.Extensions;
 using PacmanGame.MainInterfaces;
 using PacmanGame.Properties;
 using PacmanGame.Serialization;
@@ -24,6 +25,12 @@ namespace PacmanGame.Engine
         private IList<Tuple<int, int>> _coinsPosition;
         private AdditionalLifeGenerator _lifesGenerator;
         private readonly ISettingsProvider _provider;
+
+        public ITimer Timer { get; protected set; }
+        public uint Points { get; protected set; }
+        public uint Difficulty { get; protected set; }
+        public uint Lifes { get; protected set; }
+        public IEnemyMovementManager EnemyMovementManager { get; private set; }
 
         public GameEngine(IGameBuilder builder, GameBoard board, ISettingsProvider provider)
         {
@@ -47,12 +54,32 @@ namespace PacmanGame.Engine
             _player = _gameBoard.Children.OfType<Player>().Single();
             _player.Moved += OnPlayerMoved;
             _player.Direction = state?.PlayerDirection ?? Direction.Left;
-            _coinsPosition = new List<Tuple<int, int>>();
-            foreach (var result in _gameBoard.Elements.OfType<Coin>())
+            LoadCoinsPositions();
+            ConfigureEnemies();
+            SetCoinsColleted();
+            ConfigureLifesGeneratior();
+        }
+        public void MovePlayer(Direction direction)
+        {
+            if (!_movementChecker.CheckMovement(_player, direction)) return;
+            _player.Move(direction);
+        }
+        public GameState SaveState()
+        {
+            GameState gameState = new GameState()
             {
-                _coinsPosition.Add(new Tuple<int, int>((int)result.X, (int)result.Y));
-            }
-            _coinsPosition.Add(new Tuple<int, int>((int)_player.X, (int)_player.Y));
+                Points = Points,
+                Difficulty = Difficulty,
+                Lifes = Lifes,
+                Time = Timer.TimeLeft,
+                PlayerDirection = _player.Direction
+            };
+            SaveElements(gameState);
+            return gameState;
+        }
+
+        private void ConfigureEnemies()
+        {
             foreach (var result in _gameBoard.Elements.OfType<Enemy>())
             {
                 result.MovementAlgorithm =
@@ -62,8 +89,18 @@ namespace PacmanGame.Engine
             uint enemyMovementInterval = _provider.EnemyMovementInterval;
             EnemyMovementManager = new TimeEnemyMovementManager(_gameBoard.Elements.OfType<Enemy>(),
                 _movementChecker, TimeSpan.FromMilliseconds(enemyMovementInterval));
-            SetCoinsColleted();
-            //refactor needed
+        }
+        private void LoadCoinsPositions()
+        {
+            _coinsPosition = new List<Tuple<int, int>>();
+            foreach (var result in _gameBoard.Elements.OfType<Coin>())
+            {
+                _coinsPosition.Add(new Tuple<int, int>((int)result.X, (int)result.Y));
+            }
+            _coinsPosition.Add(new Tuple<int, int>((int)_player.X, (int)_player.Y));
+        }
+        private void ConfigureLifesGeneratior()
+        { 
             _lifesGenerator = new AdditionalLifeGenerator(_coinsPosition);
             _lifesGenerator.Generated += (sender, args) =>
             {
@@ -81,56 +118,6 @@ namespace PacmanGame.Engine
             };
             _lifesGenerator.Start();
         }
-
-        public GameState SaveState()
-        {
-            GameState gameState = new GameState()
-            {
-                Points = Points,
-                Difficulty = Difficulty,
-                Lifes = Lifes,
-                Time = Timer.TimeLeft,
-                PlayerDirection = _player.Direction
-            };
-            List<GameElementInfo> list= new List<GameElementInfo>();
-            int id = 1;
-            foreach (var result in _gameBoard.Children.OfType<GameElement>())
-            {
-                var info = new GameElementInfo();
-                info.X = result.X;
-                info.Y = result.Y;
-                if(result is Player) info.Type = GameElementType.Player;
-                if(result is Coin) info.Type = GameElementType.Coin;
-                if(result is BonusLife) info.Type = GameElementType.BonusLife;
-                if(result is Enemy) info.Type = GameElementType.Enemy;
-                if(result is Block) info.Type = GameElementType.Block;
-                if (result is Portal)
-                {
-                    var p = (Portal)result;
-                    int connId=0;
-                    if (p.PortalId == 0)
-                    {
-                        info.Id = id++;
-                        connId = id++;
-                        p.PortalId = info.Id;
-                        if (p.ConnectedPortal != null)
-                            p.ConnectedPortal.PortalId = connId;
-                    }
-                    else
-                    {
-                        info.Id = p.PortalId;
-                        connId = p.ConnectedPortal.PortalId;
-                    }
-
-                    info.Type = GameElementType.Portal;
-                    gameState.ConnetedPortals.Add(new Tuple<int, int>(connId, info.Id));
-                }
-                list.Add(info);
-            }
-            gameState.GameElements = list;
-            return gameState;
-        }
-
         private void SetCoinsColleted()
         {
             foreach (var result in _gameBoard.Elements.OfType<Coin>())
@@ -150,59 +137,68 @@ namespace PacmanGame.Engine
                 };
             }
         }
-
-        public ITimer Timer { get; protected set; }
-
-        public uint Points { get; protected set; }
-
-        public uint Difficulty { get; protected set; }
-
-        public uint Lifes { get; protected set; }
-
-        public IEnemyMovementManager EnemyMovementManager { get; private set; }
-
-        public void MovePlayer(Direction direction)
+        protected virtual void SaveElements(GameState state)
         {
-            if (!_movementChecker.CheckMovement(_player, direction)) return;
-            MoveElement(_player, direction);
+            int id = 1;
+            List<GameElementInfo> list = new List<GameElementInfo>();
+            PortalConnetcionList portals = new PortalConnetcionList();
+            foreach (var result in _gameBoard.Children.OfType<GameElement>())
+            {
+                var info = new GameElementInfo();
+                info.X = result.X;
+                info.Y = result.Y;
+                if (result is Player) info.Type = GameElementType.Player;
+                if (result is Coin) info.Type = GameElementType.Coin;
+                if (result is BonusLife) info.Type = GameElementType.BonusLife;
+                if (result is Enemy) info.Type = GameElementType.Enemy;
+                if (result is Block) info.Type = GameElementType.Block;
+                if (result is Portal)
+                {
+                    var p = (Portal)result;
+                    int connId = 0;
+                    if (p.PortalId == 0)
+                    {
+                        info.Id = id++;
+                        connId = id++;
+                        p.PortalId = info.Id;
+                        if (p.ConnectedPortal != null)
+                            p.ConnectedPortal.PortalId = connId;
+                    }
+                    else
+                    {
+                        info.Id = p.PortalId;
+                        connId = p.ConnectedPortal.PortalId;
+                    }
+                    info.Type = GameElementType.Portal;
+                    portals.Add(new Tuple<int, int>(connId, info.Id));
+                }
+                list.Add(info);
+            }
+            state.GameElements = list;
+            state.ConnetedPortals = portals;
         }
-
-        protected virtual void MoveElement(IMovable movable, Direction direction)
-        {
-            movable.Move(direction);
-        }
-
         protected virtual void OnPlayerMoved(object sender, MovementEventArgs e)
         {
             CheckCollisionWithCoins();
             CheckCollisionWithEnemies();
-            MoveViaPortal(_player);
+            var portal =
+                    _gameBoard.Elements.OfType<Portal>().FirstOrDefault(p => _movementChecker.CheckCollision(p, _player));
+            _player.MoveViaPortal(portal);
             if (!_gameBoard.Elements.OfType<Coin>().Any())
             {
                 Difficulty++;
                 FillBoardWithCoins();
             }
         }
-
         protected virtual void OnEnemyMoved(object sender, MovementEventArgs e)
         {
             Enemy enemy = sender as Enemy;
             if (enemy == null) return;
             CheckCollisionWithEnemies();
-            MoveViaPortal(enemy);
-        }
-
-        protected virtual void MoveViaPortal(MovableElement movable)
-        {
             var portal =
-                _gameBoard.Elements.OfType<Portal>().FirstOrDefault(p => _movementChecker.CheckCollision(p, movable));
-            if (portal?.ConnectedPortal != null)
-            {
-                movable.X = portal.ConnectedPortal.X;
-                movable.Y = portal.ConnectedPortal.Y;
-            }
+                _gameBoard.Elements.OfType<Portal>().FirstOrDefault(x => _movementChecker.CheckCollision(x, enemy));
+            enemy.MoveViaPortal(portal);
         }
-
         protected virtual void CheckCollisionWithCoins()
         {
             var coins = _gameBoard.Elements.OfType<Coin>().Where(x => _movementChecker.CheckCollision(x, _player)).ToList();
@@ -211,7 +207,6 @@ namespace PacmanGame.Engine
                 coin?.Collect();
             }
         }
-
         protected virtual void CheckCollisionWithEnemies()
         {
             Enemy enemy = EnemyMovementManager.Enemies.FirstOrDefault(x => _movementChecker.CheckCollision(_player, x));
@@ -222,7 +217,6 @@ namespace PacmanGame.Engine
             if (Lifes == 0)
                 _player.Die();
         }
-
         protected virtual void FillBoardWithCoins()
         {
             foreach (var coin in _coinsPosition.Select(tuple => new Coin
@@ -231,7 +225,7 @@ namespace PacmanGame.Engine
                 Y = tuple.Item2
             }))
             {
-                _gameBoard.Children.Add(coin);
+                _gameBoard.Children.Insert(0, coin);
             }
             SetCoinsColleted();
         }
