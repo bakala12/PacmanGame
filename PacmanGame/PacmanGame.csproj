@@ -96,13 +96,14 @@
     <Compile Include="Extensions\InvokeCommandOnEventAction.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\KeyDisplayConverter.cs" />
-    <Compile Include="EnemyMovementAlgorithms\EnemyMovementAlgorithmsFactory.cs" />
     <Compile Include="EnemyMovementAlgorithms\SimpleRandomMovementAlgorithm.cs" />
     <Compile Include="Engine\AdditionalLifeGenerator.cs" />
     <Compile Include="Engine\EnemyMovementManager.cs" />
     <Compile Include="Engine\GameMovementCheckerFactory.cs" />
     <Compile Include="Engine\GameMovementChecker.cs" />
     <Compile Include="Extensions\MovementExtensions.cs" />
+    <Compile Include="Graph\GraphComparer.cs" />
+    <Compile Include="Graph\IPriorityQueue.cs" />
     <Compile Include="Graph\PriorityQueue.cs" />
     <Compile Include="MainInterfaces\ISettingsProvider.cs" />
     <Compile Include="MainInterfaces\IGameMovementChecker.cs" />

@@ -6,14 +6,6 @@ using System.Threading.Tasks;
 
 namespace PacmanGame.Graph
 {
-    public interface IPriorityQueue<T>
-    {
-        bool IsEmpty { get; }
-        void Insert(T item);
-        T DeleteFirst();
-        bool Contains(T item);
-    }
-
     public class PriorityQueue<T> : IPriorityQueue<T>
     {
         private readonly List<T> _list = new List<T>();
@@ -45,22 +37,6 @@ namespace PacmanGame.Graph
         public bool Contains(T item)
         {
             return _list.Contains(item);
-        }
-    }
-
-    public class GraphComparer : IComparer<int>
-    {
-        private readonly int[] _dist;
-
-        public GraphComparer(int [] dist)
-        {
-            if(dist==null) throw new ArgumentNullException(nameof(dist));
-            _dist = dist;
-        }
-
-        public int Compare(int x, int y)
-        {
-            return _dist[x] - _dist[y];
         }
     }
 }

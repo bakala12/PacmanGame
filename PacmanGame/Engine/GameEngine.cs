@@ -7,6 +7,7 @@ using GameControls.Interfaces;
 using GameControls.Others;
 using PacmanGame.EnemyMovementAlgorithms;
 using PacmanGame.Extensions;
+using PacmanGame.Graph;
 using PacmanGame.MainInterfaces;
 using PacmanGame.Properties;
 using PacmanGame.Serialization;
@@ -25,6 +26,7 @@ namespace PacmanGame.Engine
         private IList<Tuple<int, int>> _coinsPosition;
         private AdditionalLifeGenerator _lifesGenerator;
         private readonly ISettingsProvider _provider;
+        private IGraph _graph;
 
         public ITimer Timer { get; protected set; }
         public uint Points { get; protected set; }
@@ -80,10 +82,11 @@ namespace PacmanGame.Engine
 
         private void ConfigureEnemies()
         {
+            _graph = new Graph.Graph(_gameBoard);
             foreach (var result in _gameBoard.Elements.OfType<Enemy>())
             {
-                result.MovementAlgorithm =
-                    EnemyMovementAlgorithmsFactory.Instance.CreateEnemyMovementAlgorithm(Difficulty);
+                result.MovementAlgorithm = 
+                    new AStarEnemyMovementAlgorithm(_graph, _player, (int)_provider.BoardWidth, (int)_provider.BoardHeight);
                 result.Moved += OnEnemyMoved;
             }
             uint enemyMovementInterval = _provider.EnemyMovementInterval;
