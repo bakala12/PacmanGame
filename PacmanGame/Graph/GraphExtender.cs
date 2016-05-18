@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PacmanGame.Graph
 {
-    internal static class GraphExtender
+    public static class GraphExtender
     {
         public static int? GetEdgeWeight(this IGraph graph, int start, int end)
         {
@@ -14,19 +14,17 @@ namespace PacmanGame.Graph
             else return null;
         }
 
-        public static int AStar(this IGraph graph, int start, int end)
+        public static int AStar(this IGraph graph, int start, int end, out int cost)
         {
             HashSet<int> close = new HashSet<int>();
             int[] prev = new int[graph.VerticlesCount];
             for (int i = 0; i < graph.VerticlesCount; i++) prev[i] = -1;
-            List<int> open = new List<int>();
             int[] dist = new int[graph.VerticlesCount];
-            open.Add(start);
-            while (open.Count > 0)
+            IPriorityQueue<int> open = new PriorityQueue<int>(new GraphComparer(dist));
+            open.Insert(start);
+            while (!open.IsEmpty)
             {
-                open.Sort((x, y) => dist[x] - dist[y]);
-                int current = open[0];
-                open.RemoveAt(0);
+                int current = open.DeleteFirst();
                 close.Add(current);
                 if (current == end) break;
                 foreach (int w in graph.Neighbours[current])
@@ -34,7 +32,7 @@ namespace PacmanGame.Graph
                     if (close.Contains(w)) continue;
                     if (!open.Contains(w))
                     {
-                        open.Add(w);
+                        open.Insert(w);
                         dist[w] = int.MaxValue;
                     }
                     if (dist[w] > dist[current] + 1)
@@ -53,6 +51,7 @@ namespace PacmanGame.Graph
                 tmp = prev[tmp];
                 amount++;
             }
+            cost = s.Count;
             return amount > 0 ? s.ToArray()[0] : start;
         }
     }

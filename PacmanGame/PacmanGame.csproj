@@ -92,6 +92,7 @@
     </ApplicationDefinition>
     <Compile Include="Configuration.cs" />
     <Compile Include="Converters\LifesConverter.cs" />
+    <Compile Include="EnemyMovementAlgorithms\AStarEnemyMovementAlgorithm.cs" />
     <Compile Include="Extensions\InvokeCommandOnEventAction.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\KeyDisplayConverter.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Engine\GameMovementCheckerFactory.cs" />
     <Compile Include="Engine\GameMovementChecker.cs" />
     <Compile Include="Extensions\MovementExtensions.cs" />
+    <Compile Include="Graph\PriorityQueue.cs" />
     <Compile Include="MainInterfaces\ISettingsProvider.cs" />
     <Compile Include="MainInterfaces\IGameMovementChecker.cs" />
     <Compile Include="Graph\Graph.cs" />

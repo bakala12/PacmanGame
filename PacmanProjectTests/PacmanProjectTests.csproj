@@ -63,10 +63,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AStarTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PriorityQueueTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GameControls\GameControls.csproj">
+      <Project>{02C0CF74-4EC4-4B90-8E14-44E91A2624C1}</Project>
+      <Name>GameControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PacmanGame\PacmanGame.csproj">
+      <Project>{5734A69D-223E-40F5-8BFD-0CFBEE6880A8}</Project>
+      <Name>PacmanGame</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
