@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PacmanGame.Graph;
+﻿using PacmanGame.Graph;
 using Xunit;
 
-namespace PacmanProjectTests
+namespace PacmanProjectTests.GraphTests
 {
+    /// <summary>
+    /// Tests for A* algorithm.
+    /// </summary>
     public class AStarTest
     {
-        private IGraph _graph;
+        private readonly IGraph _graph1;
 
         public AStarTest()
         {
@@ -21,8 +19,7 @@ namespace PacmanProjectTests
                 {false,false, true, false },
                 { true, false,false,false}
             };
-
-            _graph = new Graph(blocks);
+            _graph1 = new Graph(blocks);
         }
 
         [Theory]
@@ -33,7 +30,7 @@ namespace PacmanProjectTests
         private void AStarAlghorithTest(int s, int e, int solution)
         {
             int sol;
-            _graph.AStar(s, e, out sol);
+            _graph1.AStar(s, e, out sol);
             Assert.Equal(solution,sol);
         }
     }

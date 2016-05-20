@@ -61,6 +61,7 @@
     <Compile Include="Elements\Player.cs" />
     <Compile Include="Elements\Portal.cs" />
     <Compile Include="Interfaces\ICollectable.cs" />
+    <Compile Include="Interfaces\ICanCollide.cs" />
     <Compile Include="Interfaces\IGameElement.cs" />
     <Compile Include="Interfaces\IMovable.cs" />
     <Compile Include="Interfaces\IMovementAlgorithm.cs" />

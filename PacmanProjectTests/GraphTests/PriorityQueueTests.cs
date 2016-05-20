@@ -1,18 +1,16 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PacmanGame.Graph;
 using Xunit;
 
-namespace PacmanProjectTests
+namespace PacmanProjectTests.GraphTests
 {
+    /// <summary>
+    /// Tests for PriorityQueue implementation.
+    /// </summary>
     public class PriorityQueueTests
     {
-        class Comp : IComparer<int>
+        private class Comp : IComparer<int>
         {
             public int Compare(int x, int y)
             {

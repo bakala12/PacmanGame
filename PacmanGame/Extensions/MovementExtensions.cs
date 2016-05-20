@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using GameControls.Elements;
 using GameControls.Interfaces;
+using GameControls.Others;
 using PacmanGame.MainInterfaces;
 
 namespace PacmanGame.Extensions
@@ -25,9 +26,17 @@ namespace PacmanGame.Extensions
         public static bool CheckCollision(this IGameMovementChecker checker, IGameElement element,
             IEnumerable<IGameElement> obstacles)
         {
-            if(checker==null) throw new NullReferenceException(nameof(checker));
-            if (element ==null || obstacles == null) return false;
-            return obstacles.Aggregate(true, (current, gameElement) => current && checker.CheckCollision(gameElement, element));
+            return checker.CheckCollision(element, obstacles, false);
+        }
+
+        public static bool CheckCollision(this IGameMovementChecker checker, IGameElement element,
+            IEnumerable<IGameElement> obstacles, bool checkElementInObstacles)
+        {
+            if (checker == null) throw new NullReferenceException(nameof(checker));
+            if (element == null || obstacles == null) return false;
+            IList<IGameElement> obst = obstacles.ToList();
+            if (obst.Contains(element)) obst.Remove(element);
+            return obst.Aggregate(true, (current, gameElement) => current && checker.CheckCollision(gameElement, element));
         }
     }
 }

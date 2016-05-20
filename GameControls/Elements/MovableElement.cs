@@ -20,7 +20,7 @@ namespace GameControls.Elements
     /// <summary>
     /// Represents an element in the game which has the movement ability.
     /// </summary>
-    public abstract class MovableElement : GameElement, IMovable
+    public abstract class MovableElement : GameElement, IMovable, ICanCollide
     {
         /// <summary>
         /// Static constructor.

@@ -13,7 +13,7 @@ using PacmanGame.MainInterfaces;
 
 namespace PacmanGame.Engine
 {
-    internal class GameMovementChecker : IGameMovementChecker
+    public class GameMovementChecker : IGameMovementChecker
     {
         private readonly GameBoard _gameBoard;
         private readonly IGraph _graph;
@@ -26,10 +26,21 @@ namespace PacmanGame.Engine
 
         public bool CheckCollision(IGameElement element1, IGameElement element2)
         {
-            Rect rect1 = new Rect(new Point(element1.X, element1.Y), new Size(1,1));
-            Rect rect2 = new Rect(new Point(element2.X, element2.Y), new Size(1,1));
+            Rect rect1 = new Rect(new Point(element1.X, element1.Y), new Size(1, 1));
+            Rect rect2 = new Rect(new Point(element2.X, element2.Y), new Size(1, 1));
+            return Intersection(rect1, rect2);
+        }
+
+        private bool CheckCollision(IGameElement element1, Rect rect)
+        {
+            Rect rect1 = new Rect(new Point(element1.X, element1.Y), new Size(1, 1));
+            return Intersection(rect1, rect);
+        }
+
+        private static bool Intersection(Rect rect1, Rect rect2)
+        {
             Rect intersection = Rect.Intersect(rect1, rect2);
-            return !intersection.IsEmpty && intersection.Width >0 && intersection.Height>0;
+            return !intersection.IsEmpty && intersection.Width > 0 && intersection.Height > 0;
         }
 
         public bool CheckMovement(MovableElement movable, Direction direction)
@@ -39,11 +50,11 @@ namespace PacmanGame.Engine
             return CheckBoardMovementPossibility(rect, _gameBoard) && CheckMovement(movable, direction, _gameBoard);
         }
 
-        private static Rect TryMove(MovableElement movable, Direction direction)
+        protected static Rect TryMove(MovableElement movable, Direction direction)
         {
             Rect rect1 = new Rect(new Point(movable.X, movable.Y), new Size(1,1));
             double speed = movable.Speed;
-            switch (direction)
+            switch (direction) 
             {
                 case Direction.Up:
                     rect1.Offset(-speed, 0);
@@ -61,7 +72,7 @@ namespace PacmanGame.Engine
             return rect1;
         }
 
-        private static bool CheckBoardMovementPossibility(Rect rect, GameBoard gameBoard)
+        protected static bool CheckBoardMovementPossibility(Rect rect, GameBoard gameBoard)
         {
             Rect boardRect = new Rect(new Point(0,0), new Size(gameBoard.Rows, gameBoard.Columns));
             return boardRect.Contains(rect);
@@ -84,6 +95,15 @@ namespace PacmanGame.Engine
                 default:
                     return false;
             }
+        }
+
+        public bool IsElementNextTo<T>(MovableElement movable, Direction direction) where T : ICanCollide
+        {
+            if (movable == null) return false;
+            if (direction == Direction.None) return false;
+            Rect rect = TryMove(movable, direction);
+            bool b = _gameBoard.Elements.OfType<T>().Aggregate(true, (current, result) => current && CheckCollision(result, rect));
+            return CheckBoardMovementPossibility(rect, _gameBoard) && CheckMovement(movable, direction, _gameBoard) && b;
         }
     }
 }

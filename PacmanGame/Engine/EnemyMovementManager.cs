@@ -8,6 +8,7 @@ using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
 using PacmanGame.MainInterfaces;
+using PacmanGame.Extensions;
 
 namespace PacmanGame.Engine
 {
@@ -34,7 +35,7 @@ namespace PacmanGame.Engine
             foreach (var enemy in Enemies)
             {
                 Direction direction = enemy?.MovementAlgorithm?.ProvideDirection(enemy) ?? Direction.None;
-                if(_movementChecker.CheckMovement(enemy, direction))
+                if(_movementChecker.CheckMovement(enemy, direction) && !_movementChecker.IsElementNextTo<Enemy>(enemy, direction))
                     enemy?.Move(direction);
             }
         }
