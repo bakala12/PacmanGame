@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using GameControls.Board;
 using GameControls.Elements;
 using GameControls.Others;
+using Moq;
+using PacmanGame.EnemyMovementAlgorithms;
+using PacmanGame.Engine;
+using PacmanGame.Graph;
 using PacmanGame.MainInterfaces;
 using Xunit;
 using Block = GameControls.Elements.Block;
@@ -19,7 +24,7 @@ namespace PacmanProjectTests.MovementTests
         private readonly uint _height = 8;
 
         [Theory]
-        [InlineData(0, 0, 0, 0, true)]
+        [InlineData(0, 0, 0, 0, false)]
         [InlineData(5, 5, 0, 0, false)]
         [InlineData(0, 1, 1, 0, false)]
         [InlineData(1, 2, 1, 2, true)]
@@ -40,7 +45,7 @@ namespace PacmanProjectTests.MovementTests
         [Theory]
         [InlineData(0,0, Direction.Left, false)]
         [InlineData(1,1, Direction.None, false)]
-        [InlineData(1,1, Direction.Right, true)]
+        [InlineData(1,1, Direction.Down, true)]
         [InlineData(2,5, Direction.Left, true)]
         [InlineData(1,4,Direction.Up, false)]
         private async Task CheckMovementTest(double playerX, double playerY, Direction direction, bool result)
@@ -56,7 +61,11 @@ namespace PacmanProjectTests.MovementTests
         }
 
         [Theory]
-        [InlineData(0,0,Direction.Right, 1,0,false)]
+        [InlineData(0,0,Direction.Right, 0,1,true)]
+        [InlineData(0,0,Direction.Down, 0,1, false)]
+        [InlineData(0,0,Direction.None, 1,0, false)]
+        [InlineData(0,0,Direction.Up, 1,0, false)]
+        [InlineData(2,2,Direction.Left, 2,1, true)]
         private async Task CheckIsNextElementTest(double playerX, double playerY, Direction direction,double enemyX, double enemyY, bool result)
         {
             await GameBoardHelper.StartStaTask(() =>
@@ -67,6 +76,35 @@ namespace PacmanProjectTests.MovementTests
                 Enemy enemy = new Enemy() {X = enemyX, Y = enemyY};
                 _gameBoard.Children.Add(enemy);
                 bool res = checker.IsElementNextTo<MovableElement>(player, direction);
+                Assert.Equal(result, res);
+            });
+        }
+
+        [Theory]
+        [InlineData(true, new double[] {0,0,1,1,2,0})]
+        [InlineData(false, new double[] {0,0,1,1,2,3})]
+        private async Task CheckEnemiesMovement(bool result, double[] positions)
+        {
+            await GameBoardHelper.StartStaTask(() =>
+            {
+                _gameBoard = GameBoardHelper.GenerateEmptyGameBoard(_width, _height);
+                IGameMovementChecker checker = GameBoardHelper.GetGameMovementChecker(_gameBoard);
+                IGraph graph = new Graph(_gameBoard);
+                var player = new Mock<Player>();
+                player.Object.X = positions[0];
+                player.Object.Y = positions[1];
+                var alg = new AStarEnemyMovementAlgorithm(graph, player.Object, (int)_width, (int)_height);
+                var e1 = new Mock<Enemy>();
+                e1.Object.X = positions[2];
+                e1.Object.Y = positions[3];
+                e1.Object.MovementAlgorithm = alg;
+                var e2 = new Mock<Enemy>();
+                e2.Object.X = positions[4];
+                e2.Object.Y = positions[5];
+                e2.Object.MovementAlgorithm = alg;
+                IEnemyMovementManager manager = new TimeEnemyMovementManager(new [] {e1.Object,e2.Object}, checker, TimeSpan.FromSeconds(1));
+                manager.MoveEnemies();
+                bool res = checker.CheckCollision(e1.Object, e2.Object);
                 Assert.Equal(result, res);
             });
         }

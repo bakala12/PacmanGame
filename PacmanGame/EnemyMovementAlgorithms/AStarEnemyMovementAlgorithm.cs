@@ -33,7 +33,7 @@ namespace PacmanGame.EnemyMovementAlgorithms
         public Direction ProvideDirection(Enemy enemy)
         {
             int start = _width*(int)enemy.X + (int)enemy.Y;
-            int end = _height*(int)_player.X + (int)_player.Y;
+            int end = _width*(int)_player.X + (int)_player.Y;
             int solution;
             int m = _graph.AStar(start, end, out solution);
             if (m - start == -1) return Direction.Left;

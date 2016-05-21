@@ -26,6 +26,7 @@ namespace PacmanGame.Engine
 
         public bool CheckCollision(IGameElement element1, IGameElement element2)
         {
+            if (element1 == null || element2 == null) return false;
             Rect rect1 = new Rect(new Point(element1.X, element1.Y), new Size(1, 1));
             Rect rect2 = new Rect(new Point(element2.X, element2.Y), new Size(1, 1));
             return Intersection(rect1, rect2);
