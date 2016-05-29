@@ -103,7 +103,11 @@ namespace PacmanGame.Engine
             if (movable == null) return false;
             if (direction == Direction.None) return false;
             Rect rect = TryMove(movable, direction);
-            bool b = _gameBoard.Elements.OfType<T>().Aggregate(true, (current, result) => current && CheckCollision(result, rect));
+            bool b = true;
+            foreach (var el in _gameBoard.Elements.OfType<T>())
+            {
+                b = b && CheckCollision(el, rect);
+            }
             return CheckBoardMovementPossibility(rect, _gameBoard) && CheckMovement(movable, direction, _gameBoard) && b;
         }
     }

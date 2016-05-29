@@ -96,7 +96,6 @@
     <Compile Include="Extensions\InvokeCommandOnEventAction.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Converters\KeyDisplayConverter.cs" />
-    <Compile Include="EnemyMovementAlgorithms\SimpleRandomMovementAlgorithm.cs" />
     <Compile Include="Engine\AdditionalLifeGenerator.cs" />
     <Compile Include="Engine\EnemyMovementManager.cs" />
     <Compile Include="Engine\GameMovementCheckerFactory.cs" />
@@ -134,7 +133,6 @@
     <Compile Include="MainInterfaces\IGameBuilder.cs" />
     <Compile Include="ViewModels\CloseableViewModel.cs" />
     <Compile Include="ViewModels\EndGameViewModel.cs" />
-    <Compile Include="ViewModels\HelpViewModel.cs" />
     <Compile Include="ViewModels\HighscoresViewModel.cs" />
     <Compile Include="MainInterfaces\IViewModelChanger.cs" />
     <Compile Include="ViewModels\OptionsViewModel.cs" />
@@ -147,9 +145,6 @@
     </Compile>
     <Compile Include="Views\GameView.xaml.cs">
       <DependentUpon>GameView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\HelpView.xaml.cs">
-      <DependentUpon>HelpView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HighscoresView.xaml.cs">
       <DependentUpon>HighscoresView.xaml</DependentUpon>
@@ -196,10 +191,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\GameView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\HelpView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

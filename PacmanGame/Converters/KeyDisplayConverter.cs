@@ -9,6 +9,9 @@ using System.Windows.Input;
 
 namespace PacmanGame.Converters
 {
+    /// <summary>
+    /// Converter for displaying player's control keys. 
+    /// </summary>
     public class KeyDisplayConverter : IMultiValueConverter
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)

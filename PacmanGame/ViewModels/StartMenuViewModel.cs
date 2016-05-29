@@ -59,12 +59,6 @@ namespace PacmanGame.ViewModels
             _viewModelChanger.ChangeCurrentViewModel("Options");
         }
 
-        [OnCommand("ShowHelpCommand")]
-        protected virtual void ShowHelp()
-        {
-            _viewModelChanger.ChangeCurrentViewModel("Help");
-        }
-
         [OnCommand("ExitCommand")]
         protected virtual void Exit()
         {

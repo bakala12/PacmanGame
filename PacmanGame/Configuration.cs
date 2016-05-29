@@ -24,7 +24,6 @@ namespace PacmanGame
             builder.RegisterType<PauseViewModel>().AsSelf();
             builder.RegisterType<HighscoresViewModel>().AsSelf();
             builder.RegisterType<OptionsViewModel>().AsSelf();
-            builder.RegisterType<HelpViewModel>().AsSelf();
 
             builder.RegisterType<MainWindowViewModel>().AsImplementedInterfaces().AsSelf();
 

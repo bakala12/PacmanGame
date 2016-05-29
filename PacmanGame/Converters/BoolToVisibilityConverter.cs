@@ -9,6 +9,9 @@ using System.Windows.Data;
 
 namespace PacmanGame.Converters
 {
+    /// <summary>
+    /// Converts a bool to Visibility object to support bindings. 
+    /// </summary>
     public class BoolToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

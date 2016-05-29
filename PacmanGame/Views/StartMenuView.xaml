@@ -27,14 +27,12 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Button Content="Nowa gra" Command="{Binding NewGameCommand}" Grid.Row="0" Style="{StaticResource StartMenuButtonStyle}"/>
             <Button Content="Wczytaj grę" Command="{Binding LoadGameCommand}" Grid.Row="1" Style="{StaticResource StartMenuButtonStyle}"/>
             <Button Content="Najlepsze wyniki" Command="{Binding ShowHighscoresCommand}" Grid.Row="2" Style="{StaticResource StartMenuButtonStyle}"/>
             <Button Content="Ustawienia" Command="{Binding ShowOptionsCommand}" Grid.Row="3" Style="{StaticResource StartMenuButtonStyle}"/>
-            <Button Content="Pomoc" Command="{Binding ShowHelpCommand}" Grid.Row="4" Style="{StaticResource StartMenuButtonStyle}"/>
-            <Button Content="Wyjście" Command="{Binding ExitCommand}" Grid.Row="5" Style="{StaticResource StartMenuButtonStyle}"/>
+            <Button Content="Wyjście" Command="{Binding ExitCommand}" Grid.Row="4" Style="{StaticResource StartMenuButtonStyle}"/>
         </Grid>
     </Grid>
 </UserControl>

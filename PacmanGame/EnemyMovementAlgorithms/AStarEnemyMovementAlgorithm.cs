@@ -13,6 +13,9 @@ using PacmanGame.MainInterfaces;
 
 namespace PacmanGame.EnemyMovementAlgorithms
 {
+    /// <summary>
+    /// An implementation of enemy movement using A* algorithm.
+    /// </summary>
     public class AStarEnemyMovementAlgorithm : IMovementAlgorithm
     {
         private readonly IGraph _graph;
@@ -20,6 +23,13 @@ namespace PacmanGame.EnemyMovementAlgorithms
         private readonly int _width;
         private readonly int _height;
 
+        /// <summary>
+        /// Initializes a new instance of AStarEnemyMovementAlgorithm object.
+        /// </summary>
+        /// <param name="graph">Graph representing the gameboard.</param>
+        /// <param name="player">An element representing player.</param>
+        /// <param name="width">Width of the board (number of columns).</param>
+        /// <param name="height">Hight of the board (number of rows).</param>
         public AStarEnemyMovementAlgorithm(IGraph graph, IGameElement player, int width, int height)
         {
             if(graph==null) throw new ArgumentNullException(nameof(graph));
@@ -30,6 +40,12 @@ namespace PacmanGame.EnemyMovementAlgorithms
             _height = height;
         }
 
+        /// <summary>
+        /// Implementation of IMovementAlgorithm interface. 
+        /// Provides a direction of movement for the given enemy.
+        /// </summary>
+        /// <param name="enemy">The enemy that should be moved.</param>
+        /// <returns>The suggested direction of movement for the given enemy.</returns>
         public Direction ProvideDirection(Enemy enemy)
         {
             int start = _width*(int)enemy.X + (int)enemy.Y;

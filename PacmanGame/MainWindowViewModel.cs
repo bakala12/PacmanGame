@@ -28,7 +28,6 @@ namespace PacmanGame
             var vm = new List<ViewModelBase>
             {
                 new StartMenuViewModel(this, gameSerializer),
-                new HelpViewModel(),
                 new OptionsViewModel(this, validator),
                 new HighscoresViewModel(highscores),
                 new GameViewModel(builder, this, this, provider),

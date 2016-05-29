@@ -8,10 +8,6 @@
         <screens:StartMenuView/>
     </DataTemplate>
     
-    <DataTemplate DataType="{x:Type vm:HelpViewModel}">
-        <screens:HelpView/>
-    </DataTemplate>
-    
     <DataTemplate DataType="{x:Type vm:HighscoresViewModel}">
         <screens:HighscoresView/>
     </DataTemplate>

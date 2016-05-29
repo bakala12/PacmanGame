@@ -8,6 +8,9 @@ using System.Windows.Data;
 
 namespace PacmanGame.Converters
 {
+    /// <summary>
+    /// Converter user for displaying player's number of lifes.
+    /// </summary>
     public class LifesConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
