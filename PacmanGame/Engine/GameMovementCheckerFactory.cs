@@ -8,13 +8,18 @@ using PacmanGame.MainInterfaces;
 
 namespace PacmanGame.Engine
 {
+    /// <summary>
+    /// A factory that produces IGameMovementChecker instance. This is implemented as singleton.
+    /// </summary>
     public class GameMovementCheckerFactory
     {
         private GameMovementCheckerFactory() { }
-
         private static readonly object SyncRoot = new object();
         private static GameMovementCheckerFactory _instance;
 
+        /// <summary>
+        /// Gets the instane of GameMovementCheckerFactory.
+        /// </summary>
         public static GameMovementCheckerFactory Instance
         {
             get
@@ -31,6 +36,11 @@ namespace PacmanGame.Engine
             }
         }
 
+        /// <summary>
+        /// Creates new instance of IGameMovementChecker.
+        /// </summary>
+        /// <param name="gameBoard">The gameboard for which IGameMovementChceker is initialized.</param>
+        /// <returns>A newly instance of IGameMovementChecker.</returns>
         public IGameMovementChecker CreateUpdateChecker(GameBoard gameBoard)
         {
             return new GameMovementChecker(gameBoard);

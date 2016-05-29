@@ -11,13 +11,20 @@ using PropertyChanged;
 
 namespace PacmanGame.Highscores
 {
+    /// <summary>
+    /// Represents the list of highscores in the game.
+    /// </summary>
     [ImplementPropertyChanged]
     public class HighscoreList
     {
         private readonly IComparer<Highscore> _comparer = new HighscoreComparer();
         private uint _rememberedHighscoresCount;
-        private ISettingsProvider _provider;
+        private readonly ISettingsProvider _provider;
 
+        /// <summary>
+        /// Initializes an new instance of HighscoreList.
+        /// </summary>
+        /// <param name="provider">An object which can provide some information about the list.</param>
         public HighscoreList(ISettingsProvider provider)
         {
             if(provider==null) throw new ArgumentNullException(nameof(provider));
@@ -25,8 +32,15 @@ namespace PacmanGame.Highscores
             RefreshList();
         }
 
+        /// <summary>
+        /// Gets the list of highscores.
+        /// </summary>
         public List<Highscore> Highscores { get; protected set; }
 
+        /// <summary>
+        /// Adds new highscore to the list.
+        /// </summary>
+        /// <param name="highscore">Highscore object to be added.</param>
         public void AddHighscore(Highscore highscore)
         {
             if(highscore==null)
@@ -36,6 +50,9 @@ namespace PacmanGame.Highscores
             SaveChanges();
         }
 
+        /// <summary>
+        /// Clears all highscores in the list.
+        /// </summary>
         public void ClearAllHighscores()
         {
             Highscores.Clear();
@@ -49,6 +66,9 @@ namespace PacmanGame.Highscores
             RefreshList();
         }
 
+        /// <summary>
+        /// Refreshes the list of highscores.
+        /// </summary>
         public void RefreshList()
         {
             Highscores = _provider.Highscores ?? new List<Highscore>();
@@ -56,7 +76,12 @@ namespace PacmanGame.Highscores
             RemoveRendundantElements();
         }
 
-        public bool IsHighscore(Highscore highscore)
+        /// <summary>
+        /// Returns the information whether the given element can be a new highscore.
+        /// </summary>
+        /// <param name="highscore">The highscore to be tested.</param>
+        /// <returns>True if the given element can be a new highscore, otherwise false.</returns>
+        public bool IsNewHighscore(Highscore highscore)
         {
             return Highscores.Count < _rememberedHighscoresCount || _comparer.Compare(highscore, Highscores.Last()) <0;
         }

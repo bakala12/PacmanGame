@@ -104,7 +104,7 @@ namespace PacmanGame.Engine
         }
         private void ConfigureLifesGeneratior()
         { 
-            _lifesGenerator = new AdditionalLifeGenerator(_coinsPosition);
+            _lifesGenerator = new AdditionalLifeGenerator(_coinsPosition, _provider.AdditionalLifeGenerationInterval);
             _lifesGenerator.Generated += (sender, args) =>
             {
                 BonusLife life = _lifesGenerator.GeneratedLife;

@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace PacmanGame.Graph
 {
+    /// <summary>
+    /// Extends IGraph interface with A* algorithm computations.
+    /// </summary>
     public static class GraphExtender
     {
-        public static int? GetEdgeWeight(this IGraph graph, int start, int end)
-        {
-            if (graph.Neighbours[start].Contains(end)) return 1;
-            else return null;
-        }
-
+        /// <summary>
+        /// Finds the shortest path in the graph from start to end.
+        /// </summary>
+        /// <param name="graph">The graph.</param>
+        /// <param name="start">The start verticle.</param>
+        /// <param name="end">The end verticle.</param>
+        /// <param name="cost">The output parameter giving information about the cost of the shortest path.</param>
+        /// <returns></returns>
         public static int AStar(this IGraph graph, int start, int end, out int cost)
         {
             HashSet<int> close = new HashSet<int>();

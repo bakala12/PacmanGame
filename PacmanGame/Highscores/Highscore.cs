@@ -6,14 +6,25 @@ using System.Threading.Tasks;
 
 namespace PacmanGame.Highscores
 {
+    /// <summary>
+    /// An object representing a highscore in the game.
+    /// </summary>
     public class Highscore
     {
         private TimeSpan _gameTime;
         private uint _time;
 
+        /// <summary>
+        /// Gets or sets the name of the player.
+        /// </summary>
         public string PlayerName { get; set; }
+        /// <summary>
+        /// Gets or sets the amount of points.
+        /// </summary>
         public uint Points { get; set; }
-
+        /// <summary>
+        /// Gets or sets the time of the game.
+        /// </summary>
         public TimeSpan GameTime
         {
             get { return _gameTime; }
@@ -23,7 +34,9 @@ namespace PacmanGame.Highscores
                 Time = (uint)_gameTime.TotalSeconds;
             }
         }
-
+        /// <summary>
+        /// Gets or sets the total game time in secunds.
+        /// </summary>
         public uint Time
         {
             get { return _time; }

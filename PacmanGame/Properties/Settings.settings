@@ -40,5 +40,8 @@
     <Setting Name="BoardFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)">/Resources/example_board.board</Value>
     </Setting>
+    <Setting Name="AdditionalLifeGenerationInterval" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">00:01:00</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

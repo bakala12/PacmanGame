@@ -17,7 +17,7 @@ namespace PacmanGame.ViewModels
         protected override void OnViewAppeared()
         {
             _highscores.RefreshList();
-            IsHighscore = _highscores.IsHighscore(CreateHighscore());
+            IsHighscore = _highscores.IsNewHighscore(CreateHighscore());
             PlayerName = null;
         }
 

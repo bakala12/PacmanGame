@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using PacmanGame.Highscores;
 
@@ -17,6 +18,7 @@ namespace PacmanGame.MainInterfaces
         uint BoardWidth { get; }
         uint BoardHeight { get; }
         string BoardFilePath { get; }
+        TimeSpan AdditionalLifeGenerationInterval { get; }
         void Save();
     }
 }

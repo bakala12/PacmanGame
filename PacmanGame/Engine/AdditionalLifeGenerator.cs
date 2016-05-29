@@ -8,33 +8,52 @@ using GameControls.Elements;
 
 namespace PacmanGame.Engine
 {
+
     public class AdditionalLifeGenerator
     {
-        public event EventHandler Generated;
         private readonly DispatcherTimer _timer;
         private readonly IList<Tuple<int, int>> _coinsPositions;
         private readonly Random _random = new Random();
 
-        public AdditionalLifeGenerator(IList<Tuple<int, int>> coinsPositions)
+        /// <summary>
+        /// An event which is raised when the new bonus has been generated.
+        /// </summary>
+        public event EventHandler Generated;
+
+        /// <summary>
+        /// Initializes a new instance of AdditionalLifeGenerator.
+        /// </summary>
+        /// <param name="coinsPositions">A list of coins' positions.</param>
+        /// <param name="interval">The time interval between two generation of bonuses.</param>
+        public AdditionalLifeGenerator(IList<Tuple<int, int>> coinsPositions, TimeSpan interval)
         {
             _coinsPositions = coinsPositions;
             _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromMinutes(1);
+            _timer.Interval = interval;
             _timer.Tick += (sender, args) => Generate();
         }
 
+        /// <summary>
+        /// Starts working the AdditionalLifeGenerator.
+        /// </summary>
         public void Start()
         {
             GeneratedLife = null;
             _timer.Start();
         }
 
+        /// <summary>
+        /// Stops working the AdditionalLifeGenerator.
+        /// </summary>
         public void Stop()
         {
             GeneratedLife = null;
             _timer.Stop();
         }
 
+        /// <summary>
+        /// Perform generation of new BonusLife.
+        /// </summary>
         protected virtual void Generate()
         {
             GeneratedLife = new BonusLife(TimeSpan.FromSeconds(10));
@@ -44,6 +63,9 @@ namespace PacmanGame.Engine
             Generated?.Invoke(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// Gets the generated BonusLife object.
+        /// </summary>
         public BonusLife GeneratedLife { get; protected set; }
     }
 }

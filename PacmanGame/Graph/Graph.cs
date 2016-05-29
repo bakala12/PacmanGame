@@ -8,12 +8,27 @@ using GameControls.Interfaces;
 
 namespace PacmanGame.Graph
 {
+    /// <summary>
+    /// Simple implementation of IGraph interface used in the game.
+    /// </summary>
     public class Graph : IGraph
     {
         private readonly bool[,] _blocks;
+        
+        /// <summary>
+        /// Gets the number of verticles in the graph.
+        /// </summary>
         public int VerticlesCount { get; private set; }
+
+        /// <summary>
+        /// Gets the array which illustrates edges in the graph.
+        /// </summary>
         public List<int>[] Neighbours { get; private set; }
 
+        /// <summary>
+        /// Creates a new graph with the specified GameBoard object.
+        /// </summary>
+        /// <param name="gameBoard">A GameBoard on which graph would be based on.</param>
         public Graph(GameBoard gameBoard)
         {
             var blocks = gameBoard.Elements.OfType<Block>();
@@ -27,6 +42,10 @@ namespace PacmanGame.Graph
             ConstructPortals(gameBoard);
         }
 
+        /// <summary>
+        /// Creates a new graph with the specified array which gives information about the gameboard structure.
+        /// </summary>
+        /// <param name="blocks">An array which gives information about the gameboard structure.</param>
         public Graph(bool[,] blocks)
         {
             this._blocks = blocks;

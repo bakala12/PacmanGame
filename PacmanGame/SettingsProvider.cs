@@ -25,6 +25,7 @@ namespace PacmanGame
             BoardWidth = Settings.Default.BoardWidth;
             BoardHeight = Settings.Default.BoardHeight;
             BoardFilePath = Settings.Default.BoardFilePath;
+            AdditionalLifeGenerationInterval = Settings.Default.AdditionalLifeGenerationInterval;
         }
 
         public Key LeftKey { get; set; }
@@ -38,6 +39,7 @@ namespace PacmanGame
         public uint BoardWidth { get; }
         public uint BoardHeight { get; }
         public string BoardFilePath { get; }
+        public TimeSpan AdditionalLifeGenerationInterval { get; }
 
         public void Save()
         {
