@@ -8,6 +8,7 @@ using GameControls.Board;
 using GameControls.Elements;
 using GameControls.Interfaces;
 using GameControls.Others;
+using PacmanGame.Extensions;
 using PacmanGame.Graph;
 using PacmanGame.MainInterfaces;
 
@@ -92,6 +93,24 @@ namespace PacmanGame.Engine
             return rect1;
         }
 
+        protected Rect? TryMoveViaPortal(MovableElement movable, Direction direction)
+        {
+            Rect m = TryMove(movable, direction);
+            Portal p=null;
+            foreach (var portal in _gameBoard.Elements.OfType<Portal>())
+            {
+                if (CheckCollision(portal, m))
+                {
+                    if (p == null)
+                    {
+                        m=new Rect(new Point(portal.X, portal.Y), new Size(1,1));
+                        p = portal;
+                    }
+                }
+            }
+            return p!=null ? (Rect?)new Rect(new Point(movable.X, movable.Y), new Size(1,1)) : null;
+        }
+
         protected static bool CheckBoardMovementPossibility(Rect rect, GameBoard gameBoard)
         {
             Rect boardRect = new Rect(new Point(0,0), new Size(gameBoard.Rows, gameBoard.Columns));
@@ -128,10 +147,11 @@ namespace PacmanGame.Engine
         {
             if (movable == null) return false;
             if (direction == Direction.None) return false;
-            Rect rect = TryMove(movable, direction);
+            Rect rect = TryMoveViaPortal(movable, direction) ?? TryMove(movable, direction);
             bool b = true;
             foreach (var el in _gameBoard.Elements.OfType<T>())
             {
+                if(el.Equals(movable)) continue;
                 b = b && CheckCollision(el, rect);
             }
             return CheckBoardMovementPossibility(rect, _gameBoard) && CheckMovement(movable, direction, _gameBoard) && b;

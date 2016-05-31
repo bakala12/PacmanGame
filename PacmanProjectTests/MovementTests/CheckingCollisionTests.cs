@@ -81,8 +81,9 @@ namespace PacmanProjectTests.MovementTests
         }
 
         [Theory]
-        [InlineData(true, new double[] {0,0,1,1,2,0})]
-        [InlineData(false, new double[] {0,0,1,1,2,3})]
+        [InlineData(false, new double[] {0,0,1,1,2,0})]
+        [InlineData(false, new double[] { 0, 0, 1, 1, 0, 2 })]
+        [InlineData(false, new double[] {0,0,1,1,2,2})]
         private async Task CheckEnemiesMovement(bool result, double[] positions)
         {
             await GameBoardHelper.StartStaTask(() =>
@@ -94,17 +95,19 @@ namespace PacmanProjectTests.MovementTests
                 player.Object.X = positions[0];
                 player.Object.Y = positions[1];
                 var alg = new AStarEnemyMovementAlgorithm(graph, player.Object, (int)_width, (int)_height);
-                var e1 = new Mock<Enemy>();
-                e1.Object.X = positions[2];
-                e1.Object.Y = positions[3];
-                e1.Object.MovementAlgorithm = alg;
-                var e2 = new Mock<Enemy>();
-                e2.Object.X = positions[4];
-                e2.Object.Y = positions[5];
-                e2.Object.MovementAlgorithm = alg;
-                IEnemyMovementManager manager = new TimeEnemyMovementManager(new [] {e1.Object,e2.Object}, checker, TimeSpan.FromSeconds(1));
+                var e1 = new Enemy();
+                e1.X = positions[2];
+                e1.Y = positions[3];
+                e1.MovementAlgorithm = alg;
+                var e2 = new Enemy();
+                e2.X = positions[4];
+                e2.Y = positions[5];
+                e2.MovementAlgorithm = alg;
+                _gameBoard.Children.Add(e1);
+                _gameBoard.Children.Add(e2);
+                IEnemyMovementManager manager = new TimeEnemyMovementManager(new [] {e1,e2}, checker, TimeSpan.FromSeconds(1));
                 manager.MoveEnemies();
-                bool res = checker.CheckCollision(e1.Object, e2.Object);
+                bool res = checker.CheckCollision(e1, e2);
                 Assert.Equal(result, res);
             });
         }

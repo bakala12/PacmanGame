@@ -70,8 +70,12 @@
     <Compile Include="GameBoardHelper.cs" />
     <Compile Include="MovementTests\CheckingCollisionTests.cs" />
     <Compile Include="GraphTests\AStarTest.cs" />
+    <Compile Include="OtherTests\ControlKeysTests.cs" />
+    <Compile Include="OtherTests\HighscoresTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GraphTests\PriorityQueueTests.cs" />
+    <Compile Include="TestHaveControlKeys.cs" />
+    <Compile Include="TestSettingsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
