@@ -18,8 +18,15 @@ namespace PacmanGame.ViewModels
     /// </summary>
     public class PauseViewModel : CloseableViewModel
     {
+        private bool _savedGame;
         private readonly IViewModelChanger _viewModelChanger;
         private readonly IGameSerializer _gameSerializer;
+
+        protected override void OnViewAppeared()
+        {
+            base.OnViewAppeared();
+            _savedGame = false;
+        }
 
         /// <summary>
         /// Initializes a new instance of PauseViewModel object.
@@ -50,6 +57,7 @@ namespace PacmanGame.ViewModels
                 {
                     string path = Path.GetFullPath(dialog.FileName);
                     _gameSerializer.SaveGame(state, path);
+                    _savedGame = true;
                     MessageBox.Show("Zapisano", string.Empty, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception)
@@ -66,8 +74,8 @@ namespace PacmanGame.ViewModels
         [OnCommand("BackToMenuCommand")]
         public virtual void BackToMenu()
         {
-            if (MessageBoxResult.OK == MessageBox.Show("Jeśli przejdziesz do menu stracisz niezapisany postęp gry. Czy na pewno chcesz powrócić do menu?" +
-                                                       "", "Uwaga", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
+            if (_savedGame || (MessageBoxResult.OK == MessageBox.Show("Jeśli przejdziesz do menu stracisz niezapisany postęp gry. Czy na pewno chcesz powrócić do menu?" +
+                                                       "", "Uwaga", MessageBoxButton.YesNoCancel, MessageBoxImage.Question)))
             {
                 _viewModelChanger?.ChangeCurrentViewModel("StartMenu");
             }
