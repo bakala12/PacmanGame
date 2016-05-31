@@ -14,6 +14,9 @@ using PacmanGame.Serialization;
 
 namespace PacmanGame.ViewModels
 {
+    /// <summary>
+    /// Represents a view model associated with the GameView.
+    /// </summary>
     public class GameViewModel : CloseableViewModel
     {
         private readonly IGameBuilder _builder;
@@ -21,10 +24,23 @@ namespace PacmanGame.ViewModels
         private readonly IViewModelChanger _viewModelChanger;
         private readonly ISettingsProvider _provider;
 
+        /// <summary>
+        /// Gets the GameBoard.
+        /// </summary>
         public GameBoard GameBoard { get; protected set; }
 
+        /// <summary>
+        /// Gets the GameEngine.
+        /// </summary>
         public GameEngine GameEngine { get; protected set; }
 
+        /// <summary>
+        /// Initializes a new instance of GameViewModel object.
+        /// </summary>
+        /// <param name="builder">An object that builds core game objects.</param>
+        /// <param name="viewModelChanger">An object that changes views in the application.</param>
+        /// <param name="accessor">An object that have access to control keys.</param>
+        /// <param name="provider">An object that provides some configuration settings used in the game.</param>
         public GameViewModel(IGameBuilder builder, IViewModelChanger viewModelChanger, IHaveControlKeys accessor, ISettingsProvider provider) : base("Game")
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
@@ -44,11 +60,18 @@ namespace PacmanGame.ViewModels
             GameEngine?.EnemyMovementManager?.Start();
         }
 
+        /// <summary>
+        /// Starts new game.
+        /// </summary>
         public virtual void StartGame()
         {
             StartGame(null);
         }
 
+        /// <summary>
+        /// Starts new game with the given state.
+        /// </summary>
+        /// <param name="state">The state of the game.</param>
         public virtual void StartGame(GameState state)
         {
             GameBoard = _builder.BuildBoard(state);
@@ -57,6 +80,10 @@ namespace PacmanGame.ViewModels
             player.Dead += (x,e)=> OnGameEnded();
         }
 
+        /// <summary>
+        /// Moves the player in the specified direction.
+        /// </summary>
+        /// <param name="parameter">Informs about the movement direction.</param>
         [OnCommand("MoveCommand")]
         public virtual void MovePlayer(object parameter)
         {
@@ -71,6 +98,9 @@ namespace PacmanGame.ViewModels
             GameEngine.MovePlayer(direction);
         }
 
+        /// <summary>
+        /// Switches to the pause mode.
+        /// </summary>
         [OnCommand("PauseCommand")]
         public virtual void Pause()
         {
@@ -79,6 +109,9 @@ namespace PacmanGame.ViewModels
             _viewModelChanger.ChangeCurrentViewModel("Pause");
         }
 
+        /// <summary>
+        /// Switches to the EndGame view.
+        /// </summary>
         public virtual void OnGameEnded()
         {
             GameEngine.Timer.Stop();

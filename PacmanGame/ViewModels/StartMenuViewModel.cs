@@ -14,11 +14,19 @@ using PacmanGame.Serialization;
 
 namespace PacmanGame.ViewModels
 {
+    /// <summary>
+    /// Represents a view model associated with the start menu view.
+    /// </summary>
     public class StartMenuViewModel : ViewModelBase
     {
         private readonly IViewModelChanger _viewModelChanger;
         private readonly IGameSerializer _gameSerializer;
 
+        /// <summary>
+        /// Initializes a new instance of StartMenuViewModel object.
+        /// </summary>
+        /// <param name="viewModelChanger">An object that changes the views in the application.</param>
+        /// <param name="gameSerializer">An object that serializes the game state.</param>
         public StartMenuViewModel(IViewModelChanger viewModelChanger, IGameSerializer gameSerializer) : base("StartMenu")
         {
             if (viewModelChanger == null) throw new ArgumentNullException(nameof(viewModelChanger));
@@ -27,6 +35,10 @@ namespace PacmanGame.ViewModels
             _gameSerializer = gameSerializer;
         }
 
+        /// <summary>
+        /// Starts new game.
+        /// </summary>
+        /// <param name="state">Game state. If the value is null then new game is started, otherwise the game is loaded from the state.</param>
         [OnCommand("NewGameCommand")]
         protected virtual void NewGame(GameState state = null)
         {
@@ -35,6 +47,9 @@ namespace PacmanGame.ViewModels
             _viewModelChanger?.ChangeCurrentViewModel("Game");
         }
 
+        /// <summary>
+        /// Loads the game.
+        /// </summary>
         [OnCommand("LoadGameCommand")]
         protected virtual void LoadGame()
         {
@@ -56,18 +71,27 @@ namespace PacmanGame.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigate to the highscores view.
+        /// </summary>
         [OnCommand("ShowHighscoresCommand")]
         protected virtual void ShowHighscores()
         {
             _viewModelChanger.ChangeCurrentViewModel("Highscores");
         }
 
+        /// <summary>
+        /// Navigate to the option view.
+        /// </summary>
         [OnCommand("ShowOptionsCommand")]
         protected virtual void ShowOptions()
         {
             _viewModelChanger.ChangeCurrentViewModel("Options");
         }
-
+        
+        /// <summary>
+        /// Exits the application.
+        /// </summary>
         [OnCommand("ExitCommand")]
         protected virtual void Exit()
         {

@@ -13,11 +13,19 @@ using PacmanGame.Serialization;
 
 namespace PacmanGame.ViewModels
 {
+    /// <summary>
+    /// Represents a view model associated with pause view in the application.
+    /// </summary>
     public class PauseViewModel : CloseableViewModel
     {
         private readonly IViewModelChanger _viewModelChanger;
         private readonly IGameSerializer _gameSerializer;
 
+        /// <summary>
+        /// Initializes a new instance of PauseViewModel object.
+        /// </summary>
+        /// <param name="viewModelChanger">An object that changes the views in the application.</param>
+        /// <param name="gameSerializer">An object that serializes the game state.</param>
         public PauseViewModel(IViewModelChanger viewModelChanger, IGameSerializer gameSerializer) : base("Pause")
         {
             if(viewModelChanger == null) throw new ArgumentNullException(nameof(viewModelChanger));
@@ -26,6 +34,9 @@ namespace PacmanGame.ViewModels
             _gameSerializer = gameSerializer;
         }
 
+        /// <summary>
+        /// Saves the game.
+        /// </summary>
         [OnCommand("SaveGameCommand")]
         public virtual void SaveGame()
         {
@@ -49,6 +60,9 @@ namespace PacmanGame.ViewModels
             }
         }
 
+        /// <summary>
+        /// Navigate back to the main menu.
+        /// </summary>
         [OnCommand("BackToMenuCommand")]
         public virtual void BackToMenu()
         {
