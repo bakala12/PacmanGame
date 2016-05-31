@@ -15,13 +15,25 @@ using PropertyChanged;
 
 namespace PacmanGame
 {
+    /// <summary>
+    /// The view model for the main window. 
+    /// This provides implementation of IViewModelChanger and IHaveControlKeys interfaces.
+    /// </summary>
     [ImplementPropertyChanged]
-    internal class MainWindowViewModel : IViewModelChanger, IHaveControlKeys
+    internal class MainWindowViewModel : ViewModelBase, IViewModelChanger, IHaveControlKeys
     {
         private readonly ISettingsProvider _provider;
 
+        /// <summary>
+        /// Initializes a new instance of MainWindowViewModel.
+        /// </summary>
+        /// <param name="builder">An object that is responsible for building core game objects.</param>
+        /// <param name="highscores">The list of the highscores in the game.</param>
+        /// <param name="gameSerializer">An object that is responsible for saving and loading GameState.</param>
+        /// <param name="validator">An object that validates control keys used in the game.</param>
+        /// <param name="provider">An object that provides some configuration settings used in the game.</param>
         public MainWindowViewModel(IGameBuilder builder, HighscoreList highscores, IGameSerializer gameSerializer,
-            IKeysValidator validator, ISettingsProvider provider)
+            IKeysValidator validator, ISettingsProvider provider) : base("Main")
         {
             if(provider==null) throw new ArgumentNullException(nameof(provider));
             _provider = provider;
@@ -36,12 +48,12 @@ namespace PacmanGame
             };
             foreach (var result in vm.OfType<CloseableViewModel>())
             {
-                result.RequestClose += (sender, args) => OnClose((sender as ViewModelBase)?.Name);
+                result.RequestClose += (sender, args) => OnCloseView((sender as ViewModelBase)?.Name);
             }
             ViewModels = vm;
         }
 
-        private void OnClose(string name)
+        private void OnCloseView(string name)
         {
             if (name == "Help" || name == "Options" || name == "Highscores" || name == "EndGame")
             {
@@ -53,20 +65,30 @@ namespace PacmanGame
             }
         }
 
+        /// <summary>
+        /// Gets the list of supported view models.
+        /// </summary>
         public IList<ViewModelBase> ViewModels { get; }
 
         private ViewModelBase _currentViewModel;
 
+        /// <summary>
+        /// Gets the view model associated with the currently displaying view in the application.
+        /// </summary>
         public ViewModelBase CurrentViewModel
         {
             get { return _currentViewModel; }
-            set
+            private set
             {
                 _currentViewModel = value;      
                 (CurrentViewModel as CloseableViewModel)?.RaiseViewAppearedEvent();
             }
         }
 
+        /// <summary>
+        /// Changes currently displaying view.
+        /// </summary>
+        /// <param name="name">The name of the view to be displayed.</param>
         public void ChangeCurrentViewModel(string name)
         {
             if (string.IsNullOrEmpty(name)) return;
@@ -75,6 +97,11 @@ namespace PacmanGame
             CurrentViewModel = viewModel;
         }
 
+        /// <summary>
+        /// Gets the ViewModelBase object specified by the given name.
+        /// </summary>
+        /// <param name="name">The name f the view model.</param>
+        /// <returns>A view model associated with the given name.</returns>
         public ViewModelBase GetViewModelByName(string name)
         {
             if (string.IsNullOrEmpty(name))
@@ -86,30 +113,42 @@ namespace PacmanGame
         }
 
         #region IHaveControlKeys implementation
-
-        public Key UpKey { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Key that move player in left direction.
+        /// </summary>
         public Key LeftKey { get; set; }
-
-        public Key DownKey { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Key that move player in right direction.
+        /// </summary>
         public Key RightKey { get; set; }
-
+        /// <summary>
+        /// Gets or sets the Key that move player in up direction.
+        /// </summary>
+        public Key UpKey { get; set; }
+        /// <summary>
+        /// Gets or sets the Key that move player in down direction.
+        /// </summary>
+        public Key DownKey { get; set; }
+        /// <summary>
+        /// Loads the current configuration of control keys.
+        /// </summary>
         public void LoadControlKeys()
         {
-            LeftKey = Settings.Default.LeftKey;
+            LeftKey = _provider.LeftKey;
             RightKey = _provider.RightKey;
             UpKey = _provider.UpKey;
-            DownKey = Settings.Default.DownKey;
+            DownKey = _provider.DownKey;
         }
-
+        /// <summary>
+        /// Saves the current configuration of control keys.
+        /// </summary>
         public void SaveControlKeys()
         {
-            Settings.Default.DownKey = DownKey;
-            Settings.Default.LeftKey = LeftKey;
-            Settings.Default.RightKey = RightKey;
-            Settings.Default.UpKey = UpKey;
-            Settings.Default.Save();
+            _provider.DownKey = DownKey;
+            _provider.LeftKey = LeftKey;
+            _provider.RightKey = RightKey;
+            _provider.UpKey = UpKey;
+            _provider.Save();
         }
         #endregion
     }

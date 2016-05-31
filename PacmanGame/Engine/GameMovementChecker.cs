@@ -13,17 +13,30 @@ using PacmanGame.MainInterfaces;
 
 namespace PacmanGame.Engine
 {
+    /// <summary>
+    /// Simple implementation of IGameMovementChecker using for checking collisions on GameBoard.
+    /// </summary>
     public class GameMovementChecker : IGameMovementChecker
     {
         private readonly GameBoard _gameBoard;
         private readonly IGraph _graph;
 
+        /// <summary>
+        /// Initializes a new instance of GameMovementChecker with the specified gameboard.
+        /// </summary>
+        /// <param name="board">The GameBoard object used as an environment for checking collisions.</param>
         public GameMovementChecker(GameBoard board)
         {
             _gameBoard = board;
             _graph = new Graph.Graph(board);
         }
 
+        /// <summary>
+        /// Checks collision between two elements.
+        /// </summary>
+        /// <param name="element1">The first element to check.</param>
+        /// <param name="element2">The secund element to check.</param>
+        /// <returns>True if the elements have collision, otherwise false.</returns>
         public bool CheckCollision(IGameElement element1, IGameElement element2)
         {
             if (element1 == null || element2 == null) return false;
@@ -44,6 +57,12 @@ namespace PacmanGame.Engine
             return !intersection.IsEmpty && intersection.Width > 0 && intersection.Height > 0;
         }
 
+        /// <summary>
+        /// Checks whether the specified element can be moved in the specified direction.
+        /// </summary>
+        /// <param name="movable">The element to check.</param>
+        /// <param name="direction">Movement direction</param>
+        /// <returns>True if the element can be moved in a specified direction, otherwise false.</returns>
         public bool CheckMovement(MovableElement movable, Direction direction)
         {
             if (direction == Direction.None) return false;
@@ -98,6 +117,13 @@ namespace PacmanGame.Engine
             }
         }
 
+        /// <summary>
+        /// Checks whether there is the element of the specified type next to the given element in the specified direction.
+        /// </summary>
+        /// <typeparam name="T">Type of elements to check.</typeparam>
+        /// <param name="movable">The element to be check.</param>
+        /// <param name="direction">The direction in which elements would be tested.</param>
+        /// <returns>True if there is the element of the specified type next to the given element in the specified direction, otherwise false.</returns>
         public bool IsElementNextTo<T>(MovableElement movable, Direction direction) where T : ICanCollide
         {
             if (movable == null) return false;

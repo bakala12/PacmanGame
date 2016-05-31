@@ -16,6 +16,9 @@ using PropertyChanged;
 
 namespace PacmanGame.Engine
 {
+    /// <summary>
+    /// Core logic for all game features.
+    /// </summary>
     [ImplementPropertyChanged]
     public class GameEngine
     {
@@ -28,12 +31,33 @@ namespace PacmanGame.Engine
         private readonly ISettingsProvider _provider;
         private IGraph _graph;
 
+        /// <summary>
+        /// Gets the timer used for measuring time in the game.
+        /// </summary>
         public ITimer Timer { get; protected set; }
+        /// <summary>
+        /// Gets the amount of points gained by the player.
+        /// </summary>
         public uint Points { get; protected set; }
+        /// <summary>
+        /// Gets the difficulty of the game.
+        /// </summary>
         public uint Difficulty { get; protected set; }
+        /// <summary>
+        /// Gets the number of player's lifes in the game. 
+        /// </summary>
         public uint Lifes { get; protected set; }
+        /// <summary>
+        /// Gets the EnemyMovementChecker used for managing movements.
+        /// </summary>
         public IEnemyMovementManager EnemyMovementManager { get; private set; }
 
+        /// <summary>
+        /// Initializes a new instance of GameEngin object.
+        /// </summary>
+        /// <param name="builder">IGameBuilder object used for building core game objects.</param>
+        /// <param name="board">GameBoard used in the game.</param>
+        /// <param name="provider">Object which provides some useful game settings.</param>
         public GameEngine(IGameBuilder builder, GameBoard board, ISettingsProvider provider)
         {
             if (builder == null)
@@ -46,6 +70,10 @@ namespace PacmanGame.Engine
             _gameBoard = board;
         }
 
+        /// <summary>
+        /// Loads the game state and starts the game.
+        /// </summary>
+        /// <param name="state">The object stroing the state of the game.</param>
         public void Load(GameState state)
         {
             _movementChecker = GameMovementCheckerFactory.Instance.CreateUpdateChecker(_gameBoard);
@@ -61,11 +89,19 @@ namespace PacmanGame.Engine
             SetCoinsColleted();
             ConfigureLifesGeneratior();
         }
+        /// <summary>
+        /// Moves player into the specified direction.
+        /// </summary>
+        /// <param name="direction">The direction in which player should be moved.</param>
         public void MovePlayer(Direction direction)
         {
             if (!_movementChecker.CheckMovement(_player, direction)) return;
             _player.Move(direction);
         }
+        /// <summary>
+        /// Save the current state of the game and returns it. 
+        /// </summary>
+        /// <returns>An object storing the state of the game.</returns>
         public GameState SaveState()
         {
             GameState gameState = new GameState()

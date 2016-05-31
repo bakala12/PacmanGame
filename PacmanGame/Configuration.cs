@@ -6,8 +6,15 @@ using PacmanGame.ViewModels;
 
 namespace PacmanGame
 {
+    /// <summary>
+    /// Configuration of dependency injection container used in the application.
+    /// </summary>
     internal static class Configuration
     {
+        /// <summary>
+        /// Register application types and returs builded container.
+        /// </summary>
+        /// <returns>The container which can be used in the application.</returns>
         internal static IContainer Configure()
         {
             ContainerBuilder builder = new ContainerBuilder();

@@ -42,8 +42,17 @@ namespace PacmanGame.ViewModels
             dialog.Filter = "Pacman game state (*.pacsv)|*.pacsv";
             if (dialog.ShowDialog() == true)
             {
-                var state = _gameSerializer.LoadGame(Path.GetFullPath(dialog.FileName));
-                NewGame(state);
+                try
+                {
+                    var state = _gameSerializer.LoadGame(Path.GetFullPath(dialog.FileName));
+                    NewGame(state);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show(
+                        "Wystąpił błąd podczas ładowania stanu gry z pliku. Prawdopodobnie plik jest nieprawidłowy",
+                        "Błąd", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

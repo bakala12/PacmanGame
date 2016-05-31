@@ -35,16 +35,25 @@ namespace PacmanGame.ViewModels
             dialog.Filter = "Stan gry pacman (*.pacsv) | *.pacsv";
             if (dialog.ShowDialog() == true)
             {
-                string path = Path.GetFullPath(dialog.FileName);
-                _gameSerializer.SaveGame(state, path);
-                MessageBox.Show("Zapisano");
+                try
+                {
+                    string path = Path.GetFullPath(dialog.FileName);
+                    _gameSerializer.SaveGame(state, path);
+                    MessageBox.Show("Zapisano", string.Empty, MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Zapis stanu gry nie powiódł się.", "Błąd", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                }
             }
         }
 
         [OnCommand("BackToMenuCommand")]
         public virtual void BackToMenu()
         {
-            if (MessageBoxResult.OK == MessageBox.Show("Jeśli przejdziesz do menu stracisz niezapisany postęp gry", "Uwaga", MessageBoxButton.OKCancel))
+            if (MessageBoxResult.OK == MessageBox.Show("Jeśli przejdziesz do menu stracisz niezapisany postęp gry. Czy na pewno chcesz powrócić do menu?" +
+                                                       "", "Uwaga", MessageBoxButton.YesNoCancel, MessageBoxImage.Question))
             {
                 _viewModelChanger?.ChangeCurrentViewModel("StartMenu");
             }

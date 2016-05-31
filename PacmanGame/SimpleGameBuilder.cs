@@ -14,12 +14,19 @@ using PacmanGame.Serialization;
 
 namespace PacmanGame
 {
+    /// <summary>
+    /// Simple implementation of IGameBuilder used in the game.
+    /// </summary>
     internal class SimpleGameBuilder : IGameBuilder
     {
         private readonly string _path;
         private readonly uint _width;
         private readonly uint _height;
 
+        /// <summary>
+        /// Initializes a new instance of SimpleGameBuilder object with the given ISettingsProvider.
+        /// </summary>
+        /// <param name="provider">An object that stores some configuration values used in the game.</param>
         public SimpleGameBuilder(ISettingsProvider provider)
         {
             _path = provider.BoardFilePath;
@@ -27,6 +34,11 @@ namespace PacmanGame
             _height = provider.BoardHeight;
         }
 
+        /// <summary>
+        /// Builds the GameBoard based on the given GameState.
+        /// </summary>
+        /// <param name="gameState">An object which stores the state of the game.</param>
+        /// <returns>The newly builded GameBoard.</returns>
         public GameBoard BuildBoard(GameState gameState)
         {
             if (gameState == null)
@@ -36,11 +48,23 @@ namespace PacmanGame
             return new GameBoard(_width,_height, elements);
         }
 
+        /// <summary>
+        /// Builds the timer used in the game.
+        /// </summary>
+        /// <param name="gameState">An object which stores the state of the game.</param>
+        /// <returns>THe builded timer used in the game.</returns>
         public ITimer BuildTimer(GameState gameState)
         {
             return new GameTimer(gameState?.Time ?? TimeSpan.Zero, TimeSpan.FromSeconds(1));
         }
 
+        /// <summary>
+        /// Builds the GameEngine which manages all core game features.
+        /// </summary>
+        /// <param name="gameState">An object which stores the state of the game.</param>
+        /// <param name="board">The GameBoard used in the game.</param>
+        /// <param name="provider">The object that provide some configuration settings.</param>
+        /// <returns>The GameEngine object used in the game.</returns>
         public GameEngine BuildGameEngine(GameState gameState, GameBoard board, ISettingsProvider provider)
         {
             GameEngine engine = new GameEngine(this, board, provider);
