@@ -1,0 +1,2183 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PacmanGame</name>
+    </assembly>
+    <members>
+        <member name="T:PacmanGame.Configuration">
+            <summary>
+            Configuration of dependency injection container used in the application.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Configuration.Configure">
+            <summary>
+            Register application types and returs builded container.
+            </summary>
+            <returns>The container which can be used in the application.</returns>
+        </member>
+        <member name="T:PacmanGame.Converters.LifesConverter">
+            <summary>
+            Converter user for displaying player's number of lifes.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Converters.BoolToVisibilityConverter">
+            <summary>
+            Converts a bool to Visibility object to support bindings. 
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Converters.KeyDisplayConverter">
+            <summary>
+            Converter for displaying player's control keys. 
+            </summary>
+        </member>
+        <member name="T:PacmanGame.EnemyMovementAlgorithms.AStarEnemyMovementAlgorithm">
+            <summary>
+            An implementation of enemy movement using A* algorithm.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.EnemyMovementAlgorithms.AStarEnemyMovementAlgorithm.#ctor(PacmanGame.Graph.IGraph,GameControls.Interfaces.IGameElement,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of AStarEnemyMovementAlgorithm object.
+            </summary>
+            <param name="graph">Graph representing the gameboard.</param>
+            <param name="player">An element representing player.</param>
+            <param name="width">Width of the board (number of columns).</param>
+            <param name="height">Hight of the board (number of rows).</param>
+        </member>
+        <member name="M:PacmanGame.EnemyMovementAlgorithms.AStarEnemyMovementAlgorithm.ProvideDirection(GameControls.Elements.Enemy)">
+            <summary>
+            Implementation of IMovementAlgorithm interface. 
+            Provides a direction of movement for the given enemy.
+            </summary>
+            <param name="enemy">The enemy that should be moved.</param>
+            <returns>The suggested direction of movement for the given enemy.</returns>
+        </member>
+        <member name="T:PacmanGame.Extensions.InvokeCommandOnEventAction">
+            <summary>
+            Represents an action for Prism TriggerAction.
+            The action invokes 
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Extensions.InvokeCommandOnEventAction.Invoke(System.Object)">
+            <summary>
+            Invokes the action.
+            </summary>
+            <param name="parameter">The parameter to the action. If the action does not require a parameter, the 
+            parameter may be set to a null reference.
+            </param>
+        </member>
+        <member name="P:PacmanGame.Extensions.InvokeCommandOnEventAction.Command">
+            <summary>
+            Gets or sets the command that would be invoked as the action.
+            </summary>
+        </member>
+        <member name="F:PacmanGame.Extensions.InvokeCommandOnEventAction.CommandProperty">
+            <summary>
+            A dependency property for storing Command property value.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Extensions.MovementExtensions">
+            <summary>
+            Usefull set of extension methods for MovableElement and IGameMovementChecker.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Extensions.MovementExtensions.MoveViaPortal(GameControls.Elements.MovableElement,GameControls.Elements.Portal)">
+            <summary>
+            Moves the element via given portal from one endpoint to another.
+            </summary>
+            <param name="movable">The element which should be moved.</param>
+            <param name="portal">A portal object which gives information about where to move.</param>
+        </member>
+        <member name="M:PacmanGame.Extensions.MovementExtensions.CheckCollision(PacmanGame.MainInterfaces.IGameMovementChecker,GameControls.Interfaces.IGameElement,System.Collections.Generic.IEnumerable{GameControls.Interfaces.IGameElement})">
+            <summary>
+            Looks for collisions between the given element and the set of other elements.
+            </summary>
+            <param name="checker">The IGameMovementChecker instance.</param>
+            <param name="element">The element for testing collisions.</param>
+            <param name="obstacles">Another elements to test collision with the given element.</param>
+            <returns>True if the element has collision with at least one from the given obstacles, otherwise false.</returns>
+        </member>
+        <member name="M:PacmanGame.Extensions.MovementExtensions.CheckCollision(PacmanGame.MainInterfaces.IGameMovementChecker,GameControls.Interfaces.IGameElement,System.Collections.Generic.IEnumerable{GameControls.Interfaces.IGameElement},System.Boolean)">
+            <summary>
+            Looks for collisions between the given element and the set of other elements.
+            </summary>
+            <param name="checker">The IGameMovementChecker instance.</param>
+            <param name="element">The element for testing collisions.</param>
+            <param name="obstacles">Another elements to test collision with the given element.</param>
+            <param name="checkElementInObstacles">Specifies whether the testing element is in the given collection of obstacles.
+            If true it wouldn't be testet for collision.</param>
+            <returns>True if the element has collision with at least one from the given obstacles, otherwise false.</returns>
+        </member>
+        <member name="E:PacmanGame.Engine.AdditionalLifeGenerator.Generated">
+            <summary>
+            An event which is raised when the new bonus has been generated.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.AdditionalLifeGenerator.#ctor(System.Collections.Generic.IList{System.Tuple{System.Int32,System.Int32}},System.TimeSpan)">
+            <summary>
+            Initializes a new instance of AdditionalLifeGenerator.
+            </summary>
+            <param name="coinsPositions">A list of coins' positions.</param>
+            <param name="interval">The time interval between two generation of bonuses.</param>
+        </member>
+        <member name="M:PacmanGame.Engine.AdditionalLifeGenerator.Start">
+            <summary>
+            Starts working the AdditionalLifeGenerator.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.AdditionalLifeGenerator.Stop">
+            <summary>
+            Stops working the AdditionalLifeGenerator.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.AdditionalLifeGenerator.Generate">
+            <summary>
+            Perform generation of new BonusLife.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Engine.AdditionalLifeGenerator.GeneratedLife">
+            <summary>
+            Gets the generated BonusLife object.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Engine.TimeEnemyMovementManager">
+            <summary>
+            An implementation of IEnemyMovementManager which moves the enemies with the time interval.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Engine.TimeEnemyMovementManager.Enemies">
+            <summary>
+            Gets the collection of the enemies.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Engine.TimeEnemyMovementManager.MovementInterval">
+            <summary>
+            Gets the time between enemies are moved.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.TimeEnemyMovementManager.#ctor(System.Collections.Generic.IEnumerable{GameControls.Elements.Enemy},PacmanGame.MainInterfaces.IGameMovementChecker,PacmanGame.MainInterfaces.ISettingsProvider)">
+            <summary>
+            Initializes a new instance of TimeEnemyMovementManager.
+            </summary>
+            <param name="enemies">The collection of the enemies.</param>
+            <param name="movementChecker">The IGameMovementChecker for checking collision between elements.</param>
+            <param name="provider">An object that provide some game setting values.</param>
+        </member>
+        <member name="M:PacmanGame.Engine.TimeEnemyMovementManager.PacmanGame#Engine#IEnemyMovementManager#MoveEnemies">
+            <summary>
+            Moves all the enemies. This is explicit interface implementation.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.TimeEnemyMovementManager.Start">
+            <summary>
+            Starts working the IEnemyMovementManager.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.TimeEnemyMovementManager.Stop">
+            <summary>
+            Stops working the IEnemyMovementManager.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.TimeEnemyMovementManager.PacmanGame#Engine#IEnemyMovementManager#NextLevel">
+            <summary>
+            Increases the difficulty of the game.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Engine.GameMovementCheckerFactory">
+            <summary>
+            A factory that produces IGameMovementChecker instance. This is implemented as singleton.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Engine.GameMovementCheckerFactory.Instance">
+            <summary>
+            Gets the instane of GameMovementCheckerFactory.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.GameMovementCheckerFactory.CreateUpdateChecker(GameControls.Board.GameBoard)">
+            <summary>
+            Creates new instance of IGameMovementChecker.
+            </summary>
+            <param name="gameBoard">The gameboard for which IGameMovementChceker is initialized.</param>
+            <returns>A newly instance of IGameMovementChecker.</returns>
+        </member>
+        <member name="T:PacmanGame.Engine.GameMovementChecker">
+            <summary>
+            Simple implementation of IGameMovementChecker using for checking collisions on GameBoard.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.GameMovementChecker.#ctor(GameControls.Board.GameBoard)">
+            <summary>
+            Initializes a new instance of GameMovementChecker with the specified gameboard.
+            </summary>
+            <param name="board">The GameBoard object used as an environment for checking collisions.</param>
+        </member>
+        <member name="M:PacmanGame.Engine.GameMovementChecker.CheckCollision(GameControls.Interfaces.IGameElement,GameControls.Interfaces.IGameElement)">
+            <summary>
+            Checks collision between two elements.
+            </summary>
+            <param name="element1">The first element to check.</param>
+            <param name="element2">The secund element to check.</param>
+            <returns>True if the elements have collision, otherwise false.</returns>
+        </member>
+        <member name="M:PacmanGame.Engine.GameMovementChecker.CheckMovement(GameControls.Elements.MovableElement,GameControls.Others.Direction)">
+            <summary>
+            Checks whether the specified element can be moved in the specified direction.
+            </summary>
+            <param name="movable">The element to check.</param>
+            <param name="direction">Movement direction</param>
+            <returns>True if the element can be moved in a specified direction, otherwise false.</returns>
+        </member>
+        <member name="M:PacmanGame.Engine.GameMovementChecker.IsElementNextTo``1(GameControls.Elements.MovableElement,GameControls.Others.Direction)">
+            <summary>
+            Checks whether there is the element of the specified type next to the given element in the specified direction.
+            </summary>
+            <typeparam name="T">Type of elements to check.</typeparam>
+            <param name="movable">The element to be check.</param>
+            <param name="direction">The direction in which elements would be tested.</param>
+            <returns>True if there is the element of the specified type next to the given element in the specified direction, otherwise false.</returns>
+        </member>
+        <member name="T:PacmanGame.Engine.IEnemyMovementManager">
+            <summary>
+            Represents an object that is responsible for moving enemies on the board.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Engine.IEnemyMovementManager.Enemies">
+            <summary>
+            Gets the collection of the enemies.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.IEnemyMovementManager.MoveEnemies">
+            <summary>
+            Moves all the enemies.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.IEnemyMovementManager.Start">
+            <summary>
+            Starts working the IEnemyMovementManager.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.IEnemyMovementManager.Stop">
+            <summary>
+            Stops working the IEnemyMovementManager.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.IEnemyMovementManager.NextLevel">
+            <summary>
+            Increases the difficulty of the game.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Engine.GameEngine">
+            <summary>
+            Core logic for all game features.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Engine.GameEngine.Timer">
+            <summary>
+            Gets the timer used for measuring time in the game.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Engine.GameEngine.Points">
+            <summary>
+            Gets the amount of points gained by the player.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Engine.GameEngine.Difficulty">
+            <summary>
+            Gets the difficulty of the game.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Engine.GameEngine.Lifes">
+            <summary>
+            Gets the number of player's lifes in the game. 
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Engine.GameEngine.EnemyMovementManager">
+            <summary>
+            Gets the EnemyMovementChecker used for managing movements.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Engine.GameEngine.#ctor(PacmanGame.MainInterfaces.IGameBuilder,GameControls.Board.GameBoard,PacmanGame.MainInterfaces.ISettingsProvider)">
+            <summary>
+            Initializes a new instance of GameEngin object.
+            </summary>
+            <param name="builder">IGameBuilder object used for building core game objects.</param>
+            <param name="board">GameBoard used in the game.</param>
+            <param name="provider">Object which provides some useful game settings.</param>
+        </member>
+        <member name="M:PacmanGame.Engine.GameEngine.Load(PacmanGame.Serialization.GameState)">
+            <summary>
+            Loads the game state and starts the game.
+            </summary>
+            <param name="state">The object stroing the state of the game.</param>
+        </member>
+        <member name="M:PacmanGame.Engine.GameEngine.MovePlayer(GameControls.Others.Direction)">
+            <summary>
+            Moves player into the specified direction.
+            </summary>
+            <param name="direction">The direction in which player should be moved.</param>
+        </member>
+        <member name="M:PacmanGame.Engine.GameEngine.SaveState">
+            <summary>
+            Save the current state of the game and returns it. 
+            </summary>
+            <returns>An object storing the state of the game.</returns>
+        </member>
+        <member name="T:PacmanGame.Graph.GraphComparer">
+            <summary>
+            Simple implementation of IComparer for integer elements used in A* proiority queue.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Graph.GraphComparer.#ctor(System.Int32[])">
+            <summary>
+            Initializes a new instance of GraphComparer with the given distance's array used in A* algorithm.
+            </summary>
+            <param name="dist">An array of vertices' distances used in A* algorithm</param>
+        </member>
+        <member name="M:PacmanGame.Graph.GraphComparer.Compare(System.Int32,System.Int32)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than,
+            equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>A signed integer that indicates the relative values of x and y, as shown in the
+            following table.Value Meaning Less than zerox is less than y.Zerox equals y.Greater
+            than zerox is greater than y.</returns>
+        </member>
+        <member name="T:PacmanGame.Graph.IPriorityQueue`1">
+            <summary>
+            Represent an generic interface for priority queue of any type.
+            </summary>
+            <typeparam name="T">A type of element in the queue.</typeparam>
+        </member>
+        <member name="P:PacmanGame.Graph.IPriorityQueue`1.IsEmpty">
+            <summary>
+            Gets the information whether the queue is empty or not.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Graph.IPriorityQueue`1.Insert(`0)">
+            <summary>
+            Inserts the item to the queue.
+            </summary>
+            <param name="item">An element which should be inserted into the queue.</param>
+        </member>
+        <member name="M:PacmanGame.Graph.IPriorityQueue`1.DeleteFirst">
+            <summary>
+            Deletes first item in the queue and returns it.
+            </summary>
+            <returns>Returns the deleted element.</returns>
+        </member>
+        <member name="M:PacmanGame.Graph.IPriorityQueue`1.Contains(`0)">
+            <summary>
+            Informs whether the specified item is in the queue.
+            </summary>
+            <param name="item">The item which should be tested.</param>
+            <returns>True if the queue contains the specified item, otherwise false.</returns>
+        </member>
+        <member name="T:PacmanGame.Graph.PriorityQueue`1">
+            <summary>
+            A generic implementation of IPriorityQueue interface.
+            </summary>
+            <typeparam name="T">A type of element in the queue.</typeparam>
+        </member>
+        <member name="M:PacmanGame.Graph.PriorityQueue`1.#ctor(System.Collections.Generic.IComparer{`0})">
+            <summary>
+            Initializes a new instance of the PriorityQueue with the given comparer.
+            </summary>
+            <param name="comparer">A comparer used to compare element's priorities in the queue.</param>
+        </member>
+        <member name="P:PacmanGame.Graph.PriorityQueue`1.IsEmpty">
+            <summary>
+            Gets the information whether the queue is empty or not.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Graph.PriorityQueue`1.Insert(`0)">
+            <summary>
+            Inserts the item to the queue.
+            </summary>
+            <param name="item">An element which should be inserted into the queue.</param>
+        </member>
+        <member name="M:PacmanGame.Graph.PriorityQueue`1.DeleteFirst">
+            <summary>
+            Deletes first item in the queue and returns it.
+            </summary>
+            <returns>Returns the deleted element.</returns>
+        </member>
+        <member name="M:PacmanGame.Graph.PriorityQueue`1.Contains(`0)">
+            <summary>
+            Informs whether the specified item is in the queue.
+            </summary>
+            <param name="item">The item which should be tested.</param>
+            <returns>True if the queue contains the specified item, otherwise false.</returns>
+        </member>
+        <member name="T:PacmanGame.Graph.Graph">
+            <summary>
+            Simple implementation of IGraph interface used in the game.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Graph.Graph.VerticlesCount">
+            <summary>
+            Gets the number of verticles in the graph.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Graph.Graph.Neighbours">
+            <summary>
+            Gets the array which illustrates edges in the graph.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Graph.Graph.#ctor(GameControls.Board.GameBoard)">
+            <summary>
+            Creates a new graph with the specified GameBoard object.
+            </summary>
+            <param name="gameBoard">A GameBoard on which graph would be based on.</param>
+        </member>
+        <member name="M:PacmanGame.Graph.Graph.#ctor(System.Boolean[0:,0:])">
+            <summary>
+            Creates a new graph with the specified array which gives information about the gameboard structure.
+            </summary>
+            <param name="blocks">An array which gives information about the gameboard structure.</param>
+        </member>
+        <member name="T:PacmanGame.Graph.GraphCreator">
+            <summary>
+            A singleton which is responsible for production of IGraph objects.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Graph.GraphCreator.Instance">
+            <summary>
+            Gets the instance of GraphCreator.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Graph.GraphCreator.Create(GameControls.Board.GameBoard)">
+            <summary>
+            Creates the graph for the given GameBoard object.
+            </summary>
+            <param name="gameBoard">The GameBoard object.</param>
+            <returns>The created graph instance.</returns>
+        </member>
+        <member name="T:PacmanGame.Graph.GraphExtender">
+            <summary>
+            Extends IGraph interface with A* algorithm computations.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Graph.GraphExtender.AStar(PacmanGame.Graph.IGraph,System.Int32,System.Int32,System.Int32@)">
+            <summary>
+            Finds the shortest path in the graph from start to end.
+            </summary>
+            <param name="graph">The graph.</param>
+            <param name="start">The start verticle.</param>
+            <param name="end">The end verticle.</param>
+            <param name="cost">The output parameter giving information about the cost of the shortest path.</param>
+            <returns></returns>
+        </member>
+        <member name="T:PacmanGame.Graph.IGraph">
+            <summary>
+            Represents a graph.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Graph.IGraph.Neighbours">
+            <summary>
+            Gets the array which illustrates edges in the graph.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Graph.IGraph.VerticlesCount">
+            <summary>
+            Gets the number of verticles in the graph.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.MainInterfaces.ISettingsProvider">
+            <summary>
+            An interface that provides access to settings values used in the game. 
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.ISettingsProvider.LeftKey">
+            <summary>
+            Gets or sets the Key that move player in left direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.ISettingsProvider.RightKey">
+            <summary>
+            Gets or sets the Key that move player in right direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.ISettingsProvider.UpKey">
+            <summary>
+            Gets or sets the Key that move player in up direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.ISettingsProvider.DownKey">
+            <summary>
+            Gets or sets the Key that move player in down direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.ISettingsProvider.PauseKey">
+            <summary>
+            Gets the key that turns the pause mode.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.ISettingsProvider.Highscores">
+            <summary>
+            Gets or sets the list of game highscores.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.ISettingsProvider.RememberedHighscoresCount">
+            <summary>
+            Gets the number of stored highscores.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.ISettingsProvider.EnemyMovementInterval">
+            <summary>
+            Gets or sets the time interval between two enemies' moves.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.ISettingsProvider.BoardWidth">
+            <summary>
+            Gets the width of the board.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.ISettingsProvider.BoardHeight">
+            <summary>
+            Gets the height of the board.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.ISettingsProvider.BoardFilePath">
+            <summary>
+            Gets the path to the example gameboard file.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.ISettingsProvider.AdditionalLifeGenerationInterval">
+            <summary>
+            Gets the time interval between two bonuses' generations.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.ISettingsProvider.EnemyDifficultyIncreaseSpeed">
+            <summary>
+            Gets the time interval which is substracted from the enemy movement time interval on each 
+            increasement of game difficulty.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.ISettingsProvider.Save">
+            <summary>
+            Saves all the games settings.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.MainInterfaces.IGameMovementChecker">
+            <summary>
+            Provides support for checking collisions and movement possibility between elements on gameboard.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.IGameMovementChecker.CheckCollision(GameControls.Interfaces.IGameElement,GameControls.Interfaces.IGameElement)">
+            <summary>
+            Checks collision between two elements.
+            </summary>
+            <param name="element1">The first element to check.</param>
+            <param name="element2">The secund element to check.</param>
+            <returns>True if the elements have collision, otherwise false.</returns>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.IGameMovementChecker.CheckMovement(GameControls.Elements.MovableElement,GameControls.Others.Direction)">
+            <summary>
+            Checks whether the specified element can be moved in the specified direction.
+            </summary>
+            <param name="element">The element to check.</param>
+            <param name="direction">Movement direction</param>
+            <returns>True if the element can be moved in a specified direction, otherwise false.</returns>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.IGameMovementChecker.IsElementNextTo``1(GameControls.Elements.MovableElement,GameControls.Others.Direction)">
+            <summary>
+            Checks whether there is the element of the specified type next to the given element in the specified direction.
+            </summary>
+            <typeparam name="T">Type of elements to check.</typeparam>
+            <param name="movable">The element to be check.</param>
+            <param name="direction">The direction in which elements would be tested.</param>
+            <returns>True if there is the element of the specified type next to the given element in the specified direction, otherwise false.</returns>
+        </member>
+        <member name="T:PacmanGame.MainInterfaces.IHaveControlKeys">
+            <summary>
+            An interface that provide support to manage and change control keys in the game.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.IHaveControlKeys.LeftKey">
+            <summary>
+            Gets or sets the Key that move player in left direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.IHaveControlKeys.RightKey">
+            <summary>
+            Gets or sets the Key that move player in right direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.IHaveControlKeys.UpKey">
+            <summary>
+            Gets or sets the Key that move player in up direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.IHaveControlKeys.DownKey">
+            <summary>
+            Gets or sets the Key that move player in down direction.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.IHaveControlKeys.LoadControlKeys">
+            <summary>
+            Loads the current configuration of control keys.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.IHaveControlKeys.SaveControlKeys">
+            <summary>
+            Saves the current configuration of control keys.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.MainInterfaces.IKeysValidator">
+            <summary>
+            Represents an object that supports validation for player's control keys.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.IKeysValidator.ValidateKey(System.Windows.Input.Key,PacmanGame.Validation.KeyFunction,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{PacmanGame.Validation.KeyFunction,System.Windows.Input.Key}})">
+            <summary>
+            Validates if the key can be set as the given control function key for player.
+            </summary>
+            <param name="keyToChange">A key which behaviour might be changed.</param>
+            <param name="function">A function for the key.</param>
+            <param name="allKeys">Set of all player's control keys and their functions.</param>
+            <returns>True, if the given key can be associated to the given function, otherwise false.</returns>
+        </member>
+        <member name="T:PacmanGame.MainInterfaces.IGameSerializer">
+            <summary>
+            An interface that supports serialization of GameState object.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.IGameSerializer.LoadGame(System.String)">
+            <summary>
+            Loads the GameState from file.
+            </summary>
+            <param name="path">The path to the file.</param>
+            <returns>The loaded GameState object.</returns>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.IGameSerializer.SaveGame(PacmanGame.Serialization.GameState,System.String)">
+            <summary>
+            Saves the given GameState object to the file.
+            </summary>
+            <param name="state">The GameState object to be saved.</param>
+            <param name="path">The path to the file in which GameState would be stored.</param>
+        </member>
+        <member name="T:PacmanGame.MainInterfaces.IGameBuilder">
+            <summary>
+            An interface that provide support for building all core game objects.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.IGameBuilder.BuildBoard(PacmanGame.Serialization.GameState)">
+            <summary>
+            Builds the GameBoard based on the given GameState.
+            </summary>
+            <param name="gameState">An object which stores the state of the game.</param>
+            <returns>The newly builded GameBoard.</returns>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.IGameBuilder.BuildTimer(PacmanGame.Serialization.GameState)">
+            <summary>
+            Builds the timer used in the game.
+            </summary>
+            <param name="gameState">An object which stores the state of the game.</param>
+            <returns>THe builded timer used in the game.</returns>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.IGameBuilder.BuildGameEngine(PacmanGame.Serialization.GameState,GameControls.Board.GameBoard,PacmanGame.MainInterfaces.ISettingsProvider)">
+            <summary>
+            Builds the GameEngine which manages all core game features.
+            </summary>
+            <param name="gameState">An object which stores the state of the game.</param>
+            <param name="board">The GameBoard used in the game.</param>
+            <param name="provider">The object that provide some configuration settings.</param>
+            <returns>The GameEngine object used in the game.</returns>
+        </member>
+        <member name="T:PacmanGame.MainInterfaces.IViewModelChanger">
+            <summary>
+            An interface that provide support for changing views in the application.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainInterfaces.IViewModelChanger.CurrentViewModel">
+            <summary>
+            Gets the view model associated with the currently displaying view in the application.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.IViewModelChanger.ChangeCurrentViewModel(System.String)">
+            <summary>
+            Changes currently displaying view.
+            </summary>
+            <param name="name">The name of the view to be displayed.</param>
+        </member>
+        <member name="M:PacmanGame.MainInterfaces.IViewModelChanger.GetViewModelByName(System.String)">
+            <summary>
+            Gets the ViewModelBase object specified by the given name.
+            </summary>
+            <param name="name">The name f the view model.</param>
+            <returns>A view model associated with the given name.</returns>
+        </member>
+        <member name="T:PacmanGame.Highscores.Highscore">
+            <summary>
+            An object representing a highscore in the game.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Highscores.Highscore.PlayerName">
+            <summary>
+            Gets or sets the name of the player.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Highscores.Highscore.Points">
+            <summary>
+            Gets or sets the amount of points.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Highscores.Highscore.GameTime">
+            <summary>
+            Gets or sets the time of the game.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Highscores.Highscore.Time">
+            <summary>
+            Gets or sets the total game time in secunds.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Highscores.HighscoreComparer">
+            <summary>
+            An implementation of ICompares to compare Highscore objects.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Highscores.HighscoreComparer.Compare(PacmanGame.Highscores.Highscore,PacmanGame.Highscores.Highscore)">
+            <summary>
+            Compares two objects and returns a value indicating whether one is less than,
+            equal to, or greater than the other.
+            </summary>
+            <param name="x">The first object to compare.</param>
+            <param name="y">The second object to compare.</param>
+            <returns>A signed integer that indicates the relative values of x and y, as shown in the
+            following table.Value Meaning Less than zerox is less than y.Zerox equals y.Greater
+            than zerox is greater than y.</returns>
+        </member>
+        <member name="T:PacmanGame.Highscores.HighscoreList">
+            <summary>
+            Represents the list of highscores in the game.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Highscores.HighscoreList.#ctor(PacmanGame.MainInterfaces.ISettingsProvider)">
+            <summary>
+            Initializes an new instance of HighscoreList.
+            </summary>
+            <param name="provider">An object which can provide some information about the list.</param>
+        </member>
+        <member name="P:PacmanGame.Highscores.HighscoreList.Highscores">
+            <summary>
+            Gets the list of highscores.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Highscores.HighscoreList.AddHighscore(PacmanGame.Highscores.Highscore)">
+            <summary>
+            Adds new highscore to the list.
+            </summary>
+            <param name="highscore">Highscore object to be added.</param>
+        </member>
+        <member name="M:PacmanGame.Highscores.HighscoreList.ClearAllHighscores">
+            <summary>
+            Clears all highscores in the list.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Highscores.HighscoreList.RefreshList">
+            <summary>
+            Refreshes the list of highscores.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Highscores.HighscoreList.IsNewHighscore(PacmanGame.Highscores.Highscore)">
+            <summary>
+            Returns the information whether the given element can be a new highscore.
+            </summary>
+            <param name="highscore">The highscore to be tested.</param>
+            <returns>True if the given element can be a new highscore, otherwise false.</returns>
+        </member>
+        <member name="T:PacmanGame.Serialization.GameElementInfo">
+            <summary>
+            Stores the information about the single serialized element.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Serialization.GameElementInfo.Id">
+            <summary>
+            Gets or sets the id of the element.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Serialization.GameElementInfo.X">
+            <summary>
+            Gets or sets the X coordinate of the element.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Serialization.GameElementInfo.Y">
+            <summary>
+            Gets or sets the Y coordinate of the element.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Serialization.GameElementInfo.Type">
+            <summary>
+            Gets or sets the type of the element.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Serialization.GameElementType">
+            <summary>
+            The type of serialized game element.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Serialization.GameSerializer">
+            <summary>
+            Simple implementation of IGameSerializer used in the game.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Serialization.GameSerializer.SaveGame(PacmanGame.Serialization.GameState,System.String)">
+            <summary>
+            Saves the given GameState object to the file.
+            </summary>
+            <param name="state">The GameState object to be saved.</param>
+            <param name="path">The path to the file in which GameState would be stored.</param>
+        </member>
+        <member name="M:PacmanGame.Serialization.GameSerializer.LoadGame(System.String)">
+            <summary>
+            Loads the GameState from file.
+            </summary>
+            <param name="path">The path to the file.</param>
+            <returns>The loaded GameState object.</returns>
+        </member>
+        <member name="T:PacmanGame.Serialization.PortalConnetcionList">
+            <summary>
+            A class that stores information about portal's connections in the hierarchical way.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Serialization.PortalConnetcionList.#ctor">
+            <summary>
+            Initializes a new instance of PortalConnectionList object.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Serialization.PortalConnetcionList.Add(System.Tuple{System.Int32,System.Int32})">
+            <summary>
+            Adds the specified item to the collection.
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:PacmanGame.Serialization.PortalConnetcionList.Contains(System.Tuple{System.Int32,System.Int32})">
+            <summary>
+            Checks whether the collection contians specified item.
+            </summary>
+            <param name="item">Item to be checked.</param>
+            <returns>True if collection contains element, otherwise false.</returns>
+        </member>
+        <member name="M:PacmanGame.Serialization.PortalConnetcionList.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>An System.Collections.IEnumerator object that can be used to iterate through
+            the collection.</returns>
+        </member>
+        <member name="M:PacmanGame.Serialization.PortalConnetcionList.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>An System.Collections.IEnumerator object that can be used to iterate through
+            the collection.</returns>
+        </member>
+        <member name="T:PacmanGame.Serialization.TupleComparer">
+            <summary>
+            The comparer used in comparing tuples.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Serialization.TupleComparer.Equals(System.Tuple{System.Int32,System.Int32},System.Tuple{System.Int32,System.Int32})">
+            <summary>
+            Determines whether the specified objects are equal.
+            </summary>
+            <param name="x">The first object of type T to compare.</param>
+            <param name="y">The second object of type T to compare.</param>
+            <returns>True if the specified objects are equal; otherwise, false.</returns>
+        </member>
+        <member name="M:PacmanGame.Serialization.TupleComparer.GetHashCode(System.Tuple{System.Int32,System.Int32})">
+            <summary>
+            Returns a hash code for the specified object.
+            </summary>
+            <param name="obj">The System.Object for which a hash code is to be returned.</param>
+            <returns>A hash code for the specified object.</returns>
+        </member>
+        <member name="T:PacmanGame.Serialization.GameState">
+            <summary>
+            Stores the information about the game.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Serialization.GameState.#ctor">
+            <summary>
+            Initializes a new instance of GameState object.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Serialization.GameState.Points">
+            <summary>
+            Gets or sets the points gained by the player.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Serialization.GameState.Difficulty">
+            <summary>
+            Gets or sets the difficulty of the game.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Serialization.GameState.Lifes">
+            <summary>
+            Gets or sets the number of player's lifes.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Serialization.GameState.Time">
+            <summary>
+            Gets or sets the time of the game.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Serialization.GameState.GameElements">
+            <summary>
+            Gets or sets the elements in the game.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Serialization.GameState.ConnetedPortals">
+            <summary>
+            Gets or sets information about the portal's connections. 
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Serialization.GameState.PlayerDirection">
+            <summary>
+            Gets or sets the direction of the player.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.SettingsProvider">
+            <summary>
+            An implementation of ISettingsProvider used in the game. This stores the settings in Visual Studio settings.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.SettingsProvider.#ctor">
+            <summary>
+            Initializes a new instance of SettingsProvider.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.SettingsProvider.LeftKey">
+            <summary>
+            Gets or sets the Key that move player in left direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.SettingsProvider.RightKey">
+            <summary>
+            Gets or sets the Key that move player in right direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.SettingsProvider.UpKey">
+            <summary>
+            Gets or sets the Key that move player in up direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.SettingsProvider.DownKey">
+            <summary>
+            Gets or sets the Key that move player in down direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.SettingsProvider.PauseKey">
+            <summary>
+            Gets the key that turns the pause mode.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.SettingsProvider.Highscores">
+            <summary>
+            Gets or sets the list of game highscores.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.SettingsProvider.RememberedHighscoresCount">
+            <summary>
+            Gets the number of stored highscores.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.SettingsProvider.EnemyMovementInterval">
+            <summary>
+            Gets or sets the time interval between two enemies' moves.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.SettingsProvider.BoardWidth">
+            <summary>
+            Gets the width of the board.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.SettingsProvider.BoardHeight">
+            <summary>
+            Gets the height of the board.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.SettingsProvider.BoardFilePath">
+            <summary>
+            Gets the path to the example gameboard file.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.SettingsProvider.AdditionalLifeGenerationInterval">
+            <summary>
+            Gets the time interval between two bonuses' generations.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.SettingsProvider.EnemyDifficultyIncreaseSpeed">
+            <summary>
+            Gets the time interval which is substracted from the enemy movement time interval on each 
+            increasement of game difficulty.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.SettingsProvider.Save">
+            <summary>
+            Saves all the games settings.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.SimpleGameBuilder">
+            <summary>
+            Simple implementation of IGameBuilder used in the game.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.SimpleGameBuilder.#ctor(PacmanGame.MainInterfaces.ISettingsProvider)">
+            <summary>
+            Initializes a new instance of SimpleGameBuilder object with the given ISettingsProvider.
+            </summary>
+            <param name="provider">An object that stores some configuration values used in the game.</param>
+        </member>
+        <member name="M:PacmanGame.SimpleGameBuilder.BuildBoard(PacmanGame.Serialization.GameState)">
+            <summary>
+            Builds the GameBoard based on the given GameState.
+            </summary>
+            <param name="gameState">An object which stores the state of the game.</param>
+            <returns>The newly builded GameBoard.</returns>
+        </member>
+        <member name="M:PacmanGame.SimpleGameBuilder.BuildTimer(PacmanGame.Serialization.GameState)">
+            <summary>
+            Builds the timer used in the game.
+            </summary>
+            <param name="gameState">An object which stores the state of the game.</param>
+            <returns>THe builded timer used in the game.</returns>
+        </member>
+        <member name="M:PacmanGame.SimpleGameBuilder.BuildGameEngine(PacmanGame.Serialization.GameState,GameControls.Board.GameBoard,PacmanGame.MainInterfaces.ISettingsProvider)">
+            <summary>
+            Builds the GameEngine which manages all core game features.
+            </summary>
+            <param name="gameState">An object which stores the state of the game.</param>
+            <param name="board">The GameBoard used in the game.</param>
+            <param name="provider">The object that provide some configuration settings.</param>
+            <returns>The GameEngine object used in the game.</returns>
+        </member>
+        <member name="M:PacmanGame.SimpleGameBuilder.ReadFile">
+            <summary>
+            Reads the information about the elements on GameBoard from file.
+            </summary>
+            <returns>The list of elements on the board.</returns>
+        </member>
+        <member name="T:PacmanGame.Annotations.CanBeNullAttribute">
+            <summary>
+            Indicates that the value of the marked element could be <c>null</c> sometimes,
+            so the check for <c>null</c> is necessary before its usage.
+            </summary>
+            <example><code>
+            [CanBeNull] public object Test() { return null; }
+            public void UseTest() {
+              var p = Test();
+              var s = p.ToString(); // Warning: Possible 'System.NullReferenceException'
+            }
+            </code></example>
+        </member>
+        <member name="T:PacmanGame.Annotations.NotNullAttribute">
+            <summary>
+            Indicates that the value of the marked element could never be <c>null</c>.
+            </summary>
+            <example><code>
+            [NotNull] public object Foo() {
+              return null; // Warning: Possible 'null' assignment
+            }
+            </code></example>
+        </member>
+        <member name="T:PacmanGame.Annotations.ItemNotNullAttribute">
+            <summary>
+            Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
+            and Lazy classes to indicate that the value of a collection item, of the Task.Result property
+            or of the Lazy.Value property can never be null.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.ItemCanBeNullAttribute">
+            <summary>
+            Can be appplied to symbols of types derived from IEnumerable as well as to symbols of Task
+            and Lazy classes to indicate that the value of a collection item, of the Task.Result property
+            or of the Lazy.Value property can be null.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.StringFormatMethodAttribute">
+            <summary>
+            Indicates that the marked method builds string by format pattern and (optional) arguments.
+            Parameter, which contains format string, should be given in constructor. The format string
+            should be in <see cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])"/>-like form.
+            </summary>
+            <example><code>
+            [StringFormatMethod("message")]
+            public void ShowError(string message, params object[] args) { /* do something */ }
+            public void Foo() {
+              ShowError("Failed: {0}"); // Warning: Non-existing argument in format string
+            }
+            </code></example>
+        </member>
+        <member name="M:PacmanGame.Annotations.StringFormatMethodAttribute.#ctor(System.String)">
+            <param name="formatParameterName">
+            Specifies which parameter of an annotated method should be treated as format-string
+            </param>
+        </member>
+        <member name="T:PacmanGame.Annotations.ValueProviderAttribute">
+            <summary>
+            For a parameter that is expected to be one of the limited set of values.
+            Specify fields of which type should be used as values for this parameter.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.InvokerParameterNameAttribute">
+            <summary>
+            Indicates that the function argument should be string literal and match one
+            of the parameters of the caller function. For example, ReSharper annotates
+            the parameter of <see cref="T:System.ArgumentNullException"/>.
+            </summary>
+            <example><code>
+            public void Foo(string param) {
+              if (param == null)
+                throw new ArgumentNullException("par"); // Warning: Cannot resolve symbol
+            }
+            </code></example>
+        </member>
+        <member name="T:PacmanGame.Annotations.NotifyPropertyChangedInvocatorAttribute">
+             <summary>
+             Indicates that the method is contained in a type that implements
+             <c>System.ComponentModel.INotifyPropertyChanged</c> interface and this method
+             is used to notify that some property value changed.
+             </summary>
+             <remarks>
+             The method should be non-static and conform to one of the supported signatures:
+             <list>
+             <item><c>NotifyChanged(string)</c></item>
+             <item><c>NotifyChanged(params string[])</c></item>
+             <item><c>NotifyChanged{T}(Expression{Func{T}})</c></item>
+             <item><c>NotifyChanged{T,U}(Expression{Func{T,U}})</c></item>
+             <item><c>SetProperty{T}(ref T, T, string)</c></item>
+             </list>
+             </remarks>
+             <example><code>
+             public class Foo : INotifyPropertyChanged {
+               public event PropertyChangedEventHandler PropertyChanged;
+               [NotifyPropertyChangedInvocator]
+               protected virtual void NotifyChanged(string propertyName) { ... }
+            
+               private string _name;
+               public string Name {
+                 get { return _name; }
+                 set { _name = value; NotifyChanged("LastName"); /* Warning */ }
+               }
+             }
+             </code>
+             Examples of generated notifications:
+             <list>
+             <item><c>NotifyChanged("Property")</c></item>
+             <item><c>NotifyChanged(() =&gt; Property)</c></item>
+             <item><c>NotifyChanged((VM x) =&gt; x.Property)</c></item>
+             <item><c>SetProperty(ref myField, value, "Property")</c></item>
+             </list>
+             </example>
+        </member>
+        <member name="T:PacmanGame.Annotations.ContractAnnotationAttribute">
+            <summary>
+            Describes dependency between method input and output.
+            </summary>
+            <syntax>
+            <p>Function Definition Table syntax:</p>
+            <list>
+            <item>FDT      ::= FDTRow [;FDTRow]*</item>
+            <item>FDTRow   ::= Input =&gt; Output | Output &lt;= Input</item>
+            <item>Input    ::= ParameterName: Value [, Input]*</item>
+            <item>Output   ::= [ParameterName: Value]* {halt|stop|void|nothing|Value}</item>
+            <item>Value    ::= true | false | null | notnull | canbenull</item>
+            </list>
+            If method has single input parameter, it's name could be omitted.<br/>
+            Using <c>halt</c> (or <c>void</c>/<c>nothing</c>, which is the same)
+            for method output means that the methos doesn't return normally.<br/>
+            <c>canbenull</c> annotation is only applicable for output parameters.<br/>
+            You can use multiple <c>[ContractAnnotation]</c> for each FDT row,
+            or use single attribute with rows separated by semicolon.<br/>
+            </syntax>
+            <examples><list>
+            <item><code>
+            [ContractAnnotation("=> halt")]
+            public void TerminationMethod()
+            </code></item>
+            <item><code>
+            [ContractAnnotation("halt &lt;= condition: false")]
+            public void Assert(bool condition, string text) // regular assertion method
+            </code></item>
+            <item><code>
+            [ContractAnnotation("s:null => true")]
+            public bool IsNullOrEmpty(string s) // string.IsNullOrEmpty()
+            </code></item>
+            <item><code>
+            // A method that returns null if the parameter is null,
+            // and not null if the parameter is not null
+            [ContractAnnotation("null => null; notnull => notnull")]
+            public object Transform(object data) 
+            </code></item>
+            <item><code>
+            [ContractAnnotation("s:null=>false; =>true,result:notnull; =>false, result:null")]
+            public bool TryParse(string s, out Person result)
+            </code></item>
+            </list></examples>
+        </member>
+        <member name="T:PacmanGame.Annotations.LocalizationRequiredAttribute">
+            <summary>
+            Indicates that marked element should be localized or not.
+            </summary>
+            <example><code>
+            [LocalizationRequiredAttribute(true)]
+            public class Foo {
+              private string str = "my string"; // Warning: Localizable string
+            }
+            </code></example>
+        </member>
+        <member name="T:PacmanGame.Annotations.CannotApplyEqualityOperatorAttribute">
+            <summary>
+            Indicates that the value of the marked type (or its derivatives)
+            cannot be compared using '==' or '!=' operators and <c>Equals()</c>
+            should be used instead. However, using '==' or '!=' for comparison
+            with <c>null</c> is always permitted.
+            </summary>
+            <example><code>
+            [CannotApplyEqualityOperator]
+            class NoEquality { }
+            class UsesNoEquality {
+              public void Test() {
+                var ca1 = new NoEquality();
+                var ca2 = new NoEquality();
+                if (ca1 != null) { // OK
+                  bool condition = ca1 == ca2; // Warning
+                }
+              }
+            }
+            </code></example>
+        </member>
+        <member name="T:PacmanGame.Annotations.BaseTypeRequiredAttribute">
+            <summary>
+            When applied to a target attribute, specifies a requirement for any type marked
+            with the target attribute to implement or inherit specific type or types.
+            </summary>
+            <example><code>
+            [BaseTypeRequired(typeof(IComponent)] // Specify requirement
+            public class ComponentAttribute : Attribute { }
+            [Component] // ComponentAttribute requires implementing IComponent interface
+            public class MyComponent : IComponent { }
+            </code></example>
+        </member>
+        <member name="T:PacmanGame.Annotations.UsedImplicitlyAttribute">
+            <summary>
+            Indicates that the marked symbol is used implicitly (e.g. via reflection, in external library),
+            so this symbol will not be marked as unused (as well as by other usage inspections).
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.MeansImplicitUseAttribute">
+            <summary>
+            Should be used on attributes and causes ReSharper to not mark symbols marked with such attributes
+            as unused (as well as by other usage inspections)
+            </summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.ImplicitUseKindFlags.Access">
+            <summary>Only entity marked with attribute considered used.</summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.ImplicitUseKindFlags.Assign">
+            <summary>Indicates implicit assignment to a member.</summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.ImplicitUseKindFlags.InstantiatedWithFixedConstructorSignature">
+            <summary>
+            Indicates implicit instantiation of a type with fixed constructor signature.
+            That means any unused constructor parameters won't be reported as such.
+            </summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.ImplicitUseKindFlags.InstantiatedNoFixedConstructorSignature">
+            <summary>Indicates implicit instantiation of a type.</summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.ImplicitUseTargetFlags">
+            <summary>
+            Specify what is considered used implicitly when marked
+            with <see cref="T:PacmanGame.Annotations.MeansImplicitUseAttribute"/> or <see cref="T:PacmanGame.Annotations.UsedImplicitlyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.ImplicitUseTargetFlags.Members">
+            <summary>Members of entity marked with attribute are considered used.</summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.ImplicitUseTargetFlags.WithMembers">
+            <summary>Entity marked with attribute and all its members considered used.</summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.PublicAPIAttribute">
+            <summary>
+            This attribute is intended to mark publicly available API
+            which should not be removed and so is treated as used.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.InstantHandleAttribute">
+            <summary>
+            Tells code analysis engine if the parameter is completely handled when the invoked method is on stack.
+            If the parameter is a delegate, indicates that delegate is executed while the method is executed.
+            If the parameter is an enumerable, indicates that it is enumerated while the method is executed.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.PureAttribute">
+            <summary>
+            Indicates that a method does not make any observable state changes.
+            The same as <c>System.Diagnostics.Contracts.PureAttribute</c>.
+            </summary>
+            <example><code>
+            [Pure] private int Multiply(int x, int y) { return x * y; }
+            public void Foo() {
+              const int a = 2, b = 2;
+              Multiply(a, b); // Waring: Return value of pure method is not used
+            }
+            </code></example>
+        </member>
+        <member name="T:PacmanGame.Annotations.PathReferenceAttribute">
+            <summary>
+            Indicates that a parameter is a path to a file or a folder within a web project.
+            Path can be relative or absolute, starting from web root (~).
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.SourceTemplateAttribute">
+            <summary>
+            An extension method marked with this attribute is processed by ReSharper code completion
+            as a 'Source Template'. When extension method is completed over some expression, it's source code
+            is automatically expanded like a template at call site.
+            </summary>
+            <remarks>
+            Template method body can contain valid source code and/or special comments starting with '$'.
+            Text inside these comments is added as source code when the template is applied. Template parameters
+            can be used either as additional method parameters or as identifiers wrapped in two '$' signs.
+            Use the <see cref="T:PacmanGame.Annotations.MacroAttribute"/> attribute to specify macros for parameters.
+            </remarks>
+            <example>
+            In this example, the 'forEach' method is a source template available over all values
+            of enumerable types, producing ordinary C# 'foreach' statement and placing caret inside block:
+            <code>
+            [SourceTemplate]
+            public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; xs) {
+              foreach (var x in xs) {
+                 //$ $END$
+              }
+            }
+            </code>
+            </example>
+        </member>
+        <member name="T:PacmanGame.Annotations.MacroAttribute">
+            <summary>
+            Allows specifying a macro for a parameter of a <see cref="T:PacmanGame.Annotations.SourceTemplateAttribute">source template</see>.
+            </summary>
+            <remarks>
+            You can apply the attribute on the whole method or on any of its additional parameters. The macro expression
+            is defined in the <see cref="P:PacmanGame.Annotations.MacroAttribute.Expression"/> property. When applied on a method, the target
+            template parameter is defined in the <see cref="P:PacmanGame.Annotations.MacroAttribute.Target"/> property. To apply the macro silently
+            for the parameter, set the <see cref="P:PacmanGame.Annotations.MacroAttribute.Editable"/> property value = -1.
+            </remarks>
+            <example>
+            Applying the attribute on a source template method:
+            <code>
+            [SourceTemplate, Macro(Target = "item", Expression = "suggestVariableName()")]
+            public static void forEach&lt;T&gt;(this IEnumerable&lt;T&gt; collection) {
+              foreach (var item in collection) {
+                //$ $END$
+              }
+            }
+            </code>
+            Applying the attribute on a template method parameter:
+            <code>
+            [SourceTemplate]
+            public static void something(this Entity x, [Macro(Expression = "guid()", Editable = -1)] string newguid) {
+              /*$ var $x$Id = "$newguid$" + x.ToString();
+              x.DoSomething($x$Id); */
+            }
+            </code>
+            </example>
+        </member>
+        <member name="P:PacmanGame.Annotations.MacroAttribute.Expression">
+            <summary>
+            Allows specifying a macro that will be executed for a <see cref="T:PacmanGame.Annotations.SourceTemplateAttribute">source template</see>
+            parameter when the template is expanded.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Annotations.MacroAttribute.Editable">
+            <summary>
+            Allows specifying which occurrence of the target parameter becomes editable when the template is deployed.
+            </summary>
+            <remarks>
+            If the target parameter is used several times in the template, only one occurrence becomes editable;
+            other occurrences are changed synchronously. To specify the zero-based index of the editable occurrence,
+            use values >= 0. To make the parameter non-editable when the template is expanded, use -1.
+            </remarks>>
+        </member>
+        <member name="P:PacmanGame.Annotations.MacroAttribute.Target">
+            <summary>
+            Identifies the target parameter of a <see cref="T:PacmanGame.Annotations.SourceTemplateAttribute">source template</see> if the
+            <see cref="T:PacmanGame.Annotations.MacroAttribute"/> is applied on a template method.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AspMvcActionAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+            is an MVC action. If applied to a method, the MVC action name is calculated
+            implicitly from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AspMvcAreaAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC area.
+            Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AspMvcControllerAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is
+            an MVC controller. If applied to a method, the MVC controller name is calculated
+            implicitly from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.ChildActionExtensions.RenderAction(HtmlHelper, String, String)</c>.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AspMvcMasterAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC Master. Use this attribute
+            for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, String)</c>.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AspMvcModelTypeAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC model type. Use this attribute
+            for custom wrappers similar to <c>System.Web.Mvc.Controller.View(String, Object)</c>.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AspMvcPartialViewAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter is an MVC
+            partial view. If applied to a method, the MVC partial view name is calculated implicitly
+            from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.RenderPartialExtensions.RenderPartial(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AspMvcSupressViewErrorAttribute">
+            <summary>
+            ASP.NET MVC attribute. Allows disabling inspections for MVC views within a class or a method.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AspMvcDisplayTemplateAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC display template.
+            Use this attribute for custom wrappers similar to 
+            <c>System.Web.Mvc.Html.DisplayExtensions.DisplayForModel(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AspMvcEditorTemplateAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC editor template.
+            Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Html.EditorExtensions.EditorForModel(HtmlHelper, String)</c>.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AspMvcTemplateAttribute">
+            <summary>
+            ASP.NET MVC attribute. Indicates that a parameter is an MVC template.
+            Use this attribute for custom wrappers similar to
+            <c>System.ComponentModel.DataAnnotations.UIHintAttribute(System.String)</c>.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AspMvcViewAttribute">
+            <summary>
+            ASP.NET MVC attribute. If applied to a parameter, indicates that the parameter
+            is an MVC view. If applied to a method, the MVC view name is calculated implicitly
+            from the context. Use this attribute for custom wrappers similar to
+            <c>System.Web.Mvc.Controller.View(Object)</c>.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AspMvcActionSelectorAttribute">
+            <summary>
+            ASP.NET MVC attribute. When applied to a parameter of an attribute,
+            indicates that this parameter is an MVC action name.
+            </summary>
+            <example><code>
+            [ActionName("Foo")]
+            public ActionResult Login(string returnUrl) {
+              ViewBag.ReturnUrl = Url.Action("Foo"); // OK
+              return RedirectToAction("Bar"); // Error: Cannot resolve action
+            }
+            </code></example>
+        </member>
+        <member name="T:PacmanGame.Annotations.RazorSectionAttribute">
+            <summary>
+            Razor attribute. Indicates that a parameter or a method is a Razor section.
+            Use this attribute for custom wrappers similar to 
+            <c>System.Web.WebPages.WebPageBase.RenderSection(String)</c>.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.CollectionAccessAttribute">
+            <summary>
+            Indicates how method, constructor invocation or property access
+            over collection type affects content of the collection.
+            </summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.CollectionAccessType.None">
+            <summary>Method does not use or modify content of the collection.</summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.CollectionAccessType.Read">
+            <summary>Method only reads content of the collection but does not modify it.</summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.CollectionAccessType.ModifyExistingContent">
+            <summary>Method can change content of the collection but does not add new elements.</summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.CollectionAccessType.UpdatedContent">
+            <summary>Method can add new elements to the collection.</summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AssertionMethodAttribute">
+            <summary>
+            Indicates that the marked method is assertion method, i.e. it halts control flow if
+            one of the conditions is satisfied. To set the condition, mark one of the parameters with 
+            <see cref="T:PacmanGame.Annotations.AssertionConditionAttribute"/> attribute.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AssertionConditionAttribute">
+            <summary>
+            Indicates the condition parameter of the assertion method. The method itself should be
+            marked by <see cref="T:PacmanGame.Annotations.AssertionMethodAttribute"/> attribute. The mandatory argument of
+            the attribute is the assertion type.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.AssertionConditionType">
+            <summary>
+            Specifies assertion type. If the assertion method argument satisfies the condition,
+            then the execution continues. Otherwise, execution is assumed to be halted.
+            </summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.AssertionConditionType.IS_TRUE">
+            <summary>Marked parameter should be evaluated to true.</summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.AssertionConditionType.IS_FALSE">
+            <summary>Marked parameter should be evaluated to false.</summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.AssertionConditionType.IS_NULL">
+            <summary>Marked parameter should be evaluated to null value.</summary>
+        </member>
+        <member name="F:PacmanGame.Annotations.AssertionConditionType.IS_NOT_NULL">
+            <summary>Marked parameter should be evaluated to not null value.</summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.TerminatesProgramAttribute">
+            <summary>
+            Indicates that the marked method unconditionally terminates control flow execution.
+            For example, it could unconditionally throw exception.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.LinqTunnelAttribute">
+            <summary>
+            Indicates that method is pure LINQ method, with postponed enumeration (like Enumerable.Select,
+            .Where). This annotation allows inference of [InstantHandle] annotation for parameters
+            of delegate type by analyzing LINQ method chains.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.NoEnumerationAttribute">
+            <summary>
+            Indicates that IEnumerable, passed as parameter, is not enumerated.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.RegexPatternAttribute">
+            <summary>
+            Indicates that parameter is regular expression pattern.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.XamlItemsControlAttribute">
+            <summary>
+            XAML attribute. Indicates the type that has <c>ItemsSource</c> property and should be treated
+            as <c>ItemsControl</c>-derived type, to enable inner items <c>DataContext</c> type resolve.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Annotations.XamlItemBindingOfItemsControlAttribute">
+            <summary>
+            XAML attibute. Indicates the property of some <c>BindingBase</c>-derived type, that
+            is used to bind some item of <c>ItemsControl</c>-derived type. This annotation will
+            enable the <c>DataContext</c> type resolve for XAML bindings for such properties.
+            </summary>
+            <remarks>
+            Property should have the tree ancestor of the <c>ItemsControl</c> type or
+            marked with the <see cref="T:PacmanGame.Annotations.XamlItemsControlAttribute"/> attribute.
+            </remarks>
+        </member>
+        <member name="T:PacmanGame.Annotations.NoReorder">
+            <summary>
+            Prevents the Member Reordering feature from tossing members of the marked class.
+            </summary>
+            <remarks>
+            The attribute must be mentioned in your member reordering patterns
+            </remarks>
+        </member>
+        <member name="T:PacmanGame.Validation.KeyFunction">
+            <summary>
+            An enum representing a function of the key in the game.
+            </summary>
+        </member>
+        <member name="F:PacmanGame.Validation.KeyFunction.Left">
+            <summary>
+            Represents a function for movement in the left direction.
+            </summary>
+        </member>
+        <member name="F:PacmanGame.Validation.KeyFunction.Right">
+            <summary>
+            Represents a function for movement in the right direction.
+            </summary>
+        </member>
+        <member name="F:PacmanGame.Validation.KeyFunction.Up">
+            <summary>
+            Represents a function for movement in the up direction.
+            </summary>
+        </member>
+        <member name="F:PacmanGame.Validation.KeyFunction.Down">
+            <summary>
+            Represents a function for movement in the down direction.
+            </summary>
+        </member>
+        <member name="F:PacmanGame.Validation.KeyFunction.Pause">
+            <summary>
+            Represents a function which pauses the game.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Validation.KeysValidator">
+            <summary>
+            A simple implementation of IKeysValidator that supports changing keys responsible for player movement.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Validation.KeysValidator.ValidateKey(System.Windows.Input.Key,PacmanGame.Validation.KeyFunction,System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{PacmanGame.Validation.KeyFunction,System.Windows.Input.Key}})">
+            <summary>
+            Validates if the key can be set as the given control function key for player.
+            </summary>
+            <param name="keyToChange">A key which behaviour might be changed.</param>
+            <param name="function">A function for the key.</param>
+            <param name="allKeys">Set of all player's control keys and their functions.</param>
+            <returns>True, if the given key can be associated to the given function, otherwise false.</returns>
+        </member>
+        <member name="T:PacmanGame.ViewModels.GameViewModel">
+            <summary>
+            Represents a view model associated with the GameView.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.GameViewModel.GameBoard">
+            <summary>
+            Gets the GameBoard.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.GameViewModel.GameEngine">
+            <summary>
+            Gets the GameEngine.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.GameViewModel.#ctor(PacmanGame.MainInterfaces.IGameBuilder,PacmanGame.MainInterfaces.IViewModelChanger,PacmanGame.MainInterfaces.IHaveControlKeys,PacmanGame.MainInterfaces.ISettingsProvider)">
+            <summary>
+            Initializes a new instance of GameViewModel object.
+            </summary>
+            <param name="builder">An object that builds core game objects.</param>
+            <param name="viewModelChanger">An object that changes views in the application.</param>
+            <param name="accessor">An object that have access to control keys.</param>
+            <param name="provider">An object that provides some configuration settings used in the game.</param>
+        </member>
+        <member name="M:PacmanGame.ViewModels.GameViewModel.StartGame">
+            <summary>
+            Starts new game.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.GameViewModel.StartGame(PacmanGame.Serialization.GameState)">
+            <summary>
+            Starts new game with the given state.
+            </summary>
+            <param name="state">The state of the game.</param>
+        </member>
+        <member name="M:PacmanGame.ViewModels.GameViewModel.MovePlayer(System.Object)">
+            <summary>
+            Moves the player in the specified direction.
+            </summary>
+            <param name="parameter">Informs about the movement direction.</param>
+        </member>
+        <member name="M:PacmanGame.ViewModels.GameViewModel.Pause">
+            <summary>
+            Switches to the pause mode.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.GameViewModel.OnGameEnded">
+            <summary>
+            Switches to the EndGame view.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.ViewModels.CloseableViewModel">
+            <summary>
+            Represents a ViewModel that supports close opertation.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.CloseableViewModel.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of CloseableViewModel object.
+            </summary>
+            <param name="name">Name of the view model.</param>
+        </member>
+        <member name="F:PacmanGame.ViewModels.CloseableViewModel.ViewAppeared">
+            <summary>
+            Occures when the view associated with the current view model appeared on the screen.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.CloseableViewModel.RaiseViewAppearedEvent">
+            <summary>
+            Raises the ViewAppeared event. This is for internal use.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.CloseableViewModel.OnViewAppeared">
+            <summary>
+            Reaction for ViewAppeared event. This is empty by default. Subclasses may override this method.
+            </summary>
+        </member>
+        <member name="F:PacmanGame.ViewModels.CloseableViewModel.RequestClose">
+            <summary>
+            An event which is raised when the associated view should be closed.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.CloseableViewModel.Close">
+            <summary>
+            A method which raises the RequestClose event. 
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.CloseableViewModel.ReturnCommand">
+            <summary>
+            A command to invoked to close the view.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.ViewModels.EndGameViewModel">
+            <summary>
+            Represents a view model associated with the EndGameView.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.EndGameViewModel.OnViewAppeared">
+            <summary>
+            Overrides OnViewAppeared method and checking information about the highscore before the view appears.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.EndGameViewModel.#ctor(PacmanGame.Highscores.HighscoreList)">
+            <summary>
+            Initializes a new instance of EndGameViewModel.
+            </summary>
+            <param name="highscores">The list of game highscores.</param>
+        </member>
+        <member name="P:PacmanGame.ViewModels.EndGameViewModel.Points">
+            <summary>
+            Gets or sets the number of points gained by the player.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.EndGameViewModel.GameTime">
+            <summary>
+            Gets or sets the time of the game.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.EndGameViewModel.PlayerName">
+            <summary>
+            Gets or sets selected player name.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.EndGameViewModel.IsHighscore">
+            <summary>
+            Gets the value indicating whether the current score is a new highscore.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.EndGameViewModel.SaveHighscore">
+            <summary>
+            Saves the current highscore.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.ViewModels.HighscoresViewModel">
+            <summary>
+            Represents a view model associated with the Highscores view.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.HighscoresViewModel.#ctor(PacmanGame.Highscores.HighscoreList)">
+            <summary>
+            Initializes a new instance of HighscoreViewModel.
+            </summary>
+            <param name="highscoreList">The list of highscores.</param>
+        </member>
+        <member name="P:PacmanGame.ViewModels.HighscoresViewModel.HighscoreList">
+            <summary>
+            Gets or sets the list of highscores.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.ViewModels.OptionsViewModel">
+            <summary>
+            Represents a view model used to change control keys.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.OptionsViewModel.#ctor(PacmanGame.MainInterfaces.IHaveControlKeys,PacmanGame.MainInterfaces.IKeysValidator)">
+            <summary>
+            Initializes a new instance of OptionViewModel.
+            </summary>
+            <param name="accessor">An object that provide access to control keys.</param>
+            <param name="validator">An object that is used to validate control keys.</param>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.LeftKey">
+            <summary>
+            Gets or sets the Key that move player in left direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.RightKey">
+            <summary>
+            Gets or sets the Key that move player in right direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.UpKey">
+            <summary>
+            Gets or sets the Key that move player in up direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.DownKey">
+            <summary>
+            Gets or sets the Key that move player in down direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.ActiveDown">
+            <summary>
+            Gets or sets the information specifing whether the down button is in change mode.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.ActiveUp">
+            <summary>
+            Gets or sets the information specifing whether the up button is in change mode.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.ActiveLeft">
+            <summary>
+            Gets or sets the information specifing whether the left button is in change mode.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.ActiveRight">
+            <summary>
+            Gets or sets the information specifing whether the right button is in change mode.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.IsLeftError">
+            <summary>
+            Gets the information whether the left button error occured.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.IsRightError">
+            <summary>
+            Gets the information whether the right button error occured.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.IsUpError">
+            <summary>
+            Gets the information whether the up button error occured.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.IsDownError">
+            <summary>
+            Gets the information whether the down button error occured.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.ErrorMessage">
+            <summary>
+            Gets the error message.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.HasErrors">
+            <summary>
+            Gets the information about the error.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.OptionsViewModel.IsActive">
+            <summary>
+            Gets the information about the active state.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.OptionsViewModel.OnKeyDown(System.Object)">
+            <summary>
+            Occurs when the key is pressed.
+            </summary>
+            <param name="parameter">Provide information about the pressed key.</param>
+        </member>
+        <member name="M:PacmanGame.ViewModels.OptionsViewModel.ChangeKey(System.Object)">
+            <summary>
+            Changes the selected control key.
+            </summary>
+            <param name="parameter">Provide information about the control key to be changed.</param>
+        </member>
+        <member name="T:PacmanGame.ViewModels.PauseViewModel">
+            <summary>
+            Represents a view model associated with pause view in the application.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.PauseViewModel.#ctor(PacmanGame.MainInterfaces.IViewModelChanger,PacmanGame.MainInterfaces.IGameSerializer)">
+            <summary>
+            Initializes a new instance of PauseViewModel object.
+            </summary>
+            <param name="viewModelChanger">An object that changes the views in the application.</param>
+            <param name="gameSerializer">An object that serializes the game state.</param>
+        </member>
+        <member name="M:PacmanGame.ViewModels.PauseViewModel.SaveGame">
+            <summary>
+            Saves the game.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.PauseViewModel.BackToMenu">
+            <summary>
+            Navigate back to the main menu.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.ViewModels.StartMenuViewModel">
+            <summary>
+            Represents a view model associated with the start menu view.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.StartMenuViewModel.#ctor(PacmanGame.MainInterfaces.IViewModelChanger,PacmanGame.MainInterfaces.IGameSerializer)">
+            <summary>
+            Initializes a new instance of StartMenuViewModel object.
+            </summary>
+            <param name="viewModelChanger">An object that changes the views in the application.</param>
+            <param name="gameSerializer">An object that serializes the game state.</param>
+        </member>
+        <member name="M:PacmanGame.ViewModels.StartMenuViewModel.NewGame(PacmanGame.Serialization.GameState)">
+            <summary>
+            Starts new game.
+            </summary>
+            <param name="state">Game state. If the value is null then new game is started, otherwise the game is loaded from the state.</param>
+        </member>
+        <member name="M:PacmanGame.ViewModels.StartMenuViewModel.LoadGame">
+            <summary>
+            Loads the game.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.StartMenuViewModel.ShowHighscores">
+            <summary>
+            Navigate to the highscores view.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.StartMenuViewModel.ShowOptions">
+            <summary>
+            Navigate to the option view.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.StartMenuViewModel.Exit">
+            <summary>
+            Exits the application.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.ViewModels.ViewModelBase">
+            <summary>
+            Represents a base class for all ViewModels.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.ViewModels.ViewModelBase.Name">
+            <summary>
+            Gets the name of current ViewModel.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.ViewModels.ViewModelBase.#ctor(System.String)">
+            <summary>
+            Initializies a new instance of ViewModelBase class with the specified name.
+            </summary>
+            <param name="name">The name of the view model.</param>
+        </member>
+        <member name="T:PacmanGame.MainWindowViewModel">
+            <summary>
+            The view model for the main window. 
+            This provides implementation of IViewModelChanger and IHaveControlKeys interfaces.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.MainWindowViewModel.#ctor(PacmanGame.MainInterfaces.IGameBuilder,PacmanGame.Highscores.HighscoreList,PacmanGame.MainInterfaces.IGameSerializer,PacmanGame.MainInterfaces.IKeysValidator,PacmanGame.MainInterfaces.ISettingsProvider)">
+            <summary>
+            Initializes a new instance of MainWindowViewModel.
+            </summary>
+            <param name="builder">An object that is responsible for building core game objects.</param>
+            <param name="highscores">The list of the highscores in the game.</param>
+            <param name="gameSerializer">An object that is responsible for saving and loading GameState.</param>
+            <param name="validator">An object that validates control keys used in the game.</param>
+            <param name="provider">An object that provides some configuration settings used in the game.</param>
+        </member>
+        <member name="P:PacmanGame.MainWindowViewModel.ViewModels">
+            <summary>
+            Gets the list of supported view models.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainWindowViewModel.CurrentViewModel">
+            <summary>
+            Gets the view model associated with the currently displaying view in the application.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.MainWindowViewModel.ChangeCurrentViewModel(System.String)">
+            <summary>
+            Changes currently displaying view.
+            </summary>
+            <param name="name">The name of the view to be displayed.</param>
+        </member>
+        <member name="M:PacmanGame.MainWindowViewModel.GetViewModelByName(System.String)">
+            <summary>
+            Gets the ViewModelBase object specified by the given name.
+            </summary>
+            <param name="name">The name f the view model.</param>
+            <returns>A view model associated with the given name.</returns>
+        </member>
+        <member name="P:PacmanGame.MainWindowViewModel.LeftKey">
+            <summary>
+            Gets or sets the Key that move player in left direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainWindowViewModel.RightKey">
+            <summary>
+            Gets or sets the Key that move player in right direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainWindowViewModel.UpKey">
+            <summary>
+            Gets or sets the Key that move player in up direction.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.MainWindowViewModel.DownKey">
+            <summary>
+            Gets or sets the Key that move player in down direction.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.MainWindowViewModel.LoadControlKeys">
+            <summary>
+            Loads the current configuration of control keys.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.MainWindowViewModel.SaveControlKeys">
+            <summary>
+            Saves the current configuration of control keys.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Views.EndGameView">
+            <summary>
+            Interaction logic for EndGameView.xaml
+            </summary>
+            <summary>
+            EndGameView
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Views.EndGameView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Views.GameView">
+            <summary>
+            Interaction logic for GameView.xaml
+            </summary>
+            <summary>
+            GameView
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Views.GameView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Views.HighscoresView">
+            <summary>
+            Interaction logic for HighscoresView.xaml
+            </summary>
+            <summary>
+            HighscoresView
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Views.HighscoresView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Views.OptionsView">
+            <summary>
+            Interaction logic for OptionsView.xaml
+            </summary>
+            <summary>
+            OptionsView
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Views.OptionsView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Views.PauseView">
+            <summary>
+            Interaction logic for PauseView.xaml
+            </summary>
+            <summary>
+            PauseView
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Views.PauseView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Views.StartMenuView">
+            <summary>
+            Interaction logic for StartMenuView.xaml
+            </summary>
+            <summary>
+            StartMenuView
+            </summary>
+        </member>
+        <member name="M:PacmanGame.Views.StartMenuView.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PacmanGame.App">
+            <summary>
+            Interaction logic for App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:PacmanGame.App.OnStartup(System.Windows.StartupEventArgs)">
+            <summary>
+            Configurates application startup behaviour.
+            </summary>
+            <param name="e">Event arguments</param>
+        </member>
+        <member name="M:PacmanGame.App.DefaultControls(PacmanGame.MainInterfaces.ISettingsProvider)">
+            <summary>
+            Loads the dafault player controls if they are not set.
+            </summary>
+        </member>
+        <member name="M:PacmanGame.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:PacmanGame.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:PacmanGame.MainWindow">
+            <summary>
+            Interaction logic for MainWindow.xaml
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:PacmanGame.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:PacmanGame.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:PacmanGame.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

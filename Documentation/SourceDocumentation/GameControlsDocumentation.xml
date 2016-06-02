@@ -1,0 +1,792 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GameControls</name>
+    </assembly>
+    <members>
+        <member name="T:GameControls.Board.GameBoard">
+            <summary>
+            Represents a control for the whole game board. 
+            It contains all graphical GameElements.
+            </summary>
+            <summary>
+            GameBoard
+            </summary>
+        </member>
+        <member name="M:GameControls.Board.GameBoard.#ctor">
+            <summary>
+            Initializes a new instance of GameBoard control.
+            </summary>
+        </member>
+        <member name="M:GameControls.Board.GameBoard.#ctor(System.UInt32,System.UInt32)">
+            <summary>
+            Initializes a new instance of GameBoard with the specified number of rows and columns.
+            </summary>
+            <param name="rows">The number of rows of GameBoard.</param>
+            <param name="columns">The number of columns of GameBoard.</param>
+        </member>
+        <member name="M:GameControls.Board.GameBoard.#ctor(System.UInt32,System.UInt32,System.Collections.Generic.IEnumerable{GameControls.Elements.GameElement})">
+            <summary>
+            Initializes a new instance of GameBoard with the specified number of rows and columns 
+            and with the colleciton of elements.
+            </summary>
+            <param name="rows">The number of rows of GameBoard.</param>
+            <param name="columns">The number of columns of GameBoard.</param>
+            <param name="elements"></param>
+        </member>
+        <member name="P:GameControls.Board.GameBoard.Rows">
+            <summary>
+            Gets the number of rows of the board.
+            </summary>
+        </member>
+        <member name="P:GameControls.Board.GameBoard.Columns">
+            <summary>
+            Gets the number of columns of the board.
+            </summary>
+        </member>
+        <member name="P:GameControls.Board.GameBoard.Elements">
+            <summary>
+            Gets the elements on the board.
+            </summary>
+        </member>
+        <member name="P:GameControls.Board.GameBoard.Children">
+            <summary>
+            Gets the children of the GameBoard.
+            </summary>
+        </member>
+        <member name="F:GameControls.Board.GameBoard.ChildrenProperty">
+            <summary>
+            Readonly DependencyProperty for storing Children property.
+            </summary>
+        </member>
+        <member name="F:GameControls.Board.GameBoard.RowsProperty">
+            <summary>
+            A DependencyProperty for storing Rows property.
+            </summary>
+        </member>
+        <member name="F:GameControls.Board.GameBoard.ColumnsProperty">
+            <summary>
+            A DependencyProperty for storing Columns property.
+            </summary>
+        </member>
+        <member name="F:GameControls.Board.GameBoard.ElementsPanel">
+            <summary>
+            ElementsPanel Name Field
+            </summary>
+        </member>
+        <member name="M:GameControls.Board.GameBoard.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="T:GameControls.Board.GameBoardPanel">
+            <summary>
+            Represents a panel for storing game elements from GameBoard.
+            </summary>
+        </member>
+        <member name="P:GameControls.Board.GameBoardPanel.Rows">
+            <summary>
+            Gets or sets the number of rows on the panel.
+            </summary>
+        </member>
+        <member name="P:GameControls.Board.GameBoardPanel.Columns">
+            <summary>
+            Gets or sets the number of columns on the panel.
+            </summary>
+        </member>
+        <member name="P:GameControls.Board.GameBoardPanel.SquareSize">
+            <summary>
+            Gets a size (width and height) of a single cell in the panel.
+            </summary>
+        </member>
+        <member name="F:GameControls.Board.GameBoardPanel.RowsProperty">
+            <summary>
+            A DependencyProperty for storing Rows property.
+            </summary>
+        </member>
+        <member name="F:GameControls.Board.GameBoardPanel.ColumnsProperty">
+            <summary>
+            A DependencyProperty for storing Columns property.
+            </summary>
+        </member>
+        <member name="F:GameControls.Board.GameBoardPanel.SquareSizeProperty">
+            <summary>
+            A DependencyProperty for storing SquareSize property.
+            </summary>
+        </member>
+        <member name="M:GameControls.Board.GameBoardPanel.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Overrides a default MeasureOverride method which is a part of WPF control's measure system.
+            This method tries to set the size of GameBoardPanel to be the largest possible depending on the given size.
+            </summary>
+            <param name="availableSize">The available size on the screen.</param>
+            <returns>The requested size of the panel.</returns>
+        </member>
+        <member name="M:GameControls.Board.GameBoardPanel.ArrangeOverride(System.Windows.Size)">
+            <summary>
+            Overrides a default ArrrangeOverride method from Panel class.
+            This method arrange the elements layout on panel and place them on proper positions.
+            </summary>
+            <param name="finalSize">The final size of the panel.</param>
+            <returns>The final size of the panel.</returns>
+        </member>
+        <member name="T:GameControls.Elements.Block">
+            <summary>
+            Represents a simple block element in the game.
+            </summary>
+        </member>
+        <member name="T:GameControls.Elements.BonusLife">
+            <summary>
+            Represents the additional life element which can be collected in the game.
+            This element is available only for the specified time and after that time it disappears.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.BonusLife.#cctor">
+            <summary>
+            Static constructor that overrides the default style.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.BonusLife.#ctor">
+            <summary>
+            Initializes a new instance of BonusLife element.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.BonusLife.#ctor(System.TimeSpan)">
+            <summary>
+            Initializes a new instance of BonusLife element with the given element lifetime.
+            </summary>
+            <param name="lifeTime">The lifetime of the element.</param>
+        </member>
+        <member name="P:GameControls.Elements.BonusLife.LifeTime">
+            <summary>
+            Gets the lifetime of the current element.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.BonusLife.LifeTimeProperty">
+            <summary>
+            A DependencyProperty storing value of LifeTime property.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.BonusLife.AppearedEvent">
+            <summary>
+            The RoutedEvent associated with Appeared event.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.BonusLife.DisappearedEvent">
+            <summary>
+            The RoutedEvent associated with Disappeared event.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.BonusLife.IsAvailableProperty">
+            <summary>
+            A DependencyProperty for storing the value of IsAvailableProperty.
+            </summary>
+        </member>
+        <member name="P:GameControls.Elements.BonusLife.IsAvailable">
+            <summary>
+            Gets the information whether the element is still available to be collected.
+            </summary>
+        </member>
+        <member name="E:GameControls.Elements.BonusLife.Appeared">
+            <summary>
+            Occurs when the element has just appeared in the game.
+            </summary>
+        </member>
+        <member name="E:GameControls.Elements.BonusLife.Disappeared">
+            <summary>
+            Occures when the element has just disappeared.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.BonusLife.Appear">
+            <summary>
+            Make the element appear in the game and become available.
+            </summary>
+        </member>
+        <member name="T:GameControls.Elements.Coin">
+            <summary>
+            Represents a coin element that can be collected.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.Coin.#cctor">
+            <summary>
+            Static constructor which overrides the default style.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.Coin.#ctor">
+            <summary>
+            Initializes a new instance of the Coin element.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.Coin.Collect">
+            <summary>
+            Collects the current coin.
+            </summary>
+        </member>
+        <member name="E:GameControls.Elements.Coin.Collected">
+            <summary>
+            Occures when the coin was collected.
+            </summary>
+        </member>
+        <member name="P:GameControls.Elements.Coin.PointReward">
+            <summary>
+            Gets or sets a point reward given for collecting the coin.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.Coin.PointRewardProperty">
+            <summary>
+            A DependencyProperty for storing the value of PointReward property.
+            </summary>
+        </member>
+        <member name="T:GameControls.Elements.GameElement">
+            <summary>
+            Represents a custom WPF control providing base functionality for all game elements. 
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.GameElement.#cctor">
+            <summary>
+            Static constructor.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.GameElement.#ctor">
+            <summary>
+            Initializes a new instance of GameElement object and sets all the properties to 0.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.GameElement.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of GameElement object with the specified width and height.
+            </summary>
+            <param name="width">Width of the element.</param>
+            <param name="height">Height of the element.</param>
+        </member>
+        <member name="F:GameControls.Elements.GameElement.XProperty">
+            <summary>
+            A DependencyProperty for storing X value.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.GameElement.YProperty">
+            <summary>
+            A DependencyProperty for storing Y value.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.GameElement.ElementWidthProperty">
+            <summary>
+            A DependencyProperty for storing ElementWidth value.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.GameElement.ElementHeightProperty">
+            <summary>
+            A DependencyProperty for storing ElementHeight value.
+            </summary>
+        </member>
+        <member name="P:GameControls.Elements.GameElement.X">
+            <summary>
+            Gets or sets the current X position of the element.
+            </summary>
+        </member>
+        <member name="P:GameControls.Elements.GameElement.Y">
+            <summary>
+            Gets or sets the current Y position of the element.
+            </summary>
+        </member>
+        <member name="P:GameControls.Elements.GameElement.ElementWidth">
+            <summary>
+            Gets or sets the width of the element.
+            </summary>
+        </member>
+        <member name="P:GameControls.Elements.GameElement.ElementHeight">
+            <summary>
+            Gets or sets the height of the element.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.GameElement.ArrangeOverride(System.Windows.Size)">
+            <summary>
+            Overrides a part of the arrangement proccess. It is used to receive
+            the width and height of the element.
+            </summary>
+            <param name="arrangeBounds">The size of the element.</param>
+            <returns>Final size of the element.</returns>
+        </member>
+        <member name="T:GameControls.Elements.MovableElement">
+            <summary>
+            Represents an element in the game which has the movement ability.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.MovableElement.#cctor">
+            <summary>
+            Static constructor.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.MovableElement.#ctor">
+            <summary>
+            Initializes a new instance of MovableElement object.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.MovableElement.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of MovableElement class with the given width, height and speed.
+            </summary>
+            <param name="width">Width of the element.</param>
+            <param name="height">Height of the element.</param>
+            <param name="speed">Movement speed of the element.</param>
+        </member>
+        <member name="P:GameControls.Elements.MovableElement.Speed">
+            <summary>
+            Gets or sets the speed of the element.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.MovableElement.SpeedProperty">
+            <summary>
+            Dependency property for storing Speed property.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.MovableElement.Move(GameControls.Others.Direction)">
+            <summary>
+            Moves the object in the specified direction.
+            </summary>
+            <param name="direction">The dierction in which the element should be moved.</param>
+        </member>
+        <member name="M:GameControls.Elements.MovableElement.RaiseMovementEvents(GameControls.Others.Direction)">
+            <summary>
+            Raises an event associated with the move in the given direction.
+            </summary>
+            <param name="direction">The direction of the move.</param>
+        </member>
+        <member name="E:GameControls.Elements.MovableElement.MoveLeft">
+            <summary>
+            An event which is raised when the object move in the left direction.
+            </summary>
+        </member>
+        <member name="E:GameControls.Elements.MovableElement.MoveRight">
+            <summary>
+            An event which is raised when the object move in the right direction.
+            </summary>
+        </member>
+        <member name="E:GameControls.Elements.MovableElement.MoveUp">
+            <summary>
+            An event which is raised when the object move in the up direction.
+            </summary>
+        </member>
+        <member name="E:GameControls.Elements.MovableElement.MoveDown">
+            <summary>
+            An event which is raised when the object move in the down direction.
+            </summary>
+        </member>
+        <member name="E:GameControls.Elements.MovableElement.Moved">
+            <summary>
+            An event raised when the element moves in any direction.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.MovableElement.MoveLeftEvent">
+            <summary>
+            A RoutedEvent which handles MoveLeft event. 
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.MovableElement.MoveRightEvent">
+            <summary>
+            A RoutedEvent which handles MoveLeft event. 
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.MovableElement.MoveUpEvent">
+            <summary>
+            A RoutedEvent which handles MoveRight event. 
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.MovableElement.MoveDownEvent">
+            <summary>
+            A RoutedEvent which handles MoveDown event. 
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.MovableElement.MovedEvent">
+            <summary>
+            A RoutedEvent which handles Moved event. 
+            </summary>
+        </member>
+        <member name="T:GameControls.Elements.Player">
+            <summary>
+            A control representing a pacman, the main character of the game. This include support for 
+            moving the pacman's mouth with animation. 
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.Player.#cctor">
+            <summary>
+            Static constructor.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.Player.#ctor">
+            <summary>
+            Initializes a new instance of Player control.
+            </summary>
+        </member>
+        <member name="P:GameControls.Elements.Player.Direction">
+            <summary>
+            The direction of pacman.
+            </summary>
+        </member>
+        <member name="P:GameControls.Elements.Player.Angle">
+            <summary>
+            Gets or sets the angle of the pacman mouth.
+            </summary>
+        </member>
+        <member name="P:GameControls.Elements.Player.IsAlive">
+            <summary>
+            Gets the value indicating whether the current player is alive.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.Player.DirectionProperty">
+            <summary>
+            Dependency property for storing Direction property.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.Player.AngleProperty">
+            <summary>
+            Dependency property for storing Angle property.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.Player.IsAliveProperty">
+            <summary>
+            Dependency property for storing IsAlive property.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.Player.Move(GameControls.Others.Direction)">
+            <summary>
+            Overrides the Move method. It also changes pacman direction.
+            </summary>
+            <param name="direction">The direction in which player would be moved.</param>
+        </member>
+        <member name="M:GameControls.Elements.Player.Die">
+            <summary>
+            Kills the current Player.
+            </summary>
+        </member>
+        <member name="E:GameControls.Elements.Player.Dead">
+            <summary>
+            Occurs when the current Player died.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.Player.DeadEvent">
+            <summary>
+            The RoutedEvent associated with the Dead event.
+            </summary>
+        </member>
+        <member name="T:GameControls.Elements.Portal">
+            <summary>
+            Represents an element that provides a special two-way connection between two places.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.Portal.#cctor">
+            <summary>
+            Static constructor that overrides the default style.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.Portal.#ctor">
+            <summary>
+            Initializes a new instance of single not connected Portal.
+            </summary>
+        </member>
+        <member name="M:GameControls.Elements.Portal.#ctor(GameControls.Elements.Portal)">
+            <summary>
+            Initializes a new instance of portal, connected with the given Portal element.
+            </summary>
+            <param name="connected">A portal to be connected with the newly created one.</param>
+            <exception cref="T:System.ArgumentException">Occurs when the given portal is null or is currently connected with another one portal.</exception>
+        </member>
+        <member name="P:GameControls.Elements.Portal.ConnectedPortal">
+            <summary>
+            Gets the connected Portal with the current one.
+            </summary>
+        </member>
+        <member name="P:GameControls.Elements.Portal.PortalId">
+            <summary>
+            The Id of the portal.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.Portal.ConnectedPortalProperty">
+            <summary>
+            A DependencyProperty for storing ConnectedPortal property.
+            </summary>
+        </member>
+        <member name="F:GameControls.Elements.Portal.PortalIdProperty">
+            <summary>
+            A DependencyProperty for storing PortalId property.
+            </summary>
+        </member>
+        <member name="T:GameControls.Interfaces.ICollectable">
+            <summary>
+            Represents the object that can be collected.
+            </summary>
+        </member>
+        <member name="M:GameControls.Interfaces.ICollectable.Collect">
+            <summary>
+            Collects current element.
+            </summary>
+        </member>
+        <member name="T:GameControls.Interfaces.ICanCollide">
+            <summary>
+            Represents a game element which can be considered in checking collision process.
+            </summary>
+        </member>
+        <member name="T:GameControls.Interfaces.IGameElement">
+            <summary>
+            Provides the access to basic element's properties.
+            </summary>
+        </member>
+        <member name="P:GameControls.Interfaces.IGameElement.X">
+            <summary>
+            Gets the current X position of the element.
+            </summary>
+        </member>
+        <member name="P:GameControls.Interfaces.IGameElement.Y">
+            <summary>
+            Gets the current Y position of the element.
+            </summary>
+        </member>
+        <member name="P:GameControls.Interfaces.IGameElement.ElementWidth">
+            <summary>
+            Gets the width of the element.
+            </summary>
+        </member>
+        <member name="P:GameControls.Interfaces.IGameElement.ElementHeight">
+            <summary>
+            Gets the height of the element.
+            </summary>
+        </member>
+        <member name="T:GameControls.Interfaces.IMovable">
+            <summary>
+            Represents an object that is able make movement.
+            </summary>
+        </member>
+        <member name="M:GameControls.Interfaces.IMovable.Move(GameControls.Others.Direction)">
+            <summary>
+            Moves the object in the specified direction.
+            </summary>
+            <param name="direction">The dierction in which the element should be moved.</param>
+        </member>
+        <member name="E:GameControls.Interfaces.IMovable.MoveLeft">
+            <summary>
+            An event which is raised when the object move in the left direction.
+            </summary>
+        </member>
+        <member name="E:GameControls.Interfaces.IMovable.MoveRight">
+            <summary>
+            An event which is raised when the object move in the right direction.
+            </summary>
+        </member>
+        <member name="E:GameControls.Interfaces.IMovable.MoveUp">
+            <summary>
+            An event which is raised when the object move in the up direction.
+            </summary>
+        </member>
+        <member name="E:GameControls.Interfaces.IMovable.MoveDown">
+            <summary>
+            An event which is raised when the object move in the down direction.
+            </summary>
+        </member>
+        <member name="T:GameControls.Interfaces.IMovementAlgorithm">
+            <summary>
+            Represents an alghoritm of movement for enemies.
+            </summary>
+        </member>
+        <member name="M:GameControls.Interfaces.IMovementAlgorithm.ProvideDirection(GameControls.Elements.Enemy)">
+            <summary>
+            Provide a direction in which the given enemy should move.
+            </summary>
+            <param name="enemy">The enemy which should be moved.</param>
+            <returns>The direcition in which enemy would like to move.</returns>
+        </member>
+        <member name="T:GameControls.Interfaces.ITimer">
+            <summary>
+            Represents a timer which can measure time.
+            </summary>
+        </member>
+        <member name="P:GameControls.Interfaces.ITimer.TimeLeft">
+            <summary>
+            The time that left from the starting the timer.
+            </summary>
+        </member>
+        <member name="M:GameControls.Interfaces.ITimer.Start">
+            <summary>
+            Starts the timer.
+            </summary>
+        </member>
+        <member name="M:GameControls.Interfaces.ITimer.Stop">
+            <summary>
+            Stops the timer.
+            </summary>
+        </member>
+        <member name="M:GameControls.Interfaces.ITimer.Reset">
+            <summary>
+            Resets the timer.
+            </summary>
+        </member>
+        <member name="T:GameControls.Others.Direction">
+            <summary>
+            Represents the direction in which the element is moving
+            </summary>
+        </member>
+        <member name="F:GameControls.Others.Direction.Left">
+            <summary>
+            The left direction.
+            </summary>
+        </member>
+        <member name="F:GameControls.Others.Direction.Right">
+            <summary>
+            The right direction.
+            </summary>
+        </member>
+        <member name="F:GameControls.Others.Direction.Up">
+            <summary>
+            The up direction.
+            </summary>
+        </member>
+        <member name="F:GameControls.Others.Direction.Down">
+            <summary>
+            The down direction.
+            </summary>
+        </member>
+        <member name="F:GameControls.Others.Direction.None">
+            <summary>
+            Value that informs about no movement.
+            </summary>
+        </member>
+        <member name="T:GameControls.Others.MovementEventHandler">
+            <summary>
+            Represents a delegate that is used as handler for movement events.
+            </summary>
+            <param name="sender">An object that raises the event.</param>
+            <param name="e">Additional information of the event.</param>
+        </member>
+        <member name="T:GameControls.Others.MovementEventArgs">
+            <summary>
+            An object which is used to pass additional information with the movement events.
+            </summary>
+        </member>
+        <member name="P:GameControls.Others.MovementEventArgs.MovementDirection">
+            <summary>
+            Gets the direction of the movement.
+            </summary>
+        </member>
+        <member name="M:GameControls.Others.MovementEventArgs.#ctor(GameControls.Others.Direction,System.Windows.RoutedEvent,System.Object)">
+            <summary>
+            Initializes a new instance of MovementEventArgs class with the specified direction.
+            </summary>
+            <param name="direction"></param>
+        </member>
+        <member name="T:GameControls.Others.PacmanGeometryConverter">
+            <summary>
+            A converter that converts Player's dimentions, direction and angle to a geomerty of the Pacman.
+            This allows appropriate Player styling and animating the mouse move of the Pacman. 
+            </summary>
+        </member>
+        <member name="M:GameControls.Others.PacmanGeometryConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Converts the specified values to the specified object of the requested type.
+            </summary>
+            <param name="values">The values which should be converted.</param>
+            <param name="targetType">The requested result type of the conversion.</param>
+            <param name="parameter">The parameter of the converter.</param>
+            <param name="culture">The information of the culture.</param>
+            <returns>The result of the conversion.</returns>
+        </member>
+        <member name="M:GameControls.Others.PacmanGeometryConverter.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+            <summary>
+            Defines back conversion.
+            </summary>
+            <param name="value">The value which should be converted back.</param>
+            <param name="targetTypes">The requested result types of the backward conversion.</param>
+            <param name="parameter">The parameter of the converter.</param>
+            <param name="culture">The information of the culture.</param>
+            <returns>The result of the backward conversion.</returns>
+        </member>
+        <member name="T:GameControls.Others.GameTimer">
+            <summary>
+            An implementation of ITimer interface to measure game time.
+            </summary>
+        </member>
+        <member name="E:GameControls.Others.GameTimer.PropertyChanged">
+            <summary>
+            An event which is raised when a property has changed. This informs graphical 
+            interface about the change and it can update binding to properties.
+            </summary>
+        </member>
+        <member name="M:GameControls.Others.GameTimer.OnPropertyChanged(System.String)">
+            <summary>
+            Raises the PropertyChanged event for the change of the given property.
+            </summary>
+            <param name="propertyName">The name of the property that has changed. It is optional parameter,
+            the CallerMemberName attribute can take the calling property name automatically.</param>
+        </member>
+        <member name="F:GameControls.Others.GameTimer._timer">
+            <summary>
+            A timer which measure time internally.
+            </summary>
+        </member>
+        <member name="F:GameControls.Others.GameTimer._timeLeft">
+            <summary>
+            Backing store field for TimeLeft property.
+            </summary>
+        </member>
+        <member name="P:GameControls.Others.GameTimer.TimeLeft">
+            <summary>
+            Gets or sets the value of the time which has left since the timer was started.
+            </summary>
+        </member>
+        <member name="M:GameControls.Others.GameTimer.Start">
+            <summary>
+            Starts the timer.
+            </summary>
+        </member>
+        <member name="M:GameControls.Others.GameTimer.Stop">
+            <summary>
+            Stops the timer.
+            </summary>
+        </member>
+        <member name="M:GameControls.Others.GameTimer.Reset">
+            <summary>
+            Resets the timer. It stops it, and start again.
+            </summary>
+        </member>
+        <member name="M:GameControls.Others.GameTimer.#ctor">
+            <summary>
+            Initializes a new instance of GameTimer class.
+            </summary>
+        </member>
+        <member name="M:GameControls.Others.GameTimer.#ctor(System.TimeSpan)">
+            <summary>
+            Initializes a timer with the initial value of time left.
+            </summary>
+            <param name="initialValue">The initial value of time left.</param>
+        </member>
+        <member name="M:GameControls.Others.GameTimer.#ctor(System.TimeSpan,System.TimeSpan)">
+            <summary>
+            Initializes a new instance of GameTimer class with the initial value of time left 
+            and with the period in which timer time would be updated.
+            </summary>
+            <param name="initialValue">The initial value of time left.</param>
+            <param name="timePeriod">The period of time in which timer time left would be updated.</param>
+        </member>
+        <member name="M:GameControls.Others.GameTimer.OnTimerTick(System.Object,System.EventArgs)">
+            <summary>
+            Private method that updates the timer time.
+            </summary>
+            <param name="sender">Sender of the Tick event.</param>
+            <param name="e">Event arguments.</param>
+        </member>
+        <member name="T:GameControls.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:GameControls.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:GameControls.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>
