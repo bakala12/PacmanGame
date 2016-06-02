@@ -19,6 +19,7 @@ namespace PacmanGame.Engine
     {
         private readonly DispatcherTimer _timer;
         private readonly IGameMovementChecker _movementChecker;
+        private readonly ISettingsProvider _provider;
 
         /// <summary>
         /// Gets the collection of the enemies.
@@ -34,15 +35,18 @@ namespace PacmanGame.Engine
         /// </summary>
         /// <param name="enemies">The collection of the enemies.</param>
         /// <param name="movementChecker">The IGameMovementChecker for checking collision between elements.</param>
-        /// <param name="movementInterval">The interval between two moves of enemies.</param>
-        public TimeEnemyMovementManager(IEnumerable<Enemy> enemies, IGameMovementChecker movementChecker, TimeSpan movementInterval)
+        /// <param name="provider">An object that provide some game setting values.</param>
+        public TimeEnemyMovementManager(IEnumerable<Enemy> enemies, IGameMovementChecker movementChecker, ISettingsProvider provider)
         {
             if(movementChecker == null) throw new ArgumentNullException(nameof(movementChecker));
             _movementChecker = movementChecker;
+            if(provider==null) throw new ArgumentNullException(nameof(provider));
+            _provider = provider;
+            if(enemies==null) enemies = new List<Enemy>();
             Enemies = enemies;
-            MovementInterval = movementInterval;
+            MovementInterval = TimeSpan.FromMilliseconds(_provider.EnemyMovementInterval);
             _timer = new DispatcherTimer();
-            _timer.Interval = movementInterval;
+            _timer.Interval = MovementInterval;
             _timer.Tick += (x, e) => ((IEnemyMovementManager)this).MoveEnemies();
         }
 
@@ -73,6 +77,16 @@ namespace PacmanGame.Engine
         public void Stop()
         {
             _timer.Stop();
+        }
+
+        /// <summary>
+        /// Increases the difficulty of the game.
+        /// </summary>
+        void IEnemyMovementManager.NextLevel()
+        {
+            Stop();
+            _timer.Interval = MovementInterval.Subtract(TimeSpan.FromMilliseconds(_provider.EnemyDifficultyIncreaseSpeed));
+            Start();
         }
     }
 }

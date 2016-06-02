@@ -24,5 +24,9 @@ namespace PacmanGame.Engine
         /// Stops working the IEnemyMovementManager.
         /// </summary>
         void Stop();
+        /// <summary>
+        /// Increases the difficulty of the game.
+        /// </summary>
+        void NextLevel();
     }
 }

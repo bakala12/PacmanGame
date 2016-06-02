@@ -24,6 +24,7 @@ namespace PacmanProjectTests
             BoardFilePath = null;
             AdditionalLifeGenerationInterval = TimeSpan.FromSeconds(60);
             EnemyMovementInterval = 500;
+            EnemyDifficultyIncreaseSpeed = 10;
         }
 
         public Key LeftKey { get; set; }
@@ -38,6 +39,7 @@ namespace PacmanProjectTests
         public uint BoardHeight { get; }
         public string BoardFilePath { get; }
         public TimeSpan AdditionalLifeGenerationInterval { get; }
+        public uint EnemyDifficultyIncreaseSpeed { get; }
 
         public void Save()
         {

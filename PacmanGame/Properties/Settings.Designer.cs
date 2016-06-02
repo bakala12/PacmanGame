@@ -165,5 +165,17 @@ namespace PacmanGame.Properties {
                 this["AdditionalLifeGenerationInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public uint EnemyDifficultyIncreaseSpeed {
+            get {
+                return ((uint)(this["EnemyDifficultyIncreaseSpeed"]));
+            }
+            set {
+                this["EnemyDifficultyIncreaseSpeed"] = value;
+            }
+        }
     }
 }

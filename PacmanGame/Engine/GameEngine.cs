@@ -125,9 +125,8 @@ namespace PacmanGame.Engine
                     new AStarEnemyMovementAlgorithm(_graph, _player, (int)_provider.BoardWidth, (int)_provider.BoardHeight);
                 result.Moved += OnEnemyMoved;
             }
-            uint enemyMovementInterval = _provider.EnemyMovementInterval;
             EnemyMovementManager = new TimeEnemyMovementManager(_gameBoard.Elements.OfType<Enemy>(),
-                _movementChecker, TimeSpan.FromMilliseconds(enemyMovementInterval));
+                _movementChecker, _provider);
         }
         private void LoadCoinsPositions()
         {
@@ -227,6 +226,7 @@ namespace PacmanGame.Engine
             {
                 Difficulty++;
                 FillBoardWithCoins();
+                DifficultyUp();
             }
         }
         protected virtual void OnEnemyMoved(object sender, MovementEventArgs e)
@@ -267,6 +267,10 @@ namespace PacmanGame.Engine
                 _gameBoard.Children.Insert(0, coin);
             }
             SetCoinsColleted();
+        }
+        protected virtual void DifficultyUp()
+        {
+            EnemyMovementManager.NextLevel();
         }
     }
 }

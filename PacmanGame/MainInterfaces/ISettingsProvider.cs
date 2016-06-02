@@ -59,6 +59,11 @@ namespace PacmanGame.MainInterfaces
         /// </summary>
         TimeSpan AdditionalLifeGenerationInterval { get; }
         /// <summary>
+        /// Gets the time interval which is substracted from the enemy movement time interval on each 
+        /// increasement of game difficulty.
+        /// </summary>
+        uint EnemyDifficultyIncreaseSpeed { get; }
+        /// <summary>
         /// Saves all the games settings.
         /// </summary>
         void Save();

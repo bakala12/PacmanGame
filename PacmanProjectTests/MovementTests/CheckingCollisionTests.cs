@@ -90,6 +90,7 @@ namespace PacmanProjectTests.MovementTests
             {
                 _gameBoard = GameBoardHelper.GenerateEmptyGameBoard(_width, _height);
                 IGameMovementChecker checker = GameBoardHelper.GetGameMovementChecker(_gameBoard);
+                ISettingsProvider provider = new TestSettingsProvider();
                 IGraph graph = new Graph(_gameBoard);
                 var player = new Mock<Player>();
                 player.Object.X = positions[0];
@@ -105,7 +106,7 @@ namespace PacmanProjectTests.MovementTests
                 e2.MovementAlgorithm = alg;
                 _gameBoard.Children.Add(e1);
                 _gameBoard.Children.Add(e2);
-                IEnemyMovementManager manager = new TimeEnemyMovementManager(new [] {e1,e2}, checker, TimeSpan.FromSeconds(1));
+                IEnemyMovementManager manager = new TimeEnemyMovementManager(new [] {e1,e2}, checker, provider);
                 manager.MoveEnemies();
                 bool res = checker.CheckCollision(e1, e2);
                 Assert.Equal(result, res);

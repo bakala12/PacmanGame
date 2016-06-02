@@ -32,6 +32,7 @@ namespace PacmanGame
             BoardHeight = Settings.Default.BoardHeight;
             BoardFilePath = Settings.Default.BoardFilePath;
             AdditionalLifeGenerationInterval = Settings.Default.AdditionalLifeGenerationInterval;
+            EnemyDifficultyIncreaseSpeed = Settings.Default.EnemyDifficultyIncreaseSpeed;
         }
         /// <summary>
         /// Gets or sets the Key that move player in left direction.
@@ -81,6 +82,11 @@ namespace PacmanGame
         /// Gets the time interval between two bonuses' generations.
         /// </summary>
         public TimeSpan AdditionalLifeGenerationInterval { get; }
+        /// <summary>
+        /// Gets the time interval which is substracted from the enemy movement time interval on each 
+        /// increasement of game difficulty.
+        /// </summary>
+        public uint EnemyDifficultyIncreaseSpeed { get; }
         /// <summary>
         /// Saves all the games settings.
         /// </summary>
