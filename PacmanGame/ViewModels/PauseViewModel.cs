@@ -74,7 +74,7 @@ namespace PacmanGame.ViewModels
         [OnCommand("BackToMenuCommand")]
         public virtual void BackToMenu()
         {
-            if (_savedGame || (MessageBoxResult.OK == MessageBox.Show("Jeśli przejdziesz do menu stracisz niezapisany postęp gry. Czy na pewno chcesz powrócić do menu?" +
+            if (_savedGame || (MessageBoxResult.Yes == MessageBox.Show("Jeśli przejdziesz do menu stracisz niezapisany postęp gry. Czy na pewno chcesz powrócić do menu?" +
                                                        "", "Uwaga", MessageBoxButton.YesNoCancel, MessageBoxImage.Question)))
             {
                 _viewModelChanger?.ChangeCurrentViewModel("StartMenu");
